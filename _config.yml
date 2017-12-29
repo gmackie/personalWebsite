@@ -3,18 +3,18 @@
 # Site wide configuration
 ####################################
 #
-title: Leonids
-email: zourenyuan@gmail.com
-description: A simple and awesome blog theme powered by jekyll.
-url: https://renyuanz.github.io/leonids # the base hostname & protocol for your site
-keywords: ["Programming", "PHP", "Ruby"]
+title: Graham Mackie (.com)
+email: graham.mackie@gmail.com
+description: A simple blog/resume, created using Jekyll, hosted on kubernetes!.
+url: https://grahammackie.com # the base hostname & protocol for your site
+keywords: ["Programming", "Music", "Maker", "Hacking"]
 
 #
 ###################################
 # Jekyll configuration
 ####################################
 #
-timezone:          Europe/Paris
+timezone:          America/Los_Angeles
 markdown:          kramdown
 highlighter:       rouge
 excerpt_separator: <!--more-->
@@ -33,31 +33,31 @@ kramdown:
 ####################################
 #
 owner:
-  name: Leonids
+  name: Graham
   avatar: leonids-logo.png
-  job: "PHP & Ruby Developer"
-  bio: "A backend developer who loves design awesome things. Working for RendezvousCheznous atm in Marseille, France."
-  email: zourenyuan@gmail.com
+  job: "Software Developer/Manager"
+  bio: "A jack-of-all-trades developer, recently converted to management who loves to solve interesting problems. Working for Amazon in Seattle, Washington, USA."
+  email: graham.mackie@gmail.com
   disqus-shortname: renyuanzblog
-  twitter: renyuan814 #username
-  facebook: #username
+  twitter: grahammackie #username
+  facebook: grahammackie #username
   google:
-    plus: #username
+    plus: grahammackie #username
     analytics: UA-62251910-2
     verify:
     ad-client:
     ad-slot:
   bing-verify:
-  github: renyuanz #username
+  github: gmackie #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: renyuan-zou-69b7038a #username
+  linkedin: gmackie
   xing: #username
   instagram: #username
   lastfm: #username
   tumblr: #username
   pinterest: #username
   foursquare: #username
-  steam: #username
+  steam: deathfudge #username
   dribbble: #username
   youtube: #username
   soundcloud: #username

@@ -5,7 +5,7 @@ Important! It's better to download the gzipped files instead of forking the repo
 This project is under MIT license, so feel free to make it your own.
 
 # Leonids Jekyll Themes
-
+a
 **[Leonids](http://renyuanz.github.io/leonids)** is a clean Jekyll theme perfect for powering your GitHub hosted blog.
 
 ## What is Leonids?
@@ -18,15 +18,23 @@ This project is under MIT license, so feel free to make it your own.
 
 See a [demo](http://renyuanz.github.io/leonids/) hosted on GitHub.
 
+
 ## Quick setup
 
-`git clone https://github.com/renyuanz/leonids`
+`git clone https://github.com/gmackie/personalWebsite`
 
-`cd leonids`
+`cd personalWebsite`
 
 `jekyll server`
 
 Check out your awesome blog at `http://localhost:4000` and Cheers!
+
+## Dockerizing
+The `Dockerfile` in the repo will copy the compiled output of `jekyll build`
+(located in `./_site/`) and stash it inside an nginx docker container and host
+the site on port 80. This can then be pushed to Docker Hub and then used in
+conjunction with the helm chart [here](https://github.com/gmackie/charts/) to
+deploy the blog to Kubernetes!
 
 ## Resume Page by [@Skn0tt](https://github.com/Skn0tt)
 Leonids features a simple resume page. It is divided up into five sections: 
@@ -38,8 +46,3 @@ Leonids features a simple resume page. It is divided up into five sections:
 * About (Edit \_includes/sections/about.html)
 
 You can put all your info into these files, and they will be featured on the resume page.
-
-## TODO
-
-- [ ] Redesign categories page. Ref: [dribbble: blog category section By Ilja Miskov](https://dribbble.com/shots/2274792-Blog-Category-Selection)
-- [ ] Multi languages support.
