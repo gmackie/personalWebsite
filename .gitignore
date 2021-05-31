@@ -1,6 +1,6 @@
 _site
 .sass-cache
 _config.yml
-_drafts
+# _drafts
 .ruby-version
 .jekyll-cache/
