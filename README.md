@@ -12,3 +12,4 @@ Leonids features a simple resume page. It is divided up into five sections:
 * About (Edit \_includes/sections/about.html)
 
 You can put all your info into these files, and they will be featured on the resume page.
+# DNS updated to correct IP
