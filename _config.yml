@@ -5,7 +5,7 @@
 #
 title: Graham Mackie (.com)
 email: graham.mackie@gmail.com
-description: A simple blog/resume, created using Jekyll, hosted on kubernetes!.
+description: A simple blog/resume, created using Jekyll, hosted on kubernetes with Gitea CI/CD!
 url: https://grahammackie.com # the base hostname & protocol for your site
 keywords: ["Programming", "Music", "Maker", "Hacking"]
 
