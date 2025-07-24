@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ci.gmac.io
-  IMAGE_NAME: ${{ gitea.repository }}
+  IMAGE_NAME: mackieg/personalwebsite
 
 jobs:
   build-and-deploy:
