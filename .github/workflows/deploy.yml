@@ -1,0 +1,153 @@
+name: Deploy Jekyll Site to K3s
+
+on:
+  push:
+    branches: [ main, master ]
+
+env:
+  REGISTRY: ci.gmac.io
+  IMAGE_NAME: ${{ gitea.repository }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: false
+
+    - name: Install Jekyll
+      run: |
+        gem install jekyll bundler
+        bundle init
+        bundle add jekyll
+
+    - name: Build Jekyll site
+      run: |
+        bundle exec jekyll build
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Gitea Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ gitea.actor }}
+        password: ${{ secrets.REGISTRY_TOKEN }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+    - name: Deploy to K3s
+      env:
+        KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
+      run: |
+        # Setup kubeconfig
+        echo "$KUBECONFIG_CONTENT" | base64 -d > /tmp/kubeconfig
+        export KUBECONFIG=/tmp/kubeconfig
+        
+        # Create deployment manifest
+        cat <<EOF > deployment.yaml
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: grahammackie-com
+          namespace: production
+          labels:
+            app: grahammackie-com
+        spec:
+          replicas: 2
+          selector:
+            matchLabels:
+              app: grahammackie-com
+          template:
+            metadata:
+              labels:
+                app: grahammackie-com
+            spec:
+              containers:
+              - name: nginx
+                image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+                ports:
+                - containerPort: 80
+                resources:
+                  requests:
+                    memory: "32Mi"
+                    cpu: "10m"
+                  limits:
+                    memory: "128Mi"
+                    cpu: "100m"
+              imagePullSecrets:
+              - name: gitea-registry
+        ---
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: grahammackie-com
+          namespace: production
+        spec:
+          selector:
+            app: grahammackie-com
+          ports:
+          - port: 80
+            targetPort: 80
+        ---
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+          name: grahammackie-com
+          namespace: production
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        spec:
+          ingressClassName: nginx
+          tls:
+          - hosts:
+            - grahammackie.com
+            - www.grahammackie.com
+            secretName: grahammackie-com-tls
+          rules:
+          - host: grahammackie.com
+            http:
+              paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: grahammackie-com
+                    port:
+                      number: 80
+          - host: www.grahammackie.com
+            http:
+              paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: grahammackie-com
+                    port:
+                      number: 80
+        EOF
+        
+        # Apply deployment
+        kubectl apply -f deployment.yaml
+        
+        # Wait for deployment
+        kubectl rollout status deployment/grahammackie-com \
+          -n production \
+          --timeout=300s
+        
+        echo "✅ Jekyll site deployed to https://grahammackie.com"
