@@ -30,7 +30,11 @@ Scan vault for blog-worthy notes and generate a report.
    - Has structure (headers like ## Overview, ## Architecture, ## Why)
    - Has frontmatter (tags, status)
    - Recently modified (bonus points)
-3. Score each note 0-100
+3. Score each note 0-100:
+   - Word count: 0-40 points (500=20, 1000+=40)
+   - Structure: 0-30 points (headers, sections)
+   - Frontmatter: 0-15 points (tags, status)
+   - Recency: 0-15 points (modified in last 30 days)
 4. Read `blog-topics-tracker.md` to identify already-tracked topics
 5. Generate report to `_drafts/00-topic-mining-report.md`
 
@@ -85,6 +89,7 @@ date: YYYY-MM-DD
 excerpt: "[One-sentence summary]"
 categories: [category]
 tags: [tag1, tag2, tag3]
+comments: true
 source_note: ~/obsidian/[path/to/note.md]
 status: draft
 ---
@@ -117,13 +122,22 @@ status: draft
 <!-- FIRST DRAFT -->
 ## Draft
 
-[600-1000 words of prose following Graham's style:
+[Opening paragraph - hook]
+
+<!--more-->
+
+[Rest of 600-1000 words of prose following Graham's style:
 - Personal & conversational ("I" statements)
 - Honest & vulnerable (share struggles)
 - Specific anecdotes and examples
 - Technical details made accessible
 - Forward-looking ending]
 ```
+
+**Error Handling:**
+- Note not found: Report "Note 'X' not found in Projects/ or Areas/"
+- Multiple matches: List matches and ask user to specify full path
+- Insufficient content: Warn but still attempt draft with available content
 
 ### `draft-all` - Batch Draft Generation
 
