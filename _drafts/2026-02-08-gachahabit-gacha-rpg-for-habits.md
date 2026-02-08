@@ -4,7 +4,7 @@ title: "GachaHabit: A Habit Tracker That Plays Like a Gacha RPG"
 date: 2026-02-08
 excerpt: "Most habit trackers die because checkmarks aren't rewarding. GachaHabit is my attempt to make habit completion the only way to fuel a real gacha + RPG progression loop."
 categories: [startups]
-tags: [gachahabit, habits, gacha, mobile, rpg, retention]
+tags: [startups, gachahabit, habits, gacha, mobile, rpg, retention]
 comments: true
 status: draft
 ---
@@ -78,3 +78,4 @@ This one has a simple metric: does it retain?
 If GachaHabit can hit meaningful retention (especially day 30), it earns more investment. If it can't, it's an interesting experiment and I move on.
 
 Either way, I like the idea of treating habit formation like a game system that deserves as much design attention as any mobile RPG.
+

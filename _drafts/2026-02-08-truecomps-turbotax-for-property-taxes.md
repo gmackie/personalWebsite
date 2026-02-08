@@ -4,7 +4,7 @@ title: "TrueComps: TurboTax for Property Tax Appeals"
 date: 2026-02-08
 excerpt: "Property taxes feel fixed until you learn how many homes are over-assessed. TrueComps is my attempt to turn appeals into a $49 self-serve workflow."
 categories: [startups]
-tags: [truecomps, proptech, property-taxes, taxes, pdf, seo]
+tags: [startups, truecomps, proptech, property-taxes, taxes, pdf, seo]
 comments: true
 status: draft
 ---
@@ -72,3 +72,4 @@ Third: can the funnel be driven by county-specific SEO? The intent is extremely 
 I don't have a grand philosophical point here. I'm trying to take a fragmented, deadline-driven government workflow and turn it into something that behaves like a modern consumer product.
 
 If it works, it'll look obvious in hindsight.
+

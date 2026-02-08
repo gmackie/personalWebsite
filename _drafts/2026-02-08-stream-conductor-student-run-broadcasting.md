@@ -4,7 +4,7 @@ title: "Stream Conductor HS: Student-Run Sports Broadcasting, Powered by the Clo
 date: 2026-02-08
 excerpt: "High school sports streaming is either expensive or low-quality. Stream Conductor HS is my attempt to make multi-camera production accessible to students and schools."
 categories: [startups]
-tags: [streamconductor, streaming, k12, sports, obs, web, mobile]
+tags: [startups, streamconductor, streaming, k12, sports, obs, web, mobile]
 comments: true
 status: draft
 ---
@@ -74,3 +74,4 @@ My near-term definition of success is boring in the best way: onboard real teams
 If this works, it won't be because the UI is pretty. It'll be because the product makes it easy for a school to say yes.
 
 Easy for an athletic director to justify. Easy for a teacher to sponsor. Easy for students to run.
+

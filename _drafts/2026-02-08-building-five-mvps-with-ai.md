@@ -3,8 +3,8 @@ layout: post
 title: "Building Five MVPs with AI (Without Lying to Myself)"
 date: 2026-02-08
 excerpt: "I'm trying to start five products at once by standardizing the stack and using a structured agent workflow. The trick is turning AI from a slot machine into a system."
-categories: [ai, startups]
-tags: [ai, llm, opencode, create-t3-turbo, turborepo, prompting, workflow]
+categories: [startups, ai]
+tags: [startups, venture-studio, ai, llm, opencode, create-t3-turbo, turborepo, mcp, kubernetes, gitea, harbor, argocd, postgres, sentry, posthog, resend, prompting, workflow]
 comments: true
 status: draft
 ---
@@ -28,6 +28,8 @@ First: I standardize the technical starting point so each product is mostly prod
 Second: I use AI in a structured way so it behaves more like a team and less like a hype generator.
 
 This post is a snapshot of the methodology as it exists right now. Not a manifesto. More like a field note.
+
+
 
 ## Constraint 1: a standard starter template (so I stop reinventing scaffolding)
 

@@ -4,7 +4,7 @@ title: "ClassCheck: Attendance and Bus Tracking as One System"
 date: 2026-02-08
 excerpt: "K-12 schools are dealing with chronic absenteeism and fragmented tooling. ClassCheck is my attempt to unify attendance, transportation visibility, and LMS/SIS integration."
 categories: [startups]
-tags: [classcheck, k12, edtech, attendance, mqtt, lti, sis]
+tags: [startups, classcheck, k12, edtech, attendance, mqtt, lti, sis]
 comments: true
 status: draft
 ---
@@ -64,3 +64,4 @@ Success in the next phase is not "sign a massive district." It's the unglamorous
 It looks like: complete a clean Canvas LTI 1.3 integration, get a few pilot agreements in Washington state, prove the bus tracking workflow is reliable enough to earn parent trust, and get listed where districts buy.
 
 If those happen, ClassCheck becomes a wedge product in a category that desperately wants consolidation but is allergic to risk.
+

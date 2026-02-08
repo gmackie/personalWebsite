@@ -4,7 +4,7 @@ title: "PlayPath: Teaching Inside Roblox Without Feeling Like Homework"
 date: 2026-02-08
 excerpt: "Kids already spend hours in Roblox. PlayPath is my attempt to make that time educational by turning learning into the core game mechanics, not an interruption."
 categories: [startups]
-tags: [playpath, edtech, roblox, learning, spaced-repetition, lti, coppa]
+tags: [startups, playpath, edtech, roblox, learning, spaced-repetition, lti, coppa]
 comments: true
 status: draft
 ---
@@ -80,3 +80,4 @@ Ship one world that is genuinely fun. Build a parent dashboard that shows standa
 I don't think the hard part is "building a Roblox game." The hard part is making the educational layer invisible while staying real.
 
 If PlayPath works, it should feel like cheating. Like the kid is "just playing" while the adult dashboard quietly shows that something measurable is happening.
+
