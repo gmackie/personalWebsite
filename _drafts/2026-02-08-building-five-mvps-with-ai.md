@@ -29,6 +29,14 @@ Second: I use AI in a structured way so it behaves more like a team and less lik
 
 This post is a snapshot of the methodology as it exists right now. Not a manifesto. More like a field note.
 
+If you want the concrete examples, I wrote short standalone posts for each of the five projects:
+
+- TrueComps: TurboTax for property tax appeals: [/articles/2026-02/truecomps-turbotax-for-property-taxes](/articles/2026-02/truecomps-turbotax-for-property-taxes)
+- Stream Conductor HS: student-run sports broadcasting: [/articles/2026-02/stream-conductor-student-run-broadcasting](/articles/2026-02/stream-conductor-student-run-broadcasting)
+- ClassCheck: attendance + bus tracking: [/articles/2026-02/classcheck-attendance-and-bus-tracking](/articles/2026-02/classcheck-attendance-and-bus-tracking)
+- PlayPath: learning inside Roblox: [/articles/2026-02/playpath-learning-inside-roblox](/articles/2026-02/playpath-learning-inside-roblox)
+- GachaHabit: gacha RPG for habits: [/articles/2026-02/gachahabit-gacha-rpg-for-habits](/articles/2026-02/gachahabit-gacha-rpg-for-habits)
+
 
 
 ## Constraint 1: a standard starter template (so I stop reinventing scaffolding)

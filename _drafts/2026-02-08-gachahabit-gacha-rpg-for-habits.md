@@ -79,3 +79,4 @@ If GachaHabit can hit meaningful retention (especially day 30), it earns more in
 
 Either way, I like the idea of treating habit formation like a game system that deserves as much design attention as any mobile RPG.
 
+If you want the bigger picture on why I’m building multiple MVPs in parallel (and how I’m using AI + a standardized stack to make that possible), here’s the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).

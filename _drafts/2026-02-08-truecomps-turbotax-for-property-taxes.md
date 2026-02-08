@@ -73,3 +73,4 @@ I don't have a grand philosophical point here. I'm trying to take a fragmented, 
 
 If it works, it'll look obvious in hindsight.
 
+If you want the broader context on why I'm doing this as a portfolio (and how I'm using AI + a standardized template to ship), I wrote that up here: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).

@@ -75,3 +75,4 @@ If this works, it won't be because the UI is pretty. It'll be because the produc
 
 Easy for an athletic director to justify. Easy for a teacher to sponsor. Easy for students to run.
 
+If you want the bigger picture on the “five MVPs in parallel” experiment (and the AI workflow behind it), here’s the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).

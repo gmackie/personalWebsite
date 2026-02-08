@@ -65,3 +65,4 @@ It looks like: complete a clean Canvas LTI 1.3 integration, get a few pilot agre
 
 If those happen, ClassCheck becomes a wedge product in a category that desperately wants consolidation but is allergic to risk.
 
+If you want the bigger picture on why I’m building multiple products in parallel and how I’m using AI + a standardized stack to ship faster, here’s the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).

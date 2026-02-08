@@ -81,3 +81,4 @@ I don't think the hard part is "building a Roblox game." The hard part is making
 
 If PlayPath works, it should feel like cheating. Like the kid is "just playing" while the adult dashboard quietly shows that something measurable is happening.
 
+If you want the broader context on why I'm doing this as a portfolio (and the AI workflow I'm using to ship the MVPs), here's the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
