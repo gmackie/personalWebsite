@@ -2,81 +2,59 @@
 layout: post
 title: "GachaHabit: A Habit Tracker That Plays Like a Gacha RPG"
 date: 2026-02-08
-excerpt: "Most habit trackers die because checkmarks aren't rewarding. GachaHabit is my attempt to make habit completion the only way to fuel a real gacha + RPG progression loop."
+excerpt: "Every habit app I've tried dies by week four. GachaHabit is my attempt to fix that by making the reward loop a real game instead of a streak counter."
 categories: [startups]
 tags: [startups, gachahabit, habits, gacha, mobile, rpg, retention]
 comments: true
 status: draft
 ---
 
-I've tried a lot of habit tracking apps.
+Every habit tracker I've ever used has the same arc. Week one is incredible. Week two the streak starts to feel important. Week three missing a day feels like failure instead of a data point. Week four I stop opening the app.
 
-The pattern is always the same. Week 1 feels incredible. You're a new person. You have a system. You have momentum. Week 2 is when the streak starts to matter. Week 3 is when missing one day feels like a failure instead of a data point. Week 4 is when you stop opening the app.
-
-It's not that these apps are badly designed. Most of them are fine. Some of them are beautiful. The problem is that checkmarks are not a durable reward.
+It's not that these apps are badly designed. Most of them are fine. The problem is that checkmarks are not a durable reward.
 
 <!--more-->
 
-GachaHabit is my attempt to build a habit tracker that doesn't depend on willpower.
+GachaHabit is my attempt to build a habit tracker where the reward actually pulls you back.
 
-## The thesis: steal engagement mechanics from gacha games
+## Steal the engagement loop from gacha games
 
-Gacha games aren't subtle about why they work. Collection, progression, scarcity, anticipation ("one more pull"), layered goals (dailies, weeklies, events). You can criticize the ethics (and you should, sometimes), but you can't deny that these loops are extremely good at getting people to come back tomorrow.
+Gacha games are not subtle about why they work. Collection, progression, scarcity, anticipation, layered goals. You can criticize the ethics -- and sometimes you should -- but you can't deny that these loops are absurdly good at making people open the app tomorrow.
 
-Habit apps, by contrast, tend to offer streak counters, badges, and inspirational quotes. Those are fine, but they don't create a strong "I want to open this right now" loop. They create a "I should open this" loop, and "should" is not a reliable foundation.
+Habit apps, by contrast, offer streak counters, badges, and inspirational quotes. Those create a "I should open this" feeling, and "should" is not a foundation you can build retention on.
 
-So the question that won't leave me alone is: what happens if you build a real game, and the only way to play is to do the habit?
+So the question I can't let go of: what happens if you build a real game, and the only way to play it is to do the habit?
 
-## The constraint that makes it interesting: you can't pay to skip
+## You can't pay to skip
 
-This is the line I'm not willing to cross.
+This is the line I refuse to cross.
 
-In most gacha games, money can substitute for time or effort. In a habit product, that breaks the point. If you can swipe a credit card to keep your streak alive, the product is no longer teaching consistency. It's just selling cosmetics for guilt.
+In most gacha games, money substitutes for time or effort. In a habit product, that breaks the entire point. If you can swipe a credit card to keep your streak alive, you're not building consistency -- you're selling cosmetics for guilt.
 
-So the design constraint for GachaHabit is simple: you cannot pay to skip.
+So the core design constraint is simple: the only currency faucet is completing real habits. That's it. No shortcuts, no premium pulls, no "watch an ad for 50 gems." You do the habit, you earn the currency, you pull characters, you progress. The habit is the input for the game.
 
-The currency faucet is:
+The psychological shift I'm aiming for is the difference between "I drank water, so I have a streak" and "I drank water, so I'm five pulls closer to pity on the banner I care about." One of those is a checkmark. The other is anticipation.
 
-Complete habits -> earn currency -> pull characters -> progress the RPG.
+## What the game actually feels like
 
-That turns the habit into the input for entertainment.
+I don't want a habit app with a cartoon pet that says "good job" when you check a box. The game part needs enough depth that you'd actually play it.
 
-And the shift I'm aiming for is psychological as much as mechanical. Instead of "I drank water, so I have a streak," it becomes "I drank water, so I'm five pulls closer to pity on the banner I care about."
+Here's what I'm building toward: a turn-based battle system with elemental types. You pull characters from banners, each with a type affinity (fire, water, nature, etc.) and a role (tank, healer, DPS). Team composition matters -- you're not just throwing your strongest character at every fight. A water-heavy team gets wrecked by a nature boss. A team with no healer can't survive multi-round encounters. You actually have to think about what you're building toward.
 
-## What "real game" means (and what it doesn't)
+Progression looks like: complete your morning habits, earn currency, spend it on banner pulls. Get a new character, slot them into your team, take on the next stage. Pity is built in so pulls feel fair -- you're always making progress toward a guaranteed pull, never just dumping currency into a void. There are dailies, weeklies, and limited-time events that give structure to coming back.
 
-I don't want to build a habit app with a cartoon pet that says "good job" when you check a box.
+The goal isn't to make the habit app "fun" in an abstract sense. It's to make the reward legible and specific. There's a real difference between "you earned 10 points" and "you earned a pull, and the next pull might complete a team that can clear the stage you've been stuck on." One of those feels like progress. The other feels like UI.
 
-I want the game part to have enough depth that you would actually play it. That means things like:
+## Monetization without breaking the constraint
 
-A pity-based banner system, because pulls need to feel fair enough that people don't feel tricked. Quests and missions that give structure to daily usage. A battle system that has enough depth to be satisfying. Progression that doesn't collapse after a week.
+The business model isn't locked in, but the shape is probably familiar: a free tier with limitations, a premium subscription for unlimited habits and better cosmetics, seasonal battle passes, and purely cosmetic purchases.
 
-The goal isn't to make the habit app "fun" in an abstract sense. It's to make the reward legible and compelling.
-
-There's a real difference between "you earned 10 points" and "you earned a pull, and the next pull might complete your set bonus." One of those feels like progress. The other feels like UI.
-
-## Why now (for me)
-
-Two timing reasons.
-
-First, the habit app market is large and crowded, but the dominant mechanics are stale. Most apps still live in the streak/badge era.
-
-Second, modern gacha design has evolved a lot compared to the early lootbox era. Pity systems, battle passes, events, and more generous reward structures are now standard in successful games.
-
-Also: building this as a weekend project keeps the risk low. This is an experiment with a very clear scoreboard.
-
-## Monetization (still flexible)
-
-The business model is deliberately not locked in yet, but the shape is probably familiar: a free tier with limitations, a premium subscription (unlimited habits, better rewards, no ads), seasonal battle passes, and cosmetic purchases.
-
-The rule is that monetization can't undermine the constraint. If the product becomes "pay to skip," it becomes a different thing. I'm not interested in that different thing.
+The rule is that nothing you buy can substitute for doing the habit. Premium gets you cooler-looking characters, not stronger ones. A battle pass gives you extra cosmetic rewards on top of the pulls you earned, not replacement pulls. If monetization ever undermines the constraint, the product becomes a different thing, and I'm not interested in that different thing.
 
 ## What success looks like
 
 This one has a simple metric: does it retain?
 
-If GachaHabit can hit meaningful retention (especially day 30), it earns more investment. If it can't, it's an interesting experiment and I move on.
+If GachaHabit can hit meaningful day-30 retention, it earns more investment. If it can't, it was an interesting experiment and I move on. The nice thing about habit products is the scoreboard is brutally clear -- either people are opening the app on day 30 or they're not.
 
-Either way, I like the idea of treating habit formation like a game system that deserves as much design attention as any mobile RPG.
-
-If you want the bigger picture on why I’m building multiple MVPs in parallel (and how I’m using AI + a standardized stack to make that possible), here’s the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
+This is one of [five MVPs I'm building in parallel](/articles/2026-02/building-five-mvps-with-ai) using a shared stack and a structured AI workflow. The meta post explains why that's less reckless than it sounds.

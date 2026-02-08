@@ -2,77 +2,63 @@
 layout: post
 title: "Stream Conductor HS: Student-Run Sports Broadcasting, Powered by the Cloud"
 date: 2026-02-08
-excerpt: "High school sports streaming is either expensive or low-quality. Stream Conductor HS is my attempt to make multi-camera production accessible to students and schools."
+excerpt: "High school sports streams are almost always terrible. Stream Conductor HS gives students a real broadcast control room in a browser -- and gives schools the compliance guardrails they actually need."
 categories: [startups]
 tags: [startups, streamconductor, streaming, k12, sports, obs, web, mobile]
 comments: true
 status: draft
 ---
 
-I've watched enough high school sports streams to know the pattern.
+I've watched enough high school sports streams to know the pattern: a single fixed camera bolted somewhere high in a gym, the scoreboard half cut off, audio that's mostly sneakers and wind noise, and the whole thing dying the second WiFi hiccups. Parents still pay for it because it's the only option. That's the bar.
 
-The "stream" is a single fixed camera bolted somewhere high in a gym. The scoreboard is half cut off. The audio is mostly wind noise and sneakers. The moment the WiFi hiccups, the whole thing falls apart. And parents still pay for it because, even with all of those flaws, it's often the only way to see the game.
-
-It's not that anyone is trying to make a bad product. It's that "good" production is expensive, and "cheap" production is fragile.
+It's not that anyone is making a bad product on purpose. It's that "good" production is expensive and "cheap" production is fragile, and there's basically nothing in between.
 
 <!--more-->
 
-Stream Conductor HS is my attempt to bridge that gap: a cloud broadcasting platform designed specifically for student-run high school sports production.
+Stream Conductor HS is my attempt to build the in-between: a cloud broadcasting platform designed for student-run high school sports production.
 
-Not "teach kids OBS and hope for the best." Not "buy a broadcast truck." More like: give students a modern control room in a browser, wrap it in the constraints schools actually live with, and make the output good enough that parents will happily watch.
+Not "teach kids OBS and hope for the best." Not "buy a broadcast truck." More like: give students a real control room in a browser, wrap it in the constraints schools actually live with, and make the output good enough that parents happily watch.
 
-## The real problem isn't streaming. It's production.
+## The problem isn't streaming. It's production.
 
-If all you need is "video goes to YouTube," the world already has a hundred ways to do it. The reason high school streams are usually mediocre is that production is where quality comes from, and production is where tools get complex.
+If all you need is "video goes to YouTube," a hundred tools already exist. High school streams are mediocre because production is where quality lives, and production is where tools get complicated.
 
-The current choices for a school are basically:
+A school's options today: pay $500-$2,000 per event for professional production (doesn't scale to JV or non-revenue sports), use a low-touch network with a fixed camera and a subscription product, or do the volunteer thing where someone fights new surprises every week from a phone.
 
-Either pay $500-$2,000 per event for professional production, which doesn't scale to JV games and non-revenue sports, or use a low-touch network that gives you a fixed camera and a subscription product for parents, or do the volunteer setup where someone tries to run things from a phone or a laptop and fights a new set of surprises every week.
+All of those can "work." None feel like the obvious default.
 
-All of those paths can "work." None of them feel like the obvious, modern default.
+## The underrated angle: CTE
 
-## The underappreciated angle: schools also want CTE outcomes
+There's a parallel need that makes this way more interesting: schools want CTE programs that teach real skills. Media production is a perfect fit -- concrete, collaborative, and students see the outcome of their work immediately.
 
-There's a parallel need here that makes the product more interesting than "better streaming": schools need career-connected learning and CTE programs that teach real skills.
+But most schools won't adopt a program that requires a teacher to also be a part-time streaming engineer. The platform has to support both loops simultaneously: students learn to produce, and the school gets its games streamed. One activity, two outcomes.
 
-Media production is a perfect fit because it's concrete. Students can see the outcome of their work immediately. A broadcast is a tangible artifact. It teaches collaboration, planning, attention to detail, and a pile of technical skills that map nicely to real jobs.
+## The product: a student-friendly control room
 
-But most schools aren't going to adopt a program that requires a teacher to also be a full-time streaming engineer.
+Stream Conductor HS is a web dashboard that lets a small student crew run a broadcast modeled on a real production switcher. Multi-camera switching, overlays, transitions, scene control -- the powerful parts stay, but cognitive load drops low enough to train a team in a club setting.
 
-So the platform needs to make it easy to say yes. It has to support the learning loop and the output loop at the same time: students learn how to produce, and the school gets its games streamed.
+The product is intentionally opinionated. Same camera placements every game (wide shot, under-basket, sideline), same overlays (scoreboard, sponsor, lineup), small crews, chaotic environments. The interface has to be forgiving, setup has to be repeatable, and the "good broadcast" path has to be the default path.
 
-## The product: a student-friendly broadcast control room
+## Compliance isn't paperwork. It's the product.
 
-Stream Conductor HS is a web dashboard that lets a small student crew run a broadcast with a workflow that looks like a real production switcher. The idea is to keep the powerful parts (multi-camera, overlays, transitions, scene control) while keeping the cognitive load low enough that you can train a team in a club setting.
+This is the section nobody wants to write, and it might be the most important one.
 
-That means the product is intentionally opinionated. It's not a generic creator tool. It's designed around the predictable shape of school sports:
+Schools live and die by compliance. If you don't take it seriously, nothing else matters because a district will never say yes. I've been spending real time on the edge cases, and there are a lot of them.
 
-You tend to have the same camera placements (wide shot, under-basket, sideline). You tend to have the same overlays (scoreboard, sponsor, lineup). The crew is small. The environment is chaotic. When something breaks, you don't have time to debug.
+Start with league and association broadcasting rules. State athletic associations have different policies about who can stream, what games, and under what terms. Some require specific distribution platforms. Some have exclusive media deals restricting streaming rights for playoff brackets or championships. The product has to enforce these -- not with a warning buried in settings, but as a hard constraint in the workflow. If a game can't legally be streamed to YouTube, the option shouldn't be there.
 
-So the interface has to be forgiving, the setup has to be repeatable, and the "good broadcast" path has to be the default path.
+Then there's FERPA. When you're streaming minors, things get complicated fast. If a camera catches a student's IEP aide or a disciplinary incident on the sideline, that's a potential FERPA issue. The product needs sensible defaults: restricted camera zones configurable per venue, clear policies about who appears on screen, and controls that let a faculty advisor enforce boundaries without micromanaging every frame.
 
-## Compliance isn't paperwork. It's a feature.
+District acceptable use policies add another layer. Most districts have AUPs governing what technology students can use, what data gets stored, and where it goes. That means configurable data residency, clear audit logs, and integration with the district's identity provider so we're not creating yet another account.
 
-School sports come with rules: league requirements, association policies, district policies, and all the edge cases that show up when you stream minors.
+And then there are recording and distribution rules. Some districts require footage retained for a certain period. Some require parental opt-out mechanisms. Some have specific rules about commercial use of student images.
 
-I want compliance to be enforced by default, not stapled on later. That means having a place in the system where you can encode real constraints (recording rules, distribution rules, permissions) and let the product nudge operators toward the right thing.
-
-This isn't the sexy part of the story, but it's the part that decides whether a district will say yes.
-
-## What's built (and what I'm betting on)
-
-The broader Stream Conductor stack is modern and pretty flexible: a Next.js dashboard, an Expo mobile app, a Go backend with real-time control paths (gRPC/WebSocket), and a media layer (MediaMTX) to handle ingest/output.
-
-But the bet is not "we can stream video." Lots of companies can.
-
-The bet is that a remote control room that is designed for schools (and specifically for students) is a wedge that can win. The product has to be reliable, repeatable, and simple enough that it becomes infrastructure, not a hobby project.
+None of this is glamorous. But compliance should be enforced by default, not stapled on after the fact. If the system knows the rules, it can nudge operators toward the right thing without anyone memorizing a policy manual. That's the feature -- compliance as infrastructure that lets everyone else focus on making a good broadcast.
 
 ## What success looks like
 
-My near-term definition of success is boring in the best way: onboard real teams, ship a compliance engine for a few key states, publish curriculum-aligned lesson plans, and convert the first paid schools by the fall season.
+My near-term bar is deliberately boring: onboard real student teams, ship a compliance engine for a few key states, publish curriculum-aligned lesson plans, and convert the first paid schools by fall season.
 
-If this works, it won't be because the UI is pretty. It'll be because the product makes it easy for a school to say yes.
+If this works, it won't be because the UI is pretty. It'll be because the product makes it easy for a school to say yes. Easy for an athletic director to justify. Easy for a teacher to sponsor. Easy for students to run.
 
-Easy for an athletic director to justify. Easy for a teacher to sponsor. Easy for students to run.
-
-If you want the bigger picture on the “five MVPs in parallel” experiment (and the AI workflow behind it), here’s the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
+For the bigger picture on the "five MVPs at once" experiment, here's the hub post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).

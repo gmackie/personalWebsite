@@ -2,125 +2,65 @@
 layout: post
 title: "Building Five MVPs with AI (Without Lying to Myself)"
 date: 2026-02-08
-excerpt: "I'm trying to start five products at once by standardizing the stack and using a structured agent workflow. The trick is turning AI from a slot machine into a system."
+excerpt: "I'm building five products at once by standardizing the stack and treating AI like a junior dev with structure, not a magic wand. Here's how."
 categories: [startups, ai]
 tags: [startups, venture-studio, ai, llm, opencode, create-t3-turbo, turborepo, mcp, kubernetes, gitea, harbor, argocd, postgres, sentry, posthog, resend, prompting, workflow]
 comments: true
 status: draft
 ---
 
-The most dangerous thing about working on startups is not the lack of ideas.
+I have a graveyard of half-built repos and notebooks full of product ideas that never shipped. You probably do too.
 
-It's the gap between "this could be huge" and "I can actually ship something that touches reality." The older I get, the more I think this is the real dividing line between "I have a lot of ideas" and "I build things." The gap isn't intelligence. It's throughput.
+The problem was never ideas. It was throughput. The gap between "this could work" and "someone can actually use this" is enormous, and I kept getting stuck in the middle -- endlessly scaffolding, endlessly tweaking, never shipping.
 
-I have a list of products I want to build. Historically, that list has been a museum: nice concepts, rarely finished. Lots of "I should." Lots of "someday." Lots of notebooks and half-built repos.
-
-So I'm trying a different approach.
-
-I'm trying to build five MVPs in parallel.
+So I'm trying something that sounds reckless: building five MVPs in parallel.
 
 <!--more-->
 
-That sounds like a recipe for thrash. It probably is. But I'm trying to do it with two constraints that make it at least plausible.
+Two things make it less crazy than it sounds. I standardized the tech so I'm not paying the setup tax five times. And I built a structured AI workflow that acts more like a disciplined junior dev than a magic autocomplete.
 
-First: I standardize the technical starting point so each product is mostly product work, not setup work.
+Here's what each product actually is:
 
-Second: I use AI in a structured way so it behaves more like a team and less like a hype generator.
+- [TrueComps](/articles/2026-02/truecomps-turbotax-for-property-taxes) -- TurboTax for property tax appeals. Pull comps, generate evidence packets, file the appeal.
+- [Stream Conductor HS](/articles/2026-02/stream-conductor-student-run-broadcasting) -- Lets high school students run their own sports broadcasts with compliance guardrails baked in.
+- [ClassCheck](/articles/2026-02/classcheck-attendance-and-bus-tracking) -- Attendance and bus tracking for schools that are still doing it on clipboards.
+- [PlayPath](/articles/2026-02/playpath-learning-inside-roblox) -- Educational content that lives inside Roblox, where the kids already are.
+- [GachaHabit](/articles/2026-02/gachahabit-gacha-rpg-for-habits) -- A gacha RPG where completing real habits powers your team in battle.
 
-This post is a snapshot of the methodology as it exists right now. Not a manifesto. More like a field note.
+## One stack, five products
 
-If you want the concrete examples, I wrote short standalone posts for each of the five projects:
+Every product starts from the same modified create-t3-turbo monorepo. Turborepo, Next.js, Expo when I need mobile, tRPC, Postgres, consistent auth. The point isn't that it's the best stack -- it's that I make the boring decisions once.
 
-- TrueComps: TurboTax for property tax appeals: [/articles/2026-02/truecomps-turbotax-for-property-taxes](/articles/2026-02/truecomps-turbotax-for-property-taxes)
-- Stream Conductor HS: student-run sports broadcasting: [/articles/2026-02/stream-conductor-student-run-broadcasting](/articles/2026-02/stream-conductor-student-run-broadcasting)
-- ClassCheck: attendance + bus tracking: [/articles/2026-02/classcheck-attendance-and-bus-tracking](/articles/2026-02/classcheck-attendance-and-bus-tracking)
-- PlayPath: learning inside Roblox: [/articles/2026-02/playpath-learning-inside-roblox](/articles/2026-02/playpath-learning-inside-roblox)
-- GachaHabit: gacha RPG for habits: [/articles/2026-02/gachahabit-gacha-rpg-for-habits](/articles/2026-02/gachahabit-gacha-rpg-for-habits)
+The parts that matter most are the ones nobody talks about. Docker + Kubernetes deployment with a repeatable layout so every repo doesn't invent its own deploy script. Our own Postgres in the cluster instead of a managed service -- more ops work, but zero early-stage friction. Sentry, PostHog, Resend wired in by default so each product doesn't become a new vendor maze.
 
+And a control panel that ties it together. One screen showing me what's actually happening across Gitea repos, the K8s cluster, Harbor registry, and Argo CD deployments. The value isn't dashboards -- it's knowing whether I'm shipping or just pushing code around.
 
+## What an AI work session actually looks like
 
-## Constraint 1: a standard starter template (so I stop reinventing scaffolding)
+Here's the thing about LLMs: they're incredible at creating momentum and terrible at guaranteeing correctness. They make you feel fast while you generate plausible nonsense. I've done it. You've done it.
 
-I started from a create-t3-turbo-style baseline.
+So I stopped using AI like a slot machine and started using it like a system.
 
-When I say "modified create-t3-turbo," I mean: a monorepo that makes it cheap to stand up a web app and (when needed) a mobile app using consistent primitives. The point isn't that the template is perfect. It's that I don't want to pay the "set up auth/db/deploy" tax five times.
+A typical session: I open Claude Code and describe what I want to build. But instead of just prompting and hoping, there's a workflow. First, an explore agent greps through the codebase and maps out where the relevant patterns live. Then I brainstorm the approach -- what am I actually building, what are the constraints, what could go wrong. Then a plan gets written as an artifact, not a thought. Then implementation happens in small steps with real verification after each one.
 
-At a high level, the template aims to make these decisions once:
+The rule that saves me the most: no completion claims without running the command that proves it. No "should work." No "seems fine." If the test didn't pass, it's not done.
 
-Monorepo layout (Turborepo/pnpm). Web UI (Next.js + React). Mobile app (Expo / React Native, optional per product). API layer (tRPC for the JavaScript-heavy apps). Database (Postgres + a type-safe ORM). Auth (a consistent default, with exceptions when a product needs something else).
+I also have agents that can claim tasks from a shared board, post progress, and hand off to each other. It sounds over-engineered until you're juggling five repos and realize you can't remember what state anything is in. The board is the forcing function -- if I can't describe the work as a task, it's not a real task yet.
 
-But the modifications that matter most (for me) are the boring operational ones. The stuff that doesn't feel like "building a product" but absolutely determines whether you ship.
+## Why five at once
 
-I standardized infrastructure and deployment around Docker + Kubernetes, with a repeatable layout so every repo doesn't invent its own deployment dialect.
+I'm not hedging. I'm searching.
 
-I standardized on running our own Postgres instance in the Kubernetes cluster. That's a trade-off (ops responsibility, backups, migrations), but it removes a lot of early-stage friction and makes environments behave consistently.
+Early-stage products are mostly about finding signal. Some ideas are wrong. Some are right but poorly timed. Some have a customer but no distribution. I don't want to bet the next year on whichever idea felt most exciting on a Tuesday afternoon.
 
-I standardized integrations: Sentry for errors, PostHog for product analytics, Resend for transactional email. Not because those are the only good tools, but because every MVP doesn't need to become a new vendor maze.
+Five MVPs with a shared stack means context carries over between them. Something I learn deploying TrueComps makes ClassCheck's deploy faster. A pattern I nail in GachaHabit's mobile app applies directly to PlayPath. The portfolio isn't five separate bets -- it's one system that explores five directions.
 
-I standardized tooling: consistent lint/test defaults and lightweight generators so I can spin up new routes and features without hand-wiring the same plumbing.
-
-And then I added something I didn't expect to be as important as it is: a control-panel app.
-
-When you're operating across multiple repos and deploying to your own infrastructure, you need a single place that shows you what's actually happening. We built a control panel that monitors our self-hosted Gitea repos, the Kubernetes cluster, the Harbor registry, and Argo CD deployments.
-
-The benefit isn't "pretty dashboards." The benefit is that I can look at one screen and see whether I'm shipping or just pushing code around.
-
-## Constraint 2: a skills-based AI workflow (so I stop confusing text with progress)
-
-The second constraint is more important.
-
-LLMs are incredible at creating momentum and terrible at guaranteeing correctness. They can make you feel like you're moving fast while you're actually just generating plausible text.
-
-So my rule is: AI only helps if it's forced into a workflow that produces evidence.
-
-This is the difference between AI as a slot machine and AI as a system.
-
-Slot machine: prompt, hope, paste.
-
-System: clarify the goal, explore the codebase, write a plan, implement in small steps, and verify with real commands.
-
-It is slower per individual iteration, but it is massively faster than shipping delusion.
-
-## How I use agents (concretely)
-
-The trick, for me, is to stop thinking of AI as "one model" and start thinking of it as a set of roles.
-
-I use an explore-style agent for contextual grep and codebase mapping. That's the agent that finds where patterns live, where the real code is, and what conventions exist.
-
-I use a librarian-style agent when I need external references and examples. That's the agent that looks up real-world usage patterns, official docs, and edge-case behavior.
-
-I use a brainstorming step when I'm doing creative work and I need to pin down what I'm actually building before touching code.
-
-I use a planning step when something is bigger than a couple minutes. Plans are artifacts. They create accountability. They make it harder to drift.
-
-And I have a verification rule that is borderline obnoxious but saves me constantly: no completion claims without running the command that proves the claim.
-
-No "should work." No "seems fine." If I didn't run the test/build/typecheck, it's not done.
-
-## Coordination: the other half of making this feel like a team
-
-If you want multiple agents working across multiple repos without duplicating effort, you need a shared place to put state.
-
-We built a kanban-style board app for managing tasks across projects, and exposed it via an MCP server so agents can claim tasks, post progress updates, and attach artifacts (links, PRs, notes).
-
-This is the part that makes the workflow feel less like "me prompting a model" and more like "a team updating a shared board." It also creates a useful forcing function: if I can't describe the work as a task on a board, it's probably not a real task yet.
-
-## Why do this as a portfolio?
-
-The reason I'm doing this across five products is that the early stage is mostly about finding signal.
-
-Some ideas will be wrong. Some will be right but poorly timed. Some will have a customer but no distribution. I don't want to bet the next year on an idea that only feels good in my head.
-
-So I want a portfolio approach where each idea has a crisp MVP and a launch plan, the stack is consistent enough that context carries over, and the AI workflow reduces the cost of iteration.
-
-I don't think this is the only way to build. It's my attempt to stop being stuck in the idea phase.
+The goal is brutally simple: build five things that touch reality, fast enough to learn which ones deserve the next twelve months.
 
 ## What I'm still figuring out
 
-There are open questions I'm actively working through.
+How much of the template should be opinionated versus flexible. How to keep five products from stealing focus from each other. What "done" means for each MVP so I stop polishing. How to keep the AI workflow from becoming its own form of procrastination.
 
-How much of the template should be opinionated vs optional? How do I keep the five ideas from stealing focus from each other? What does "done" mean for each MVP so I don't keep polishing? How do I keep the AI workflow from becoming bureaucracy?
+I don't have clean answers to any of those. But I have five repos, a shared stack, a workflow that forces verification, and a board that tracks what's actually happening.
 
-The goal isn't to build five perfect products.
-
-The goal is to build five real products that touch reality, quickly enough to learn which ones deserve the next 12 months.
+That's further than the notebook ever got.

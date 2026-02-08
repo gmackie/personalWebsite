@@ -2,83 +2,69 @@
 layout: post
 title: "PlayPath: Teaching Inside Roblox Without Feeling Like Homework"
 date: 2026-02-08
-excerpt: "Kids already spend hours in Roblox. PlayPath is my attempt to make that time educational by turning learning into the core game mechanics, not an interruption."
+excerpt: "Kids already spend hours in Roblox. PlayPath puts learning inside the game loop itself -- not as an interruption, but as the mechanic."
 categories: [startups]
 tags: [startups, playpath, edtech, roblox, learning, spaced-repetition, lti, coppa]
 comments: true
 status: draft
 ---
 
-The most common EdTech failure mode is chocolate-covered broccoli.
-
-You build something that is technically educational, and then you try to hide the learning inside a thin game skin. Kids detect the trick instantly. If the product feels like school wearing a party hat, it loses to the actual party.
+The most common EdTech failure mode is chocolate-covered broccoli. You build something that's technically educational, wrap it in a thin game skin, and hope kids don't notice. Kids always notice. If the product feels like school wearing a party hat, it loses to the actual party.
 
 And for tens of millions of kids, the actual party is Roblox.
 
-<!--more-->
-
 PlayPath is my attempt to stop fighting that reality.
 
-## Roblox is where the attention is (whether we like it or not)
+<!--more-->
 
-If you spend time around parents, you'll hear the same tension in a dozen different ways. "My kid loves Roblox." "I feel guilty about it." "I don't know if it's healthy." "It's the only thing they'll do for hours without being asked." Teachers mostly can't touch it, and educational products mostly can't compete with it.
+## Roblox is where the attention is
 
-Roblox wins because it's social, infinite, and identity-driven. It's not just a game, it's a place. You have an avatar, you have status, you have a friend graph, you have an endless feed of new experiences.
+If you spend time around parents, you hear the same tension a dozen ways. "My kid loves Roblox." "I feel guilty about screen time." "It's the only thing they'll do for hours without being asked."
 
-So when a kid can choose between an educational worksheet app and Roblox, Roblox wins almost every time. That's not a moral failing. It's an incentive system.
+Roblox wins because it's social, infinite, and identity-driven. It's not a game -- it's a place. When a kid chooses between a worksheet app and Roblox, Roblox wins every time. That's not a moral failing. It's an incentive system.
 
-The question I'm asking is simple: what if learning lived inside the game loop kids already love?
+So the question is simple: what if learning lived inside the game loop kids already love?
 
-## The core constraint: learning can't interrupt play
+## Learning can't interrupt play
 
-Most educational games interrupt play with learning. You're doing something fun, then a quiz pops up. Answer these three math problems to continue.
+Most educational games interrupt play with learning. You're doing something fun, a quiz pops up, answer three math problems to continue. Kids feel the "now eat your vegetables" moment instantly.
 
-Kids are not fooled by this. They can feel the "now do your vegetables" moment instantly.
+PlayPath's design constraint is strict: learning cannot interrupt play. Fractions aren't a quiz between levels. Fractions are the mechanic. The learning objective has to be identical to the thing that moves the player forward.
 
-The design constraint for PlayPath is: learning cannot interrupt play. Fractions aren't a quiz between levels. Fractions are the mechanic.
+In Fraction Forest, you navigate a world where number lines and fraction comparisons are literally how you move. In a Physics Sandbox, the question isn't "what is the angle?" -- it's "can you make the thing go where you want?" In Rhythm Phonics, decoding and syllables are the inputs in a rhythm game that feels like something you'd play even if no adult was watching.
 
-When I say "gameplay is the curriculum," I'm not trying to be poetic. I'm describing a technical constraint: the learning objective has to be identical to the thing that moves the player forward.
+This is the only approach I've seen that has a real shot at being Roblox-fun and academically meaningful at the same time.
 
-Examples of the kinds of worlds I want to build:
+## The engine: adaptive, not creepy
 
-In Fraction Forest, you don't answer fraction questions to unlock the next area. You navigate a world where number lines and fraction comparisons are literally how you move and progress.
+If the game is going to teach, it has to adapt. Otherwise it's either too easy (boring) or too hard (frustrating), and both paths lead to churn.
 
-In a Physics Sandbox world, the question isn't "what is the angle?" The question is "can you make the thing go where you want?" The math is embedded in a physics intuition loop.
+The plan combines proven ideas: spaced repetition for retention, mastery tracking to decide what comes next, and a light content generation layer so the experience doesn't feel like the same worksheet in different fonts.
 
-In Rhythm Phonics, decoding and syllables aren't a separate exercise. They're the inputs in a rhythm game that feels like something you would play even if no adult was watching.
+But the users are kids, and that changes everything.
 
-This is the only approach I've seen that has a chance of being Roblox-fun and academically real.
+COPPA isn't a compliance footnote I'll deal with later. It's a design constraint that shapes the architecture from day one. The easy version is a checklist: no PII in prompts, safety filtering, parent controls. The harder version -- the one I actually care about -- is earning trust by being genuinely conservative about data.
 
-## The engine: adaptive, but not creepy
+The adaptive engine runs on behavioral signals within the game (what levels a player struggles with, what they've mastered, how long they spend on a challenge) and never on identity data. Generated content goes through safety filters before a kid sees it. Parent dashboards show progress without requiring the kid to hand over anything personal. The whole thing is designed to survive an audit from a skeptical district IT director, because if we get into schools, that audit is coming.
 
-If the game is going to teach, it has to adapt. Otherwise it becomes either too easy (boring) or too hard (frustrating), and both are a short path to churn.
+I'd rather over-engineer the privacy layer now than discover I cut corners later.
 
-The plan is to combine a few proven ideas: spaced repetition to turn practice into retention, mastery tracking to decide what comes next, and a light layer of personalization so the content doesn't feel like the same worksheet wearing different fonts.
+## Schools make this harder (and way more defensible)
 
-But because the users are kids, the constraints have to be strict. COPPA isn't a footnote. It's a design constraint.
+There are two customers for PlayPath: families and schools.
 
-That means: no PII in prompts, safety filtering on generated content, clear parent controls, and a product posture that assumes this will eventually be used in schools and audited by people who are allergic to hand-waving.
+Families pay for engagement -- they want their kid's Roblox time to feel less like wasted time. That's a real market, but consumer EdTech is brutal.
 
-I like the idea of using a spaced repetition core and letting content generation sit around it. The model helps with variation and phrasing; the learning engine decides what the student should practice.
-
-## Schools make this harder (and also more defensible)
-
-There are two customers for this product: families and schools.
-
-Families pay for engagement. Schools adopt if it fits their workflows.
-
-For schools, integration isn't optional. If a teacher can't assign this and see progress without a week of setup, it doesn't exist.
-
-That's why PlayPath is designed to support LTI 1.3 launches, roster sync, and grade passback. If we can make it behave like a normal LMS-integrated tool, it becomes possible for districts to pilot without creating a parallel universe.
+Schools are harder to sell to but stickier once you're in. The catch: if a teacher can't assign this and see progress without a week of setup, it doesn't exist to them. That's why PlayPath supports LTI 1.3 launches, roster sync, and grade passback from the start. If it behaves like a normal LMS-integrated tool, a district can pilot without creating a parallel universe of logins and spreadsheets.
 
 ## What success looks like
 
-The early milestones are practical and kind of boring:
+Near-term: ship one world (Fraction Forest) that is genuinely fun enough to retain players who have zero obligation to keep playing. Build a parent dashboard that shows standards-aligned progress without requiring a PhD to read. Get a small cohort of paying families to validate the value prop outside my head.
 
-Ship one world that is genuinely fun. Build a parent dashboard that shows standards-aligned progress. Get a small number of paying families. Find early teachers who want to pilot.
+Then schools. A real pilot: one teacher, one classroom, six weeks. The teacher assigns Fraction Forest through their LMS. Students launch it from the same place they launch everything else. The teacher sees a dashboard showing who's mastered equivalent fractions and who's stuck on number line placement. At the end of six weeks, the teacher points to measurable progress on specific Common Core standards and says "this worked" -- or "it didn't" -- with actual data.
 
-I don't think the hard part is "building a Roblox game." The hard part is making the educational layer invisible while staying real.
+That's the bar. Not "kids liked it." Did the teacher see learning she could measure and trust?
 
-If PlayPath works, it should feel like cheating. Like the kid is "just playing" while the adult dashboard quietly shows that something measurable is happening.
+If PlayPath works, it should feel like cheating. The kid is "just playing Roblox" while the parent dashboard quietly shows something real is happening.
 
-If you want the broader context on why I'm doing this as a portfolio (and the AI workflow I'm using to ship the MVPs), here's the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
+For the bigger picture on why I'm building five products at once, here's the hub post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
