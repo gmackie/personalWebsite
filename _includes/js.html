@@ -1,3 +1,23 @@
+<script>
+// Dark mode toggle — respects system preference, persists choice
+(function() {
+  var stored = localStorage.getItem('theme');
+  if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  else if (stored === 'light') document.documentElement.removeAttribute('data-theme');
+  // If no stored preference, CSS @media (prefers-color-scheme: dark) handles it
+})();
+function toggleTheme() {
+  var html = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+</script>
 <script type="text/javascript" src="{{ site.url }}/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="{{ site.url }}/js/main.js"></script>
 {% if site.owner.google.analytics %}

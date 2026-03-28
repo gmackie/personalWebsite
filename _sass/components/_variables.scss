@@ -37,9 +37,9 @@
   --radius-lg: 12px;
 }
 
-// Dark mode (gmacko)
+// Dark mode — triggered by system preference OR data-theme attribute
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #171411;
     --surface: #1E1B17;
     --surface-2: #262220;
@@ -53,6 +53,43 @@
     --white: #1E1B17;
   }
 }
+
+// Manual dark mode toggle
+:root[data-theme="dark"] {
+  --bg: #171411;
+  --surface: #1E1B17;
+  --surface-2: #262220;
+  --text: #E5DFD6;
+  --text-strong: #F5F0E8;
+  --muted: #8A8078;
+  --accent: #D4612E;
+  --accent-hover: #E87040;
+  --rule: #2E2A25;
+  --rule-heavy: #3D3732;
+  --white: #1E1B17;
+}
+
+// Theme toggle button
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, border-color 0.15s;
+  &:hover { background: var(--surface-2); border-color: var(--muted); }
+  .theme-toggle-icon::before { content: '☀'; }
+}
+:root[data-theme="dark"] .theme-toggle .theme-toggle-icon::before,
+:root:not([data-theme]) .theme-toggle .theme-toggle-icon::before { content: '☀'; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .theme-toggle-icon::before { content: '☾'; }
+}
+:root[data-theme="dark"] .theme-toggle .theme-toggle-icon::before { content: '☾'; }
 
 // ============================================================
 // Sass Variables (backwards compat, referencing custom properties)

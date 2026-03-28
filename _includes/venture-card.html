@@ -1,0 +1,31 @@
+<a class="startup-card" href="{{ include.venture.url }}" target="_blank" rel="noopener noreferrer">
+  <div class="startup-thumb">
+    {% if include.venture.image %}
+    <img src="{{ include.venture.image }}" alt="{{ include.venture.name }} homepage thumbnail">
+    {% else %}
+    <div class="startup-thumb-fallback startup-thumb-{{ include.venture.status }}">
+      <span>{{ include.venture.domain }}</span>
+    </div>
+    {% endif %}
+  </div>
+  <div class="startup-copy">
+    <div class="startup-title-row">
+      <h3>{{ include.venture.name }}</h3>
+      <span class="status-badge status-{{ include.venture.status }}">{{ include.venture.status }}</span>
+    </div>
+    {% if include.venture.thesis %}
+    <p class="venture-thesis">{{ include.venture.thesis }}</p>
+    {% endif %}
+    <p>{{ include.venture.description }}</p>
+    {% if include.venture.tags and include.venture.tags.size > 0 %}
+    <div class="venture-tags">
+      {% for tag in include.venture.tags %}
+      <span class="venture-tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if include.venture.last_updated %}
+    <p class="venture-updated">updated {{ include.venture.last_updated | date: "%-d %b %Y" }}</p>
+    {% endif %}
+  </div>
+</a>

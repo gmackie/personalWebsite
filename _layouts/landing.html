@@ -64,50 +64,72 @@ layout: default
       <p class="landing-kicker">Ventures</p>
       <h2>Current portfolio</h2>
       <p>
-        A snapshot of the companies and product bets currently occupying my time.
-        Each card links out directly.
+        11 companies and product bets across infrastructure, AI, games, operations, and consumer software.
+        All built on the same shared infra. Each card links out directly.
       </p>
     </div>
 
-    {% if site.data.ventures and site.data.ventures.size > 0 %}
-    <div class="startup-grid">
-      {% for venture in site.data.ventures %}
-      <a class="startup-card" href="{{ venture.url }}" target="_blank" rel="noopener noreferrer">
-        <div class="startup-thumb">
-          {% if venture.image %}
-          <img src="{{ venture.image }}" alt="{{ venture.name }} homepage thumbnail">
-          {% else %}
-          <div class="startup-thumb-fallback startup-thumb-{{ venture.status }}">
-            <span>{{ venture.domain }}</span>
-          </div>
-          {% endif %}
-        </div>
-        <div class="startup-copy">
-          <div class="startup-title-row">
-            <h3>{{ venture.name }}</h3>
-            <span class="status-badge status-{{ venture.status }}">{{ venture.status }}</span>
-          </div>
-          {% if venture.thesis %}
-          <p class="venture-thesis">{{ venture.thesis }}</p>
-          {% endif %}
-          <p>{{ venture.description }}</p>
-          {% if venture.tags and venture.tags.size > 0 %}
-          <div class="venture-tags">
-            {% for tag in venture.tags %}
-            <span class="venture-tag">{{ tag }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-          {% if venture.last_updated %}
-          <p class="venture-updated">updated {{ venture.last_updated | date: "%-d %b %Y" }}</p>
-          {% endif %}
-        </div>
-      </a>
-      {% endfor %}
+    {% assign infra = site.data.ventures | where_exp: "v", "v.category == 'infrastructure' or v.category == 'ai-infra'" %}
+    {% assign games = site.data.ventures | where_exp: "v", "v.category == 'edtech' or v.category == 'gamedev' or v.category == 'consumer'" %}
+    {% assign ops = site.data.ventures | where_exp: "v", "v.category == 'industrial' or v.category == 'workflow' or v.category == 'iot'" %}
+    {% assign standalone = site.data.ventures | where_exp: "v", "v.category == 'media' or v.category == 'proptech'" %}
+    {% assign experiments = site.data.ventures | where: "experiment", true %}
+
+    <div class="venture-group">
+      <p class="venture-group-label">Infrastructure &amp; AI</p>
+      <p class="venture-group-desc">The platform layer. ForgeGraf deploys everything. GenTrellis puts AI on-prem.</p>
+      <div class="startup-grid">
+        {% for venture in infra %}
+        {% include venture-card.html venture=venture %}
+        {% endfor %}
+      </div>
     </div>
-    {% else %}
-    <p class="empty-state">No ventures yet.</p>
+
+    <div class="venture-group">
+      <p class="venture-group-label">Games &amp; Learning</p>
+      <p class="venture-group-desc">Learning through play, building games with AI, and turning real life into a game.</p>
+      <div class="startup-grid">
+        {% for venture in games %}
+        {% include venture-card.html venture=venture %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="venture-group">
+      <p class="venture-group-label">Operations &amp; Controls</p>
+      <p class="venture-group-desc">Control rooms for physical systems. Industrial PLCs, escape rooms, and van electrical.</p>
+      <div class="startup-grid">
+        {% for venture in ops %}
+        {% include venture-card.html venture=venture %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="venture-group">
+      <p class="venture-group-label">Standalone</p>
+      <p class="venture-group-desc">Products that stand on their own.</p>
+      <div class="startup-grid">
+        {% for venture in standalone %}
+        {% include venture-card.html venture=venture %}
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if experiments.size > 0 %}
+    <div class="venture-group">
+      <p class="venture-group-label">Experiments</p>
+      <p class="venture-group-desc">Wild bets. Not ventures yet. Might become one, might not.</p>
+      <div class="startup-grid">
+        {% for venture in experiments %}
+        {% include venture-card.html venture=venture %}
+        {% endfor %}
+      </div>
+    </div>
     {% endif %}
+
+    {% unless site.data.ventures %}
+    <p class="empty-state">No ventures yet.</p>
+    {% endunless %}
 
     <p class="landing-section-link"><a href="{{ site.url }}/ventures/">All ventures &rarr;</a></p>
   </section>

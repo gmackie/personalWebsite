@@ -1,7 +1,7 @@
 # Venture portfolio — single source of truth for all ventures.
-# Order matters: ventures flow from infrastructure → AI → games → ops → consumer → experimental
+# Order: infrastructure → AI → games → ops/controls → standalone → experiments
 # Required fields: name, slug, domain, url, description, status, thesis, category
-# Optional fields: tags, shared_infra, last_updated, next_milestone, image, gmac_experiment
+# Optional fields: tags, shared_infra, last_updated, next_milestone, image, experiment
 
 - name: ForgeGraf
   slug: forgegraph
@@ -31,20 +31,6 @@
   next_milestone: Q2 2026 first deliveries
   image: /img/ventures/gentrellis.png
 
-- name: Controls Foundry
-  slug: controls-foundry
-  domain: controlsfoundry.com
-  url: https://controlsfoundry.com
-  description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
-  thesis: The integrator is gone. The knowledge is retiring. Your PLC programs shouldn't be a mystery.
-  status: active
-  category: industrial
-  tags: [industrial, controls, ai, plc, migration]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Siemens S7 support
-  image: /img/ventures/controls-foundry.png
-
 - name: PlayTrek.ai
   slug: playtrek
   domain: playtrek.ai
@@ -73,6 +59,34 @@
   next_milestone: Unity MCP integration
   image: /img/ventures/levelforge.png
 
+- name: HabitPlay
+  slug: habitplay
+  domain: habitplay.io
+  url: https://habitplay.io
+  description: Gamified habit and task manager. Pick your goals (fitness, nutrition, sobriety, skills, creative), get a daily plan, earn XP, battle friends, and spend coins in the shop. RPG progression meets real-life habits.
+  thesis: Habit tracking should feel like a game, not a chore.
+  status: active
+  category: consumer
+  tags: [gamification, habits, mobile, productivity, gaming]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Battle mode launch
+  image: /img/ventures/habitplay.png
+
+- name: Controls Foundry
+  slug: controls-foundry
+  domain: controlsfoundry.com
+  url: https://controlsfoundry.com
+  description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
+  thesis: The integrator is gone. The knowledge is retiring. Your PLC programs shouldn't be a mystery.
+  status: active
+  category: industrial
+  tags: [industrial, controls, ai, plc, migration]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Siemens S7 support
+  image: /img/ventures/controls-foundry.png
+
 - name: LatchFlow
   slug: latchflow
   domain: latchflow.io
@@ -81,11 +95,25 @@
   thesis: Escape rooms deserve ops tooling as good as the experiences they create.
   status: shipping
   category: workflow
-  tags: [operations, entertainment, real-time]
+  tags: [operations, entertainment, real-time, controls]
   shared_infra: [forgegraph]
   last_updated: 2026-03-28
   next_milestone: Marketplace launch
   image: /img/ventures/latchflow.png
+
+- name: DriftPort
+  slug: driftport
+  domain: driftport.io
+  url: https://driftport.io
+  description: Remote monitoring and control for van and RV electrical systems. Battery, solar, water, climate — live arc gauges on your phone. Send commands, get alerts, update firmware from anywhere. Built for owners and installers.
+  thesis: Your rig should be as connected as your house.
+  status: active
+  category: iot
+  tags: [iot, hardware, mobile, vanlife, controls]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-10
+  next_milestone: Demo + waitlist launch
+  image: /img/ventures/driftport.png
 
 - name: Stream Conductor
   slug: stream-conductor
@@ -101,20 +129,6 @@
   next_milestone: Public beta
   image: /img/ventures/stream-conductor.png
 
-- name: DriftPort
-  slug: driftport
-  domain: driftport.io
-  url: https://driftport.io
-  description: Remote monitoring and control for van and RV electrical systems. Battery, solar, water, climate — live arc gauges on your phone. Send commands, get alerts, update firmware from anywhere. Built for owners and installers.
-  thesis: Your rig should be as connected as your house.
-  status: active
-  category: iot
-  tags: [iot, hardware, mobile, vanlife]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-10
-  next_milestone: Demo + waitlist launch
-  image: /img/ventures/driftport.png
-
 - name: AppealKey
   slug: appealkey
   domain: appealkey.com
@@ -129,19 +143,7 @@
   next_milestone: Android launch
   image: /img/ventures/appealkey.png
 
-- name: HabitPlay
-  slug: habitplay
-  domain: habitplay.io
-  url: https://habitplay.io
-  description: Gamified habit and task manager. Pick your goals (fitness, nutrition, sobriety, skills, creative), get a daily plan, earn XP, battle friends, and spend coins in the shop. RPG progression meets real-life habits.
-  thesis: Habit tracking should feel like a game, not a chore.
-  status: active
-  category: consumer
-  tags: [gamification, habits, mobile, productivity]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Battle mode launch
-  image: /img/ventures/habitplay.png
+# Experiments — separated from the main portfolio
 
 - name: x402 Arena
   slug: x402arena
@@ -155,4 +157,5 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-28
   next_milestone: Season 1
-  image:
+  experiment: true
+  image: /img/ventures/x402arena.png
