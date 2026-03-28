@@ -1,0 +1,25 @@
+#
+###################################
+# grahammackie.com — Site-specific config
+# Build: jekyll build --config _config.yml,_config.personal.yml
+####################################
+#
+title: Graham Mackie
+url: https://grahammackie.com
+site_id: personal
+site_theme: personal
+description: "Personal blog and social hub for Graham Mackie."
+keywords: ["Personal", "Blog", "Music", "Life"]
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      site: personal
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page

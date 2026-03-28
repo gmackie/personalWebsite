@@ -1,0 +1,25 @@
+#
+###################################
+# gmac.io — Site-specific config
+# Build: jekyll build --config _config.yml,_config.gmac.yml
+####################################
+#
+title: gmac.io
+url: https://gmac.io
+site_id: gmac
+site_theme: dashboard
+description: "Prototype dashboard. Experiments running on Hetzner VPSs and local homelab."
+keywords: ["Prototypes", "Experiments", "Dashboard"]
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      site: gmac
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page

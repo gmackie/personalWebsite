@@ -1,0 +1,31 @@
+#
+###################################
+# gmacko.com — Site-specific config
+# Build: jekyll build --config _config.yml,_config.gmacko.yml
+####################################
+#
+title: Gmacko
+url: https://gmacko.com
+site_id: gmacko
+site_theme: gmacko
+description: "Build-in-public hub for Graham Mackie and Gmacko Ventures LLC."
+keywords: ["Software", "Startups", "Builder", "Ventures"]
+
+# Content defaults for gmacko
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      site: gmacko
+  - scope:
+      path: ""
+      type: "ventures"
+    values:
+      layout: venture
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
