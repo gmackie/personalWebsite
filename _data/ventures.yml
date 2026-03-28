@@ -86,12 +86,12 @@
   next_milestone: Unity MCP integration
   image: /img/ventures/levelforge.png
 
-- name: ForgeGraph
+- name: ForgeGraf
   slug: forgegraph
   domain: forgegraf.com
   url: https://forgegraf.com
-  description: Delivery evidence platform built on Jujutsu's changeset-native identity model. Tracks every changeset from draft through production with real evidence — builds, tests, coverage, artifacts, deployments. Nix closures, not Docker images. No Kubernetes.
-  thesis: Infrastructure should be a graph you can see, not YAML you memorize.
+  description: Edge + bare metal delivery platform. Deploy Workers to Cloudflare and Nix closures to Hetzner from one pipeline. Built on Jujutsu's changeset identity model with full delivery evidence, promotion gates, and health monitoring across edge and metal.
+  thesis: Deploying everywhere shouldn't mean managing everything.
   status: active
   category: infrastructure
   tags: [infrastructure, graph, deployment, nix, jujutsu]
@@ -127,3 +127,17 @@
   last_updated: 2026-03-12
   next_milestone: Public beta
   image: /img/ventures/stream-conductor.png
+
+- name: HabitPlay
+  slug: habitplay
+  domain: habitplay.io
+  url: https://habitplay.io
+  description: Gamified habit and task manager. Pick your goals (fitness, nutrition, sobriety, skills, creative), get a daily plan, earn XP, battle friends, and spend coins in the shop. RPG progression meets real-life habits.
+  thesis: Habit tracking should feel like a game, not a chore.
+  status: active
+  category: consumer
+  tags: [gamification, habits, mobile, productivity]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Battle mode launch
+  image: /img/ventures/habitplay.png
