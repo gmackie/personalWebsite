@@ -1,0 +1,135 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+<body class="theme-dashboard">
+
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1 class="dashboard-title">gmac.io</h1>
+    <p class="dashboard-subtitle">prototypes &amp; services <span class="dashboard-caveat">— nothing here is production</span></p>
+  </header>
+
+  <div class="dashboard-status-legend">
+    <span class="legend-item"><span class="status-dot dot-live"></span> live</span>
+    <span class="legend-item"><span class="status-dot dot-degraded"></span> degraded</span>
+    <span class="legend-item"><span class="status-dot dot-down"></span> down</span>
+    <span class="legend-item"><span class="status-dot dot-local"></span> local only</span>
+    <span class="legend-item"><span class="status-dot dot-coming"></span> coming soon</span>
+  </div>
+
+  {% if site.data.gmac.services.size > 0 %}
+  <section class="dashboard-section">
+    <h2 class="dashboard-section-label">Services</h2>
+    <div class="proto-grid">
+      {% for svc in site.data.gmac.services %}
+      <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}">
+        <div class="proto-header">
+          <span class="status-dot dot-{{ svc.status }}"></span>
+          <span class="proto-name">{{ svc.name }}</span>
+          {% if svc.internal %}
+          <span class="proto-url">tailscale only</span>
+          {% else %}
+          <span class="proto-url">{{ svc.url | remove: 'https://' }}</span>
+          {% endif %}
+        </div>
+        <p class="proto-desc">{{ svc.description }}</p>
+        {% if svc.stack %}
+        <div class="proto-stack">
+          {% for tech in svc.stack %}
+          <span class="stack-pill">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if site.data.gmac.prototypes.size > 0 %}
+  <section class="dashboard-section">
+    <h2 class="dashboard-section-label">Prototypes</h2>
+    <div class="proto-grid">
+      {% for proto in site.data.gmac.prototypes %}
+      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}">
+        <div class="proto-header">
+          <span class="status-dot dot-{{ proto.status }}"></span>
+          <span class="proto-name">{{ proto.name }}</span>
+          {% if proto.status == 'coming-soon' %}
+          <span class="proto-url">coming soon</span>
+          {% else %}
+          <span class="proto-url">{{ proto.url | remove: 'https://' }}</span>
+          {% endif %}
+        </div>
+        <p class="proto-desc">{{ proto.description }}</p>
+        {% if proto.stack %}
+        <div class="proto-stack">
+          {% for tech in proto.stack %}
+          <span class="stack-pill">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% assign gmac_posts = site.posts | where_exp: "p", "p.site contains 'gmac'" %}
+  {% if gmac_posts.size > 0 %}
+  <section class="dashboard-section">
+    <h2 class="dashboard-section-label">Build Log</h2>
+    <div class="build-log">
+      {% for post in gmac_posts limit:10 %}
+      <div class="log-entry">
+        <span class="log-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        <span class="log-message"><a href="{{ post.url }}">{{ post.title }}</a></span>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <footer class="dashboard-footer">
+    <div class="dashboard-site-nav">
+      <a href="https://gmacko.com">gmacko.com &rarr; ventures</a>
+      <a href="https://grahammackie.com">grahammackie.com &rarr; personal</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Health check: ping each service URL and update status dots
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.proto-card[data-health]').forEach(function(card) {
+    var healthUrl = card.getAttribute('data-health');
+    var isInternal = card.getAttribute('data-internal') === 'true';
+    var dot = card.querySelector('.status-dot');
+
+    if (isInternal || !healthUrl) {
+      if (isInternal) dot.className = 'status-dot dot-local';
+      return;
+    }
+
+    dot.className = 'status-dot dot-loading';
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 3000);
+
+    fetch(healthUrl, { mode: 'no-cors', signal: controller.signal })
+      .then(function() {
+        clearTimeout(timeoutId);
+        dot.className = 'status-dot dot-live';
+      })
+      .catch(function() {
+        clearTimeout(timeoutId);
+        dot.className = 'status-dot dot-unknown';
+      });
+  });
+});
+</script>
+
+</body>
+</html>

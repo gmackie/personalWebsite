@@ -9,6 +9,7 @@
   <span class="author_bio mbm">{{ author.bio }}</span>
   <nav class="nav">
     <ul class="nav-list">
+      {% if site.site_id == 'gmacko' or site.site_id == nil %}
       <li class="nav-item">
         <a href="{{ site.url }}/">home</a>
         <span>/</span>
@@ -18,25 +19,40 @@
         <span>/</span>
       </li>
       <li class="nav-item">
-        <a href="{{ site.url }}/lab/">lab</a>
-        <span>/</span>
-      </li>
-      <li class="nav-item">
         <a href="{{ site.url }}/blog/">blog</a>
-        <span>/</span>
-      </li>
-      <li class="nav-item">
-        <a href="{{ site.url }}/changelog/">changelog</a>
-        <span>/</span>
-      </li>
-      <li class="nav-item">
-        <a href="{{ site.url }}/now/">now</a>
         <span>/</span>
       </li>
       <li class="nav-item">
         <a href="{{ site.url }}/resume/">resume</a>
       </li>
+      {% elsif site.site_id == 'personal' %}
+      <li class="nav-item">
+        <a href="{{ site.url }}/">home</a>
+        <span>/</span>
+      </li>
+      <li class="nav-item">
+        <a href="{{ site.url }}/blog/">blog</a>
+      </li>
+      {% elsif site.site_id == 'gmac' %}
+      <li class="nav-item">
+        <a href="{{ site.url }}/">dashboard</a>
+      </li>
+      {% endif %}
     </ul>
   </nav>
+
+  <div class="site-crosslinks">
+    {% if site.site_id == 'gmacko' or site.site_id == nil %}
+    <a href="https://grahammackie.com" class="crosslink">personal</a>
+    <a href="https://gmac.io" class="crosslink">prototypes</a>
+    {% elsif site.site_id == 'personal' %}
+    <a href="https://gmacko.com" class="crosslink">ventures</a>
+    <a href="https://gmac.io" class="crosslink">prototypes</a>
+    {% elsif site.site_id == 'gmac' %}
+    <a href="https://gmacko.com" class="crosslink">ventures</a>
+    <a href="https://grahammackie.com" class="crosslink">personal</a>
+    {% endif %}
+  </div>
+
   {% include social-links.html %}
 </div>

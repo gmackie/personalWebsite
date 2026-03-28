@@ -1,0 +1,34 @@
+- name: ForgeGraph
+  url: https://forge.gmac.io
+  description: Graph-oriented deployment and infrastructure orchestration for all Gmacko ventures.
+  status: active
+  stack: [nix, caddy, gitea]
+  health_endpoint: https://forge.gmac.io/health
+
+- name: Bob
+  url: https://bob.tail1e1a32.ts.net
+  description: Task management and work tracking across ventures. Internal tool over Tailscale.
+  status: active
+  stack: [go, tailscale]
+  internal: true
+
+- name: Gitea
+  url: https://git.gmac.io
+  description: Self-hosted Git with CI/CD. Source of truth for all venture code.
+  status: active
+  stack: [go, nix, caddy]
+  health_endpoint: https://git.gmac.io
+
+- name: Harbor
+  url: https://harbor.gmac.io
+  description: Container registry for staging and production images.
+  status: active
+  stack: [docker, nix]
+  health_endpoint: https://harbor.gmac.io/api/v2.0/health
+
+- name: Kubernetes
+  url: https://k8s.gmac.io
+  description: Container orchestration for staging workloads on labnuc NUC.
+  status: active
+  stack: [k3s, nix]
+  internal: true

@@ -11,6 +11,14 @@ site_theme: personal
 description: "Personal blog and social hub for Graham Mackie."
 keywords: ["Personal", "Blog", "Music", "Life"]
 
+exclude:
+  - index.html
+  - blog.html
+  - resume.html
+  - pages/gmacko
+  - pages/gmac
+  - _ventures
+
 defaults:
   - scope:
       path: ""

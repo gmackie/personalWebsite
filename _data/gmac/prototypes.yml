@@ -1,0 +1,17 @@
+- name: LevelForge
+  url: https://levelforge.io
+  description: AI game-dev IDE that turns plain-English direction into engine-ready output.
+  status: coming-soon
+  stack: [godot, rust, typescript]
+
+- name: AppealKey
+  url: https://appealkey.com
+  description: Property-tax appeal tooling with comp evidence and challenge workflow.
+  status: coming-soon
+  stack: [react, python, postgres]
+
+- name: DriftPort
+  url: https://driftport.io
+  description: Infrastructure for moving safely between environments, systems, and teams.
+  status: coming-soon
+  stack: [go, nix]

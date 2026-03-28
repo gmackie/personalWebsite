@@ -84,8 +84,23 @@
       color: var(--muted);
       &:hover,
       &:focus {
-        color: lighten($secondary, 14%);
+        color: var(--accent);
       }
     }
+  }
+}
+
+// Cross-site links
+.site-crosslinks {
+  margin-top: 1em;
+  .crosslink {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-decoration: none;
+    margin-right: 1em;
+    transition: color 0.15s;
+    &:hover { color: var(--accent); }
   }
 }

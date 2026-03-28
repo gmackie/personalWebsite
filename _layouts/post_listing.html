@@ -2,7 +2,12 @@
 layout: default
 ---
 
-{% for post in site.posts %}
+{% if site.site_id %}
+  {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+{% else %}
+  {% assign site_posts = site.posts %}
+{% endif %}
+{% for post in site_posts %}
 <section class="post">
   <header class="post-header">
     <p class="post-meta">

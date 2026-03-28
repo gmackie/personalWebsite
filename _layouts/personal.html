@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<div class="personal-layout">
+  <aside class="personal-sidebar">
+    <div class="sidebar-avatar">
+      {% if site.owner.avatar %}
+      <img src="{{ site.url }}/img/{{ site.owner.avatar }}" alt="{{ site.owner.name }}" class="avatar-img">
+      {% else %}
+      <span class="avatar-initials">GM</span>
+      {% endif %}
+    </div>
+    <h1 class="sidebar-name">Graham Mackie</h1>
+    <p class="sidebar-bio">Builder, musician, and human. Based in Seattle. The ventures and tech stuff live elsewhere.</p>
+
+    <p class="sidebar-label">Links</p>
+    <ul class="sidebar-links">
+      {% if site.owner.instagram %}<li><a href="https://instagram.com/{{ site.owner.instagram }}"><span class="link-name">Instagram</span> <span class="link-handle">@{{ site.owner.instagram }}</span></a></li>{% endif %}
+      {% if site.owner.soundcloud %}<li><a href="https://soundcloud.com/{{ site.owner.soundcloud }}"><span class="link-name">SoundCloud</span> <span class="link-handle">{{ site.owner.soundcloud }}</span></a></li>{% endif %}
+      {% if site.owner.steam %}<li><a href="https://steamcommunity.com/id/{{ site.owner.steam }}"><span class="link-name">Steam</span> <span class="link-handle">{{ site.owner.steam }}</span></a></li>{% endif %}
+      {% if site.owner.github %}<li><a href="https://github.com/{{ site.owner.github }}"><span class="link-name">GitHub</span> <span class="link-handle">{{ site.owner.github }}</span></a></li>{% endif %}
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <p class="sidebar-label">Other Sites</p>
+    <ul class="sidebar-site-links">
+      <li><a href="https://gmacko.com">gmacko.com &rarr; what I'm building</a></li>
+      <li><a href="https://gmac.io">gmac.io &rarr; prototypes &amp; experiments</a></li>
+    </ul>
+  </aside>
+
+  <main class="personal-feed">
+    {{ content }}
+  </main>
+</div>

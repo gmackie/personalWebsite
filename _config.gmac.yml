@@ -11,6 +11,14 @@ site_theme: dashboard
 description: "Prototype dashboard. Experiments running on Hetzner VPSs and local homelab."
 keywords: ["Prototypes", "Experiments", "Dashboard"]
 
+exclude:
+  - index.html
+  - blog.html
+  - resume.html
+  - pages/gmacko
+  - pages/personal
+  - _ventures
+
 defaults:
   - scope:
       path: ""
@@ -19,7 +27,6 @@ defaults:
       layout: post
       site: gmac
   - scope:
-      path: ""
-      type: "pages"
+      path: "pages/gmac"
     values:
-      layout: page
+      layout: dashboard

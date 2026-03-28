@@ -1,0 +1,31 @@
+---
+layout: personal
+title: Graham Mackie
+permalink: /
+---
+
+<div class="feed-header">
+  <h2>Blog</h2>
+  <p>Personal writing. Travel, music, life, opinions.</p>
+</div>
+
+{% if site.site_id %}
+  {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+{% else %}
+  {% assign site_posts = site.posts %}
+{% endif %}
+
+{% if site_posts.size > 0 %}
+  {% for post in site_posts %}
+  <article class="blog-post">
+    <p class="blog-post-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    {% if post.excerpt %}
+    <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
+    {% endif %}
+    <a class="read-more" href="{{ post.url }}">Read more</a>
+  </article>
+  {% endfor %}
+{% else %}
+<p class="empty-state">Nothing here yet. Check back soon.</p>
+{% endif %}

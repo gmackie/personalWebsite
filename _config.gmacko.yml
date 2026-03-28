@@ -12,6 +12,10 @@ description: "Build-in-public hub for Graham Mackie and Gmacko Ventures LLC."
 keywords: ["Software", "Startups", "Builder", "Ventures"]
 
 # Content defaults for gmacko
+exclude:
+  - pages/personal
+  - pages/gmac
+
 defaults:
   - scope:
       path: ""

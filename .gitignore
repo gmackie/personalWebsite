@@ -1,4 +1,7 @@
 _site
+_site_gmacko
+_site_personal
+_site_gmac
 .sass-cache
 # _drafts
 .ruby-version
