@@ -31,20 +31,6 @@
   next_milestone: Q2 2026 first deliveries
   image: /img/ventures/gentrellis.png
 
-- name: PlayTrek.ai
-  slug: playtrek
-  domain: playtrek.ai
-  url: https://playtrek.ai
-  description: Adaptive math and reading practice woven into the games kids already play. AI adjusts difficulty in real-time, aligns to school standards (Common Core, TEKS), and gives parents and teachers a dashboard showing mastery by skill.
-  thesis: Kids learn better inside games they're already playing.
-  status: active
-  category: edtech
-  tags: [ai, education, gaming]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Parent dashboard beta
-  image: /img/ventures/playtrek.png
-
 - name: LevelForge
   slug: levelforge
   domain: levelforge.io
@@ -58,6 +44,20 @@
   last_updated: 2026-03-15
   next_milestone: Unity MCP integration
   image: /img/ventures/levelforge.png
+
+- name: PlayTrek.ai
+  slug: playtrek
+  domain: playtrek.ai
+  url: https://playtrek.ai
+  description: Adaptive math and reading practice woven into the games kids already play. AI adjusts difficulty in real-time, aligns to school standards (Common Core, TEKS), and gives parents and teachers a dashboard showing mastery by skill.
+  thesis: Kids learn better inside games they're already playing.
+  status: active
+  category: edtech
+  tags: [ai, education, gaming]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Parent dashboard beta
+  image: /img/ventures/playtrek.png
 
 - name: HabitPlay
   slug: habitplay
