@@ -1,16 +1,11 @@
-- name: ForgeGraph
-  url: https://forge.gmac.io
-  description: Graph-oriented deployment and infrastructure orchestration for all Gmacko ventures.
-  status: active
-  stack: [nix, caddy, gitea]
-  health_endpoint: https://forge.gmac.io/health
+# Infrastructure services running on gmac.io nodes
 
-- name: Bob
-  url: https://bob.tail1e1a32.ts.net
-  description: Task management and work tracking across ventures. Internal tool over Tailscale.
+- name: ForgeGraf
+  url: https://forgegraf.com
+  description: Edge + bare metal delivery platform. Cloudflare Workers + Hetzner Nix closures.
   status: active
-  stack: [go, tailscale]
-  internal: true
+  stack: [nix, caddy, jujutsu, cloudflare]
+  health_endpoint: https://forge.gmac.io/health
 
 - name: Gitea
   url: https://git.gmac.io
@@ -31,4 +26,11 @@
   description: Container orchestration for staging workloads on labnuc NUC.
   status: active
   stack: [k3s, nix]
+  internal: true
+
+- name: Bob
+  url: https://bob.tail1e1a32.ts.net
+  description: Task management and work tracking across ventures. Internal tool over Tailscale.
+  status: active
+  stack: [go, tailscale]
   internal: true

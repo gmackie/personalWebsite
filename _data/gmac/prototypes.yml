@@ -1,17 +1,64 @@
-- name: LevelForge
-  url: https://levelforge.io
-  description: AI game-dev IDE that turns plain-English direction into engine-ready output.
-  status: coming-soon
-  stack: [godot, rust, typescript]
+# Venture apps — live products and prototypes
+
+- name: PlayTrek.ai
+  url: https://playtrek.ai
+  description: Adaptive learning inside the games kids already play. K-8 math and reading.
+  status: active
+  stack: [expo, react-native, supabase]
+  health_endpoint: https://playtrek.ai
+
+- name: GenTrellis
+  url: https://gentrellis.com
+  description: On-prem AI inference boxes for regulated SMBs. Hybrid Bedrock routing.
+  status: active
+  stack: [python, vllm, nix, nvidia]
+  health_endpoint: https://gentrellis.com
+
+- name: Controls Foundry
+  url: https://controlsfoundry.com
+  description: Cloud intelligence for industrial PLC programs. AI-annotated ladder logic.
+  status: active
+  stack: [python, react, ai]
+  health_endpoint: https://controlsfoundry.com
+
+- name: LatchFlow
+  url: https://latchflow.io
+  description: Escape room operations. Live game control, puzzle orchestration, bookings.
+  status: active
+  stack: [react, node, postgres]
+  health_endpoint: https://latchflow.io
 
 - name: AppealKey
   url: https://appealkey.com
-  description: Property-tax appeal tooling with comp evidence and challenge workflow.
-  status: coming-soon
-  stack: [react, python, postgres]
+  description: AI-powered property tax appeals. No win, no fee. iOS, Android, web.
+  status: active
+  stack: [react, cloudflare-workers, ai]
+  health_endpoint: https://appealkey.com
 
 - name: DriftPort
   url: https://driftport.io
-  description: Infrastructure for moving safely between environments, systems, and teams.
-  status: coming-soon
-  stack: [go, nix]
+  description: Van/RV IoT monitoring. Battery, solar, water, climate from your phone.
+  status: active
+  stack: [react, go, iot]
+  health_endpoint: https://driftport.io
+
+- name: LevelForge
+  url: https://levelforge.io
+  description: AI game dev IDE. Describe your game, agent builds it in Unity via MCP.
+  status: active
+  stack: [electron, unity, mcp, ai]
+  health_endpoint: https://levelforge.io
+
+- name: Stream Conductor
+  url: https://streamconductor.com
+  description: Cloud streaming control room. Multi-platform, role-based, auto-failover.
+  status: active
+  stack: [react, obs, srt]
+  health_endpoint: https://streamconductor.com
+
+- name: HabitPlay
+  url: https://habitplay.io
+  description: Gamified habit tracker with RPG progression, battles, and daily plans.
+  status: active
+  stack: [react, node, gamification]
+  health_endpoint: https://habitplay.io
