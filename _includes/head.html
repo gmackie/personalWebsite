@@ -1,4 +1,4 @@
-{% if page.title %}
+{% if page.title and page.title != site.title %}
   {% capture title %}{{ page.title }} | {{ site.title }}{% endcapture %}
 {% else %}
   {% capture title %}{{ site.title }}{% endcapture %}

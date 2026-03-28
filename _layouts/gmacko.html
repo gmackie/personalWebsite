@@ -1,0 +1,42 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+<body>
+
+<nav class="gmacko-nav">
+  <div class="gmacko-nav-inner">
+    <a href="{{ site.url }}/" class="gmacko-nav-brand">Gmacko</a>
+    <ul class="gmacko-nav-links">
+      <li><a href="{{ site.url }}/">home</a></li>
+      <li><a href="{{ site.url }}/ventures/">ventures</a></li>
+      <li><a href="{{ site.url }}/blog/">blog</a></li>
+      <li><a href="{{ site.url }}/resume/">resume</a></li>
+    </ul>
+    <div class="gmacko-nav-crosslinks">
+      <a href="https://grahammackie.com">personal</a>
+      <a href="https://gmac.io">prototypes</a>
+    </div>
+  </div>
+</nav>
+
+<main class="gmacko-main">
+  {{ content }}
+</main>
+
+<footer class="gmacko-footer">
+  <div class="gmacko-footer-inner">
+    <span>&copy; {{ 'now' | date: "%Y" }} Graham Mackie</span>
+    <span class="gmacko-footer-links">
+      <a href="https://github.com/{{ site.owner.github }}">GitHub</a>
+      <a href="https://linkedin.com/in/{{ site.owner.linkedin }}">LinkedIn</a>
+      <a href="https://grahammackie.com">Personal</a>
+      <a href="https://gmac.io">Prototypes</a>
+    </span>
+  </div>
+</footer>
+
+{% include js.html %}
+</body>
+</html>

@@ -1,0 +1,136 @@
+/* Gmacko layout — gmacko.com */
+/* Full-width, no sidebar. Top nav bar. */
+
+.gmacko-nav {
+  border-bottom: 2px solid var(--rule-heavy);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.gmacko-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.gmacko-nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--text-strong);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+
+.gmacko-nav-brand:hover {
+  color: var(--accent);
+}
+
+.gmacko-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.gmacko-nav-links a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.gmacko-nav-links a:hover {
+  color: var(--text);
+}
+
+.gmacko-nav-crosslinks {
+  display: flex;
+  gap: 12px;
+  padding-left: 16px;
+  border-left: 1px solid var(--rule);
+}
+
+.gmacko-nav-crosslinks a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.gmacko-nav-crosslinks a:hover {
+  color: var(--accent);
+}
+
+/* Main content area */
+.gmacko-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+/* Footer */
+.gmacko-footer {
+  border-top: 2px solid var(--rule-heavy);
+  margin-top: 48px;
+}
+
+.gmacko-footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.gmacko-footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.gmacko-footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.gmacko-footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .gmacko-nav-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gmacko-nav-crosslinks {
+    display: none;
+  }
+
+  .gmacko-nav-links {
+    gap: 12px;
+  }
+
+  .gmacko-footer-inner {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}

@@ -1,6 +1,9 @@
 ---
-layout: default
 ---
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+<body>
 
 <div class="personal-layout">
   <aside class="personal-sidebar">
@@ -16,10 +19,30 @@ layout: default
 
     <p class="sidebar-label">Links</p>
     <ul class="sidebar-links">
-      {% if site.owner.instagram %}<li><a href="https://instagram.com/{{ site.owner.instagram }}"><span class="link-name">Instagram</span> <span class="link-handle">@{{ site.owner.instagram }}</span></a></li>{% endif %}
-      {% if site.owner.soundcloud %}<li><a href="https://soundcloud.com/{{ site.owner.soundcloud }}"><span class="link-name">SoundCloud</span> <span class="link-handle">{{ site.owner.soundcloud }}</span></a></li>{% endif %}
-      {% if site.owner.steam %}<li><a href="https://steamcommunity.com/id/{{ site.owner.steam }}"><span class="link-name">Steam</span> <span class="link-handle">{{ site.owner.steam }}</span></a></li>{% endif %}
-      {% if site.owner.github %}<li><a href="https://github.com/{{ site.owner.github }}"><span class="link-name">GitHub</span> <span class="link-handle">{{ site.owner.github }}</span></a></li>{% endif %}
+      {% if site.owner.instagram %}
+      <li><a href="https://instagram.com/{{ site.owner.instagram }}">
+        <span class="link-name">Instagram</span>
+        <span class="link-handle">@{{ site.owner.instagram }}</span>
+      </a></li>
+      {% endif %}
+      {% if site.owner.soundcloud %}
+      <li><a href="https://soundcloud.com/{{ site.owner.soundcloud }}">
+        <span class="link-name">SoundCloud</span>
+        <span class="link-handle">{{ site.owner.soundcloud }}</span>
+      </a></li>
+      {% endif %}
+      {% if site.owner.steam %}
+      <li><a href="https://steamcommunity.com/id/{{ site.owner.steam }}">
+        <span class="link-name">Steam</span>
+        <span class="link-handle">{{ site.owner.steam }}</span>
+      </a></li>
+      {% endif %}
+      {% if site.owner.github %}
+      <li><a href="https://github.com/{{ site.owner.github }}">
+        <span class="link-name">GitHub</span>
+        <span class="link-handle">{{ site.owner.github }}</span>
+      </a></li>
+      {% endif %}
     </ul>
 
     <hr class="sidebar-divider">
@@ -27,7 +50,7 @@ layout: default
     <p class="sidebar-label">Other Sites</p>
     <ul class="sidebar-site-links">
       <li><a href="https://gmacko.com">gmacko.com &rarr; what I'm building</a></li>
-      <li><a href="https://gmac.io">gmac.io &rarr; prototypes &amp; experiments</a></li>
+      <li><a href="https://gmac.io">gmac.io &rarr; prototypes &amp; services</a></li>
     </ul>
   </aside>
 
@@ -35,3 +58,7 @@ layout: default
     {{ content }}
   </main>
 </div>
+
+{% include js.html %}
+</body>
+</html>
