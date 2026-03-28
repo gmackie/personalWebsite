@@ -1,90 +1,7 @@
 # Venture portfolio — single source of truth for all ventures.
+# Order matters: ventures flow from infrastructure → AI → games → ops → consumer → experimental
 # Required fields: name, slug, domain, url, description, status, thesis, category
 # Optional fields: tags, shared_infra, last_updated, next_milestone, image, gmac_experiment
-
-- name: PlayTrek.ai
-  slug: playtrek
-  domain: playtrek.ai
-  url: https://playtrek.ai
-  description: Adaptive math and reading practice woven into the games kids already play. AI adjusts difficulty in real-time, aligns to school standards (Common Core, TEKS), and gives parents and teachers a dashboard showing mastery by skill.
-  thesis: Kids learn better inside games they're already playing.
-  status: active
-  category: edtech
-  tags: [ai, education, gaming]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Parent dashboard beta
-  image: /img/ventures/playtrek.png
-
-- name: Controls Foundry
-  slug: controls-foundry
-  domain: controlsfoundry.com
-  url: https://controlsfoundry.com
-  description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
-  thesis: The integrator is gone. The knowledge is retiring. Your PLC programs shouldn't be a mystery.
-  status: active
-  category: industrial
-  tags: [industrial, controls, ai, plc, migration]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Siemens S7 support
-  image: /img/ventures/controls-foundry.png
-
-- name: GenTrellis
-  slug: gentrellis
-  domain: gentrellis.com
-  url: https://gentrellis.com
-  description: Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built hardware (NVIDIA H200, RTX PRO 6000) with hybrid Bedrock routing, protection levels for sensitive data, immutable audit logs, and vibe-coder workshops. Starting at $39k.
-  thesis: AI that stays on your network is the only AI enterprises will trust.
-  status: shipping
-  category: ai-infra
-  tags: [ai, infrastructure, privacy, enterprise, hardware]
-  shared_infra: [forgegraph, nix]
-  last_updated: 2026-03-25
-  next_milestone: Q2 2026 first deliveries
-  image: /img/ventures/gentrellis.png
-
-- name: LatchFlow
-  slug: latchflow
-  domain: latchflow.io
-  url: https://latchflow.io
-  description: One system for escape room operations. Live game control, puzzle orchestration, device health, bookings, and post-run analytics. The interface feels like a control room, not generic SaaS.
-  thesis: Escape rooms deserve ops tooling as good as the experiences they create.
-  status: shipping
-  category: workflow
-  tags: [operations, entertainment, real-time]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-28
-  next_milestone: Marketplace launch
-  image: /img/ventures/latchflow.png
-
-- name: DriftPort
-  slug: driftport
-  domain: driftport.io
-  url: https://driftport.io
-  description: Remote monitoring and control for van and RV electrical systems. Battery, solar, water, climate — live arc gauges on your phone. Send commands, get alerts, update firmware from anywhere. Built for owners and installers.
-  thesis: Your rig should be as connected as your house.
-  status: active
-  category: iot
-  tags: [iot, hardware, mobile, vanlife]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-10
-  next_milestone: Demo + waitlist launch
-  image: /img/ventures/driftport.png
-
-- name: LevelForge
-  slug: levelforge
-  domain: levelforge.io
-  url: https://levelforge.io
-  description: AI game development IDE. Describe your game in plain English, an agent writes the code, generates assets, and pushes them into Unity via MCP. Chat-first, with composable modules for platformer physics, combat, inventory, and more.
-  thesis: Game development is the last creative discipline AI hasn't simplified.
-  status: active
-  category: gamedev
-  tags: [ai, gaming, ide, developer-tools]
-  shared_infra: [forgegraph]
-  last_updated: 2026-03-15
-  next_milestone: Unity MCP integration
-  image: /img/ventures/levelforge.png
 
 - name: ForgeGraf
   slug: forgegraph
@@ -100,19 +17,75 @@
   next_milestone: Multi-node fleet management
   image: /img/ventures/forgegraph.png
 
-- name: AppealKey
-  slug: appealkey
-  domain: appealkey.com
-  url: https://appealkey.com
-  description: AI-powered property tax appeal platform. Enter your address, get comparable sales analysis, and let AppealKey handle the filing, paperwork, hearings, and negotiations. No win, no fee. Available on iOS, Android, and web.
-  thesis: Homeowners overpay property taxes because the appeal process is opaque.
+- name: GenTrellis
+  slug: gentrellis
+  domain: gentrellis.com
+  url: https://gentrellis.com
+  description: Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built hardware (NVIDIA H200, RTX PRO 6000) with hybrid Bedrock routing, protection levels for sensitive data, immutable audit logs, and vibe-coder workshops. Starting at $39k.
+  thesis: AI that stays on your network is the only AI enterprises will trust.
+  status: shipping
+  category: ai-infra
+  tags: [ai, infrastructure, privacy, enterprise, hardware]
+  shared_infra: [forgegraph, nix]
+  last_updated: 2026-03-25
+  next_milestone: Q2 2026 first deliveries
+  image: /img/ventures/gentrellis.png
+
+- name: Controls Foundry
+  slug: controls-foundry
+  domain: controlsfoundry.com
+  url: https://controlsfoundry.com
+  description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
+  thesis: The integrator is gone. The knowledge is retiring. Your PLC programs shouldn't be a mystery.
   status: active
-  category: proptech
-  tags: [proptech, legal, ai, mobile]
+  category: industrial
+  tags: [industrial, controls, ai, plc, migration]
   shared_infra: [forgegraph]
-  last_updated: 2026-03-05
-  next_milestone: Android launch
-  image: /img/ventures/appealkey.png
+  last_updated: 2026-03-28
+  next_milestone: Siemens S7 support
+  image: /img/ventures/controls-foundry.png
+
+- name: PlayTrek.ai
+  slug: playtrek
+  domain: playtrek.ai
+  url: https://playtrek.ai
+  description: Adaptive math and reading practice woven into the games kids already play. AI adjusts difficulty in real-time, aligns to school standards (Common Core, TEKS), and gives parents and teachers a dashboard showing mastery by skill.
+  thesis: Kids learn better inside games they're already playing.
+  status: active
+  category: edtech
+  tags: [ai, education, gaming]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Parent dashboard beta
+  image: /img/ventures/playtrek.png
+
+- name: LevelForge
+  slug: levelforge
+  domain: levelforge.io
+  url: https://levelforge.io
+  description: AI game development IDE. Describe your game in plain English, an agent writes the code, generates assets, and pushes them into Unity via MCP. Chat-first, with composable modules for platformer physics, combat, inventory, and more.
+  thesis: Game development is the last creative discipline AI hasn't simplified.
+  status: active
+  category: gamedev
+  tags: [ai, gaming, ide, developer-tools]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-15
+  next_milestone: Unity MCP integration
+  image: /img/ventures/levelforge.png
+
+- name: LatchFlow
+  slug: latchflow
+  domain: latchflow.io
+  url: https://latchflow.io
+  description: One system for escape room operations. Live game control, puzzle orchestration, device health, bookings, and post-run analytics. The interface feels like a control room, not generic SaaS.
+  thesis: Escape rooms deserve ops tooling as good as the experiences they create.
+  status: shipping
+  category: workflow
+  tags: [operations, entertainment, real-time]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Marketplace launch
+  image: /img/ventures/latchflow.png
 
 - name: Stream Conductor
   slug: stream-conductor
@@ -128,6 +101,34 @@
   next_milestone: Public beta
   image: /img/ventures/stream-conductor.png
 
+- name: DriftPort
+  slug: driftport
+  domain: driftport.io
+  url: https://driftport.io
+  description: Remote monitoring and control for van and RV electrical systems. Battery, solar, water, climate — live arc gauges on your phone. Send commands, get alerts, update firmware from anywhere. Built for owners and installers.
+  thesis: Your rig should be as connected as your house.
+  status: active
+  category: iot
+  tags: [iot, hardware, mobile, vanlife]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-10
+  next_milestone: Demo + waitlist launch
+  image: /img/ventures/driftport.png
+
+- name: AppealKey
+  slug: appealkey
+  domain: appealkey.com
+  url: https://appealkey.com
+  description: AI-powered property tax appeal platform. Enter your address, get comparable sales analysis, and let AppealKey handle the filing, paperwork, hearings, and negotiations. No win, no fee. Available on iOS, Android, and web.
+  thesis: Homeowners overpay property taxes because the appeal process is opaque.
+  status: active
+  category: proptech
+  tags: [proptech, legal, ai, mobile]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-05
+  next_milestone: Android launch
+  image: /img/ventures/appealkey.png
+
 - name: HabitPlay
   slug: habitplay
   domain: habitplay.io
@@ -141,3 +142,17 @@
   last_updated: 2026-03-28
   next_milestone: Battle mode launch
   image: /img/ventures/habitplay.png
+
+- name: x402 Arena
+  slug: x402arena
+  domain: x402arena.gg
+  url: https://x402arena.gg
+  description: 10 autonomous AI agents compete to build and sell paid APIs for real USDC. They write their own code, choose their niche, set their prices. HTTP 402 ("Payment Required") as a protocol. The leaderboard is live.
+  thesis: What happens when AI agents have to earn real money?
+  status: active
+  category: crypto
+  tags: [ai-agents, crypto, usdc, experiment]
+  shared_infra: [forgegraph]
+  last_updated: 2026-03-28
+  next_milestone: Season 1
+  image:
