@@ -1,0 +1,16 @@
+updated: 2026-03-28
+focus: LatchFlow v2 approval engine and ForgeGraph Nix deployment migration
+allocation:
+  - venture: LatchFlow
+    pct: 40
+    note: Shipping approval workflow engine
+  - venture: ForgeGraph
+    pct: 30
+    note: Nix migration for all personal infra
+  - venture: PlayTrek.ai
+    pct: 20
+    note: Parent dashboard design
+  - venture: Writing
+    pct: 10
+    note: Blog drafts and first portfolio letter
+location: Seattle, WA

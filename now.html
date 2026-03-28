@@ -1,0 +1,43 @@
+---
+layout: page
+title: Now
+permalink: /now/
+---
+
+<div class="now-page">
+  <p class="landing-kicker">What I'm working on</p>
+  <h1>Now</h1>
+
+  {% assign now = site.data.now %}
+
+  <p class="now-focus">{{ now.focus }}</p>
+
+  {% if now.location %}
+  <p class="now-meta">{{ now.location }} / Updated {{ now.updated | date: "%-d %b %Y" }}</p>
+  {% endif %}
+
+  {% if now.allocation and now.allocation.size > 0 %}
+  <h2>Time allocation</h2>
+  <div class="allocation-list">
+    {% for item in now.allocation %}
+    <div class="allocation-item">
+      <div class="allocation-header">
+        <span class="allocation-venture">{{ item.venture }}</span>
+        <span class="allocation-pct">{{ item.pct }}%</span>
+      </div>
+      <div class="allocation-bar">
+        <div class="allocation-fill" style="width: {{ item.pct }}%"></div>
+      </div>
+      {% if item.note %}
+      <p class="allocation-note">{{ item.note }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <p class="now-inspired-by">
+    This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now page</a>.
+    If you have one, <a href="https://nownownow.com">add it to the directory</a>.
+  </p>
+</div>

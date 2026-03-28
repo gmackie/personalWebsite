@@ -1,0 +1,37 @@
+---
+layout: page
+title: Lab
+permalink: /lab/
+---
+
+<div class="lab-page">
+  <p class="landing-kicker">Experiments</p>
+  <h1>Lab</h1>
+  <p>Projects and tools running on GMAC.io. Some are live, some are works in progress.</p>
+
+  {% if site.data.experiments and site.data.experiments.size > 0 %}
+  <div class="experiment-grid">
+    {% for exp in site.data.experiments %}
+    <a class="experiment-card" href="{{ exp.url }}" target="_blank" rel="noopener noreferrer">
+      <div class="experiment-header">
+        <h3>{{ exp.name }}</h3>
+        <span class="status-badge status-{{ exp.status }}">{{ exp.status }}</span>
+      </div>
+      <p>{{ exp.description }}</p>
+      {% if exp.venture %}
+      <p class="experiment-venture">Related: {{ exp.venture }}</p>
+      {% endif %}
+      {% if exp.tags and exp.tags.size > 0 %}
+      <div class="venture-tags">
+        {% for tag in exp.tags %}
+        <span class="venture-tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-state">No experiments yet. Check back soon.</p>
+  {% endif %}
+</div>

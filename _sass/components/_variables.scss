@@ -1,70 +1,84 @@
 /*
- * Global Variables
+ * Design System — Graham Mackie (.com)
+ * See /DESIGN.md for full specification.
  */
 
-// Google font import
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,400,400italic|Roboto+Mono);
-
-// Custom variables
-
-// Spacing
-//
-// Control the default styling of most Bootstrap elements by modifying these
-// variables. Mostly focused on spacing.
-
-$spacer:                     1rem !default;
-$spacer-x:                   $spacer !default;
-$spacer-y:                   $spacer !default;
-$border-width:               .0625rem !default;
+// Font loading via <link> in head.html (Fontshare + Google Fonts)
 
 // Typography
-//
-// Font, line-height, and color for body text, headings, and more.
+$font-family-display:    'Satoshi', sans-serif;
+$font-family-sans-serif: 'Instrument Sans', sans-serif;
+$font-family-monospace:  'JetBrains Mono', monospace;
+$font-family-base:       $font-family-sans-serif;
 
-$font-family-sans-serif:     "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
-$font-family-monospace:      "Roboto Mono", "Courier New", monospace !default;
-$font-family-base:           $font-family-sans-serif !default;
+// Font sizes
+$font-size-root:         15px !default;
+$font-size-base:         $font-size-root !default;
+$font-size-lg:           $font-size-root * 1.25 !default;
+$font-size-sm:           $font-size-root * 0.875 !default;
+$font-size-xs:           $font-size-root * 0.75 !default;
 
-// Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-$font-size-root:             15px !default;
+$font-size-h1:           4rem !default;
+$font-size-h2:           1.75rem !default;
+$font-size-h3:           1.25rem !default;
+$font-size-h4:           1.1rem !default;
+$font-size-h5:           1rem !default;
+$font-size-h6:           0.875rem !default;
 
-$font-size-base:             $font-size-root !default;
-$font-size-lg:               $font-size-root * 1.25 !default;
-$font-size-sm:               $font-size-root * 0.875 !default;
-$font-size-xs:               $font-size-root * 0.75 !default;
+$base-line-height:       1.5;
+$base-space-unit:        1.5em;
 
-$font-size-h1:               2rem !default;
-$font-size-h2:               1.75rem !default;
-$font-size-h3:               1.5rem !default;
-$font-size-h4:               1.25rem !default;
-$font-size-h5:               1.15rem !default;
-$font-size-h6:               1rem !default;
+// Spacing (8px base)
+$spacer:                 1rem !default;
+$spacer-x:               $spacer !default;
+$spacer-y:               $spacer !default;
+$border-width:           .0625rem !default;
 
-$base-line-height:            1.5;
-$base-space-unit:             1.5em;
+$hr-border-color:        rgba(0,0,0,.1) !default;
+$hr-border-width:        $border-width;
 
-$hr-border-color:             rgba(0,0,0,.1) !default;
-$hr-border-width:             $border-width;
+// Colors — warm editorial palette
+$bg:               #F7F3ED;
+$surface:          #EFEBE4;
+$surface-2:        #E6E0D7;
+$text-color:       #1A1714;
+$text-strong:      #110F0D;
+$muted:            #6B6159;
+$accent:           #B5451B;
+$accent-hover:     #9A3A17;
+$rule:             #D4CABC;
+$rule-heavy:       #B8AB9A;
 
-//
-// Colors
-//
+$background-color: $bg;
+$white:            #FDFBF8;
+$primary:          $accent;
+$secondary:        $muted;
 
-$text-color:       rgba(0, 0, 0, 0.87) !default;
-$background-color: #f5f5f5;
+// Semantic colors
+$success:          #2D5F1A;
+$success-bg:       #E8F5E0;
+$danger:           #7A1A1A;
+$danger-bg:        #FDE8E8;
+$warning:          #6B4A0A;
+$warning-bg:       #FEF3E0;
+$info:             #1A4A6B;
+$info-bg:          #E4F0F8;
 
-$white:            #fff;
-$primary:          #42b983;
-$secondary:        #8d7edc;
-$success:          #65e892;
-$danger:           #f83e4b;
-$warning:          #F5A623;
-$info:             #09ABF6;
+// Status badge colors (maps to venture statuses)
+$status-active:     $accent;
+$status-shipping:   $success;
+$status-experiment: $info;
+$status-paused:     $muted;
+$status-killed:     $danger;
+
+// Border radius
+$radius-sm:        4px;
+$radius-md:        8px;
+$radius-lg:        12px;
 
 // Tables
-$table-border-color: #d0d0d0 !default;
-$table-striped-color: #f2f2f2 !default;
+$table-border-color: $rule !default;
+$table-striped-color: $surface !default;
 
 // Grid Variables
 $num-cols: 12 !default;

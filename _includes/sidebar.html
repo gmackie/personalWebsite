@@ -13,14 +13,29 @@
         <a href="{{ site.url }}/">home</a>
         <span>/</span>
       </li>
-      {% for page in site.pages %} {% if page.title %}
       <li class="nav-item">
-        <a href="{{ site.url }}{{ page.url }}">{{ page.title }}</a>
-        {% unless forloop.last %}
-          <span>/</span>
-        {% endunless %}
+        <a href="{{ site.url }}/ventures/">ventures</a>
+        <span>/</span>
       </li>
-      {% endif %} {% endfor %}
+      <li class="nav-item">
+        <a href="{{ site.url }}/lab/">lab</a>
+        <span>/</span>
+      </li>
+      <li class="nav-item">
+        <a href="{{ site.url }}/blog/">blog</a>
+        <span>/</span>
+      </li>
+      <li class="nav-item">
+        <a href="{{ site.url }}/changelog/">changelog</a>
+        <span>/</span>
+      </li>
+      <li class="nav-item">
+        <a href="{{ site.url }}/now/">now</a>
+        <span>/</span>
+      </li>
+      <li class="nav-item">
+        <a href="{{ site.url }}/resume/">resume</a>
+      </li>
     </ul>
   </nav>
   {% include social-links.html %}

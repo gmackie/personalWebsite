@@ -1,0 +1,72 @@
+---
+layout: page
+title: Changelog
+permalink: /changelog/
+---
+
+<div class="changelog-page">
+  <p class="landing-kicker">Build log</p>
+  <h1>Changelog</h1>
+  <p>Short-form updates across all ventures. What shipped, what started, what changed.</p>
+
+  {% if site.data.updates and site.data.updates.size > 0 %}
+  <div class="changelog-filters">
+    <button class="changelog-filter active" data-filter="all">All</button>
+    {% assign venture_names = "" %}
+    {% for update in site.data.updates %}
+      {% unless venture_names contains update.venture %}
+        {% assign venture_names = venture_names | append: update.venture | append: "," %}
+        <button class="changelog-filter" data-filter="{{ update.venture }}">{{ update.venture }}</button>
+      {% endunless %}
+    {% endfor %}
+  </div>
+
+  <div class="changelog-entries">
+    {% for update in site.data.updates %}
+    <div class="changelog-entry" data-venture="{{ update.venture }}">
+      <span class="update-date">{{ update.date | date: "%-d %b %Y" }}</span>
+      <span class="update-type-badge update-type-{{ update.type }}">{{ update.type }}</span>
+      <span class="update-venture">{{ update.venture }}</span>
+      <span class="update-summary">{{ update.summary }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="changelog-empty-filter" style="display: none;">
+    <p class="empty-state">No updates for this venture yet.</p>
+  </div>
+  {% else %}
+  <p class="empty-state">No updates yet. Check back soon.</p>
+  {% endif %}
+</div>
+
+<script>
+(function() {
+  var filters = document.querySelectorAll('.changelog-filter');
+  var entries = document.querySelectorAll('.changelog-entry');
+  var emptyMsg = document.querySelector('.changelog-empty-filter');
+
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filters.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var filter = btn.getAttribute('data-filter');
+      var visible = 0;
+
+      entries.forEach(function(entry) {
+        if (filter === 'all' || entry.getAttribute('data-venture') === filter) {
+          entry.style.display = '';
+          visible++;
+        } else {
+          entry.style.display = 'none';
+        }
+      });
+
+      if (emptyMsg) {
+        emptyMsg.style.display = visible === 0 ? '' : 'none';
+      }
+    });
+  });
+})();
+</script>

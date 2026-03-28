@@ -1,0 +1,42 @@
+# Changelog — reverse-chronological updates across all ventures.
+# Fields: date, venture, type (shipped|started|paused|killed|milestone|note), summary
+
+- date: 2026-03-28
+  venture: LatchFlow
+  type: shipped
+  summary: Approval workflow engine core complete
+
+- date: 2026-03-28
+  venture: ForgeGraph
+  type: milestone
+  summary: Nix deployment pipeline working for 3 services
+
+- date: 2026-03-25
+  venture: GenTrellis
+  type: shipped
+  summary: Multi-model routing prototype deployed internally
+
+- date: 2026-03-20
+  venture: PlayTrek.ai
+  type: milestone
+  summary: Parent dashboard wireframes finalized
+
+- date: 2026-03-15
+  venture: LevelForge
+  type: shipped
+  summary: Plain-English to code generation pipeline working end-to-end
+
+- date: 2026-03-12
+  venture: Stream Conductor
+  type: milestone
+  summary: Multi-camera switching UI design complete
+
+- date: 2026-03-10
+  venture: DriftPort
+  type: started
+  summary: Environment sync prototype kicked off
+
+- date: 2026-03-05
+  venture: AppealKey
+  type: milestone
+  summary: Evidence assembly wizard flow mapped out

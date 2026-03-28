@@ -1,0 +1,124 @@
+---
+layout: default
+---
+
+{% assign v = site.data.ventures | where: "name", page.venture | first %}
+
+<div class="venture-detail">
+  {% if v %}
+  <p class="landing-kicker">Venture</p>
+  <div class="venture-detail-header">
+    <h1>{{ v.name }}</h1>
+    <span class="status-badge status-{{ v.status }}">{{ v.status }}</span>
+  </div>
+
+  <div class="venture-meta-strip">
+    <span class="venture-meta-item"><strong>{{ v.domain }}</strong></span>
+    <span class="venture-meta-item">{{ v.category }}</span>
+    {% if v.last_updated %}
+    <span class="venture-meta-item">Updated {{ v.last_updated | date: "%-d %b %Y" }}</span>
+    {% endif %}
+    <a href="{{ v.url }}" class="venture-meta-item" target="_blank" rel="noopener noreferrer">Visit site &rarr;</a>
+  </div>
+
+  {% if v.thesis %}
+  <blockquote class="venture-thesis-block">{{ v.thesis }}</blockquote>
+  {% endif %}
+
+  <p>{{ v.description }}</p>
+
+  {% if v.next_milestone %}
+  <p class="venture-milestone"><strong>Next milestone:</strong> {{ v.next_milestone }}</p>
+  {% endif %}
+
+  {% if v.shared_infra and v.shared_infra.size > 0 %}
+  <p class="venture-infra"><strong>Shared infra:</strong>
+    {% for infra in v.shared_infra %}
+    <span class="venture-tag">{{ infra }}</span>
+    {% endfor %}
+  </p>
+  {% endif %}
+
+  {% if v.tags and v.tags.size > 0 %}
+  <div class="venture-tags">
+    {% for tag in v.tags %}
+    <span class="venture-tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <hr class="section-rule">
+
+  {% assign related_posts = "" | split: "" %}
+  {% if v.tags %}
+    {% for post in site.posts %}
+      {% for tag in v.tags %}
+        {% if post.tags contains tag %}
+          {% assign related_posts = related_posts | push: post %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {% if related_posts.size > 0 %}
+  <h2>Related writing</h2>
+  <div class="blog-tease-list">
+    {% for post in related_posts limit:5 %}
+    <article class="blog-tease-card">
+      <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
+      <h3><a href="{{ site.url }}{{ post.url }}.html">{{ post.title }}</a></h3>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% assign related_updates = "" | split: "" %}
+  {% for update in site.data.updates %}
+    {% if update.venture == v.name %}
+      {% assign related_updates = related_updates | push: update %}
+    {% endif %}
+  {% endfor %}
+
+  {% if related_updates.size > 0 %}
+  <h2>Changelog</h2>
+  <div class="changelog-entries">
+    {% for update in related_updates %}
+    <div class="changelog-entry">
+      <span class="update-date">{{ update.date | date: "%-d %b %Y" }}</span>
+      <span class="update-type-badge update-type-{{ update.type }}">{{ update.type }}</span>
+      <span class="update-summary">{{ update.summary }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% assign related_experiments = "" | split: "" %}
+  {% if site.data.experiments %}
+    {% for exp in site.data.experiments %}
+      {% if exp.venture == v.name %}
+        {% assign related_experiments = related_experiments | push: exp %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if related_experiments.size > 0 %}
+  <h2>Experiments</h2>
+  <div class="experiment-grid">
+    {% for exp in related_experiments %}
+    <a class="experiment-card" href="{{ exp.url }}" target="_blank" rel="noopener noreferrer">
+      <h3>{{ exp.name }}</h3>
+      <p>{{ exp.description }}</p>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <hr class="section-rule">
+  <p class="landing-section-link"><a href="{{ site.url }}/ventures/">&larr; All ventures</a></p>
+
+  {% else %}
+  <h1>Venture not found</h1>
+  <p class="empty-state">This venture doesn't exist in the portfolio. <a href="{{ site.url }}/ventures/">View all ventures</a>.</p>
+  {% endif %}
+</div>

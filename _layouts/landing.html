@@ -1,0 +1,173 @@
+---
+layout: default
+---
+
+{% assign active_ventures = site.data.ventures | where: "status", "active" %}
+{% assign shipping_ventures = site.data.ventures | where: "status", "shipping" %}
+{% assign experiment_ventures = site.data.ventures | where: "status", "experiment" %}
+{% assign recent_updates = site.data.updates | slice: 0, 3 %}
+
+<div class="landing-page">
+  <section class="landing-hero">
+    <p class="landing-kicker">Builder, operator, and serial starter</p>
+    <h1>Graham</h1>
+    <p class="landing-intro">
+      I build software across education, AI infrastructure, media, operations, and developer tools.
+      This site is the front door: active ventures on the homepage, writing at <a href="{{ site.url }}/blog/">/blog</a>,
+      and the full career history at <a href="{{ site.url }}/resume/">/resume</a>.
+    </p>
+
+    <div class="landing-actions">
+      <a class="landing-button primary" href="{{ site.url }}/resume/">View Resume</a>
+      <a class="landing-button" href="{{ site.url }}/blog/">Read The Blog</a>
+      <a class="landing-button" href="https://github.com/{{ site.owner.github }}">GitHub</a>
+    </div>
+
+    <div class="landing-summary-strip">
+      <span><strong>{{ site.data.ventures | size }}</strong> ventures</span>
+      <span><strong>{{ shipping_ventures | size | plus: active_ventures.size }}</strong> active</span>
+      {% assign shipped_this_month = 0 %}
+      {% for u in site.data.updates %}
+        {% if u.type == "shipped" %}{% assign shipped_this_month = shipped_this_month | plus: 1 %}{% endif %}
+      {% endfor %}
+      <span><strong>{{ shipped_this_month }}</strong> shipped</span>
+      <span><strong>{{ site.posts | size }}</strong> posts</span>
+    </div>
+  </section>
+
+  {% if recent_updates and recent_updates.size > 0 %}
+  <section class="landing-recent-activity">
+    <p class="landing-kicker">Recent activity</p>
+    <div class="recent-updates">
+      {% for update in recent_updates %}
+      <div class="recent-update">
+        <span class="update-type-badge update-type-{{ update.type }}">{{ update.type }}</span>
+        <span class="update-venture">{{ update.venture }}</span>
+        <span class="update-summary">{{ update.summary }}</span>
+        <span class="update-date">{{ update.date | date: "%-d %b" }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="landing-section-link"><a href="{{ site.url }}/changelog/">Full changelog &rarr;</a></p>
+  </section>
+  {% endif %}
+
+  <hr class="section-rule">
+
+  <section class="landing-section">
+    <div class="landing-section-header">
+      <p class="landing-kicker">Ventures</p>
+      <h2>Current portfolio</h2>
+      <p>
+        A snapshot of the companies and product bets currently occupying my time.
+        Each card links out directly.
+      </p>
+    </div>
+
+    {% if site.data.ventures and site.data.ventures.size > 0 %}
+    <div class="startup-grid">
+      {% for venture in site.data.ventures %}
+      <a class="startup-card" href="{{ venture.url }}" target="_blank" rel="noopener noreferrer">
+        <div class="startup-thumb">
+          {% if venture.image %}
+          <img src="{{ venture.image }}" alt="{{ venture.name }} homepage thumbnail">
+          {% else %}
+          <div class="startup-thumb-fallback startup-thumb-{{ venture.status }}">
+            <span>{{ venture.domain }}</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="startup-copy">
+          <div class="startup-title-row">
+            <h3>{{ venture.name }}</h3>
+            <span class="status-badge status-{{ venture.status }}">{{ venture.status }}</span>
+          </div>
+          {% if venture.thesis %}
+          <p class="venture-thesis">{{ venture.thesis }}</p>
+          {% endif %}
+          <p>{{ venture.description }}</p>
+          {% if venture.tags and venture.tags.size > 0 %}
+          <div class="venture-tags">
+            {% for tag in venture.tags %}
+            <span class="venture-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if venture.last_updated %}
+          <p class="venture-updated">updated {{ venture.last_updated | date: "%-d %b %Y" }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">No ventures yet.</p>
+    {% endif %}
+
+    <p class="landing-section-link"><a href="{{ site.url }}/ventures/">All ventures &rarr;</a></p>
+  </section>
+
+  <hr class="section-rule">
+
+  <section class="landing-section landing-overview">
+    <div class="landing-section-header">
+      <p class="landing-kicker">Overview</p>
+      <h2>What I work on</h2>
+      <p>
+        The common thread is practical systems work: software that ships, operations that become legible,
+        and products that need both engineering depth and taste.
+      </p>
+    </div>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3>Background</h3>
+        <p>{{ site.owner.bio }}</p>
+      </div>
+      <div class="overview-card">
+        <h3>Recent Experience</h3>
+        <ul class="overview-list">
+          {% for career in site.data.index.careers limit:3 %}
+          <li><strong>{{ career.job }}</strong> at {{ career.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="overview-card">
+        <h3>Elsewhere</h3>
+        <ul class="overview-list">
+          <li><a href="https://github.com/{{ site.owner.github }}">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/{{ site.owner.linkedin }}/">LinkedIn</a></li>
+          <li><a href="{{ site.url }}/resume/">Resume</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <section class="landing-section landing-blog-tease">
+    <div class="landing-section-header">
+      <p class="landing-kicker">Writing</p>
+      <h2>Latest from the blog</h2>
+      <p>
+        Longer-form writing on products, systems, experiments, and the work behind them.
+      </p>
+    </div>
+
+    <div class="blog-tease-list">
+      {% for post in site.posts limit:3 %}
+      <article class="blog-tease-card">
+        <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
+        <h3><a href="{{ site.url }}{{ post.url }}.html">{{ post.title }}</a></h3>
+        {% if post.excerpt %}
+        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+
+    <p class="landing-section-link">
+      <a href="{{ site.url }}/blog/">Browse all posts &rarr;</a>
+    </p>
+  </section>
+</div>

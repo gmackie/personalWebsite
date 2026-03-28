@@ -75,6 +75,12 @@ Main settings in `_config.yml`:
 - Jekyll processing options
 - Google Analytics tracking ID
 
+## Design System
+Always read DESIGN.md before making any visual or UI decisions.
+All font choices, colors, spacing, and aesthetic direction are defined there.
+Do not deviate without explicit user approval.
+In QA mode, flag any code that doesn't match DESIGN.md.
+
 ## Deployment
 The site is configured to run on Kubernetes. The deployment process:
 1. Build Jekyll site locally

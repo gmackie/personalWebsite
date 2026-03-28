@@ -27,6 +27,14 @@ kramdown:
   toc_levels: 1..6
   enable_coderay: false
 
+plugins:
+  - jekyll-feed
+
+collections:
+  ventures:
+    output: true
+    permalink: /ventures/:name/
+
 #
 ###################################
 # Site Owner configuration

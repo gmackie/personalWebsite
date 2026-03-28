@@ -1,0 +1,26 @@
+# GMAC.io experiments — projects and tools running on the GMAC.io domain.
+# Fields: name, url, description, status (live|archived|wip), venture, date, tags
+
+- name: ForgeGraph Dashboard
+  url: https://forge.gmac.io
+  description: Graph-oriented infrastructure management UI for deploying and monitoring services across nodes.
+  status: live
+  venture: ForgeGraph
+  date: 2026-03-01
+  tags: [infrastructure, deployment, graph]
+
+- name: Blog Seed Expander
+  url: https://gmac.io/tools/blog-seeds
+  description: AI-powered tool that takes rough topic ideas and expands them into structured blog post outlines.
+  status: wip
+  venture:
+  date: 2026-02-15
+  tags: [ai, writing, tools]
+
+- name: Nix Builder Playground
+  url: https://gmac.io/experiments/nix-builder
+  description: Interactive environment for experimenting with Nix package definitions and deployment closures.
+  status: wip
+  venture: ForgeGraph
+  date: 2026-03-20
+  tags: [nix, infrastructure, developer-tools]

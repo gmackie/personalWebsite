@@ -1,0 +1,40 @@
+---
+layout: page
+title: Ventures
+permalink: /ventures/
+---
+
+<div class="ventures-index">
+  <p class="landing-kicker">Portfolio</p>
+  <h1>Ventures</h1>
+  <p>All companies and product bets, current and past.</p>
+
+  {% if site.data.ventures and site.data.ventures.size > 0 %}
+  <div class="startup-grid">
+    {% for venture in site.data.ventures %}
+    <a class="startup-card" href="{{ site.url }}/ventures/{{ venture.slug }}/">
+      <div class="startup-copy">
+        <div class="startup-title-row">
+          <h3>{{ venture.name }}</h3>
+          <span class="status-badge status-{{ venture.status }}">{{ venture.status }}</span>
+        </div>
+        {% if venture.thesis %}
+        <p class="venture-thesis">{{ venture.thesis }}</p>
+        {% endif %}
+        <p>{{ venture.description }}</p>
+        <p class="startup-domain">{{ venture.domain }}</p>
+        {% if venture.tags and venture.tags.size > 0 %}
+        <div class="venture-tags">
+          {% for tag in venture.tags %}
+          <span class="venture-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-state">No ventures yet.</p>
+  {% endif %}
+</div>
