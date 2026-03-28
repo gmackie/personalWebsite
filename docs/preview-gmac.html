@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Preview — gmac.io</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D0D;
+    --surface: #1A1A1A;
+    --surface-2: #242424;
+    --text: #E0E0E0;
+    --text-strong: #FFFFFF;
+    --muted: #707070;
+    --accent: #BF5AF2;
+    --accent-hover: #A344D4;
+    --rule: #2A2A2A;
+    --rule-heavy: #3A3A3A;
+    --grid-line: #161616;
+    --white: #1A1A1A;
+    --status-live: #00FF88;
+    --status-degraded: #FFB800;
+    --status-down: #FF3366;
+    --status-local: #00BFFF;
+    --status-coming: #707070;
+    --font-display: 'Satoshi', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .preview-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  /* ---- SYSTEM HEADER ---- */
+  .system-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule-heavy);
+    margin-bottom: 48px;
+  }
+
+  .system-header h1 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .system-header .live-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--status-live);
+    text-shadow: 0 0 12px var(--status-live);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px var(--accent);
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--rule-heavy);
+    margin: 48px 0 32px;
+  }
+
+  /* ---- HERO ---- */
+  .dashboard-hero {
+    margin-bottom: 48px;
+  }
+
+  .dashboard-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 40px rgba(191, 90, 242, 0.2);
+    margin-bottom: 8px;
+  }
+
+  .dashboard-subtitle {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .dashboard-subtitle .caveat {
+    color: var(--status-degraded);
+    text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
+  }
+
+  /* ---- STATUS LEGEND ---- */
+  .status-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .legend-dot.live {
+    background: var(--status-live);
+    box-shadow: 0 0 8px var(--status-live);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .legend-dot.degraded {
+    background: var(--status-degraded);
+    box-shadow: 0 0 8px var(--status-degraded);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .legend-dot.down {
+    background: var(--status-down);
+    box-shadow: 0 0 8px var(--status-down);
+  }
+
+  .legend-dot.local {
+    background: var(--status-local);
+    box-shadow: 0 0 6px var(--status-local);
+  }
+
+  .legend-dot.coming {
+    background: var(--status-coming);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ---- PROTOTYPE CARDS ---- */
+  .proto-grid {
+    display: grid;
+    gap: 0;
+    margin-top: 16px;
+  }
+
+  .proto-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .proto-card:hover {
+    border-color: var(--rule-heavy);
+  }
+
+  .proto-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .proto-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .proto-status.live {
+    background: var(--status-live);
+    box-shadow: 0 0 8px var(--status-live);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .proto-status.degraded {
+    background: var(--status-degraded);
+    box-shadow: 0 0 8px var(--status-degraded);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .proto-status.down {
+    background: var(--status-down);
+    box-shadow: 0 0 8px var(--status-down);
+  }
+
+  .proto-status.local {
+    background: var(--status-local);
+    box-shadow: 0 0 6px var(--status-local);
+  }
+
+  .proto-status.coming {
+    background: var(--status-coming);
+  }
+
+  .proto-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-strong);
+    flex: 1;
+  }
+
+  .proto-url {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .proto-uptime {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--status-live);
+    text-shadow: 0 0 6px rgba(0, 255, 136, 0.3);
+  }
+
+  .proto-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding-left: 22px;
+  }
+
+  .proto-stack {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding-left: 22px;
+  }
+
+  .stack-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--rule-heavy);
+    border-radius: var(--radius-sm);
+    color: var(--muted);
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .proto-card:hover .stack-pill {
+    border-color: rgba(191, 90, 242, 0.2);
+    color: var(--text);
+  }
+
+  /* ---- DEPENDENCY TREE ---- */
+  .dep-tree {
+    margin-top: 12px;
+    padding-left: 22px;
+  }
+
+  .dep-toggle {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+  }
+
+  .dep-toggle:hover { color: var(--text); }
+
+  .dep-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 16px;
+    border-left: 1px solid var(--rule);
+    padding-left: 16px;
+  }
+
+  .dep-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .dep-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dep-dot.healthy {
+    background: var(--status-live);
+    box-shadow: 0 0 6px var(--status-live);
+  }
+
+  .dep-dot.unreachable {
+    background: var(--status-down);
+    box-shadow: 0 0 6px var(--status-down);
+  }
+
+  .dep-name { color: var(--text); }
+
+  .dep-status-text {
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .dep-latency {
+    color: var(--status-live);
+    text-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .dep-latency.bad {
+    color: var(--status-down);
+    text-shadow: 0 0 4px rgba(255, 51, 102, 0.3);
+  }
+
+  /* ---- BUILD LOG ---- */
+  .build-log { margin-top: 16px; }
+
+  .log-entry {
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .log-date {
+    color: var(--muted);
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+
+  .log-project {
+    color: var(--accent);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .log-message { color: var(--text); }
+
+  /* ---- CROSS-SITE NAV ---- */
+  .site-nav {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .site-nav a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .site-nav a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(191, 90, 242, 0.3);
+  }
+
+  /* ---- FONT SPECIMENS ---- */
+  .specimen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .specimen-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .specimen-card .role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px rgba(191, 90, 242, 0.3);
+  }
+
+  .specimen-display {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+  }
+
+  .specimen-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .specimen-mono {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .specimen-mono-large {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(191, 90, 242, 0.3);
+  }
+
+  /* ---- COLOR SWATCHES ---- */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .swatch {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+
+  .swatch-color { height: 64px; }
+
+  .swatch-info {
+    background: var(--surface);
+    padding: 10px 12px;
+  }
+
+  .swatch-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Neon glow swatch borders for status colors */
+  .swatch.neon-green { border-color: rgba(0, 255, 136, 0.3); box-shadow: 0 0 8px rgba(0, 255, 136, 0.15); }
+  .swatch.neon-amber { border-color: rgba(255, 184, 0, 0.3); box-shadow: 0 0 8px rgba(255, 184, 0, 0.15); }
+  .swatch.neon-red { border-color: rgba(255, 51, 102, 0.3); box-shadow: 0 0 8px rgba(255, 51, 102, 0.15); }
+  .swatch.neon-blue { border-color: rgba(0, 191, 255, 0.3); box-shadow: 0 0 8px rgba(0, 191, 255, 0.15); }
+  .swatch.neon-purple { border-color: rgba(191, 90, 242, 0.3); box-shadow: 0 0 8px rgba(191, 90, 242, 0.15); }
+
+  @media (max-width: 640px) {
+    .specimen-grid { grid-template-columns: 1fr; }
+    .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+    .proto-header { flex-wrap: wrap; }
+    .log-entry { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="preview-container">
+
+  <!-- SYSTEM HEADER -->
+  <div class="system-header">
+    <h1>Design Preview / gmac.io</h1>
+    <span class="live-count">3 live</span>
+  </div>
+
+  <!-- ==================== -->
+  <!-- DASHBOARD MOCKUP     -->
+  <!-- ==================== -->
+  <div class="dashboard-hero">
+    <h2 class="dashboard-title">gmac.io</h2>
+    <p class="dashboard-subtitle">prototypes & experiments &nbsp;&middot;&nbsp; <span class="caveat">caveat emptor</span></p>
+
+    <div class="status-legend">
+      <div class="legend-item"><span class="legend-dot live"></span> live</div>
+      <div class="legend-item"><span class="legend-dot degraded"></span> degraded</div>
+      <div class="legend-item"><span class="legend-dot down"></span> down</div>
+      <div class="legend-item"><span class="legend-dot local"></span> local only</div>
+      <div class="legend-item"><span class="legend-dot coming"></span> coming soon</div>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- PROTOTYPES -->
+  <p class="section-label">Prototypes</p>
+
+  <div class="proto-grid">
+
+    <!-- ForgeGraph — live with deps -->
+    <div class="proto-card" onclick="this.classList.toggle('expanded')">
+      <div class="proto-header">
+        <span class="proto-status live"></span>
+        <span class="proto-name">ForgeGraph</span>
+        <span class="proto-url">forge.gmac.io</span>
+        <span class="proto-uptime">24d up</span>
+      </div>
+      <p class="proto-desc">Graph-oriented deployment and infrastructure orchestration.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">nix</span>
+        <span class="stack-pill">caddy</span>
+        <span class="stack-pill">gitea</span>
+      </div>
+
+      <div class="dep-tree">
+        <div class="dep-toggle">&#9662; dependencies</div>
+        <ul class="dep-list">
+          <li class="dep-item">
+            <span class="dep-dot healthy"></span>
+            <span class="dep-name">gitea</span>
+            <span class="dep-status-text">healthy</span>
+            <span class="dep-latency">12ms</span>
+          </li>
+          <li class="dep-item">
+            <span class="dep-dot healthy"></span>
+            <span class="dep-name">caddy</span>
+            <span class="dep-status-text">healthy</span>
+            <span class="dep-latency">3ms</span>
+          </li>
+          <li class="dep-item">
+            <span class="dep-dot healthy"></span>
+            <span class="dep-name">postgres</span>
+            <span class="dep-status-text">healthy</span>
+            <span class="dep-latency">8ms</span>
+          </li>
+          <li class="dep-item">
+            <span class="dep-dot unreachable"></span>
+            <span class="dep-name">redis</span>
+            <span class="dep-status-text">unreachable</span>
+            <span class="dep-latency bad">---</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PlayTrek — live -->
+    <div class="proto-card">
+      <div class="proto-header">
+        <span class="proto-status live"></span>
+        <span class="proto-name">PlayTrek.ai</span>
+        <span class="proto-url">playtrek.ai</span>
+        <span class="proto-uptime">12d up</span>
+      </div>
+      <p class="proto-desc">Adaptive math and reading practice inside the games kids already love.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">expo</span>
+        <span class="stack-pill">react-native</span>
+        <span class="stack-pill">supabase</span>
+      </div>
+    </div>
+
+    <!-- Bob — local only -->
+    <div class="proto-card">
+      <div class="proto-header">
+        <span class="proto-status local"></span>
+        <span class="proto-name">Bob</span>
+        <span class="proto-url">tailscale only</span>
+      </div>
+      <p class="proto-desc">Task management over Tailscale. Internal tool for tracking work across ventures.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">go</span>
+        <span class="stack-pill">tailscale</span>
+      </div>
+    </div>
+
+    <!-- Controls Foundry — degraded -->
+    <div class="proto-card">
+      <div class="proto-header">
+        <span class="proto-status degraded"></span>
+        <span class="proto-name">Controls Foundry</span>
+        <span class="proto-url">controlsfoundry.com</span>
+        <span class="proto-uptime" style="color: var(--status-degraded); text-shadow: 0 0 6px rgba(255,184,0,0.3);">degraded</span>
+      </div>
+      <p class="proto-desc">Industrial software for controls-heavy workflows and operational systems.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">python</span>
+        <span class="stack-pill">fastapi</span>
+        <span class="stack-pill">postgres</span>
+      </div>
+    </div>
+
+    <!-- LevelForge — coming soon -->
+    <div class="proto-card">
+      <div class="proto-header">
+        <span class="proto-status coming"></span>
+        <span class="proto-name">LevelForge</span>
+        <span class="proto-url">coming soon</span>
+      </div>
+      <p class="proto-desc">AI game-dev IDE that turns plain-English direction into engine-ready output.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">godot</span>
+        <span class="stack-pill">rust</span>
+      </div>
+    </div>
+
+    <!-- GenTrellis — down -->
+    <div class="proto-card">
+      <div class="proto-header">
+        <span class="proto-status down"></span>
+        <span class="proto-name">GenTrellis</span>
+        <span class="proto-url">gentrellis.com</span>
+        <span class="proto-uptime" style="color: var(--status-down); text-shadow: 0 0 6px rgba(255,51,102,0.3);">down</span>
+      </div>
+      <p class="proto-desc">On-prem AI infrastructure. Currently being redeployed.</p>
+      <div class="proto-stack">
+        <span class="stack-pill">python</span>
+        <span class="stack-pill">ollama</span>
+        <span class="stack-pill">nix</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- BUILD LOG -->
+  <p class="section-label">Build Log</p>
+
+  <div class="build-log">
+    <div class="log-entry">
+      <span class="log-date">2026-03-27</span>
+      <span class="log-project">ForgeGraph</span>
+      <span class="log-message">Added deep health check endpoint for dependency tree</span>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">2026-03-25</span>
+      <span class="log-project">Bob</span>
+      <span class="log-message">Migrated from Node to Go, added Tailscale auth</span>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">2026-03-22</span>
+      <span class="log-project">PlayTrek.ai</span>
+      <span class="log-message">Initial Expo prototype deployed to staging</span>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">2026-03-18</span>
+      <span class="log-project">Controls Foundry</span>
+      <span class="log-message">FastAPI scaffolding, first PLC integration test</span>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">2026-03-12</span>
+      <span class="log-project">GenTrellis</span>
+      <span class="log-message">Ollama model registry + Nix closure packaging</span>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- CROSS-SITE NAV -->
+  <p class="section-label">Also</p>
+  <div class="site-nav">
+    <a href="#">gmacko.com &rarr; ventures</a>
+    <a href="#">grahammackie.com &rarr; personal</a>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- FONT SPECIMENS -->
+  <p class="section-label">Typography</p>
+
+  <div class="specimen-grid">
+    <div class="specimen-card">
+      <p class="role">Display / Satoshi 900</p>
+      <p class="specimen-display">gmac.io</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Body / Instrument Sans 400</p>
+      <p class="specimen-body">Prototypes and experiments running on Hetzner VPSs and local homelab. Not production. Things break here so they don't break there.</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Mono / JetBrains Mono 400</p>
+      <p class="specimen-mono">forge.gmac.io — 24d uptime — healthy<br>nix · caddy · gitea · postgres<br>2026-03-27 — added health endpoint</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Kicker / JetBrains Mono 700</p>
+      <p class="specimen-mono-large">Prototypes</p>
+      <p class="specimen-mono-large" style="margin-top: 8px;">Build Log</p>
+      <p class="specimen-mono-large" style="margin-top: 8px;">Dependencies</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- COLOR PALETTE -->
+  <p class="section-label">Color Palette</p>
+
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #0D0D0D;"></div>
+      <div class="swatch-info"><p class="swatch-name">Background</p><p class="swatch-hex">#0D0D0D</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1A1A1A;"></div>
+      <div class="swatch-info"><p class="swatch-name">Surface</p><p class="swatch-hex">#1A1A1A</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #E0E0E0;"></div>
+      <div class="swatch-info"><p class="swatch-name">Text</p><p class="swatch-hex">#E0E0E0</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #707070;"></div>
+      <div class="swatch-info"><p class="swatch-name">Muted</p><p class="swatch-hex">#707070</p></div>
+    </div>
+    <div class="swatch neon-purple">
+      <div class="swatch-color" style="background: #BF5AF2;"></div>
+      <div class="swatch-info"><p class="swatch-name">Accent</p><p class="swatch-hex">#BF5AF2</p></div>
+    </div>
+    <div class="swatch neon-green">
+      <div class="swatch-color" style="background: #00FF88;"></div>
+      <div class="swatch-info"><p class="swatch-name">Live</p><p class="swatch-hex">#00FF88</p></div>
+    </div>
+    <div class="swatch neon-amber">
+      <div class="swatch-color" style="background: #FFB800;"></div>
+      <div class="swatch-info"><p class="swatch-name">Degraded</p><p class="swatch-hex">#FFB800</p></div>
+    </div>
+    <div class="swatch neon-red">
+      <div class="swatch-color" style="background: #FF3366;"></div>
+      <div class="swatch-info"><p class="swatch-name">Down</p><p class="swatch-hex">#FF3366</p></div>
+    </div>
+    <div class="swatch neon-blue">
+      <div class="swatch-color" style="background: #00BFFF;"></div>
+      <div class="swatch-info"><p class="swatch-name">Local Only</p><p class="swatch-hex">#00BFFF</p></div>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <p style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-align: center; letter-spacing: 0.06em; text-transform: uppercase;">
+    Design Preview &middot; gmac.io
+  </p>
+
+</div>
+</body>
+</html>

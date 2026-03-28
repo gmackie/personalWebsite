@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Preview — gmacko.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F3ED;
+    --surface: #EFEBE4;
+    --surface-2: #E6E0D7;
+    --text: #1A1714;
+    --text-strong: #110F0D;
+    --muted: #6B6159;
+    --accent: #B5451B;
+    --accent-hover: #9A3A17;
+    --rule: #D4CABC;
+    --rule-heavy: #B8AB9A;
+    --white: #FDFBF8;
+    --font-display: 'Satoshi', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  [data-theme="dark"] {
+    --bg: #171411;
+    --surface: #1E1B17;
+    --surface-2: #262220;
+    --text: #E5DFD6;
+    --text-strong: #F5F0E8;
+    --muted: #8A8078;
+    --accent: #D4612E;
+    --accent-hover: #E87040;
+    --rule: #2E2A25;
+    --rule-heavy: #3D3732;
+    --white: #1E1B17;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .preview-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .system-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--rule-heavy);
+    margin-bottom: 48px;
+  }
+
+  .system-header h1 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    text-transform: uppercase;
+  }
+
+  .theme-toggle:hover { background: var(--surface-2); }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 2px solid var(--rule-heavy);
+    margin: 48px 0 32px;
+  }
+
+  /* ---- LANDING ---- */
+  .landing-hero { margin-bottom: 48px; }
+
+  .landing-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .landing-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text-strong);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .landing-intro {
+    font-size: 1.05rem;
+    max-width: 36rem;
+    color: var(--text);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .landing-intro a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .landing-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    border: 1px solid var(--rule-heavy);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 18px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .btn:hover {
+    background: var(--surface);
+    border-color: var(--muted);
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+  }
+
+  .btn.primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .landing-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .landing-stat {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 16px;
+  }
+
+  .landing-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-strong);
+  }
+
+  .landing-stat span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ---- STARTUP GRID ---- */
+  .startup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .startup-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .startup-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .startup-thumb {
+    background: linear-gradient(135deg, var(--surface-2) 0%, var(--rule) 100%);
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .startup-thumb .domain-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    color: var(--muted);
+  }
+
+  [data-theme="dark"] .startup-thumb .domain-pill {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .startup-copy { padding: 16px; }
+
+  .startup-copy h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-strong);
+  }
+
+  .startup-copy p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ---- BLOG TEASE ---- */
+  .blog-tease-list { margin-top: 16px; }
+
+  .blog-tease-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .blog-tease-item:first-child { padding-top: 0; }
+
+  .blog-tease-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .blog-tease-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-strong);
+    margin-bottom: 4px;
+  }
+
+  .blog-tease-item h3 a { color: inherit; text-decoration: none; }
+  .blog-tease-item h3 a:hover { color: var(--accent); }
+
+  .blog-tease-item p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .section-link { margin-top: 16px; }
+
+  .section-link a {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ---- OVERVIEW CARDS ---- */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .overview-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .overview-card h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-strong);
+    margin-bottom: 8px;
+  }
+
+  .overview-card p, .overview-card li {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .overview-card ul { list-style: none; padding: 0; }
+  .overview-card li { padding: 3px 0; }
+
+  .overview-card a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ---- CROSS-SITE NAV ---- */
+  .site-nav {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .site-nav a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .site-nav a:hover { color: var(--accent); }
+
+  /* ---- FONT SPECIMENS ---- */
+  .specimen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .specimen-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .specimen-card .role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .specimen-display {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+  }
+
+  .specimen-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .specimen-mono {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .specimen-mono-large {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---- COLOR SWATCHES ---- */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .swatch {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+
+  .swatch-color { height: 64px; }
+
+  .swatch-info {
+    background: var(--surface);
+    padding: 10px 12px;
+  }
+
+  .swatch-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .landing-stats { grid-template-columns: 1fr; }
+    .startup-grid { grid-template-columns: 1fr; }
+    .specimen-grid { grid-template-columns: 1fr; }
+    .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+    .overview-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="preview-container">
+
+  <div class="system-header">
+    <h1>Design Preview / gmacko.com</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+  </div>
+
+  <!-- LANDING -->
+  <p class="section-label">Landing Page</p>
+
+  <div class="landing-hero">
+    <p class="landing-kicker">Gmacko Ventures &middot; Build in Public</p>
+    <h2 class="landing-name">Gmacko</h2>
+    <p class="landing-intro">
+      Software ventures across edtech, AI infrastructure, industrial controls, workflow tooling, game dev, and more.
+      Run by <a href="#">Graham Mackie</a> out of Seattle.
+      Active bets on the homepage, writing at <a href="#">/blog</a>,
+      full career history at <a href="#">/resume</a>.
+    </p>
+
+    <div class="landing-actions">
+      <a class="btn primary" href="#">View Startups</a>
+      <a class="btn" href="#">Read The Blog</a>
+      <a class="btn" href="#">Resume</a>
+    </div>
+
+    <div class="landing-stats">
+      <div class="landing-stat">
+        <strong>9</strong>
+        <span>ventures in motion</span>
+      </div>
+      <div class="landing-stat">
+        <strong>8</strong>
+        <span>published posts</span>
+      </div>
+      <div class="landing-stat">
+        <strong>7</strong>
+        <span>career chapters</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- STARTUPS -->
+  <p class="section-label">Startups</p>
+  <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-strong); margin-bottom: 6px;">Current portfolio</h2>
+  <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">The companies and product bets currently occupying my time.</p>
+
+  <div class="startup-grid">
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">playtrek.ai</span></div>
+      <div class="startup-copy">
+        <h3>PlayTrek.ai</h3>
+        <p>Adaptive math and reading practice inside the games kids already love.</p>
+      </div>
+    </a>
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">controlsfoundry.com</span></div>
+      <div class="startup-copy">
+        <h3>Controls Foundry</h3>
+        <p>Industrial software for controls-heavy workflows and operational systems.</p>
+      </div>
+    </a>
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">gentrellis.com</span></div>
+      <div class="startup-copy">
+        <h3>GenTrellis</h3>
+        <p>On-prem AI infrastructure for teams that need privacy and compliance.</p>
+      </div>
+    </a>
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">latchflow.io</span></div>
+      <div class="startup-copy">
+        <h3>LatchFlow</h3>
+        <p>Workflow tooling for approvals, handoffs, and operational coordination.</p>
+      </div>
+    </a>
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">levelforge.io</span></div>
+      <div class="startup-copy">
+        <h3>LevelForge</h3>
+        <p>An AI game-dev IDE that turns plain-English direction into engine-ready output.</p>
+      </div>
+    </a>
+    <a class="startup-card" href="#">
+      <div class="startup-thumb"><span class="domain-pill">forgegraph.cc</span></div>
+      <div class="startup-copy">
+        <h3>ForgeGraph</h3>
+        <p>Graph-oriented infrastructure for deployment, inspection, and workflow modeling.</p>
+      </div>
+    </a>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- BLOG TEASE -->
+  <p class="section-label">Writing</p>
+  <h2 style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text-strong); margin-bottom: 6px;">Latest from the blog</h2>
+
+  <div class="blog-tease-list">
+    <div class="blog-tease-item">
+      <p class="blog-tease-meta">05 Mar 2026</p>
+      <h3><a href="#">You Don't Need a Team</a></h3>
+      <p>Why solo builders with AI leverage can outrun small teams on most product bets.</p>
+    </div>
+    <div class="blog-tease-item">
+      <p class="blog-tease-meta">16 Feb 2020</p>
+      <h3><a href="#">Life on the Road</a></h3>
+      <p>Reflections on working remotely and the systems that make distributed life sustainable.</p>
+    </div>
+    <div class="blog-tease-item">
+      <p class="blog-tease-meta">2 Dec 2019</p>
+      <h3><a href="#">New Blog</a></h3>
+      <p>A fresh start with Jekyll, Docker, and Kubernetes. Why I rebuilt from scratch.</p>
+    </div>
+  </div>
+
+  <div class="section-link">
+    <a href="#">Browse all posts &rarr;</a>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- OVERVIEW -->
+  <p class="section-label">Overview</p>
+
+  <div class="overview-grid">
+    <div class="overview-card">
+      <h3>About</h3>
+      <p>Serial builder running Gmacko Ventures LLC. Software developer turned manager, now full-time on my own ventures. Based in Seattle.</p>
+    </div>
+    <div class="overview-card">
+      <h3>Experience</h3>
+      <ul>
+        <li><strong>Founder</strong> — Gmacko Ventures</li>
+        <li><strong>Software Dev Manager</strong> — Amazon</li>
+        <li><strong>Software Developer</strong> — Citrix</li>
+      </ul>
+    </div>
+    <div class="overview-card">
+      <h3>Elsewhere</h3>
+      <ul>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">grahammackie.com</a> (personal)</li>
+        <li><a href="#">gmac.io</a> (prototypes)</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- FONT SPECIMENS -->
+  <p class="section-label">Typography</p>
+
+  <div class="specimen-grid">
+    <div class="specimen-card">
+      <p class="role">Display / Satoshi 900</p>
+      <p class="specimen-display">Builder, operator,<br>and serial starter</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Body / Instrument Sans 400</p>
+      <p class="specimen-body">I build software across education, AI infrastructure, media, operations, and developer tools. The common thread is practical systems work: software that ships and products that need both engineering depth and taste.</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Mono / JetBrains Mono 400</p>
+      <p class="specimen-mono">playtrek.ai — controlsfoundry.com — gentrellis.com<br>16 FEB 2020 — 9 ventures — v3.2 shipped<br>updated 2d ago — 12K users — $0 MRR</p>
+    </div>
+    <div class="specimen-card">
+      <p class="role">Kicker / JetBrains Mono 700</p>
+      <p class="specimen-mono-large">Startups</p>
+      <p class="specimen-mono-large" style="margin-top: 8px;">Writing</p>
+      <p class="specimen-mono-large" style="margin-top: 8px;">Overview</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- COLOR PALETTE -->
+  <p class="section-label">Color Palette</p>
+
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #F7F3ED;"></div>
+      <div class="swatch-info"><p class="swatch-name">Background</p><p class="swatch-hex">#F7F3ED</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #EFEBE4;"></div>
+      <div class="swatch-info"><p class="swatch-name">Surface</p><p class="swatch-hex">#EFEBE4</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1A1714;"></div>
+      <div class="swatch-info"><p class="swatch-name">Text</p><p class="swatch-hex">#1A1714</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #6B6159;"></div>
+      <div class="swatch-info"><p class="swatch-name">Muted</p><p class="swatch-hex">#6B6159</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #B5451B;"></div>
+      <div class="swatch-info"><p class="swatch-name">Accent</p><p class="swatch-hex">#B5451B</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #D4CABC;"></div>
+      <div class="swatch-info"><p class="swatch-name">Rule</p><p class="swatch-hex">#D4CABC</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #171411;"></div>
+      <div class="swatch-info"><p class="swatch-name">Dark BG</p><p class="swatch-hex">#171411</p></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #D4612E;"></div>
+      <div class="swatch-info"><p class="swatch-name">Dark Accent</p><p class="swatch-hex">#D4612E</p></div>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <p style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-align: center; letter-spacing: 0.06em; text-transform: uppercase;">
+    Design Preview &middot; gmacko.com
+  </p>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Preview — grahammackie.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F3ED;
+    --surface: #EFEBE4;
+    --surface-2: #E6E0D7;
+    --text: #1A1714;
+    --text-strong: #110F0D;
+    --muted: #6B6159;
+    --accent: #4A7FB5;
+    --accent-hover: #3D6A96;
+    --rule: #D4CABC;
+    --rule-heavy: #B8AB9A;
+    --white: #FDFBF8;
+    --font-display: 'Satoshi', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- SYSTEM HEADER ---- */
+  .system-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .system-header h1 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---- TWO-PANEL LAYOUT ---- */
+  .site-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    padding-top: 48px;
+  }
+
+  /* ---- SIDEBAR ---- */
+  .sidebar {
+    position: sticky;
+    top: 48px;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 48px 32px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .sidebar-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 2px solid var(--rule);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+
+  .sidebar-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-bio {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 32px;
+  }
+
+  .sidebar-section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+  }
+
+  .sidebar-links li { padding: 4px 0; }
+
+  .sidebar-links a {
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-links a:hover { color: var(--accent); }
+
+  .sidebar-links .link-label {
+    font-family: var(--font-body);
+  }
+
+  .sidebar-links .link-handle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .sidebar-divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 24px 0;
+  }
+
+  .sidebar-site-links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-site-links li { padding: 4px 0; }
+
+  .sidebar-site-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .sidebar-site-links a:hover { color: var(--accent); }
+
+  /* ---- BLOG FEED ---- */
+  .blog-feed {
+    padding: 48px 48px;
+    max-width: 720px;
+  }
+
+  .feed-header {
+    margin-bottom: 32px;
+  }
+
+  .feed-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .feed-header p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .blog-post {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .blog-post:first-of-type { padding-top: 0; }
+
+  .blog-post-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .blog-post h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-strong);
+    margin-bottom: 6px;
+  }
+
+  .blog-post h3 a { color: inherit; text-decoration: none; }
+  .blog-post h3 a:hover { color: var(--accent); }
+
+  .blog-post p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .blog-post .read-more {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ---- DESIGN SYSTEM SECTIONS (below fold) ---- */
+  .design-sections {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-rule {
+    border: none;
+    border-top: 2px solid var(--rule-heavy);
+    margin: 48px 0 32px;
+  }
+
+  /* ---- FONT SPECIMENS ---- */
+  .specimen-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .specimen-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .specimen-card .role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .specimen-display {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+  }
+
+  .specimen-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .specimen-mono {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .specimen-mono-large {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---- COLOR SWATCHES ---- */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .swatch {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+
+  .swatch-color { height: 64px; }
+
+  .swatch-info {
+    background: var(--surface);
+    padding: 10px 12px;
+  }
+
+  .swatch-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 700px) {
+    .site-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: relative;
+      top: auto;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+      padding: 32px 24px;
+    }
+
+    .blog-feed { padding: 32px 24px; }
+    .specimen-grid { grid-template-columns: 1fr; }
+    .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- System Header -->
+  <div class="system-header">
+    <h1>Design Preview / grahammackie.com</h1>
+  </div>
+
+  <!-- ==================== -->
+  <!-- TWO-PANEL LAYOUT     -->
+  <!-- ==================== -->
+  <div class="site-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-avatar">GM</div>
+      <h1 class="sidebar-name">Graham Mackie</h1>
+      <p class="sidebar-bio">
+        Builder, musician, and human. Based in Seattle. This is the personal side — the ventures and tech stuff live elsewhere.
+      </p>
+
+      <p class="sidebar-section-label">Links</p>
+      <ul class="sidebar-links">
+        <li>
+          <a href="#">
+            <span class="link-label">Instagram</span>
+            <span class="link-handle">@gmackienw</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="link-label">SoundCloud</span>
+            <span class="link-handle">gmack-attack</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="link-label">Steam</span>
+            <span class="link-handle">deathfudge</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="link-label">GitHub</span>
+            <span class="link-handle">gmackie</span>
+          </a>
+        </li>
+      </ul>
+
+      <hr class="sidebar-divider">
+
+      <p class="sidebar-section-label">Other Sites</p>
+      <ul class="sidebar-site-links">
+        <li><a href="#">gmacko.com &rarr; what I'm building</a></li>
+        <li><a href="#">gmac.io &rarr; prototypes &amp; experiments</a></li>
+      </ul>
+    </aside>
+
+    <!-- BLOG FEED -->
+    <main class="blog-feed">
+      <div class="feed-header">
+        <h2>Blog</h2>
+        <p>Personal writing. Travel, music, life, opinions.</p>
+      </div>
+
+      <div class="blog-post">
+        <p class="blog-post-meta">12 Mar 2026</p>
+        <h3><a href="#">Seattle in March</a></h3>
+        <p>The cherry blossoms are out on the UW quad again. Every year I forget how short the window is, and every year I almost miss it. This time I brought the good camera.</p>
+        <a class="read-more" href="#">Read more</a>
+      </div>
+
+      <div class="blog-post">
+        <p class="blog-post-meta">28 Feb 2026</p>
+        <h3><a href="#">New Speakers, Old Records</a></h3>
+        <p>Finally upgraded the studio monitors. Went back through my vinyl collection to hear what I'd been missing. Turns out: a lot of low end on Steely Dan records.</p>
+        <a class="read-more" href="#">Read more</a>
+      </div>
+
+      <div class="blog-post">
+        <p class="blog-post-meta">14 Feb 2026</p>
+        <h3><a href="#">Why I Still Play Dota</a></h3>
+        <p>Twelve years in, 6,000 hours logged. It's not about the game anymore — it's about the friendships that survived every meta shift and rage quit.</p>
+        <a class="read-more" href="#">Read more</a>
+      </div>
+
+      <div class="blog-post">
+        <p class="blog-post-meta">16 Feb 2020</p>
+        <h3><a href="#">Life on the Road</a></h3>
+        <p>Reflections on working remotely and the systems that make distributed life sustainable. Hotels, time zones, and the art of having a routine without a home base.</p>
+        <a class="read-more" href="#">Read more</a>
+      </div>
+
+      <div class="blog-post">
+        <p class="blog-post-meta">2 Dec 2019</p>
+        <h3><a href="#">Rebuilding This Site</a></h3>
+        <p>A fresh start with Jekyll. Why I killed the old WordPress site and went static. Simpler is better, even if the migration took a weekend.</p>
+        <a class="read-more" href="#">Read more</a>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ==================== -->
+  <!-- DESIGN SYSTEM BELOW  -->
+  <!-- ==================== -->
+  <div class="design-sections">
+
+    <hr class="section-rule">
+
+    <p class="section-label">Typography</p>
+
+    <div class="specimen-grid">
+      <div class="specimen-card">
+        <p class="role">Display / Satoshi 900</p>
+        <p class="specimen-display">Graham Mackie</p>
+      </div>
+      <div class="specimen-card">
+        <p class="role">Body / Instrument Sans 400</p>
+        <p class="specimen-body">Personal writing about travel, music, games, and life outside of startups. The ventures live at gmacko.com — this is the other stuff.</p>
+      </div>
+      <div class="specimen-card">
+        <p class="role">Mono / JetBrains Mono 400</p>
+        <p class="specimen-mono">@gmackienw — gmack-attack — deathfudge<br>12 MAR 2026 — seattle — personal</p>
+      </div>
+      <div class="specimen-card">
+        <p class="role">Kicker / JetBrains Mono 700</p>
+        <p class="specimen-mono-large">Links</p>
+        <p class="specimen-mono-large" style="margin-top: 8px;">Blog</p>
+        <p class="specimen-mono-large" style="margin-top: 8px;">Other Sites</p>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <p class="section-label">Color Palette</p>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #F7F3ED;"></div>
+        <div class="swatch-info"><p class="swatch-name">Background</p><p class="swatch-hex">#F7F3ED</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #EFEBE4;"></div>
+        <div class="swatch-info"><p class="swatch-name">Surface</p><p class="swatch-hex">#EFEBE4</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #1A1714;"></div>
+        <div class="swatch-info"><p class="swatch-name">Text</p><p class="swatch-hex">#1A1714</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #4A7FB5;"></div>
+        <div class="swatch-info"><p class="swatch-name">Accent</p><p class="swatch-hex">#4A7FB5</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #3D6A96;"></div>
+        <div class="swatch-info"><p class="swatch-name">Accent Hover</p><p class="swatch-hex">#3D6A96</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #6B6159;"></div>
+        <div class="swatch-info"><p class="swatch-name">Muted</p><p class="swatch-hex">#6B6159</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #D4CABC;"></div>
+        <div class="swatch-info"><p class="swatch-name">Rule</p><p class="swatch-hex">#D4CABC</p></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #B8AB9A;"></div>
+        <div class="swatch-info"><p class="swatch-name">Rule Heavy</p><p class="swatch-hex">#B8AB9A</p></div>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-align: center; letter-spacing: 0.06em; text-transform: uppercase;">
+      Design Preview &middot; grahammackie.com
+    </p>
+
+  </div>
+
+</body>
+</html>
