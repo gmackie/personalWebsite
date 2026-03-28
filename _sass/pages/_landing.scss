@@ -1,7 +1,7 @@
 .landing-page {
-  background: #F7F3ED;
-  color: #1A1714;
-  font-family: "Instrument Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
   margin: -20px -20px 0;
   padding: 24px 20px 0;
 
@@ -14,22 +14,22 @@
 .landing-page h1,
 .landing-page h2,
 .landing-page h3 {
-  color: #110F0D;
-  font-family: "Satoshi", "Instrument Sans", sans-serif;
+  color: var(--text-strong);
+  font-family: var(--font-display);
   letter-spacing: -0.02em;
 }
 
 .landing-page p,
 .landing-page li {
-  color: #1A1714;
+  color: var(--text);
 }
 
 .landing-page a {
-  color: #B5451B;
+  color: var(--accent);
 
   &:hover,
   &:focus {
-    color: #9A3A17;
+    color: var(--accent-hover);
   }
 }
 
@@ -40,7 +40,7 @@
 }
 
 .landing-hero {
-  border-bottom: 2px solid #B8AB9A;
+  border-bottom: 2px solid var(--rule-heavy);
   padding: 0 0 48px;
 }
 
@@ -60,8 +60,8 @@
 .landing-stat span,
 .startup-thumb-fallback small,
 .startup-thumb-fallback span {
-  color: #6B6159;
-  font-family: "JetBrains Mono", monospace;
+  color: var(--muted);
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -91,12 +91,12 @@
 }
 
 .landing-hero-aside {
-  border-top: 1px solid #D4CABC;
+  border-top: 1px solid var(--rule);
   padding-top: 16px;
 
   @include media-query($small-screen) {
     border-top: 0;
-    border-left: 1px solid #D4CABC;
+    border-left: 1px solid var(--rule);
     padding-left: 24px;
     padding-top: 4px;
   }
@@ -108,7 +108,7 @@
 }
 
 .landing-stat {
-  border-bottom: 1px solid #D4CABC;
+  border-bottom: 1px solid var(--rule);
   padding-bottom: 12px;
 
   strong,
@@ -117,8 +117,8 @@
   }
 
   strong {
-    color: #110F0D;
-    font-family: "Satoshi", "Instrument Sans", sans-serif;
+    color: var(--text-strong);
+    font-family: var(--font-display);
     font-size: 2rem;
     font-weight: 700;
     line-height: 1;
@@ -138,11 +138,11 @@
 }
 
 .landing-button {
-  border: 1px solid #D4CABC;
+  border: 1px solid var(--rule);
   border-radius: 4px;
-  color: #1A1714;
+  color: var(--text);
   display: inline-block;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   padding: 10px 12px;
@@ -150,26 +150,26 @@
 
   &:hover,
   &:focus {
-    border-color: #B5451B;
-    color: #9A3A17;
+    border-color: var(--accent);
+    color: var(--accent-hover);
   }
 
   &.primary {
-    background: #B5451B;
-    border-color: #B5451B;
-    color: #F7F3ED;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
 
     &:hover,
     &:focus {
-      background: #9A3A17;
-      border-color: #9A3A17;
-      color: #F7F3ED;
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: var(--bg);
     }
   }
 }
 
 .landing-section {
-  border-top: 2px solid #B8AB9A;
+  border-top: 2px solid var(--rule-heavy);
   padding-top: 48px;
 }
 
@@ -189,7 +189,7 @@
 }
 
 .landing-section-header p:last-child {
-  color: #6B6159;
+  color: var(--muted);
   margin-bottom: 0;
 }
 
@@ -209,8 +209,8 @@
 }
 
 .startup-card {
-  background: #EFEBE4;
-  border: 1px solid #D4CABC;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 8px;
   color: inherit;
   display: block;
@@ -219,14 +219,14 @@
 
   &:hover,
   &:focus {
-    border-color: #B5451B;
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 }
 
 .startup-thumb {
-  background: #E6E0D7;
-  border-bottom: 1px solid #D4CABC;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
   height: 196px;
   overflow: hidden;
 
@@ -254,7 +254,7 @@
   }
 
   span {
-    color: #1A1714;
+    color: var(--text);
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0.08em;
@@ -267,7 +267,7 @@
 }
 
 .startup-copy p {
-  color: #6B6159;
+  color: var(--muted);
   margin-bottom: 0;
 }
 
@@ -300,7 +300,7 @@
 
 .overview-card,
 .blog-tease-card {
-  border-top: 1px solid #D4CABC;
+  border-top: 1px solid var(--rule);
   padding-top: 16px;
 }
 
@@ -333,7 +333,7 @@
 }
 
 .blog-tease-card p:last-child {
-  color: #6B6159;
+  color: var(--muted);
   margin-bottom: 0;
 }
 
@@ -345,7 +345,7 @@
 
 .section-rule {
   border: none;
-  border-top: 2px solid #B8AB9A;
+  border-top: 2px solid var(--rule-heavy);
   margin: 48px auto;
   max-width: 960px;
 }
@@ -359,15 +359,15 @@
   margin-top: 24px;
 
   span {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.06em;
-    color: #6B6159;
+    color: var(--muted);
   }
 
   strong {
-    color: #110F0D;
-    font-family: "Satoshi", sans-serif;
+    color: var(--text-strong);
+    font-family: var(--font-display);
     font-weight: 700;
   }
 }
@@ -386,7 +386,7 @@
 }
 
 .recent-update {
-  border-bottom: 1px solid #D4CABC;
+  border-bottom: 1px solid var(--rule);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -399,23 +399,23 @@
 }
 
 .update-venture {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #1A1714;
+  color: var(--text);
 }
 
 .update-summary {
-  color: #6B6159;
+  color: var(--muted);
   font-size: 14px;
   flex: 1;
 }
 
 .update-date {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
-  color: #6B6159;
+  color: var(--muted);
   letter-spacing: 0.06em;
 }
 
@@ -424,7 +424,7 @@
 .status-badge {
   border-radius: 4px;
   display: inline-block;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -434,7 +434,7 @@
 
 .status-active {
   background: rgba(181, 69, 27, 0.12);
-  color: #B5451B;
+  color: var(--accent);
 }
 
 .status-shipping {
@@ -449,7 +449,7 @@
 
 .status-paused {
   background: rgba(107, 97, 89, 0.12);
-  color: #6B6159;
+  color: var(--muted);
 }
 
 .status-killed {
@@ -469,7 +469,7 @@
 
 .status-archived {
   background: rgba(107, 97, 89, 0.12);
-  color: #6B6159;
+  color: var(--muted);
 }
 
 // ---- Update type badges ----
@@ -477,7 +477,7 @@
 .update-type-badge {
   border-radius: 4px;
   display: inline-block;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -487,10 +487,10 @@
 
 .update-type-shipped   { background: rgba(45, 95, 26, 0.12); color: #2D5F1A; }
 .update-type-milestone { background: rgba(26, 74, 107, 0.12); color: #1A4A6B; }
-.update-type-started   { background: rgba(181, 69, 27, 0.12); color: #B5451B; }
-.update-type-paused    { background: rgba(107, 97, 89, 0.12); color: #6B6159; }
+.update-type-started   { background: rgba(181, 69, 27, 0.12); color: var(--accent); }
+.update-type-paused    { background: rgba(107, 97, 89, 0.12); color: var(--muted); }
 .update-type-killed    { background: rgba(122, 26, 26, 0.12); color: #7A1A1A; }
-.update-type-note      { background: rgba(107, 97, 89, 0.08); color: #6B6159; }
+.update-type-note      { background: rgba(107, 97, 89, 0.08); color: var(--muted); }
 
 // ---- Venture tags ----
 
@@ -504,8 +504,8 @@
 .venture-tag {
   background: rgba(107, 97, 89, 0.1);
   border-radius: 3px;
-  color: #6B6159;
-  font-family: "JetBrains Mono", monospace;
+  color: var(--muted);
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -515,15 +515,15 @@
 // ---- Venture thesis (on cards) ----
 
 .venture-thesis {
-  color: #1A1714;
+  color: var(--text);
   font-style: italic;
   font-size: 13px;
   margin: 0 0 6px;
 }
 
 .venture-updated {
-  color: #6B6159;
-  font-family: "JetBrains Mono", monospace;
+  color: var(--muted);
+  font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.06em;
   margin-top: 8px;
@@ -531,16 +531,16 @@
 
 // ---- Startup thumb status colors ----
 
-.startup-thumb-active    { background: linear-gradient(135deg, #E6E0D7 0%, #D4CABC 100%); }
-.startup-thumb-shipping  { background: linear-gradient(135deg, #E8F5E0 0%, #D4CABC 100%); }
-.startup-thumb-experiment { background: linear-gradient(135deg, #E4F0F8 0%, #D4CABC 100%); }
-.startup-thumb-paused    { background: linear-gradient(135deg, #E6E0D7 0%, #D4CABC 50%); opacity: 0.7; }
-.startup-thumb-killed    { background: linear-gradient(135deg, #E6E0D7 0%, #D4CABC 50%); opacity: 0.5; }
+.startup-thumb-active    { background: linear-gradient(135deg, var(--surface-2) 0%, var(--rule) 100%); }
+.startup-thumb-shipping  { background: linear-gradient(135deg, $success-bg 0%, var(--rule) 100%); }
+.startup-thumb-experiment { background: linear-gradient(135deg, $info-bg 0%, var(--rule) 100%); }
+.startup-thumb-paused    { background: linear-gradient(135deg, var(--surface-2) 0%, var(--rule) 50%); opacity: 0.7; }
+.startup-thumb-killed    { background: linear-gradient(135deg, var(--surface-2) 0%, var(--rule) 50%); opacity: 0.5; }
 
 // ---- Empty states ----
 
 .empty-state {
-  color: #6B6159;
+  color: var(--muted);
   font-style: italic;
   padding: 24px 0;
 }
@@ -564,25 +564,25 @@
 
 .changelog-filter {
   background: transparent;
-  border: 1px solid #D4CABC;
+  border: 1px solid var(--rule);
   border-radius: 4px;
-  color: #6B6159;
+  color: var(--muted);
   cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.04em;
   padding: 6px 10px;
 
   &:hover {
-    border-color: #B5451B;
-    color: #B5451B;
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   &.active {
-    background: #B5451B;
-    border-color: #B5451B;
-    color: #F7F3ED;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
   }
 }
 
@@ -592,7 +592,7 @@
 }
 
 .changelog-entry {
-  border-bottom: 1px solid #D4CABC;
+  border-bottom: 1px solid var(--rule);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -613,8 +613,8 @@
 }
 
 .experiment-card {
-  background: #EFEBE4;
-  border: 1px solid #D4CABC;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 8px;
   color: inherit;
   display: block;
@@ -623,7 +623,7 @@
 
   &:hover,
   &:focus {
-    border-color: #B5451B;
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 
@@ -634,7 +634,7 @@
   }
 
   p {
-    color: #6B6159;
+    color: var(--muted);
     font-size: 14px;
     margin: 0;
   }
@@ -648,9 +648,9 @@
 }
 
 .experiment-venture {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
-  color: #6B6159;
+  color: var(--muted);
   margin-top: 8px;
 }
 
@@ -663,8 +663,8 @@
 }
 
 .now-meta {
-  color: #6B6159;
-  font-family: "JetBrains Mono", monospace;
+  color: var(--muted);
+  font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
   margin-bottom: 32px;
@@ -684,41 +684,41 @@
 }
 
 .allocation-venture {
-  font-family: "Satoshi", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 14px;
 }
 
 .allocation-pct {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 700;
-  color: #B5451B;
+  color: var(--accent);
 }
 
 .allocation-bar {
-  background: #E6E0D7;
+  background: var(--surface-2);
   border-radius: 3px;
   height: 6px;
   overflow: hidden;
 }
 
 .allocation-fill {
-  background: #B5451B;
+  background: var(--accent);
   border-radius: 3px;
   height: 100%;
   transition: width 0.3s ease;
 }
 
 .allocation-note {
-  color: #6B6159;
+  color: var(--muted);
   font-size: 13px;
   margin: 4px 0 0;
 }
 
 .now-inspired-by {
-  border-top: 1px solid #D4CABC;
-  color: #6B6159;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
   font-size: 13px;
   margin-top: 32px;
   padding-top: 16px;
@@ -745,15 +745,15 @@
 }
 
 .venture-meta-item {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
-  color: #6B6159;
+  color: var(--muted);
   letter-spacing: 0.04em;
 }
 
 .venture-thesis-block {
-  border-left: 3px solid #B5451B;
-  color: #1A1714;
+  border-left: 3px solid var(--accent);
+  color: var(--text);
   font-size: 1.1rem;
   font-style: italic;
   margin: 24px 0;
@@ -761,11 +761,11 @@
 }
 
 .venture-milestone {
-  color: #6B6159;
+  color: var(--muted);
   font-size: 14px;
 }
 
 .venture-infra {
-  color: #6B6159;
+  color: var(--muted);
   font-size: 14px;
 }

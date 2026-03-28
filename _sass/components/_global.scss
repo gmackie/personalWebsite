@@ -7,7 +7,7 @@
   @include box-sizing;
 }
 .notice {
-  border: 1px solid lighten($text-color, 45%);
+  border: 1px solid var(--rule);
   border-radius: 0.4em;
   padding: 0.5em 1em;
 }
@@ -108,13 +108,13 @@ footer {
   padding: 3em 0;
   .heart-icon {
     color: $danger;
-    text-shadow: 0 0 5px $white, 0 0 10px $danger;
+    text-shadow: 0 0 5px var(--white), 0 0 10px $danger;
   }
 }
 .related-articles {
   margin-top: 2em;
   h4 {
-    font-family: $font-family-base;
+    font-family: var(--font-body);
   }
   ul {
     margin: 0;

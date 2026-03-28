@@ -146,19 +146,19 @@
 
 // Colors helpers
 .primary-text-color {
-  color: $primary;
+  color: var(--accent);
 }
 
 .primary-bg-color {
-  background-color: $primary;
+  background-color: var(--accent);
 }
 
 .secondary-text-color {
-  color: $secondary;
+  color: var(--muted);
 }
 
 .secondary-bg-color {
-  background-color: $secondary;
+  background-color: var(--muted);
 }
 
 .success-text-color {

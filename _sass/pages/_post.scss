@@ -1,6 +1,6 @@
 // Post listing
 .post-listing {
-  background-color: $white;
+  background-color: var(--white);
   position: absolute;
   top: 400px;
   z-index: 233;
@@ -39,7 +39,7 @@ section.post {
   font-size: 13px;
   font-weight: bold;
   color: $info;
-  border: 1px solid lighten($text-color, 45%);
+  border: 1px solid var(--rule);
   border-radius: 0.4em;
   padding: 0.5em 1em;
 }
@@ -50,12 +50,12 @@ section.post {
 }
 
 .post-title-link {
-	color: $primary;
+	color: var(--accent);
 	font-size: 14px;
 	margin-left: 10px;
 	&:hover,
 	&:focus {
-		color: lighten($primary, 14%);
+		color: var(--accent-hover);
 	}
 }
 
@@ -64,7 +64,7 @@ section.post {
   font-size: 13px;
   font-weight: bold;
 	.post-date {
-		color: $secondary;
+		color: var(--muted);
 	}
 	.post-author {
 		text-transform: uppercase;
@@ -75,7 +75,7 @@ section.post {
 		color: $warning;
 	}
   .read-time {
-    color: $primary;
+    color: var(--accent);
   }
 }
 
@@ -178,70 +178,70 @@ a.read-more {
 }
 .twitter {
   background-color: #77bcf1;
-  color: $white;
+  color: var(--white);
   border-color: #77bcf1;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: #77bcf1;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: #77bcf1;
     border-color: #77bcf1;
   }
 }
 .facebook {
   background-color: #627aac;
-  color: $white;
+  color: var(--white);
   border-color: #627aac;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: #627aac;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: #627aac;
     border-color: #627aac;
   }
 }
 .google-plus {
   background-color: #e36f60;
-  color: $white;
+  color: var(--white);
   border-color: #e36f60;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: #e36f60;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: #e36f60;
     border-color: #e36f60;
   }
 }
 .hacker-news {
   background-color: #f60;
-  color: $white;
+  color: var(--white);
   border-color: #f60;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: #f60;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: #f60;
     border-color: #f60;
   }
 }
 .reddit {
   background-color: #5f99cf;
-  color: $white;
+  color: var(--white);
   border-color: #5f99cf;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: #5f99cf;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: #5f99cf;
     border-color: #5f99cf;
   }

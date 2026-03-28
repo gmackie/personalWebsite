@@ -7,37 +7,37 @@
   margin-bottom: 20px;
   padding: 8px 20px;
   font-size: 0.875em;
-  font-family: $font-family-base;
+  font-family: var(--font-body);
   font-weight: 700;
-  background-color: $primary;
-  color: $white;
+  background-color: var(--accent);
+  color: var(--white);
   border-width: 2px !important;
   border-style: solid !important;
-  border-color: $primary;
+  border-color: var(--accent);
   text-decoration: none !important;
   border-radius: 5px;
   &:visited {
-    color: $white;
-    border-color: $primary;
+    color: var(--white);
+    border-color: var(--accent);
   }
   &:hover {
-    background-color: $white;
-    color: $primary;
-    border-color: $primary;
+    background-color: var(--white);
+    color: var(--accent);
+    border-color: var(--accent);
   }
 }
 
 // Success button
 .btn-success {
   background-color: $success;
-  color: $white;
+  color: var(--white);
   border-color: $success;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: $success;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: $success;
     border-color: $success;
   }
@@ -46,14 +46,14 @@
 // Warning button
 .btn-warning {
   background-color: $warning;
-  color: $white;
+  color: var(--white);
   border-color: $warning;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: $warning;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: $warning;
     border-color: $warning;
   }
@@ -62,14 +62,14 @@
 // Danger button
 .btn-danger {
   background-color: $danger;
-  color: $white;
+  color: var(--white);
   border-color: $danger;
   &:visited {
-    color: $white;
+    color: var(--white);
     border-color: $danger;
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: $danger;
     border-color: $danger;
   }
@@ -78,14 +78,14 @@
 // Information button
 .btn-info {
   background-color: $info;
-  color: $white;
+  color: var(--white);
   border-color: $info;
   &:visited {
     border-color: $info;
-    color: $white;
+    color: var(--white);
   }
   &:hover {
-    background-color: $white;
+    background-color: var(--white);
     color: $info;
     border-color: $info;
   }
