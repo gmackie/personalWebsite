@@ -6,7 +6,7 @@
   slug: playtrek
   domain: playtrek.ai
   url: https://playtrek.ai
-  description: Adaptive math and reading practice inside the games kids already love, personalized to each learner and visible to parents and schools.
+  description: Adaptive math and reading practice woven into the games kids already play. AI adjusts difficulty in real-time, aligns to school standards (Common Core, TEKS), and gives parents and teachers a dashboard showing mastery by skill.
   thesis: Kids learn better inside games they're already playing.
   status: active
   category: edtech
@@ -20,7 +20,7 @@
   slug: controls-foundry
   domain: controlsfoundry.com
   url: https://controlsfoundry.com
-  description: Industrial software and controls-focused product work aimed at making operational systems easier to build, run, and trust.
+  description: Industrial software for controls-heavy workflows. Making operational systems easier to build, run, and trust.
   thesis: Operational systems should be as easy to build as web apps.
   status: active
   category: industrial
@@ -34,96 +34,96 @@
   slug: gentrellis
   domain: gentrellis.com
   url: https://gentrellis.com
-  description: On-premises AI infrastructure for teams that need useful automation without giving up privacy, compliance, or data control.
+  description: Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built hardware (NVIDIA H200, RTX PRO 6000) with hybrid Bedrock routing, protection levels for sensitive data, immutable audit logs, and vibe-coder workshops. Starting at $39k.
   thesis: AI that stays on your network is the only AI enterprises will trust.
-  status: active
+  status: shipping
   category: ai-infra
-  tags: [ai, infrastructure, privacy, enterprise]
+  tags: [ai, infrastructure, privacy, enterprise, hardware]
   shared_infra: [forgegraph, nix]
   last_updated: 2026-03-25
-  next_milestone: Multi-model routing
+  next_milestone: Q2 2026 first deliveries
   image: /img/ventures/gentrellis.png
 
 - name: LatchFlow
   slug: latchflow
   domain: latchflow.io
   url: https://latchflow.io
-  description: Workflow tooling for approvals, handoffs, and operational coordination where loose processes need to become reliable systems.
-  thesis: Every team has invisible workflows held together by Slack messages and hope.
+  description: One system for escape room operations. Live game control, puzzle orchestration, device health, bookings, and post-run analytics. The interface feels like a control room, not generic SaaS.
+  thesis: Escape rooms deserve ops tooling as good as the experiences they create.
   status: shipping
   category: workflow
-  tags: [workflow, approvals, operations]
+  tags: [operations, entertainment, real-time]
   shared_infra: [forgegraph]
   last_updated: 2026-03-28
-  next_milestone: Approval engine v2
+  next_milestone: Marketplace launch
   image: /img/ventures/latchflow.png
 
 - name: DriftPort
   slug: driftport
   domain: driftport.io
   url: https://driftport.io
-  description: Product and infrastructure experiments around smoother movement between environments, systems, and the teams operating them.
-  thesis: Moving between environments should be as easy as switching browser tabs.
-  status: experiment
-  category: devtools
-  tags: [infrastructure, developer-experience]
+  description: Remote monitoring and control for van and RV electrical systems. Battery, solar, water, climate — live arc gauges on your phone. Send commands, get alerts, update firmware from anywhere. Built for owners and installers.
+  thesis: Your rig should be as connected as your house.
+  status: active
+  category: iot
+  tags: [iot, hardware, mobile, vanlife]
   shared_infra: [forgegraph]
   last_updated: 2026-03-10
-  next_milestone: Environment sync prototype
+  next_milestone: Demo + waitlist launch
   image: /img/ventures/driftport.png
 
 - name: LevelForge
   slug: levelforge
   domain: levelforge.io
   url: https://levelforge.io
-  description: An AI game development IDE that turns plain-English direction into code, assets, and engine-ready output for modern game teams.
+  description: AI game development IDE. Describe your game in plain English, an agent writes the code, generates assets, and pushes them into Unity via MCP. Chat-first, with composable modules for platformer physics, combat, inventory, and more.
   thesis: Game development is the last creative discipline AI hasn't simplified.
   status: active
   category: gamedev
   tags: [ai, gaming, ide, developer-tools]
   shared_infra: [forgegraph]
   last_updated: 2026-03-15
-  next_milestone: Asset pipeline integration
+  next_milestone: Unity MCP integration
   image: /img/ventures/levelforge.png
 
 - name: ForgeGraph
   slug: forgegraph
   domain: forgegraf.com
   url: https://forgegraf.com
-  description: Graph-oriented product and infrastructure work focused on making relationships, systems, and workflows easier to model and navigate.
+  description: Delivery evidence platform built on Jujutsu's changeset-native identity model. Tracks every changeset from draft through production with real evidence — builds, tests, coverage, artifacts, deployments. Nix closures, not Docker images. No Kubernetes.
   thesis: Infrastructure should be a graph you can see, not YAML you memorize.
   status: active
   category: infrastructure
-  tags: [infrastructure, graph, deployment, nix]
+  tags: [infrastructure, graph, deployment, nix, jujutsu]
   shared_infra: []
   last_updated: 2026-03-28
-  next_milestone: Nix deployment pipeline for all personal infra
+  next_milestone: Multi-node fleet management
   image: /img/ventures/forgegraph.png
 
 - name: AppealKey
   slug: appealkey
   domain: appealkey.com
   url: https://appealkey.com
-  description: Property-tax appeal tooling that helps homeowners assemble the evidence and workflow needed to challenge bad assessments.
+  description: AI-powered property tax appeal platform. Enter your address, get comparable sales analysis, and let AppealKey handle the filing, paperwork, hearings, and negotiations. No win, no fee. Available on iOS, Android, and web.
   thesis: Homeowners overpay property taxes because the appeal process is opaque.
   status: active
   category: proptech
-  tags: [proptech, legal, workflow]
+  tags: [proptech, legal, ai, mobile]
   shared_infra: [forgegraph]
   last_updated: 2026-03-05
-  next_milestone: Evidence assembly wizard
+  next_milestone: Android launch
   image: /img/ventures/appealkey.png
 
 - name: Stream Conductor
   slug: stream-conductor
   domain: streamconductor.com
   url: https://streamconductor.com
-  description: A browser-based control room for student-run sports broadcasts, built to improve production quality without losing school-friendly guardrails.
-  thesis: Student broadcasts deserve professional tools without professional complexity.
+  description: Cloud streaming control room for teams. Cloud OBS, multi-platform output (Twitch, YouTube, Kick), role-based permissions for producers/directors/streamers, auto-failover, and sub-second latency via SRT/RIST.
+  thesis: Streaming teams deserve a control room, not a solo tool.
   status: active
-  category: edtech
-  tags: [education, media, broadcasting]
+  category: media
+  tags: [streaming, media, collaboration, cloud]
   shared_infra: [forgegraph]
   last_updated: 2026-03-12
-  next_milestone: Multi-camera switching UI
+  next_milestone: Public beta
   image: /img/ventures/stream-conductor.png
