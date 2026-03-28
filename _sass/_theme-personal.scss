@@ -1,0 +1,17 @@
+/*
+ * Theme: grahammackie.com (personal)
+ * Accent swap: burnt sienna → slate blue
+ * See /DESIGN.personal.md
+ */
+
+:root {
+  --accent: #4A7FB5;
+  --accent-hover: #3D6A96;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #6A9FD5;
+    --accent-hover: #82B3E0;
+  }
+}

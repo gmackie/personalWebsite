@@ -1,0 +1,30 @@
+/*
+ * Theme: gmac.io (dashboard)
+ * Dark mode only, neon accents
+ * See /DESIGN.gmac.md
+ */
+
+:root {
+  --bg: #0D0D0D;
+  --surface: #1A1A1A;
+  --surface-2: #242424;
+  --text: #E0E0E0;
+  --text-strong: #FFFFFF;
+  --muted: #707070;
+  --accent: #BF5AF2;
+  --accent-hover: #A344D4;
+  --rule: #2A2A2A;
+  --rule-heavy: #3A3A3A;
+  --white: #1A1A1A;
+
+  --grid-line: #161616;
+
+  // Status neon colors
+  --status-live: #00FF88;
+  --status-degraded: #FFB800;
+  --status-down: #FF3366;
+  --status-local: #00BFFF;
+  --status-coming: #707070;
+}
+
+// No dark mode media query — already dark by default

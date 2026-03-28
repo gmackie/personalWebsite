@@ -1,11 +1,64 @@
 /*
- * Design System — Graham Mackie (.com)
- * See /DESIGN.md for full specification.
+ * Design System — Multi-site
+ * See /DESIGN.md for shared spec, /DESIGN.{site}.md for per-site palettes.
+ *
+ * CSS custom properties on :root enable per-site theming.
+ * Sass $variables remain for backwards compatibility with existing components.
  */
 
-// Font loading via <link> in head.html (Fontshare + Google Fonts)
+// ============================================================
+// CSS Custom Properties (themeable)
+// Default values = gmacko.com palette
+// Override in _theme-personal.scss or _theme-dashboard.scss
+// ============================================================
 
-// Typography
+:root {
+  // Colors
+  --bg: #F7F3ED;
+  --surface: #EFEBE4;
+  --surface-2: #E6E0D7;
+  --text: #1A1714;
+  --text-strong: #110F0D;
+  --muted: #6B6159;
+  --accent: #B5451B;
+  --accent-hover: #9A3A17;
+  --rule: #D4CABC;
+  --rule-heavy: #B8AB9A;
+  --white: #FDFBF8;
+
+  // Typography
+  --font-display: 'Satoshi', sans-serif;
+  --font-body: 'Instrument Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  // Radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+// Dark mode (gmacko)
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171411;
+    --surface: #1E1B17;
+    --surface-2: #262220;
+    --text: #E5DFD6;
+    --text-strong: #F5F0E8;
+    --muted: #8A8078;
+    --accent: #D4612E;
+    --accent-hover: #E87040;
+    --rule: #2E2A25;
+    --rule-heavy: #3D3732;
+    --white: #1E1B17;
+  }
+}
+
+// ============================================================
+// Sass Variables (backwards compat, referencing custom properties)
+// ============================================================
+
+// Font loading via <link> in head.html (Fontshare + Google Fonts)
 $font-family-display:    'Satoshi', sans-serif;
 $font-family-sans-serif: 'Instrument Sans', sans-serif;
 $font-family-monospace:  'JetBrains Mono', monospace;
@@ -37,7 +90,7 @@ $border-width:           .0625rem !default;
 $hr-border-color:        rgba(0,0,0,.1) !default;
 $hr-border-width:        $border-width;
 
-// Colors — warm editorial palette
+// Colors — Sass vars for backwards compat (new code should use var(--token))
 $bg:               #F7F3ED;
 $surface:          #EFEBE4;
 $surface-2:        #E6E0D7;
@@ -71,7 +124,7 @@ $status-experiment: $info;
 $status-paused:     $muted;
 $status-killed:     $danger;
 
-// Border radius
+// Border radius (Sass vars for backwards compat)
 $radius-sm:        4px;
 $radius-md:        8px;
 $radius-lg:        12px;
