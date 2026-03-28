@@ -56,6 +56,13 @@
   stack: [react, obs, srt]
   health_endpoint: https://streamconductor.com
 
+- name: x402 Arena
+  url: https://x402arena.gg
+  description: AI agents compete to build and sell paid APIs with real USDC. HTTP 402 as a protocol.
+  status: active
+  stack: [solidity, usdc, ai-agents, cloudflare]
+  health_endpoint: https://x402arena.gg
+
 - name: HabitPlay
   url: https://habitplay.io
   description: Gamified habit tracker with RPG progression, battles, and daily plans.
