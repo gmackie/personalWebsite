@@ -4,85 +4,109 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is Graham Mackie's personal website/blog built with Jekyll (static site generator). The site showcases blog posts, resume information, and projects.
+One Jekyll repository producing three static sites:
+
+| Domain | Purpose | Theme | Config |
+|--------|---------|-------|--------|
+| gmacko.com | Build-in-public hub, startups, blog, resume | Warm editorial, burnt sienna | `_config.gmacko.yml` |
+| grahammackie.com | Personal blog, social links | Warm editorial, slate blue | `_config.personal.yml` |
+| gmac.io | Prototype & service dashboard | Dark mode, neon purple | `_config.gmac.yml` |
 
 ## Key Technologies
 
 - **Jekyll**: Static site generator (Ruby-based)
-- **Leonids Theme**: Jekyll theme for the site design
-- **Docker/Nginx**: Containerized deployment
-- **SCSS/Sass**: Modular styling
+- **SCSS/CSS Custom Properties**: Themeable design system via `:root` variables
+- **Nix/ForgeGraph**: Deployment (planned, currently Docker/Nginx)
 - **Markdown**: Content authoring for blog posts
 
-## Building and Running
+## Building
 
-Since Jekyll is not installed locally and the repository uses Docker:
+Each site builds with Jekyll multi-config merge:
 
 ```bash
-# Build the Docker image
-docker build -t personal-website .
+# gmacko.com
+bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination _site_gmacko
 
-# Run the container locally
-docker run -p 8080:80 personal-website
+# grahammackie.com
+bundle exec jekyll build --config _config.yml,_config.personal.yml --destination _site_personal
+
+# gmac.io
+bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination _site_gmac
 ```
 
-The Dockerfile expects a pre-built `_site/` directory. To build the Jekyll site:
-1. Install Jekyll locally: `gem install jekyll bundler`
-2. Build the site: `jekyll build`
-3. The static files will be in `_site/`
+For local development with live reload:
+```bash
+bundle exec jekyll serve --config _config.yml,_config.gmacko.yml --destination _site_gmacko
+```
 
 ## Project Structure
 
-- `_posts/`: Published blog posts in Markdown format (YYYY-MM-DD-title.md)
-- `_drafts/`: Unpublished blog posts
-- `_data/`: YAML files containing resume data:
-  - `careers.yml`: Work experience
-  - `education.yml`: Educational background
-  - `skills.yml`: Technical skills
-  - `projects.yml`: Project showcase
-- `_layouts/`: Page templates (default, post, resume)
-- `_includes/`: Reusable components and sections
-- `_sass/`: Modular SCSS files
-- `_config.yml`: Site configuration and metadata
+```
+_config.yml              # Shared base config (timezone, markdown, owner)
+_config.gmacko.yml       # gmacko.com overrides (url, title, site_id, excludes)
+_config.personal.yml     # grahammackie.com overrides
+_config.gmac.yml         # gmac.io overrides
+
+DESIGN.md                # Shared design system (typography, spacing, motion)
+DESIGN.gmacko.md         # gmacko.com palette
+DESIGN.personal.md       # grahammackie.com palette
+DESIGN.gmac.md           # gmac.io palette (dark + neon)
+
+_layouts/
+  default.html           # Shared base layout (sidebar + content)
+  landing.html           # gmacko.com homepage
+  venture.html           # gmacko.com venture detail pages
+  personal.html          # grahammackie.com sidebar + blog feed
+  dashboard.html         # gmac.io standalone dark dashboard
+
+_sass/
+  components/_variables.scss   # CSS custom properties on :root + Sass backwards compat
+  _theme-personal.scss         # Blue accent override for personal site
+  _theme-dashboard.scss        # Dark theme override for dashboard
+  pages/_personal.scss         # Personal sidebar layout styles
+  pages/_dashboard.scss        # Dashboard grid/card styles
+
+_data/
+  ventures.yml           # Startup portfolio (gmacko.com)
+  gmac/services.yml      # Live services (gmac.io)
+  gmac/prototypes.yml    # Experimental prototypes (gmac.io)
+  index/                 # Resume data (careers, education, skills)
+
+pages/
+  gmac/index.html        # gmac.io dashboard page
+  personal/index.html    # grahammackie.com blog feed page
+```
 
 ## Content Management
 
-### Creating Blog Posts
-1. Add new posts to `_posts/` with filename format: `YYYY-MM-DD-title.md`
-2. Include front matter:
-   ```yaml
-   ---
-   layout: post
-   title: "Post Title"
-   excerpt: "Brief description"
-   categories: [category]
-   tags: [tag1, tag2]
-   ---
-   ```
-3. Use `<!--more-->` to mark the excerpt separator
+### Theming
 
-### Updating Resume
-Edit the YAML files in `_data/index/`:
-- `careers.yml`: Work experience entries
-- `education.yml`: Education entries
-- `skills.yml`: Technical skills
-- `projects.yml`: Project descriptions
+All colors flow through CSS custom properties defined in `_variables.scss`. New code should use `var(--token)`, not `$sass-variable`. Key tokens: `--bg`, `--surface`, `--text`, `--text-strong`, `--muted`, `--accent`, `--accent-hover`, `--rule`, `--rule-heavy`.
+
+### Content Filtering
+
+Posts are filtered by `site_id` in templates using Liquid:
+```liquid
+{% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+```
+
+Posts need a `site` front matter field to appear on the correct site:
+```yaml
+site: gmacko    # or: personal, gmac, or [gmacko, personal] for cross-posting
+```
 
 ### Site Configuration
-Main settings in `_config.yml`:
-- Site metadata (title, description, keywords)
-- Owner information and social links
-- Jekyll processing options
-- Google Analytics tracking ID
+
+Each site config sets `site_id` and `exclude` to prevent content leaking between sites. The base `_config.yml` holds shared settings. Site configs override via Jekyll's `--config` merge.
 
 ## Design System
+
 Always read DESIGN.md before making any visual or UI decisions.
+Per-site palettes are in DESIGN.gmacko.md, DESIGN.personal.md, DESIGN.gmac.md.
 All font choices, colors, spacing, and aesthetic direction are defined there.
 Do not deviate without explicit user approval.
-In QA mode, flag any code that doesn't match DESIGN.md.
 
 ## Deployment
-The site is configured to run on Kubernetes. The deployment process:
-1. Build Jekyll site locally
-2. Build Docker image with static files
-3. Deploy container to Kubernetes cluster
+
+Currently Docker/Nginx. Migration to Nix closures via ForgeGraph planned.
+Three ForgeGraph apps: gmacko → gmacko.com, personal → grahammackie.com, gmac → gmac.io.
