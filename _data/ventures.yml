@@ -14,7 +14,7 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-28
   next_milestone: Parent dashboard beta
-  image:
+  image: /img/ventures/playtrek.png
 
 - name: Controls Foundry
   slug: controls-foundry
@@ -84,12 +84,12 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-15
   next_milestone: Asset pipeline integration
-  image:
+  image: /img/ventures/levelforge.png
 
 - name: ForgeGraph
   slug: forgegraph
-  domain: forgegraph.cc
-  url: https://forgegraph.cc
+  domain: forgegraf.com
+  url: https://forgegraf.com
   description: Graph-oriented product and infrastructure work focused on making relationships, systems, and workflows easier to model and navigate.
   thesis: Infrastructure should be a graph you can see, not YAML you memorize.
   status: active
@@ -112,7 +112,7 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-05
   next_milestone: Evidence assembly wizard
-  image:
+  image: /img/ventures/appealkey.png
 
 - name: Stream Conductor
   slug: stream-conductor
