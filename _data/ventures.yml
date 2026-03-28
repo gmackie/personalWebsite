@@ -20,15 +20,15 @@
   slug: controls-foundry
   domain: controlsfoundry.com
   url: https://controlsfoundry.com
-  description: Industrial software for controls-heavy workflows. Making operational systems easier to build, run, and trust.
-  thesis: Operational systems should be as easy to build as web apps.
+  description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
+  thesis: The integrator is gone. The knowledge is retiring. Your PLC programs shouldn't be a mystery.
   status: active
   category: industrial
-  tags: [operations, industrial, controls]
+  tags: [industrial, controls, ai, plc, migration]
   shared_infra: [forgegraph]
-  last_updated: 2026-03-20
-  next_milestone: First customer pilot
-  image:
+  last_updated: 2026-03-28
+  next_milestone: Siemens S7 support
+  image: /img/ventures/controls-foundry.png
 
 - name: GenTrellis
   slug: gentrellis
