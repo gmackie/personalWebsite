@@ -1,15 +1,56 @@
-## Graham Mackie's personal blog
-Built using Jekyll, and the theme Leonids.
-**[Leonids](http://renyuanz.github.io/leonids)** is a clean Jekyll theme perfect for powering your GitHub hosted blog.
+# Personal Websites
 
-### Resume Page by [@Skn0tt](https://github.com/Skn0tt)
-Leonids features a simple resume page. It is divided up into five sections: 
+One Jekyll repo, three sites:
 
-* Bio (Edit \_data/index/careers.yml)
-* Education (Edit \_data/index/education.yml)
-* Skills (Edit \_data/index/skills.yml)
-* Projects (Edit \_data/index/projects.yml)
-* About (Edit \_includes/sections/about.html)
+| Domain | What | Theme |
+|--------|------|-------|
+| [gmacko.com](https://gmacko.com) | Build-in-public hub, startups, blog, resume | Warm editorial, burnt sienna |
+| [grahammackie.com](https://grahammackie.com) | Personal blog, social links | Warm editorial, slate blue |
+| [gmac.io](https://gmac.io) | Prototype & service dashboard | Dark mode, neon purple |
 
-You can put all your info into these files, and they will be featured on the resume page.
-# DNS updated to correct IP
+## Build
+
+```bash
+bundle install
+
+# Build one site
+bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination _site_gmacko
+
+# Build all three
+for site in gmacko personal gmac; do
+  bundle exec jekyll build --config _config.yml,_config.${site}.yml --destination _site_${site}
+done
+```
+
+## Serve locally
+
+```bash
+bundle exec jekyll serve --config _config.yml,_config.gmacko.yml --destination _site_gmacko
+```
+
+## Deploy
+
+Deployed to hetzner-master via ForgeGraph. Caddy serves static files directly.
+
+```bash
+# Build + deploy one site
+bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination _site_gmac
+rsync -avz --delete _site_gmac/ root@gmac.io:/var/www/gmac.io/
+```
+
+See `docs/forgegraph-static-deploy.md` for the automated Gitea workflow.
+
+## Structure
+
+- `_config.yml` — Shared base config
+- `_config.{gmacko,personal,gmac}.yml` — Per-site overrides
+- `DESIGN.md` — Shared design system (typography, spacing, motion)
+- `DESIGN.{gmacko,personal,gmac}.md` — Per-site palettes and layouts
+- `_layouts/` — Shared + per-site layouts (landing, personal, dashboard)
+- `_sass/` — CSS custom properties on `:root` with per-site theme overrides
+- `_data/gmac/` — Services and prototypes for the dashboard
+- `pages/{gmac,personal}/` — Per-site page templates
+
+## Content
+
+Posts need a `site` front matter field: `site: gmacko`, `site: personal`, `site: gmac`, or `site: [gmacko, personal]` for cross-posting. Templates filter by `site_id` from each site's config.
