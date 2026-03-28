@@ -42,7 +42,7 @@
   shared_infra: [forgegraph, nix]
   last_updated: 2026-03-25
   next_milestone: Multi-model routing
-  image:
+  image: /img/ventures/gentrellis.png
 
 - name: LatchFlow
   slug: latchflow
@@ -56,7 +56,7 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-28
   next_milestone: Approval engine v2
-  image:
+  image: /img/ventures/latchflow.png
 
 - name: DriftPort
   slug: driftport
@@ -70,7 +70,7 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-10
   next_milestone: Environment sync prototype
-  image:
+  image: /img/ventures/driftport.png
 
 - name: LevelForge
   slug: levelforge
@@ -98,7 +98,7 @@
   shared_infra: []
   last_updated: 2026-03-28
   next_milestone: Nix deployment pipeline for all personal infra
-  image:
+  image: /img/ventures/forgegraph.png
 
 - name: AppealKey
   slug: appealkey
@@ -126,4 +126,4 @@
   shared_infra: [forgegraph]
   last_updated: 2026-03-12
   next_milestone: Multi-camera switching UI
-  image:
+  image: /img/ventures/stream-conductor.png
