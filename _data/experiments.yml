@@ -24,3 +24,19 @@
   venture: ForgeGraph
   date: 2026-03-20
   tags: [nix, infrastructure, developer-tools]
+
+- name: bizpulse.cc
+  url: https://bizpulse.cc
+  description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
+  status: wip
+  venture:
+  date: 2026-04-03
+  tags: [experiment, concept, visual]
+
+- name: blder.bot
+  url: https://blder.bot
+  description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.
+  status: wip
+  venture:
+  date: 2026-04-03
+  tags: [experiment, bot, visual]

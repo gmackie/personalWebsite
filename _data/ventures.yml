@@ -159,3 +159,31 @@
   next_milestone: Season 1
   experiment: true
   image: /img/ventures/x402arena.png
+
+- name: bizpulse.cc
+  slug: bizpulse
+  domain: bizpulse.cc
+  url: https://bizpulse.cc
+  description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
+  thesis: Some experiments start as a visual and a domain before they earn a full company.
+  status: experiment
+  category: experiment
+  tags: [experiment, concept, visual]
+  shared_infra: []
+  last_updated: 2026-04-03
+  next_milestone: Visual pass + concept validation
+  experiment: true
+
+- name: blder.bot
+  slug: blder-bot
+  domain: blder.bot
+  url: https://blder.bot
+  description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.
+  thesis: Sometimes the fastest way to test a product idea is to give the bot a real home on the internet.
+  status: experiment
+  category: experiment
+  tags: [experiment, bot, visual]
+  shared_infra: []
+  last_updated: 2026-04-03
+  next_milestone: Visual pass + concept validation
+  experiment: true
