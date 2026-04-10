@@ -10,6 +10,7 @@ site_id: gmac
 site_theme: dashboard
 description: "Prototype dashboard. Experiments running on Hetzner VPSs and local homelab."
 keywords: ["Prototypes", "Experiments", "Dashboard"]
+public_feed_manifest_url: https://data.gmac.io/forgegraph/v1/manifest.json
 
 exclude:
   - index.html

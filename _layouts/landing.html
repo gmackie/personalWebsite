@@ -7,7 +7,11 @@ layout: default
 {% assign experiment_ventures = site.data.ventures | where: "status", "experiment" %}
 {% assign recent_updates = site.data.updates | slice: 0, 3 %}
 
-<div class="landing-page">
+<div
+  class="landing-page"
+  data-public-feed-landing
+  data-feed-manifest-url="{{ site.public_feed_manifest_url }}"
+>
   <section class="landing-hero">
     <p class="landing-kicker">Builder, operator, and serial starter</p>
     <h1>Graham</h1>
@@ -67,6 +71,7 @@ layout: default
         11 companies and product bets across infrastructure, AI, games, operations, and consumer software.
         All built on the same shared infra. Each card links out directly.
       </p>
+      <p class="venture-updated" data-landing-feed-meta>static fallback</p>
     </div>
 
     {% assign infra = site.data.ventures | where_exp: "v", "v.category == 'infrastructure' or v.category == 'ai-infra'" %}
@@ -78,7 +83,7 @@ layout: default
     <div class="venture-group">
       <p class="venture-group-label">Infrastructure &amp; AI</p>
       <p class="venture-group-desc">The platform layer. ForgeGraf deploys everything. GenTrellis puts AI on-prem.</p>
-      <div class="startup-grid">
+      <div class="startup-grid" data-feed-grid="infrastructure-ai">
         {% for venture in infra %}
         {% include venture-card.html venture=venture %}
         {% endfor %}
@@ -88,7 +93,7 @@ layout: default
     <div class="venture-group">
       <p class="venture-group-label">Games &amp; Learning</p>
       <p class="venture-group-desc">Learning through play, building games with AI, and turning real life into a game.</p>
-      <div class="startup-grid">
+      <div class="startup-grid" data-feed-grid="games-learning">
         {% for venture in games %}
         {% include venture-card.html venture=venture %}
         {% endfor %}
@@ -98,7 +103,7 @@ layout: default
     <div class="venture-group">
       <p class="venture-group-label">Operations &amp; Controls</p>
       <p class="venture-group-desc">Control rooms for physical systems. Industrial PLCs, escape rooms, and van electrical.</p>
-      <div class="startup-grid">
+      <div class="startup-grid" data-feed-grid="operations-controls">
         {% for venture in ops %}
         {% include venture-card.html venture=venture %}
         {% endfor %}
@@ -108,7 +113,7 @@ layout: default
     <div class="venture-group">
       <p class="venture-group-label">Standalone</p>
       <p class="venture-group-desc">Products that stand on their own.</p>
-      <div class="startup-grid">
+      <div class="startup-grid" data-feed-grid="standalone">
         {% for venture in standalone %}
         {% include venture-card.html venture=venture %}
         {% endfor %}
@@ -119,7 +124,7 @@ layout: default
     <div class="venture-group">
       <p class="venture-group-label">Experiments</p>
       <p class="venture-group-desc">Wild bets. Not ventures yet. Might become one, might not.</p>
-      <div class="startup-grid">
+      <div class="startup-grid" data-feed-grid="experiments">
         {% for venture in experiments %}
         {% include venture-card.html venture=venture %}
         {% endfor %}
@@ -203,3 +208,5 @@ layout: default
     </p>
   </section>
 </div>
+<script src="{{ site.url }}/js/public-feed.js"></script>
+<script src="{{ site.url }}/js/gmacko-public-feed.js"></script>

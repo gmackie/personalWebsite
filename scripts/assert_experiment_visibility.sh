@@ -22,6 +22,8 @@ GMACKO_DEST="_site_gmacko_test"
 
 grep -q "bizpulse.cc" "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing bizpulse.cc"
 grep -q "blder.bot" "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing blder.bot"
+grep -q "data-public-feed-dashboard" "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public feed bootstrap"
+grep -q "/js/public-feed.js" "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public feed script"
 
 grep -q "bizpulse.cc" "$GMAC_DEST/lab/index.html" || fail "gmac.io lab missing bizpulse.cc"
 grep -q "blder.bot" "$GMAC_DEST/lab/index.html" || fail "gmac.io lab missing blder.bot"

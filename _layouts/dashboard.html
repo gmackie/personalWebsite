@@ -19,63 +19,72 @@
     <span class="legend-item"><span class="status-dot dot-coming"></span> coming soon</span>
   </div>
 
-  {% if site.data.gmac.services.size > 0 %}
-  <section class="dashboard-section">
-    <h2 class="dashboard-section-label">Services</h2>
-    <div class="proto-grid">
-      {% for svc in site.data.gmac.services %}
-      <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}">
-        <div class="proto-header">
-          <span class="status-dot dot-{{ svc.status }}"></span>
-          <span class="proto-name">{{ svc.name }}</span>
-          {% if svc.internal %}
-          <span class="proto-url">tailscale only</span>
-          {% else %}
-          <span class="proto-url">{{ svc.url | remove: 'https://' }}</span>
-          {% endif %}
-        </div>
-        <p class="proto-desc">{{ svc.description }}</p>
-        {% if svc.stack %}
-        <div class="proto-stack">
-          {% for tech in svc.stack %}
-          <span class="stack-pill">{{ tech }}</span>
+  <div
+    class="dashboard-live"
+    data-public-feed-dashboard
+    data-feed-manifest-url="{{ site.public_feed_manifest_url }}"
+  >
+    <p class="dashboard-feed-meta" data-dashboard-feed-meta>static fallback</p>
+    <div data-dashboard-feed-root>
+      {% if site.data.gmac.services.size > 0 %}
+      <section class="dashboard-section">
+        <h2 class="dashboard-section-label">Services</h2>
+        <div class="proto-grid">
+          {% for svc in site.data.gmac.services %}
+          <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}">
+            <div class="proto-header">
+              <span class="status-dot dot-{{ svc.status }}"></span>
+              <span class="proto-name">{{ svc.name }}</span>
+              {% if svc.internal %}
+              <span class="proto-url">tailscale only</span>
+              {% else %}
+              <span class="proto-url">{{ svc.url | remove: 'https://' }}</span>
+              {% endif %}
+            </div>
+            <p class="proto-desc">{{ svc.description }}</p>
+            {% if svc.stack %}
+            <div class="proto-stack">
+              {% for tech in svc.stack %}
+              <span class="stack-pill">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
           {% endfor %}
         </div>
-        {% endif %}
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
+      </section>
+      {% endif %}
 
-  {% if site.data.gmac.prototypes.size > 0 %}
-  <section class="dashboard-section">
-    <h2 class="dashboard-section-label">Prototypes</h2>
-    <div class="proto-grid">
-      {% for proto in site.data.gmac.prototypes %}
-      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}">
-        <div class="proto-header">
-          <span class="status-dot dot-{{ proto.status }}"></span>
-          <span class="proto-name">{{ proto.name }}</span>
-          {% if proto.status == 'coming-soon' %}
-          <span class="proto-url">coming soon</span>
-          {% else %}
-          <span class="proto-url">{{ proto.url | remove: 'https://' }}</span>
-          {% endif %}
-        </div>
-        <p class="proto-desc">{{ proto.description }}</p>
-        {% if proto.stack %}
-        <div class="proto-stack">
-          {% for tech in proto.stack %}
-          <span class="stack-pill">{{ tech }}</span>
+      {% if site.data.gmac.prototypes.size > 0 %}
+      <section class="dashboard-section">
+        <h2 class="dashboard-section-label">Prototypes</h2>
+        <div class="proto-grid">
+          {% for proto in site.data.gmac.prototypes %}
+          <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}">
+            <div class="proto-header">
+              <span class="status-dot dot-{{ proto.status }}"></span>
+              <span class="proto-name">{{ proto.name }}</span>
+              {% if proto.status == 'coming-soon' %}
+              <span class="proto-url">coming soon</span>
+              {% else %}
+              <span class="proto-url">{{ proto.url | remove: 'https://' }}</span>
+              {% endif %}
+            </div>
+            <p class="proto-desc">{{ proto.description }}</p>
+            {% if proto.stack %}
+            <div class="proto-stack">
+              {% for tech in proto.stack %}
+              <span class="stack-pill">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
           {% endfor %}
         </div>
-        {% endif %}
-      </div>
-      {% endfor %}
+      </section>
+      {% endif %}
     </div>
-  </section>
-  {% endif %}
+  </div>
 
   {% assign gmac_posts = site.posts | where_exp: "p", "p.site contains 'gmac'" %}
   {% if gmac_posts.size > 0 %}
@@ -130,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script src="{{ site.url }}/js/public-feed.js"></script>
 
 </body>
 </html>

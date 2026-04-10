@@ -115,6 +115,14 @@
   margin-bottom: 48px;
 }
 
+.dashboard-feed-meta {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  margin: 0 0 16px;
+}
+
 .dashboard-section-label {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -142,6 +150,37 @@
 
 .proto-card:hover {
   border-color: var(--rule-heavy);
+}
+
+.proto-card-live {
+  display: grid;
+  gap: 16px;
+}
+
+.proto-card-media {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.proto-card-media img {
+  display: block;
+  height: 180px;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+
+.proto-card-fallback {
+  align-items: flex-end;
+  color: var(--muted);
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  height: 180px;
+  letter-spacing: 0.06em;
+  padding: 14px;
 }
 
 .proto-header {
@@ -178,6 +217,15 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  padding-left: 22px;
+}
+
+.proto-meta {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin: 0 0 10px;
   padding-left: 22px;
 }
 

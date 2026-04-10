@@ -10,6 +10,7 @@ site_id: gmacko
 site_theme: gmacko
 description: "Build-in-public hub for Graham Mackie and Gmacko Ventures LLC."
 keywords: ["Software", "Startups", "Builder", "Ventures"]
+public_feed_manifest_url: https://data.gmac.io/forgegraph/v1/manifest.json
 
 # Content defaults for gmacko
 exclude:
