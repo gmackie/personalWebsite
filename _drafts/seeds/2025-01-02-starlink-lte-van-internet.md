@@ -2,11 +2,13 @@
 layout: post
 title: "Van Internet: Starlink + LTE Failover for Life on the Road"
 date: 2026-02-07
+site: personal
 excerpt: "I get better internet parked in a national forest than most hotels deliver. Here's the hardware, architecture, and real numbers behind a Starlink + LTE failover setup for full-time remote work from a van."
 categories: [technical]
 tags: [vanlife, starlink, lte, networking, mobile-internet, remote-work]
 comments: true
 status: draft
+published: false
 ---
 
 The Zoom call dropped. Again. I was parked in a national forest, my phone showed four bars of LTE, and my coworker was mid-sentence when the connection just evaporated. I rejoined thirty seconds later, apologized, and spent the rest of the meeting wondering if this whole "work from a van" thing was actually sustainable.

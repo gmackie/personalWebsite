@@ -50,8 +50,13 @@ layout: default
   <hr class="section-rule">
 
   {% assign related_posts = "" | split: "" %}
+  {% if site.site_id %}
+    {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+  {% else %}
+    {% assign site_posts = site.posts %}
+  {% endif %}
   {% if v.tags %}
-    {% for post in site.posts %}
+    {% for post in site_posts %}
       {% for tag in v.tags %}
         {% if post.tags contains tag %}
           {% assign related_posts = related_posts | push: post %}

@@ -30,15 +30,22 @@ bundle exec jekyll serve --config _config.yml,_config.gmacko.yml --destination _
 
 ## Deploy
 
-Deployed to hetzner-master via ForgeGraph. Caddy serves static files directly.
+Hosted on Cloudflare Pages — three projects (`gmacko`, `personal`, `gmac`) mapped to gmacko.com, grahammackie.com, and gmac.io respectively. Deploys are manual via wrangler for now.
 
 ```bash
-# Build + deploy one site
-bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination _site_gmac
-rsync -avz --delete _site_gmac/ root@gmac.io:/var/www/gmac.io/
+# One-time: authenticate
+wrangler login
+
+# Deploy one site
+./scripts/deploy-pages.sh gmacko    # → gmacko.com
+./scripts/deploy-pages.sh personal  # → grahammackie.com
+./scripts/deploy-pages.sh gmac      # → gmac.io
+
+# Or all three
+./scripts/deploy-pages.sh all
 ```
 
-See `docs/forgegraph-static-deploy.md` for the automated Gitea workflow.
+The script builds with the matching `_config.*.yml` and pushes the output directory to the corresponding Pages project.
 
 ## Structure
 

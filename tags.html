@@ -5,26 +5,48 @@ permalink: /tags/
 ---
 
 <h5>Tag cloud <i class="fa fa-cloud info-text-color"></i></h5>
+{% if site.site_id %}
+  {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+{% else %}
+  {% assign site_posts = site.posts %}
+{% endif %}
 <ul class="tag-cloud">
 {% for tag in site.tags %}
-  <li style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 70  }}%">
+  {% assign filtered_posts = "" | split: "" %}
+  {% capture tag_name %}{{ tag | first }}{% endcapture %}
+  {% for post in site_posts %}
+    {% if post.tags contains tag_name %}
+      {% assign filtered_posts = filtered_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% if filtered_posts.size > 0 %}
+  <li style="font-size: {{ filtered_posts.size | times: 100 | divided_by: site_posts.size | plus: 70 }}%">
     <a class="post-tag" href="#{{ tag | first | slugize }}">
       {{ tag | first }}
     </a>
   </li>
+  {% endif %}
 {% endfor %}
 </ul>
 
 <div class="tag-list">
 {% for tag in site.tags %}
+  {% assign filtered_posts = "" | split: "" %}
+  {% capture tag_name %}{{ tag | first }}{% endcapture %}
+  {% for post in site_posts %}
+    {% if post.tags contains tag_name %}
+      {% assign filtered_posts = filtered_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% if filtered_posts.size > 0 %}
   <div class="tag-group">
-    {% capture tag_name %}{{ tag | first }}{% endcapture %}
     <h5 class="tag-group-title" id="{{ tag_name | slugize }}">{{ tag_name }}</h5>
-    {% for post in site.tags[tag_name] %}
+    {% for post in filtered_posts %}
     <article class="tag-item">
       <a class="tag-item-title" href="{{ site.url }}{{ post.url }}.html">{{post.title}}</a>
     </article>
     {% endfor %}
   </div>
+  {% endif %}
 {% endfor %}
 </div>

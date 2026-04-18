@@ -11,6 +11,12 @@
 {% endif %}
 
 {% assign asset_prefix = site.baseurl | default: '' %}
+{% assign social_image = page.social_image | default: site.social_image | default: '/img/leonids-logo.png' %}
+{% if social_image contains 'http://' or social_image contains 'https://' %}
+  {% assign social_image_url = social_image %}
+{% else %}
+  {% capture social_image_url %}{{ site.url }}{{ social_image }}{% endcapture %}
+{% endif %}
 
 <head>
   <meta charset="UTF-8">
@@ -30,14 +36,14 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
-  <meta name="twitter:image" content="{{ site.url }}/img/leonids-logo.png">
+  <meta name="twitter:image" content="{{ social_image_url }}">
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
   <meta property="og:url" content="{{ site.url }}">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:image" content="{{ site.url }}/img/leonids-logo.png">
+  <meta property="og:image" content="{{ social_image_url }}">
   <title>{{ title }}</title>
 
   <!-- CSS files -->

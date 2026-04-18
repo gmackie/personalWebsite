@@ -1,70 +1,110 @@
 ---
 layout: post
-title: "PlayPath: Teaching Inside Roblox Without Feeling Like Homework"
+title: "PlayPath: The Edtech Idea I Actually Wanted to Build"
 date: 2026-02-08
-excerpt: "Kids already spend hours in Roblox. PlayPath puts learning inside the game loop itself -- not as an interruption, but as the mechanic."
-categories: [startups]
-tags: [startups, playpath, edtech, roblox, learning, spaced-repetition, lti, coppa]
+site: gmacko
+excerpt: "ClassCheck got me into edtech. PlayPath is closer to the thing I had been orbiting for years: game-native learning, adaptive systems, and finally having the tooling to build it."
+categories: [startups, gaming, ai]
+tags: [startups, playpath, edtech, roblox, learning, gamedev, ai, lti, coppa]
 comments: true
 status: draft
+source_notes:
+  - /Users/mackieg/obsidian/Projects/PlayPath.md
+  - /Users/mackieg/obsidian/Projects/PlayPath/ideas/game-engine-for-k-8-learning.md
 ---
 
-The most common EdTech failure mode is chocolate-covered broccoli. You build something that's technically educational, wrap it in a thin game skin, and hope kids don't notice. Kids always notice. If the product feels like school wearing a party hat, it loses to the actual party.
+One of the first real tech projects I ever shipped was `tf2heatmaps.net`.
 
-And for tens of millions of kids, the actual party is Roblox.
+I built it as a senior in high school for indie `Team Fortress 2` map developers. The site took kill-location data, dropped it onto top-down map images, and turned it into heat maps so people could see where fights were clustering and where a level might be breaking down.
 
-PlayPath is my attempt to stop fighting that reality.
+It was not a startup. It was not polished. It was just one of the first times I felt the specific satisfaction of taking a weird niche problem, wiring a few tools together, and making something people in that world actually wanted.
+
+That itch never really left.
 
 <!--more-->
 
-## Roblox is where the attention is
+Game development kept sitting in the background for me after that, but mostly as an interest instead of a sustained practice. I would tinker, poke at engines, sketch ideas, then bounce off the same reality every time: traditional game development is slow, asset-heavy, and full of tedious work before anything starts to feel alive.
 
-If you spend time around parents, you hear the same tension a dozen ways. "My kid loves Roblox." "I feel guilty about screen time." "It's the only thing they'll do for hours without being asked."
+For a long time, that made it hard to keep choosing.
 
-Roblox wins because it's social, infinite, and identity-driven. It's not a game -- it's a place. When a kid chooses between a worksheet app and Roblox, Roblox wins every time. That's not a moral failing. It's an incentive system.
+Then two things changed.
 
-So the question is simple: what if learning lived inside the game loop kids already love?
+First, I got deeper into edtech through [ClassCheck](/articles/2026-02/classcheck-attendance-and-bus-tracking). Second, AI tooling started to reduce some of the startup cost of experimenting with systems, content variation, and game logic. Not all of it. But enough that the space felt newly buildable.
 
-## Learning can't interrupt play
+That is where PlayPath comes from.
 
-Most educational games interrupt play with learning. You're doing something fun, a quiz pops up, answer three math problems to continue. Kids feel the "now eat your vegetables" moment instantly.
+## ClassCheck got me into edtech. PlayPath gave me a reason to stay.
 
-PlayPath's design constraint is strict: learning cannot interrupt play. Fractions aren't a quiz between levels. Fractions are the mechanic. The learning objective has to be identical to the thing that moves the player forward.
+ClassCheck was a useful wedge because it forced me to learn the real mechanics of school software: `LTI 1.3`, SIS integrations, district procurement, compliance, parent visibility, all the stuff that sounds boring until you realize it decides whether a product can exist.
 
-In Fraction Forest, you navigate a world where number lines and fraction comparisons are literally how you move. In a Physics Sandbox, the question isn't "what is the angle?" -- it's "can you make the thing go where you want?" In Rhythm Phonics, decoding and syllables are the inputs in a rhythm game that feels like something you'd play even if no adult was watching.
+But the more I learned, the clearer it became that attendance was not the part of edtech I was actually pulled toward. The more interesting question was always somewhere else:
 
-This is the only approach I've seen that has a real shot at being Roblox-fun and academically meaningful at the same time.
+What would it look like to build learning software that kids would choose even if nobody made them?
 
-## The engine: adaptive, not creepy
+That is a much harder standard than "make school software nicer." It is also the standard I care about.
 
-If the game is going to teach, it has to adapt. Otherwise it's either too easy (boring) or too hard (frustrating), and both paths lead to churn.
+## The thesis is simple
 
-The plan combines proven ideas: spaced repetition for retention, mastery tracking to decide what comes next, and a light content generation layer so the experience doesn't feel like the same worksheet in different fonts.
+Most "gamified learning" products still feel like worksheets wearing a costume.
 
-But the users are kids, and that changes everything.
+You get points. Maybe a badge. Maybe a cheerful mascot. But the core loop is still obvious: stop having fun, answer the educational prompt, resume having fun. Kids notice that immediately.
 
-COPPA isn't a compliance footnote I'll deal with later. It's a design constraint that shapes the architecture from day one. The easy version is a checklist: no PII in prompts, safety filtering, parent controls. The harder version -- the one I actually care about -- is earning trust by being genuinely conservative about data.
+PlayPath starts from a stricter rule: the learning mechanic has to be the game mechanic.
 
-The adaptive engine runs on behavioral signals within the game (what levels a player struggles with, what they've mastered, how long they spend on a challenge) and never on identity data. Generated content goes through safety filters before a kid sees it. Parent dashboards show progress without requiring the kid to hand over anything personal. The whole thing is designed to survive an audit from a skeptical district IT director, because if we get into schools, that audit is coming.
+If the child is working on fractions, the fraction reasoning should be what makes the rocket launch, the puzzle unlock, or the system progress. If they are working on reading, the comprehension should be inside the play loop, not bolted on as a quiz between levels.
 
-I'd rather over-engineer the privacy layer now than discover I cut corners later.
+That difference is the whole product.
 
-## Schools make this harder (and way more defensible)
+## Why Roblox matters
 
-There are two customers for PlayPath: families and schools.
+I am not interested in building educational software inside some imaginary perfect environment where kids patiently log in because adults told them to.
 
-Families pay for engagement -- they want their kid's Roblox time to feel less like wasted time. That's a real market, but consumer EdTech is brutal.
+Roblox matters because attention already lives there. It is where kids already spend time, where game-native expectations already exist, and where "this is fun" is a real bar instead of a marketing line.
 
-Schools are harder to sell to but stickier once you're in. The catch: if a teacher can't assign this and see progress without a week of setup, it doesn't exist to them. That's why PlayPath supports LTI 1.3 launches, roster sync, and grade passback from the start. If it behaves like a normal LMS-integrated tool, a district can pilot without creating a parallel universe of logins and spreadsheets.
+If you want to take play-based learning seriously, you have to respect where play already happens.
 
-## What success looks like
+That does not mean "just build a Roblox game and call it edtech." It means using the habits, expectations, and social texture of that environment as the starting point instead of trying to smuggle another worksheet through the front door.
 
-Near-term: ship one world (Fraction Forest) that is genuinely fun enough to retain players who have zero obligation to keep playing. Build a parent dashboard that shows standards-aligned progress without requiring a PhD to read. Get a small cohort of paying families to validate the value prop outside my head.
+## Why AI changes the feasibility
 
-Then schools. A real pilot: one teacher, one classroom, six weeks. The teacher assigns Fraction Forest through their LMS. Students launch it from the same place they launch everything else. The teacher sees a dashboard showing who's mastered equivalent fractions and who's stuck on number line placement. At the end of six weeks, the teacher points to measurable progress on specific Common Core standards and says "this worked" -- or "it didn't" -- with actual data.
+The part that got more interesting with AI was not the fantasy version where a model simply teaches the child.
 
-That's the bar. Not "kids liked it." Did the teacher see learning she could measure and trust?
+The useful version is more practical:
 
-If PlayPath works, it should feel like cheating. The kid is "just playing Roblox" while the parent dashboard quietly shows something real is happening.
+- adapting content difficulty
+- generating more variation around the same skill
+- changing themes and surface details without rebuilding the whole engine
+- personalizing examples without losing standards alignment
 
-For the bigger picture on why I'm building five products at once, here's the hub post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
+That is what makes the idea feel more buildable now than it did a few years ago.
+
+If the learning engine underneath is solid, AI can help the surface stay fresh instead of turning into the same question bank with different fonts. It can also help content scale across more themes, mechanics, and student profiles than a tiny team could manually author from scratch.
+
+I still do not want the model driving the educational core blindly. The mastery model, standards alignment, progression, and guardrails need to be explicit. But AI makes the content system around that core much more flexible.
+
+## What PlayPath actually is
+
+Right now I think about PlayPath less as one game and more as a learning engine that can live inside multiple game loops.
+
+The current shape includes:
+
+- standards-aligned skills and mastery tracking
+- spaced repetition and progression systems
+- AI-assisted personalization
+- an SDK layer for game integrations
+- parent and teacher visibility where it matters
+- school-facing plumbing like `LTI 1.3` so it can live inside real education workflows
+
+That is why this project feels bigger than "build a Roblox mini-game." The long-term opportunity is to build the underlying system that different educational play experiences can sit on top of.
+
+## Why this one feels different
+
+Attendance software solves a real problem. I still believe that.
+
+But PlayPath hits the overlap I have been circling for years: games, learning, adaptive systems, and tools that make creation faster instead of slower. It also feels like the kind of category where getting early matters. The research around play-based learning is there. The tooling is getting better. AI is expanding what a small team can realistically prototype.
+
+So this is the honest framing:
+
+ClassCheck got me into edtech.
+
+PlayPath is the project that made me want to stay there.

@@ -10,6 +10,8 @@ site_id: personal
 site_theme: personal
 description: "Personal blog and social hub for Graham Mackie."
 keywords: ["Personal", "Blog", "Music", "Life"]
+personal_avatar_image: /img/avatar.jpg
+social_image: /img/avatar.jpg
 
 exclude:
   - index.html

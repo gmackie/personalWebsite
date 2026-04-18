@@ -8,8 +8,8 @@
 <div class="personal-layout">
   <aside class="personal-sidebar">
     <div class="sidebar-avatar">
-      {% if site.owner.avatar %}
-      <img src="{{ site.url }}/img/{{ site.owner.avatar }}" alt="{{ site.owner.name }}" class="avatar-img">
+      {% if site.personal_avatar_image %}
+      <img src="{{ site.url }}{{ site.personal_avatar_image }}" alt="{{ site.owner.name }}" class="avatar-img">
       {% else %}
       <span class="avatar-initials">GM</span>
       {% endif %}

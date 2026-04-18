@@ -160,6 +160,20 @@
   experiment: true
   image: /img/ventures/x402arena.png
 
+- name: Festigram
+  slug: festigram
+  domain: festigram.net
+  url: https://festigram.net
+  description: Off-grid social media for festivals and big gatherings. Disposable-camera style posting, delayed gratification, and sync that survives overloaded or spotty networks.
+  thesis: Festival memories should feel like a disposable camera, not an algorithmic feed.
+  status: experiment
+  category: consumer
+  tags: [festival, social, photos, off-grid, experiment]
+  shared_infra: [forgegraph]
+  last_updated: 2026-04-02
+  next_milestone: Disposable-camera posting flow + offline sync prototype
+  experiment: true
+
 - name: bizpulse.cc
   slug: bizpulse
   domain: bizpulse.cc

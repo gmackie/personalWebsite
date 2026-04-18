@@ -3,16 +3,29 @@ layout: page
 title:  Categories
 permalink: /categories/
 ---
+{% if site.site_id %}
+  {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+{% else %}
+  {% assign site_posts = site.posts %}
+{% endif %}
 <div class="tag-list">
 {% for cat in site.categories %}
+  {% assign filtered_posts = "" | split: "" %}
+  {% capture cat_name %}{{ cat | first }}{% endcapture %}
+  {% for post in site_posts %}
+    {% if post.categories contains cat_name %}
+      {% assign filtered_posts = filtered_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% if filtered_posts.size > 0 %}
   <div class="tag-group">
-    {% capture cat_name %}{{ cat | first }}{% endcapture %}
     <h5 class="tag-group-title" id="{{ cat_name | slugize }}">{{ cat_name }}</h5>
-    {% for post in site.categories[cat_name] %}
+    {% for post in filtered_posts %}
     <article class="tag-item">
       <a class="tag-item-title" href="{{ site.url }}{{ post.url }}">{{post.title}}</a>
     </article>
     {% endfor %}
   </div>
+  {% endif %}
 {% endfor %}
 </div>

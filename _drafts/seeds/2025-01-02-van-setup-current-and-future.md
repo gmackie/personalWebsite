@@ -2,11 +2,13 @@
 layout: post
 title: "Van Build v0.5: Current Setup and the IIoT Future"
 date: 2026-02-07
+site: personal
 excerpt: "A tour of my current van build -- livable but rough -- plus the ESP32-based control system I'm planning to bring industrial IoT thinking to a 70-square-foot home."
 categories: [projects]
 tags: [vanlife, van-build, iiot, home-automation, esp32, embedded]
 comments: true
 status: draft
+published: false
 ---
 
 My van is a livable apartment, a mobile office, and an unfinished construction site, all in about 70 square feet. The bed is comfortable. The kitchen works. The electrical system keeps my laptop and Starlink running. And the storage situation is a disaster, the cable management would make an electrician cry, and I still don't have hot water.

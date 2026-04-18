@@ -1,12 +1,25 @@
 {% if page.author %} {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.owner %} {% endif %}
+{% assign sidebar_name = author.name %}
+{% assign sidebar_job = author.job %}
+{% assign sidebar_bio = author.bio %}
+{% assign sidebar_avatar = author.avatar %}
+
+{% if site.site_id == 'personal' %}
+  {% assign sidebar_name = 'Graham Mackie' %}
+  {% assign sidebar_job = 'Builder, musician, and human' %}
+  {% assign sidebar_bio = 'Based in Seattle. The ventures and tech stuff live elsewhere.' %}
+  {% assign sidebar_avatar = nil %}
+{% endif %}
 
 <div class="cover-card table-cell table-middle">
-  {% if author.avatar %}
-  <img src="{{ site.url }}/img/{{ author.avatar }}" alt="" class="avatar">
+  {% if site.site_id == 'personal' and site.personal_avatar_image %}
+  <img src="{{ site.url }}{{ site.personal_avatar_image }}" alt="{{ sidebar_name }}" class="avatar">
+  {% elsif sidebar_avatar %}
+  <img src="{{ site.url }}/img/{{ sidebar_avatar }}" alt="" class="avatar">
   {% endif %}
-  <a href="{{ site.url }}/" class="author_name">{{ author.name }}</a>
-  <span class="author_job">{{ author.job }}</span>
-  <span class="author_bio mbm">{{ author.bio }}</span>
+  <a href="{{ site.url }}/" class="author_name">{{ sidebar_name }}</a>
+  <span class="author_job">{{ sidebar_job }}</span>
+  <span class="author_bio mbm">{{ sidebar_bio }}</span>
   <nav class="nav">
     <ul class="nav-list">
       {% if site.site_id == 'gmacko' or site.site_id == nil %}

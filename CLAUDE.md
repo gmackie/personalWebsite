@@ -108,5 +108,10 @@ Do not deviate without explicit user approval.
 
 ## Deployment
 
-Currently Docker/Nginx. Migration to Nix closures via ForgeGraph planned.
-Three ForgeGraph apps: gmacko → gmacko.com, personal → grahammackie.com, gmac → gmac.io.
+Hosted on Cloudflare Pages — three projects (`gmacko`, `personal`, `gmac`), each pointed at this repo via git integration with its own build command and output directory:
+
+- `gmacko` → gmacko.com — `--config _config.yml,_config.gmacko.yml --destination _site_gmacko`
+- `personal` → grahammackie.com — `--config _config.yml,_config.personal.yml --destination _site_personal`
+- `gmac` → gmac.io — `--config _config.yml,_config.gmac.yml --destination _site_gmac`
+
+Deploys are manual via `./scripts/deploy-pages.sh <gmacko|personal|gmac|all>`, which builds with the matching `_config.*.yml` and runs `wrangler pages deploy` against the corresponding project. Requires `wrangler login` once.

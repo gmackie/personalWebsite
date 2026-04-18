@@ -2,8 +2,10 @@ _site
 _site_gmacko
 _site_personal
 _site_gmac
+_site_*_test/
 .sass-cache
 # _drafts
 .ruby-version
 .jekyll-cache/
 .gstack/
+.opencode/

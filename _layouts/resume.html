@@ -1,32 +1,187 @@
 ---
 layout: default
 ---
-<div class="row">
-    <div class="col l7">
-        <div class="row">
-            <div class="col">
-                {% include sections/about.html %}        
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col">
-                {% include sections/projects.html %}
-            </div>
-        </div>
-    </div>
+<style>
+  .resume-shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+  }
 
-    <div class="col l4 offset-l1">
-        <div class="row">
-            {% include sections/skills.html %}    
-        </div>
-        <div class="row">
-            {% include sections/career.html %}    
-        </div>
-        <div class="row">
-            {% include sections/education.html %}    
-        </div>
-    </div>
-    
+  .resume-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--rule, rgba(18, 16, 14, 0.12));
+  }
 
+  .resume-title {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-strong, #171411);
+  }
+
+  .resume-subtitle,
+  .resume-summary,
+  .resume-contact,
+  .resume-role-copy,
+  .resume-role-bullets,
+  .resume-side-list,
+  .resume-education {
+    color: var(--text, #2e2a25);
+  }
+
+  .resume-subtitle {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .resume-summary {
+    max-width: 720px;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .resume-contact {
+    min-width: 240px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .resume-contact a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .resume-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(280px, 0.9fr);
+    gap: 40px;
+  }
+
+  .resume-section + .resume-section {
+    margin-top: 36px;
+  }
+
+  .resume-section h2 {
+    margin: 0 0 18px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent, #8a4a2f);
+  }
+
+  .resume-role {
+    padding: 0 0 22px;
+    margin: 0 0 22px;
+    border-bottom: 1px solid var(--rule, rgba(18, 16, 14, 0.12));
+  }
+
+  .resume-role:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .resume-role-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 10px;
+  }
+
+  .resume-role-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-strong, #171411);
+  }
+
+  .resume-role-org {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    color: var(--muted, #6a6258);
+  }
+
+  .resume-role-date {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--muted, #6a6258);
+  }
+
+  .resume-role-copy {
+    margin: 0 0 12px;
+    line-height: 1.65;
+  }
+
+  .resume-role-bullets,
+  .resume-side-list {
+    margin: 0;
+    padding-left: 18px;
+    line-height: 1.6;
+  }
+
+  .resume-role-bullets li + li,
+  .resume-side-list li + li {
+    margin-top: 8px;
+  }
+
+  .resume-side-block + .resume-side-block {
+    margin-top: 24px;
+  }
+
+  .resume-side-label {
+    margin: 0 0 10px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted, #6a6258);
+  }
+
+  .resume-education strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--text-strong, #171411);
+  }
+
+  .resume-education p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .resume-hero,
+    .resume-role-header {
+      display: block;
+    }
+
+    .resume-contact {
+      margin-top: 20px;
+      min-width: 0;
+    }
+
+    .resume-role-date {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .resume-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="resume-shell">
+  {{ content }}
 </div>

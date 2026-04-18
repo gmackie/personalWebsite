@@ -2,65 +2,104 @@
 layout: post
 title: "Building Five MVPs with AI (Without Lying to Myself)"
 date: 2026-02-08
-excerpt: "I'm building five products at once by standardizing the stack and treating AI like a junior dev with structure, not a magic wand. Here's how."
+site: gmacko
+excerpt: "Five MVPs at once only works if the stack is standardized, the workflow is explicit, and each project is treated as a search for signal instead of a promise to finish."
 categories: [startups, ai]
 tags: [startups, venture-studio, ai, llm, opencode, create-t3-turbo, turborepo, mcp, kubernetes, gitea, harbor, argocd, postgres, sentry, posthog, resend, prompting, workflow]
 comments: true
 status: draft
+source_notes:
+  - /Users/mackieg/obsidian/Projects/AIWorkflow.md
+  - /Users/mackieg/obsidian/Captures/2026-02-27 - Context Management as the Real AI Bottleneck.md
+  - /Users/mackieg/obsidian/Captures/2026-02-27 - Bandwidth Asymmetry in Human-AI Communication.md
 ---
 
-I have a graveyard of half-built repos and notebooks full of product ideas that never shipped. You probably do too.
+For years I kept repeating the same stupid loop.
 
-The problem was never ideas. It was throughput. The gap between "this could work" and "someone can actually use this" is enormous, and I kept getting stuck in the middle -- endlessly scaffolding, endlessly tweaking, never shipping.
+New idea. New repo. New auth decision. New deploy script. New notes file. A week later: one more half-built product, one more burst of excitement spent on setup instead of learning anything real.
 
-So I'm trying something that sounds reckless: building five MVPs in parallel.
+The problem was never ideas. It was the cost of getting an idea far enough into reality that it could prove me wrong.
+
+So now I'm doing something that would have sounded irresponsible to me a year ago: building five MVPs in parallel.
 
 <!--more-->
 
-Two things make it less crazy than it sounds. I standardized the tech so I'm not paying the setup tax five times. And I built a structured AI workflow that acts more like a disciplined junior dev than a magic autocomplete.
+It only works because I standardized the stack and stopped treating AI like autocomplete. The model is useful when it behaves more like a junior engineer inside a workflow with real constraints.
 
-Here's what each product actually is:
+The current portfolio looks like this:
 
-- [TrueComps](/articles/2026-02/truecomps-turbotax-for-property-taxes) -- TurboTax for property tax appeals. Pull comps, generate evidence packets, file the appeal.
-- [Stream Conductor HS](/articles/2026-02/stream-conductor-student-run-broadcasting) -- Lets high school students run their own sports broadcasts with compliance guardrails baked in.
-- [ClassCheck](/articles/2026-02/classcheck-attendance-and-bus-tracking) -- Attendance and bus tracking for schools that are still doing it on clipboards.
-- [PlayPath](/articles/2026-02/playpath-learning-inside-roblox) -- Educational content that lives inside Roblox, where the kids already are.
-- [GachaHabit](/articles/2026-02/gachahabit-gacha-rpg-for-habits) -- A gacha RPG where completing real habits powers your team in battle.
+- [TrueComps](/articles/2026-02/truecomps-turbotax-for-property-taxes): property-tax appeals with evidence packets and filing help
+- [Stream Conductor HS](/articles/2026-02/stream-conductor-student-run-broadcasting): school sports broadcasting software
+- [ClassCheck](/articles/2026-02/classcheck-attendance-and-bus-tracking): attendance, bus tracking, and school integrations
+- [PlayPath](/articles/2026-02/playpath-learning-inside-roblox): learning systems inside Roblox-style game loops
+- [GachaHabit](/articles/2026-02/gachahabit-gacha-rpg-for-habits): habit tracking through a gacha RPG loop
 
-## One stack, five products
+I am not pretending all five become companies. The point is to get each one far enough to produce signal.
 
-Every product starts from the same modified create-t3-turbo monorepo. Turborepo, Next.js, Expo when I need mobile, tRPC, Postgres, consistent auth. The point isn't that it's the best stack -- it's that I make the boring decisions once.
+## One stack, reused on purpose
 
-The parts that matter most are the ones nobody talks about. Docker + Kubernetes deployment with a repeatable layout so every repo doesn't invent its own deploy script. Our own Postgres in the cluster instead of a managed service -- more ops work, but zero early-stage friction. Sentry, PostHog, Resend wired in by default so each product doesn't become a new vendor maze.
+Every product starts from the same modified `create-t3-turbo` monorepo. `Turborepo`, `Next.js`, `Expo` when I need mobile, `tRPC`, Postgres, the same auth assumptions, the same layout, the same deployment shape.
 
-And a control panel that ties it together. One screen showing me what's actually happening across Gitea repos, the K8s cluster, Harbor registry, and Argo CD deployments. The value isn't dashboards -- it's knowing whether I'm shipping or just pushing code around.
+That is not because I think there is one blessed founder stack. It is because I am done paying the setup tax over and over.
 
-## What an AI work session actually looks like
+The real leverage is in the unglamorous stuff:
 
-Here's the thing about LLMs: they're incredible at creating momentum and terrible at guaranteeing correctness. They make you feel fast while you generate plausible nonsense. I've done it. You've done it.
+- Docker and Kubernetes deploys that look the same from repo to repo
+- our own Postgres in-cluster instead of making every experiment start with vendor decisions
+- `Sentry`, `PostHog`, and `Resend` wired in early instead of bolted on later
+- one control surface that lets me see what is happening across `Gitea`, the cluster, `Harbor`, and `Argo CD`
 
-So I stopped using AI like a slot machine and started using it like a system.
+That last part matters more than it sounds. When I can see which repo changed, which image got built, and which deployment is live, I stop guessing whether I am shipping or just rearranging code.
 
-A typical session: I open Claude Code and describe what I want to build. But instead of just prompting and hoping, there's a workflow. First, an explore agent greps through the codebase and maps out where the relevant patterns live. Then I brainstorm the approach -- what am I actually building, what are the constraints, what could go wrong. Then a plan gets written as an artifact, not a thought. Then implementation happens in small steps with real verification after each one.
+Standardization also makes lessons portable. If I learn something painful once in `TrueComps`, I do not want to relearn it in `ClassCheck` three days later. I want the next product to inherit the scar tissue.
 
-The rule that saves me the most: no completion claims without running the command that proves it. No "should work." No "seems fine." If the test didn't pass, it's not done.
+## What the AI workflow actually does
 
-I also have agents that can claim tasks from a shared board, post progress, and hand off to each other. It sounds over-engineered until you're juggling five repos and realize you can't remember what state anything is in. The board is the forcing function -- if I can't describe the work as a task, it's not a real task yet.
+The popular version of AI coding is still mostly vibes: prompt harder, hope the model stays coherent, then act surprised when it lies confidently.
+
+That is useful for momentum. It is terrible for trust.
+
+My workflow is narrower and more boring. I start with an explore pass to find the real patterns in the repo. Then I write a plan. Then implementation happens in smaller chunks. Then I run the command that proves the thing works. No completion claims without evidence. No "should be fine." No "looks right to me."
+
+That rule does most of the work. The other thing that matters is task shape. Once I started using skills, repo memory, and a board that agents could claim work from, the sessions got better fast. If the task is vague, the output is vague. If the context is polluted, the output gets weird. If the plan is real and the scope is small, the model becomes much more useful.
+
+This is why I care so much about workflow design. A better model helps. A better context discipline helps more.
+
+## The real bottleneck is context
+
+I used to think the main limiter was model intelligence. It is, a little. But that is not the thing that burns most of my time anymore.
+
+The real bottleneck is context management.
+
+Give a model the wrong conversation history, stale decisions, abandoned approaches, and three unrelated logs, and it gets dumb in a hurry. Give it the right file, the relevant constraint, and a task small enough to reason about, and suddenly it looks much more capable.
+
+That is why I keep building around the model instead of just swapping models:
+
+- reusable skills for recurring workflows
+- repo memory for build, deploy, and architecture rules
+- fresh sessions when a thread starts to rot
+- screenshots, voice notes, and plans when plain text is losing information
+
+The trick is not "more context." It is cleaner context.
 
 ## Why five at once
 
-I'm not hedging. I'm searching.
+People hear "five MVPs" and picture multitasking. That is not what I mean.
 
-Early-stage products are mostly about finding signal. Some ideas are wrong. Some are right but poorly timed. Some have a customer but no distribution. I don't want to bet the next year on whichever idea felt most exciting on a Tuesday afternoon.
+I mean portfolio search.
 
-Five MVPs with a shared stack means context carries over between them. Something I learn deploying TrueComps makes ClassCheck's deploy faster. A pattern I nail in GachaHabit's mobile app applies directly to PlayPath. The portfolio isn't five separate bets -- it's one system that explores five directions.
+At the earliest stage, the job is not to defend one precious idea. The job is to get to reality faster than your own optimism. Some ideas are wrong. Some are early. Some have demand but no distribution. Some sound good until they touch an actual user.
 
-The goal is brutally simple: build five things that touch reality, fast enough to learn which ones deserve the next twelve months.
+A shared stack changes the economics of that search. The deployment work in one repo speeds up the next one. The analytics defaults carry over. The mobile patterns carry over. The verification habits carry over. I am not restarting from zero five times.
 
-## What I'm still figuring out
+That also keeps me more honest. If I only chased one idea at a time, it would be too easy to protect it from evidence because I would already have months sunk into it. Five in flight makes it easier to kill weak ideas and feed the stronger ones.
 
-How much of the template should be opinionated versus flexible. How to keep five products from stealing focus from each other. What "done" means for each MVP so I stop polishing. How to keep the AI workflow from becoming its own form of procrastination.
+The goal is simple: build enough reality, fast enough, to know what deserves the next year.
 
-I don't have clean answers to any of those. But I have five repos, a shared stack, a workflow that forces verification, and a board that tracks what's actually happening.
+## What I am still figuring out
 
-That's further than the notebook ever got.
+I still do not know how opinionated the shared template should become. I still do not know the right definition of "done" for each MVP. I still catch myself turning workflow design into a form of procrastination sometimes.
+
+But I know this much: the old version of me would have spent the same amount of time setting up one repo and calling it progress. This version has five products touching reality, one stack that keeps getting better, and a workflow that makes it harder to lie to myself.
+
+That is a much better place to start.

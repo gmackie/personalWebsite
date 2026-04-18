@@ -1,58 +1,87 @@
 ---
 layout: post
-title: "ClassCheck: Attendance and Bus Tracking as One System"
+title: "ClassCheck: My First Real Vibe-Coded Edtech App"
 date: 2026-02-08
-excerpt: "K-12 attendance software is a mess of fragmented tools that don't talk to each other. ClassCheck combines attendance, bus tracking, and LMS/SIS integration into one system for $2/student/year."
-categories: [startups]
-tags: [startups, classcheck, k12, edtech, attendance, mqtt, lti, sis]
+site: gmacko
+excerpt: "ClassCheck started at SXSW EDU 2025 as my first real AI-built edtech product. It taught me how K-12 software actually fits together and pointed me toward the part of edtech I cared about more."
+categories: [startups, ai]
+tags: [startups, classcheck, k12, edtech, attendance, mqtt, lti, sis, ai, vibe-coding]
 comments: true
 status: draft
+source_notes:
+  - /Users/mackieg/obsidian/Projects/ClassCheck.md
 ---
 
-If you want to understand how weird K-12 software is, look at attendance.
+`SXSW EDU 2025` was the week this project snapped into focus for me.
 
-On paper it's the simplest domain imaginable. A student is present or absent. You could build the core feature in an afternoon.
+I was down there thinking about education, software, and where AI coding tools might actually be useful. Claude Code was landing in the same window, and I wanted a project that was real enough to be honest but bounded enough that I would actually finish something.
 
-In reality, attendance is "simple" the way "sending an email" is simple inside a company with SSO, compliance rules, audit trails, and a bunch of legacy systems that were never designed to work together. The core concept is trivial. Everything around it is not.
+Attendance sounded boring enough to work.
+
+That lasted about five minutes.
 
 <!--more-->
 
-## The patchwork problem
+The second you move past "mark a student present or absent," school operations get messy fast. Attendance touches transportation. Transportation touches parent communication. Rosters live in the SIS. Assignments live in the LMS. Identity flows through `Clever`, `ClassLink`, district SSO, and whatever legacy rules the school already has. By the time you get to something as basic as "did this student get on the bus and make it to class," you are already knee-deep in real integration work.
 
-Most districts run on a patchwork of tools that all claim to be "the system of record" for something. Attendance lives in one app. Transportation visibility lives somewhere else -- if it exists at all. Grades and rosters live in the SIS. Assignments live in the LMS. Parent communication is spread across email threads, robocalls, and whatever portal the district happened to buy five years ago.
+That is why ClassCheck became my first real vibe-coded edtech app. It was not simple. It was just concrete.
 
-Teachers pay for that fragmentation with time. Parents pay with uncertainty. District IT pays with brittle integrations and yearly renewal negotiations that never get easier.
+## Why ClassCheck was the right first wedge
 
-And the timing is brutal. Chronic absenteeism has gotten worse since the pandemic. States are demanding more reporting. At the same time, districts are hitting the ESSER funding cliff, which turns "we can tolerate three vendors" into "we need one vendor or none." The consolidation pressure is real and it's happening now.
+I did not start ClassCheck because attendance was my lifelong calling. I started it because it forced several useful questions into the same product:
 
-## Why price matters more than features
+- How far can AI-assisted building actually carry a real side project?
+- What do `LTI 1.3`, `SIS` sync, `ClassLink`, `Clever`, and district procurement look like once you are the one wiring them up?
+- Could a small team using AI responsibly build something credible in K-12?
 
-In education, pricing isn't revenue strategy. It's procurement strategy.
+The app grew into a pretty serious prototype: Go backend, React frontend, Expo mobile work, `OpenAPI`-generated clients, and bus tracking over `MQTT`. More important than the code, though, was what it forced me to learn. I stopped talking about edtech in the abstract and started learning how the stack actually fits together.
 
-ClassCheck is targeting $2/student/year at the school level, $1.50/student/year at the district level. That sounds low until you compare it to incumbents and think about the consolidation story: replace multiple tools, reduce manual work, and land in a price band that makes adoption possible without a year-long RFP process. If you price above the threshold where a principal can swipe a card, you've turned a product decision into a committee decision. I'd rather be cheap and fast than expensive and "enterprise."
+## The actual product shape
 
-## The wedge: attendance + bus tracking + integration
+ClassCheck ended up sitting on three connected problems:
 
-ClassCheck is built around three things that force the product to be honest.
+- attendance workflows that teachers will actually use quickly
+- real-time bus visibility that parents actually care about
+- school integrations that district IT can say yes to
 
-Teachers need attendance to be fast and low-friction. Parents want to know where the bus is and whether their kid actually got on it. District IT needs everything to integrate with the systems they already have, because ripping out a SIS or forcing a new identity system is not a realistic sales pitch.
+That last one is the killer. A lot of founders see a school pain point and imagine they are selling a cleaner interface. In reality, they are selling a new piece of infrastructure into a system that already has `PowerSchool`, Canvas, SSO, procurement thresholds, privacy reviews, and a district calendar that does not care about your startup timeline.
 
-If you nail those three, you earn the right to expand. If you can't, it doesn't matter how many features you ship. So the one-sentence version: unify attendance workflows, real-time transportation visibility, and SIS/LMS integrations into one system that is secure and auditable by default.
+So the real one-line pitch became: attendance, transportation visibility, and SIS/LMS integration in one product that feels modern and stays auditable.
 
-## The tech is intentionally boring (except for the bus)
+That framing kept the project honest. If I could not make the integrations credible, then the product story was fake no matter how nice the UI looked.
 
-K-12 isn't forgiving. It's multi-tenant. It includes minors. It has strict privacy requirements -- FERPA, COPPA. It needs role-based access control that isn't "admin/user" but something closer to a real org chart. And it needs to be legible during audits.
+## What it taught me about edtech
 
-The architecture is boring on purpose: Go backend with Echo, an OpenAPI spec for clean client generation, React/Vite on the frontend. Boring choices that behave predictably under load and can be explained to a district compliance officer without hand-waving.
+The biggest lesson was that K-12 software is mostly a coordination problem wearing a software costume.
 
-The one un-boring piece is bus tracking. For real-time location streaming, I'm using MQTT -- it's built for high-frequency telemetry and it's a natural fit for the "where is my kid's bus right now" use case. The interesting challenge isn't the protocol. It's tying the GPS data back into the attendance system so that "got on the bus" and "arrived at school" become part of the same data model instead of living in separate apps.
+Teachers pay for fragmentation with time. Parents pay for it with uncertainty. District IT pays for it with brittle integrations and procurement fatigue. Even pricing works differently than in most startups. If you cannot fit inside the kind of pilot motion a school can actually approve, you have a go-to-market problem before you have a feature problem.
 
-## What success looks like
+It also made me respect the boring parts more. `FERPA`, `COPPA`, role-based access, audit trails, and legible system behavior are not side quests in this market. They are part of the product. So the architecture stayed intentionally boring in the good way: Go, `Echo`, clean API definitions, React, predictable data flow, and one unusual piece in the middle where `MQTT` made sense for live bus telemetry.
 
-Success in the next phase isn't "sign a massive district." It's the unglamorous work that proves the wedge is real.
+The bus side was the interesting technical wrinkle. GPS streams are easy enough. Tying them back into school operations in a way that turns "boarded the bus," "arrived at school," and "marked present" into one coherent system is where the product got real.
 
-Complete a clean Canvas LTI 1.3 integration. Get a few pilot agreements in Washington state. Prove the bus tracking workflow is reliable enough to earn parent trust. Get listed where districts actually buy.
+## What it taught me about AI coding
 
-If those happen, ClassCheck becomes a wedge product in a category that desperately wants consolidation but is allergic to risk. The consolidation pressure does the selling -- I just have to be the product that's cheap enough, integrated enough, and trustworthy enough to be the obvious choice.
+ClassCheck was also where AI coding stopped feeling like a toy.
 
-This is one of five MVPs I'm building in parallel. If you want the bigger picture on why and how, here's the meta post: [Building Five MVPs with AI](/articles/2026-02/building-five-mvps-with-ai).
+Not because the model built the company for me. It did not. The useful pattern was much narrower than that. AI was good at pushing scaffolding forward, exploring known shapes, and helping me move a prototype faster after work than I would have on my own. It was bad at protecting me from domain ignorance.
+
+That distinction matters.
+
+If I did not understand what `LTI 1.3` really implied, the model could still generate something that looked reassuring. If I did not understand SIS sync, it could happily invent plausible nonsense. ClassCheck forced me to learn enough of the domain to tell the difference.
+
+That was probably the most valuable part of the project. I got a product prototype, but I also got a real education in how edtech and AI-assisted development actually behave under pressure.
+
+## Why it pointed me somewhere else
+
+The deeper I got into ClassCheck, the clearer another truth became: attendance was not the part of edtech I cared about most.
+
+I had already been carrying game-development ideas around in the background for years. I was interested in play-based learning. I kept noticing the research around intrinsic motivation and adaptive systems. As the AI tooling got better, I found myself getting more excited about that direction than about attendance workflows.
+
+So ClassCheck became a bridge.
+
+It gave me the wedge into edtech. It taught me the acronyms, the procurement reality, the integration surface, and the compliance posture. Then it pointed me toward the part of the market that felt more alive to me, which is what later became [PlayPath](/articles/2026-02/playpath-learning-inside-roblox).
+
+That is still how I think about it now. ClassCheck is not dead. It is just not the thing I am most compelled to push today.
+
+It did its job. It got me into the space for real, and it made the next idea smarter.

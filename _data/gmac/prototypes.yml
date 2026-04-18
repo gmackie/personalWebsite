@@ -70,6 +70,12 @@
   stack: [react, node, gamification]
   health_endpoint: https://habitplay.io
 
+- name: Festigram
+  url: https://festigram.net
+  description: Off-grid social media for festivals and large gatherings. Disposable-camera style posting with delayed reveals and sync that survives overloaded networks.
+  status: coming-soon
+  stack: [pwa, photos, offline-sync]
+
 - name: bizpulse.cc
   url: https://bizpulse.cc
   description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
