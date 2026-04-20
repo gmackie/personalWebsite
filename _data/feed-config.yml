@@ -1,0 +1,12 @@
+# ForgeGraph public-feed consumer config.
+#
+# Flip `enabled` to true once the producer side is healthy:
+#   - manifest, apps, summary, timeline all return 2xx
+#   - consumer-contract doc names this `manifest_url` as canonical
+#   - CORS permits gmac.io / gmacko.com origins
+#
+# See docs/plans/2026-04-10-forgegraph-public-portfolio-feed-implementation.md
+# and ../ForgeGraph/docs/plans/2026-04-19-public-feed-consumer-blockers.md
+enabled: false
+manifest_url: https://forgegraf.com/api/public/feed/manifest
+fetch_timeout_ms: 3500

@@ -5,7 +5,16 @@
 {% include head.html %}
 <body class="theme-dashboard">
 
-<div class="dashboard-container">
+<script type="application/json" id="public-feed-config">
+{
+  "enabled": {{ site.data.feed-config.enabled | default: false | jsonify }},
+  "manifest_url": {{ site.data.feed-config.manifest_url | jsonify }},
+  "fetch_timeout_ms": {{ site.data.feed-config.fetch_timeout_ms | default: 3500 | jsonify }},
+  "site_target": "gmac"
+}
+</script>
+
+<div class="dashboard-container" data-public-feed-root="gmac">
   <header class="dashboard-header">
     <h1 class="dashboard-title">gmac.io</h1>
     <p class="dashboard-subtitle">prototypes &amp; services <span class="dashboard-caveat">— nothing here is production</span></p>
@@ -20,9 +29,9 @@
   </div>
 
   {% if site.data.gmac.services.size > 0 %}
-  <section class="dashboard-section">
+  <section class="dashboard-section" data-feed-section="services">
     <h2 class="dashboard-section-label">Services</h2>
-    <div class="proto-grid">
+    <div class="proto-grid" data-feed-target="services">
       {% for svc in site.data.gmac.services %}
       <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}">
         <div class="proto-header">
@@ -49,9 +58,9 @@
   {% endif %}
 
   {% if site.data.gmac.prototypes.size > 0 %}
-  <section class="dashboard-section">
+  <section class="dashboard-section" data-feed-section="prototypes">
     <h2 class="dashboard-section-label">Prototypes</h2>
-    <div class="proto-grid">
+    <div class="proto-grid" data-feed-target="prototypes">
       {% for proto in site.data.gmac.prototypes %}
       <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}">
         <div class="proto-header">
@@ -100,6 +109,7 @@
   </footer>
 </div>
 
+<script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
 <script>
 // Health check: ping each service URL and update status dots
 document.addEventListener('DOMContentLoaded', function() {

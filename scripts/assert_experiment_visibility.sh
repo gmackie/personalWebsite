@@ -29,4 +29,10 @@ grep -q "blder.bot" "$GMAC_DEST/lab/index.html" || fail "gmac.io lab missing bld
 grep -q "bizpulse.cc" "$GMACKO_DEST/index.html" || fail "gmacko landing missing bizpulse.cc"
 grep -q "blder.bot" "$GMACKO_DEST/index.html" || fail "gmacko landing missing blder.bot"
 
-echo "PASS: experiment visibility includes bizpulse.cc and blder.bot on gmac.io and gmacko"
+grep -q 'id="public-feed-config"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public-feed bootstrap"
+grep -q 'data-public-feed-root="gmac"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public-feed root marker"
+grep -q 'data-feed-target="services"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing services hydration target"
+grep -q 'data-feed-target="prototypes"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing prototypes hydration target"
+[ -f "$GMAC_DEST/js/public-feed.js" ] || fail "gmac.io build missing js/public-feed.js"
+
+echo "PASS: experiment visibility + feed hydration wiring present on gmac.io and gmacko"
