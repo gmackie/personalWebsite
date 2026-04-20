@@ -29,6 +29,13 @@ grep -q "blder.bot" "$GMAC_DEST/lab/index.html" || fail "gmac.io lab missing bld
 grep -q "bizpulse.cc" "$GMACKO_DEST/index.html" || fail "gmacko landing missing bizpulse.cc"
 grep -q "blder.bot" "$GMACKO_DEST/index.html" || fail "gmacko landing missing blder.bot"
 
+for dest in "$GMAC_DEST" "$GMACKO_DEST"; do
+  [ -f "$dest/.well-known/forge-health" ] || fail "$dest missing /.well-known/forge-health"
+  python3 -c "import json,sys; json.load(open('$dest/.well-known/forge-health'))" || fail "$dest /.well-known/forge-health is not valid JSON"
+  grep -q '"version": "1.0"' "$dest/.well-known/forge-health" || fail "$dest forge-health missing version 1.0"
+  [ -f "$dest/_headers" ] || fail "$dest missing _headers for Cloudflare Pages"
+done
+
 grep -q 'id="public-feed-config"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public-feed bootstrap"
 grep -q 'data-public-feed-root="gmac"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing public-feed root marker"
 grep -q 'data-feed-target="services"' "$GMAC_DEST/index.html" || fail "gmac.io dashboard missing services hydration target"

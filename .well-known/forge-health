@@ -1,0 +1,18 @@
+---
+layout: null
+permalink: /.well-known/forge-health
+sitemap: false
+---
+{
+  "status": "healthy",
+  "version": "1.0",
+  "timestamp": {% if site.data.build.built_at %}{{ site.data.build.built_at | jsonify }}{% else %}{{ site.time | date_to_xmlschema | jsonify }}{% endif %},
+  "commitHash": {{ site.data.build.commit_sha | default: "unknown" | jsonify }},
+  "app": "personal-website",
+  "served_by": {{ site.site_id | jsonify }},
+  "routes": [
+    { "domain": "gmacko.com",       "site_id": "gmacko" },
+    { "domain": "grahammackie.com", "site_id": "personal" },
+    { "domain": "gmac.io",          "site_id": "gmac" }
+  ]
+}

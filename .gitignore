@@ -9,3 +9,6 @@ _site_*_test/
 .jekyll-cache/
 .gstack/
 .opencode/
+# Generated per-build by scripts/deploy-pages.sh for /.well-known/forge-health
+_data/build.yml
+.wrangler/

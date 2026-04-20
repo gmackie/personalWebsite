@@ -10,9 +10,22 @@ set -euo pipefail
 
 SITES=(gmacko personal gmac)
 
+write_build_data() {
+  # Capture commit SHA + build timestamp for /.well-known/forge-health.
+  # Regenerated on every build; _data/build.yml is gitignored.
+  mkdir -p _data
+  cat > _data/build.yml <<EOF
+commit_sha: "$(git rev-parse HEAD 2>/dev/null || echo unknown)"
+commit_short: "$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
+built_at: "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+EOF
+}
+
 deploy_site() {
   local site="$1"
   local dest="_site_${site}"
+
+  write_build_data
 
   echo "==> Building ${site}"
   bundle exec jekyll build \

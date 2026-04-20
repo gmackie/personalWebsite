@@ -26,6 +26,13 @@ kramdown:
 plugins:
   - jekyll-feed
 
+# Ship dot-prefixed well-known paths (e.g. /.well-known/forge-health)
+# and Cloudflare Pages' _headers rule file, which Jekyll would otherwise
+# skip for starting with '.' or '_'.
+include:
+  - .well-known
+  - _headers
+
 collections:
   ventures:
     output: true
