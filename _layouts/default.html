@@ -58,5 +58,15 @@
   {% endif %}
 
   {% include js.html %}
+
+  <script type="application/json" id="public-feed-config">
+  {
+    "enabled": {{ site.data.feed-config.enabled | default: false | jsonify }},
+    "manifest_url": {{ site.data.feed-config.manifest_url | jsonify }},
+    "fetch_timeout_ms": {{ site.data.feed-config.fetch_timeout_ms | default: 3500 | jsonify }},
+    "site_target": {{ site.site_id | jsonify }}
+  }
+  </script>
+  <script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
 </body>
 </html>
