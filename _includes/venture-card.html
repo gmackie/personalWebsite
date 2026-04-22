@@ -1,4 +1,5 @@
-<a class="startup-card" href="{{ include.venture.url }}" target="_blank" rel="noopener noreferrer">
+{% assign feed_slug = include.venture.feed_slug | default: include.venture.slug %}
+<a class="startup-card" href="{{ include.venture.url }}" target="_blank" rel="noopener noreferrer"{% if feed_slug %} data-feed-slug="{{ feed_slug }}"{% endif %}>
   <div class="startup-thumb">
     {% if include.venture.image %}
     <img src="{{ include.venture.image }}" alt="{{ include.venture.name }} homepage thumbnail">

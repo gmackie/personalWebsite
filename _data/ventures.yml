@@ -1,7 +1,8 @@
 # Venture portfolio — single source of truth for all ventures.
 # Order: infrastructure → AI → games → ops/controls → standalone → experiments
 # Required fields: name, slug, domain, url, description, status, thesis, category
-# Optional fields: tags, shared_infra, last_updated, next_milestone, image, experiment
+# Optional fields: tags, shared_infra, last_updated, next_milestone, image, experiment,
+#                  feed_slug (override when ForgeGraph's public-feed slug differs from local slug)
 
 - name: ForgeGraf
   slug: forgegraph
@@ -75,6 +76,7 @@
 
 - name: Controls Foundry
   slug: controls-foundry
+  feed_slug: controlsfoundry
   domain: controlsfoundry.com
   url: https://controlsfoundry.com
   description: Cloud intelligence for industrial controls. Upload any PLC program and get instant AI analysis, annotated ladder logic, and a migration plan. Built for plants whose original integrator is gone and PLC-5/SLC-500 parts are getting scarce.
@@ -117,6 +119,7 @@
 
 - name: Stream Conductor
   slug: stream-conductor
+  feed_slug: streamconductor
   domain: streamconductor.com
   url: https://streamconductor.com
   description: Cloud streaming control room for teams. Cloud OBS, multi-platform output (Twitch, YouTube, Kick), role-based permissions for producers/directors/streamers, auto-failover, and sub-second latency via SRT/RIST.
@@ -190,6 +193,7 @@
 
 - name: blder.bot
   slug: blder-bot
+  feed_slug: blder
   domain: blder.bot
   url: https://blder.bot
   description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.

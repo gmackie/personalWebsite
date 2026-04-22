@@ -33,7 +33,7 @@
     <h2 class="dashboard-section-label">Services</h2>
     <div class="proto-grid" data-feed-target="services">
       {% for svc in site.data.gmac.services %}
-      <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}">
+      <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}"{% if svc.feed_slug %} data-feed-slug="{{ svc.feed_slug }}"{% endif %}>
         <div class="proto-header">
           <span class="status-dot dot-{{ svc.status }}"></span>
           <span class="proto-name">{{ svc.name }}</span>
@@ -62,7 +62,7 @@
     <h2 class="dashboard-section-label">Prototypes</h2>
     <div class="proto-grid" data-feed-target="prototypes">
       {% for proto in site.data.gmac.prototypes %}
-      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}">
+      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}>
         <div class="proto-header">
           <span class="status-dot dot-{{ proto.status }}"></span>
           <span class="proto-name">{{ proto.name }}</span>

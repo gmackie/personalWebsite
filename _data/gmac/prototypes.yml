@@ -1,6 +1,9 @@
 # Venture apps — live products and prototypes
+# Optional feed_slug maps the ForgeGraph public-feed slug (falls back to
+# matching by derived name if absent).
 
 - name: PlayTrek.ai
+  feed_slug: playtrek
   url: https://playtrek.ai
   description: Adaptive learning inside the games kids already play. K-8 math and reading.
   status: active
@@ -8,6 +11,7 @@
   health_endpoint: https://playtrek.ai
 
 - name: GenTrellis
+  feed_slug: gentrellis
   url: https://gentrellis.com
   description: On-prem AI inference boxes for regulated SMBs. Hybrid Bedrock routing.
   status: active
@@ -15,6 +19,7 @@
   health_endpoint: https://gentrellis.com
 
 - name: Controls Foundry
+  feed_slug: controlsfoundry
   url: https://controlsfoundry.com
   description: Cloud intelligence for industrial PLC programs. AI-annotated ladder logic.
   status: active
@@ -22,6 +27,7 @@
   health_endpoint: https://controlsfoundry.com
 
 - name: LatchFlow
+  feed_slug: latchflow
   url: https://latchflow.io
   description: Escape room operations. Live game control, puzzle orchestration, bookings.
   status: active
@@ -29,6 +35,7 @@
   health_endpoint: https://latchflow.io
 
 - name: AppealKey
+  feed_slug: appealkey
   url: https://appealkey.com
   description: AI-powered property tax appeals. No win, no fee. iOS, Android, web.
   status: active
@@ -36,6 +43,7 @@
   health_endpoint: https://appealkey.com
 
 - name: DriftPort
+  feed_slug: driftport
   url: https://driftport.io
   description: Van/RV IoT monitoring. Battery, solar, water, climate from your phone.
   status: active
@@ -43,6 +51,7 @@
   health_endpoint: https://driftport.io
 
 - name: LevelForge
+  feed_slug: levelforge
   url: https://levelforge.io
   description: AI game dev IDE. Describe your game, agent builds it in Unity via MCP.
   status: active
@@ -50,6 +59,7 @@
   health_endpoint: https://levelforge.io
 
 - name: Stream Conductor
+  feed_slug: streamconductor
   url: https://streamconductor.com
   description: Cloud streaming control room. Multi-platform, role-based, auto-failover.
   status: active
@@ -64,6 +74,7 @@
   health_endpoint: https://x402arena.gg
 
 - name: HabitPlay
+  feed_slug: habitplay
   url: https://habitplay.io
   description: Gamified habit tracker with RPG progression, battles, and daily plans.
   status: active
@@ -77,12 +88,14 @@
   stack: [pwa, photos, offline-sync]
 
 - name: bizpulse.cc
+  feed_slug: bizpulse
   url: https://bizpulse.cc
   description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
   status: coming-soon
   stack: [experiment, concept, visual]
 
 - name: blder.bot
+  feed_slug: blder
   url: https://blder.bot
   description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.
   status: coming-soon

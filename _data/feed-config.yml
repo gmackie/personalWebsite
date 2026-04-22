@@ -7,6 +7,6 @@
 #
 # See docs/plans/2026-04-10-forgegraph-public-portfolio-feed-implementation.md
 # and ../ForgeGraph/docs/plans/2026-04-19-public-feed-consumer-blockers.md
-enabled: false
+enabled: true
 manifest_url: https://forgegraf.com/api/public/feed/manifest
 fetch_timeout_ms: 3500

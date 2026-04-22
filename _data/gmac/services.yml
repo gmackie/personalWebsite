@@ -8,6 +8,7 @@
   health_endpoint: https://forge.gmac.io/health
 
 - name: Gitea
+  feed_slug: git-server
   url: https://git.gmac.io
   description: Self-hosted Git with CI/CD. Source of truth for all venture code.
   status: active
@@ -29,6 +30,7 @@
   internal: true
 
 - name: Bob
+  feed_slug: bob
   url: https://bob.tail1e1a32.ts.net
   description: Task management and work tracking across ventures. Internal tool over Tailscale.
   status: active
