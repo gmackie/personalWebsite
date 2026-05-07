@@ -1,16 +1,22 @@
-updated: 2026-03-28
-focus: LatchFlow v2 approval engine and ForgeGraph Nix deployment migration
+updated: 2026-05-07
+focus: Shipping ventures, networking, and exploring full-time remote opportunities
 allocation:
-  - venture: LatchFlow
-    pct: 40
-    note: Shipping approval workflow engine
-  - venture: ForgeGraph
+  - venture: Job Search & Networking
     pct: 30
-    note: Nix migration for all personal infra
-  - venture: PlayTrek.ai
+    note: Building personal brand, updating portfolio, reaching out to people
+  - venture: ForgeGraph
     pct: 20
-    note: Parent dashboard design
+    note: Nix deployment migration, multi-node fleet management
+  - venture: GenTrellis
+    pct: 15
+    note: Q2 first deliveries, hardware sourcing
+  - venture: Controls Foundry
+    pct: 15
+    note: Siemens S7 support, AI analysis pipeline
+  - venture: DriftPort
+    pct: 10
+    note: PCB rev 2, firmware refinement
   - venture: Writing
     pct: 10
-    note: Blog drafts and first portfolio letter
-location: Seattle, WA
+    note: Blog posts, portfolio letters, build-in-public updates
+location: Remote, US

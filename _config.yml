@@ -46,9 +46,10 @@ collections:
 owner:
   name: Graham
   avatar: leonids-logo.png
-  job: "Founder, Gmacko Ventures"
-  bio: "Serial builder running 9+ software ventures across edtech, AI infrastructure, industrial controls, workflow tooling, game dev, and more. Based in Seattle."
+  job: "Founder & Engineer"
+  bio: "Product-minded engineer with a decade at Amazon and 10+ ventures spanning infrastructure, AI, IoT, industrial controls, and media. Building things that matter."
   email: graham.mackie@gmail.com
+  calendly: https://calendly.com/gmacko
   twitter: grahammackie
   facebook: grahammackie
   google:

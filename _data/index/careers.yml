@@ -1,21 +1,43 @@
-# careers section data
-# if you don't have language feature(language.yml is empty), ignore "i18n" items
-- name: Amazon
-  link: http://www.amazon.com/
-  date: March 2017 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
-  job: Software Development Manager
+- name: Independent
+  date: Jan 2026 - Present
+  job: Founder / Software Engineer
 
 - name: Amazon
   link: http://www.amazon.com/
-  date: August 2014 - March 2017
-  job: Software Development Engineer
+  date: Nov 2021 - Jan 2026
+  job: Sr SDE / Tech Lead, Sub-Same-Day & Grocery
+
+- name: Amazon
+  link: http://www.amazon.com/
+  date: Oct 2019 - Nov 2021
+  job: Software Manager, Scheduling
+
+- name: Amazon
+  link: http://www.amazon.com/
+  date: Mar 2019 - Oct 2019
+  job: SDE, ShiftSwap
+
+- name: Amazon
+  link: http://www.amazon.com/
+  date: Aug 2018 - Mar 2019
+  job: System Deployment Engineer
+
+- name: Amazon
+  link: http://www.amazon.com/
+  date: 2016 - Aug 2018
+  job: Software Manager, Labor Planning
+
+- name: Amazon
+  link: http://www.amazon.com/
+  date: 2014 - 2016
+  job: SDE I, Labor Planning
 
 - name: Amazon
   link: http://www.amazon.com/
   date: Summer 2013
-  job: Software Development Engineer - Intern
+  job: Software Development Engineer Intern
 
 - name: Under Armour
   link: https://www.underarmour.com/
   date: Summer 2012
-  job: Website Developer - Intern
+  job: Software Development Engineer Intern

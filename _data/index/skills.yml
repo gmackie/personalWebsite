@@ -1,6 +1,4 @@
-# skills section data
-
-label: Ability
-id : cs
-aspects: Motivation, GitHub, Java, HTML/CSS, Docker, Python
-percentage: 100, 65, 70, 60, 60, 55
+label: Skills
+id: cs
+aspects: TypeScript, Python, Cloud/Infra, Embedded/HW, AI/ML, Security
+percentage: 95, 75, 90, 70, 75, 80

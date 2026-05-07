@@ -2,19 +2,19 @@
 layout: resume
 title: Resume
 permalink: /resume/
-excerpt: "Resume for Graham Mackie covering internships, labor planning, warehouse controls, engineering leadership, and order-management systems."
+excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale operations, a venture portfolio, and hardware-to-cloud range."
 ---
 <header class="resume-hero">
   <div>
     <h1 class="resume-title">Graham Mackie</h1>
-    <p class="resume-subtitle">Technical leader across fulfillment systems, labor planning, warehouse controls, order management, and incident response.</p>
+    <p class="resume-subtitle">Product-minded engineer with Amazon-scale operations, a venture portfolio, and hardware-to-cloud range.</p>
     <p class="resume-summary">
-      Engineer and manager with a career arc from internship to SDE, SDM, deployment engineer, and tech lead. Most of my background sits inside operationally critical software: systems that affect labor planning, warehouse execution, order flow, and oncall reality. The common thread is ownership, writing-driven decision making, and building mechanisms that hold up under real production pressure.
+      12+ years spanning Amazon fulfillment systems, cloud infrastructure, security, industrial automation, and embedded hardware. Spent a decade at Amazon progressing from intern to software manager and tech lead — the go-to person field operations reached out to when they needed issues resolved, features built, or workarounds to get unblocked. Since leaving in January 2026, launched a portfolio of ventures across infrastructure, AI, IoT, industrial controls, gaming, streaming, and education. AWS Solutions Architect and Security certified. OSCP expected June 2026.
     </p>
   </div>
 
   <div class="resume-contact">
-    <div>Seattle, Washington</div>
+    <div>Remote, US</div>
     <div><a href="mailto:{{ site.owner.email }}">{{ site.owner.email }}</a></div>
     <div><a href="https://github.com/{{ site.owner.github }}">github.com/{{ site.owner.github }}</a></div>
     <div><a href="https://linkedin.com/in/{{ site.owner.linkedin }}">linkedin.com/in/{{ site.owner.linkedin }}</a></div>
@@ -30,85 +30,132 @@ excerpt: "Resume for Graham Mackie covering internships, labor planning, warehou
       <article class="resume-role">
         <div class="resume-role-header">
           <div>
-            <h3 class="resume-role-title">Tech Lead / Senior Software Development Engineer, Order Management + Incident Response</h3>
-            <p class="resume-role-org">Amazon</p>
+            <h3 class="resume-role-title">Founder / Software Engineer</h3>
+            <p class="resume-role-org">Independent (Remote)</p>
           </div>
-          <div class="resume-role-date">2022–2025</div>
+          <div class="resume-role-date">Jan 2026–Present</div>
         </div>
         <p class="resume-role-copy">
-          Worked on order-management systems and the operational mechanisms around them, with a strong emphasis on resilience, diagnosis, and incident response. The role sat at the point where software design meets pager reality.
+          Building a portfolio of ventures across infrastructure, AI, IoT, industrial controls, gaming, media, and education — shipping production software across all of them.
         </p>
         <ul class="resume-role-bullets">
-          <li>Led technical direction across systems tied to order flow, production operations, and incident handling.</li>
-          <li>Drove design reviews, launch quality, oncall expectations, and mechanisms for faster, clearer response during production events.</li>
-          <li>Worked across engineering and operations boundaries to improve reliability, debugging, and operational feedback loops.</li>
+          <li><strong>ForgeGraph</strong> — Multi-node deployment platform on Cloudflare Workers, Hetzner bare-metal, and Tailscale mesh. Automated provisioning, health monitoring, edge proxy routing, and database management.</li>
+          <li><strong>GenTrellis</strong> — Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built NVIDIA hardware with hybrid Bedrock routing, protection levels, and immutable audit logs.</li>
+          <li><strong>Controls Foundry</strong> — AI-powered PLC analysis platform. Upload any legacy PLC program for instant analysis, annotated ladder logic, and migration planning.</li>
+          <li><strong>DriftPort</strong> — IoT monitoring for van/RV electrical systems. Custom PCB design, embedded firmware, and cloud dashboard with live telemetry and OTA updates.</li>
+          <li><strong>Stream Conductor</strong> — Cloud streaming control room for teams. Multi-platform output (Twitch/YouTube/Kick), role-based permissions, sub-second latency via SRT/RIST.</li>
+          <li><strong>BizPulse</strong> — AI business intelligence with multi-agent workflows, 10+ integration connectors, and automated remote job search pipeline.</li>
         </ul>
       </article>
 
       <article class="resume-role">
         <div class="resume-role-header">
           <div>
-            <h3 class="resume-role-title">Software Development Manager, Specialty Fulfillment Labor Scheduling</h3>
+            <h3 class="resume-role-title">Sr SDE / Tech Lead, Sub-Same-Day &amp; Grocery</h3>
             <p class="resume-role-org">Amazon</p>
           </div>
-          <div class="resume-role-date">2019–2022</div>
+          <div class="resume-role-date">Nov 2021–Jan 2026</div>
         </div>
         <p class="resume-role-copy">
-          Managed engineering work around labor scheduling for specialty fulfillment operations, where software decisions directly influenced planning quality and day-to-day execution.
+          Tech lead for incident response and order management across SubSame Day and grocery delivery operations. Built systems that replaced manual operational processes with automated, weather-aware decision engines.
         </p>
         <ul class="resume-role-bullets">
-          <li>Led team execution, hiring, coaching, roadmap planning, and operational quality for scheduling systems.</li>
-          <li>Built mechanisms that connected software delivery more tightly to labor decisions and operational realities.</li>
-          <li>Developed as a people leader while staying close to technical reviews, system behavior, and long-range planning.</li>
+          <li>Built an automated disruption response system that replaced a manual Excel process — integrated weather forecasting to automatically adjust delivery operations ahead of weather events, ensuring on-time delivery and preventing over-scheduling during reduced capacity.</li>
+          <li>Evolved the system from manual spreadsheet to web tool to fully automated, running multiple times per day with customer-configured actions for different disruption types (weather, mechanical failures, city events).</li>
+          <li>Designed a complex execution engine to process multiple operational levers across different disruption categories. Coordinated across many stakeholder teams.</li>
+          <li>Built an internal location unification service that standardized fulfillment center and operational entity names across business domains, replacing hard-coded lists.</li>
         </ul>
       </article>
 
       <article class="resume-role">
         <div class="resume-role-header">
           <div>
-            <h3 class="resume-role-title">System Deployment Engineer, Warehouse Controls + Conveyor PLC Integration</h3>
+            <h3 class="resume-role-title">Software Manager, Scheduling</h3>
             <p class="resume-role-org">Amazon</p>
           </div>
-          <div class="resume-role-date">2018–2019</div>
+          <div class="resume-role-date">Oct 2019–Nov 2021</div>
         </div>
         <p class="resume-role-copy">
-          Worked at the boundary between software and physical automation, helping warehouse controls systems behave correctly in the real world instead of just in diagrams.
+          Replaced the legacy scheduling software for Global Specialty Fulfillment, Small Grocery, and SubSame Day with a new system designed for scale.
         </p>
         <ul class="resume-role-bullets">
-          <li>Supported warehouse controls deployments that included conveyor PLC integration and operational bring-up.</li>
-          <li>Focused on system handoffs, deployment quality, and reliability in noisy physical environments.</li>
-          <li>Strengthened the part of my background that deals with industrial systems, controls, and software-to-hardware boundaries.</li>
+          <li>Delivered the new system across the entire GSF network (60,000 associates) in 8 months — working directly with customers and product managers to shape design and hit the launch deadline.</li>
+          <li>Wrote migration scripts to import scheduling opportunities from the legacy planning system and worked hands-on with business owners through the cutover.</li>
+          <li>Designed for up to 10,000 transactions per second on the shift databases.</li>
         </ul>
       </article>
 
       <article class="resume-role">
         <div class="resume-role-header">
           <div>
-            <h3 class="resume-role-title">Software Development Engineer I → Software Development Engineer II → Software Development Manager, Labor Planning System</h3>
+            <h3 class="resume-role-title">SDE, ShiftSwap</h3>
             <p class="resume-role-org">Amazon</p>
           </div>
-          <div class="resume-role-date">2014–2018</div>
+          <div class="resume-role-date">Mar 2019–Oct 2019</div>
         </div>
         <p class="resume-role-copy">
-          Joined Amazon full-time after graduation and grew from individual contributor into management on labor-planning systems used to forecast and operationalize staffing decisions.
+          Built the ShiftSwap application enabling warehouse associates to swap scheduled shifts with each other, improving schedule flexibility across fulfillment operations.
+        </p>
+      </article>
+
+      <article class="resume-role">
+        <div class="resume-role-header">
+          <div>
+            <h3 class="resume-role-title">System Deployment Engineer</h3>
+            <p class="resume-role-org">Amazon</p>
+          </div>
+          <div class="resume-role-date">Aug 2018–Mar 2019</div>
+        </div>
+        <p class="resume-role-copy">
+          Worked alongside third-party vendors to deploy hardware solutions in fulfillment centers, bridging the gap between physical systems and cloud infrastructure.
         </p>
         <ul class="resume-role-bullets">
-          <li>Built and evolved software used for labor planning, operational forecasting, and execution support.</li>
-          <li>Developed the writing, design-review, and ownership habits that still shape how I work.</li>
-          <li>Progressed from IC to manager by taking on more system responsibility, operational accountability, and team leadership.</li>
+          <li>Connected vendor PLCs to the Amazon network and integrated them with cloud-based monitoring and control software.</li>
+          <li>Built an auto-commissioning web application (self-initiated, outside core role scope) that allowed vendors to commission hardware without Amazon engineers on-site. Reduced new site bring-up time by over 3 weeks and saved hundreds of thousands of dollars per year in travel costs.</li>
         </ul>
       </article>
 
       <article class="resume-role">
         <div class="resume-role-header">
           <div>
-            <h3 class="resume-role-title">Software Development Engineer Intern, Pick UI</h3>
+            <h3 class="resume-role-title">Software Manager, Labor Planning</h3>
             <p class="resume-role-org">Amazon</p>
           </div>
-          <div class="resume-role-date">2013</div>
+          <div class="resume-role-date">2016–Aug 2018</div>
         </div>
         <p class="resume-role-copy">
-          Summer internship focused on user interface work tied to warehouse picking workflows. It was my first real exposure to large-scale operational software and the standards expected inside a major engineering organization.
+          Managed a team of seven engineers to redesign and rebuild the labor planning system used across Amazon fulfillment centers.
+        </p>
+        <ul class="resume-role-bullets">
+          <li>Championed adoption of React and TypeScript, migrating from legacy Backbone.js and Angular frontends.</li>
+          <li>Productionized a research scientist's paper by completely rewriting the labor planning engine — automated attendance forecasting, attrition modeling, new-hire planning, and voluntary overtime postings.</li>
+          <li>Built productivity workflows, modeling pipelines, and linear regression systems for workforce optimization.</li>
+        </ul>
+      </article>
+
+      <article class="resume-role">
+        <div class="resume-role-header">
+          <div>
+            <h3 class="resume-role-title">SDE I, Labor Planning</h3>
+            <p class="resume-role-org">Amazon</p>
+          </div>
+          <div class="resume-role-date">2014–2016</div>
+        </div>
+        <p class="resume-role-copy">
+          Wrote software automating the labor planning process: new-hire pipelines, voluntary overtime postings, and labor management. Built automated attendance and attrition models used for workforce forecasting.
+        </p>
+      </article>
+
+      <article class="resume-role">
+        <div class="resume-role-header">
+          <div>
+            <h3 class="resume-role-title">Software Development Engineer Intern, PIC UI Team</h3>
+            <p class="resume-role-org">Amazon</p>
+          </div>
+          <div class="resume-role-date">Summer 2013</div>
+        </div>
+        <p class="resume-role-copy">
+          Developed user interfaces for handheld scanners used by associates in Amazon fulfillment centers.
         </p>
       </article>
 
@@ -118,10 +165,10 @@ excerpt: "Resume for Graham Mackie covering internships, labor planning, warehou
             <h3 class="resume-role-title">Software Development Engineer Intern, Affiliate Points Program</h3>
             <p class="resume-role-org">Under Armour</p>
           </div>
-          <div class="resume-role-date">2012</div>
+          <div class="resume-role-date">Summer 2012</div>
         </div>
         <p class="resume-role-copy">
-          Worked on the affiliate points program as an early software engineering internship. It was a strong introduction to shipping production web software inside a consumer-facing business.
+          Worked on the affiliate points program, shipping production web software inside a consumer-facing business.
         </p>
       </article>
     </section>
@@ -129,23 +176,36 @@ excerpt: "Resume for Graham Mackie covering internships, labor planning, warehou
 
   <aside>
     <section class="resume-section resume-side-block">
-      <h2>Strengths</h2>
+      <h2>What I Bring</h2>
       <ul class="resume-side-list">
-        <li>Technical leadership for operationally critical systems</li>
-        <li>Incident response, oncall quality, and operational excellence</li>
-        <li>Labor planning, scheduling, and fulfillment-domain software</li>
-        <li>Warehouse controls and software-to-automation boundaries</li>
-        <li>Writing-driven design reviews and decision making</li>
-        <li>Hiring, coaching, and management in high-expectation environments</li>
+        <li>Product instinct — I care about what gets shipped and why, not just the code</li>
+        <li>Hardware-to-cloud range — PCB design through production cloud infrastructure</li>
+        <li>The go-to person operations teams call to get unblocked</li>
+        <li>10+ ventures launched in 4 months across infra, AI, IoT, media, and more</li>
+        <li>Amazon-scale distributed systems and incident response</li>
       </ul>
     </section>
 
     <section class="resume-section resume-side-block">
-      <h2>Career Arc</h2>
+      <h2>Certifications</h2>
       <ul class="resume-side-list">
-        <li>Intern → full-time SDE → SDE II → SDM → deployment engineering → SDM → tech lead / Sr SDE</li>
-        <li>Experience spanning consumer-adjacent software, fulfillment operations, internal platforms, and industrial controls</li>
-        <li>Strong preference for systems with real feedback loops, clear ownership, and measurable operational consequences</li>
+        <li>AWS Solutions Architect — Associate</li>
+        <li>AWS Certified Security — Specialty</li>
+        <li>OSCP — Expected June 2026</li>
+      </ul>
+    </section>
+
+    <section class="resume-section resume-side-block">
+      <h2>Skills</h2>
+      <ul class="resume-side-list">
+        <li><strong>Languages:</strong> TypeScript, Python, Go, C/C++, Rust, Bash, SQL</li>
+        <li><strong>Cloud:</strong> AWS, Cloudflare Workers, Hetzner, Tailscale, Nix, Docker, K8s</li>
+        <li><strong>Backend:</strong> Node.js, Postgres, Redis, tRPC, Drizzle, WebSockets</li>
+        <li><strong>Frontend:</strong> React, Next.js, Tailwind CSS</li>
+        <li><strong>Hardware:</strong> KiCad, embedded firmware, USB-PD, PLCs, IoT</li>
+        <li><strong>AI:</strong> Claude Code, multi-agent workflows, prompt engineering</li>
+        <li><strong>Security:</strong> Pen testing, threat modeling, ICS cybersecurity</li>
+        <li><strong>Media:</strong> Final Cut Pro, Premiere Pro, OBS, SRT/RIST</li>
       </ul>
     </section>
 
@@ -156,6 +216,15 @@ excerpt: "Resume for Graham Mackie covering internships, labor planning, warehou
         <p>BSE, Computer Engineering</p>
         <p>2010–2014</p>
       </div>
+    </section>
+
+    <section class="resume-section resume-side-block">
+      <h2>Projects</h2>
+      <ul class="resume-side-list">
+        <li><strong>USB-PD PSU</strong> — Custom USB Power Delivery source board</li>
+        <li><strong>WLED PCB</strong> — Addressable LED controller boards</li>
+        <li><strong>Van Control</strong> — Full electrical control plane with firmware + cloud telemetry</li>
+      </ul>
     </section>
   </aside>
 </div>
