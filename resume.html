@@ -2,14 +2,14 @@
 layout: resume
 title: Resume
 permalink: /resume/
-excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale operations, a venture portfolio, and hardware-to-cloud range."
+excerpt: "Resume for Graham Mackie — engineer, founder, hardware tinkerer. Ten years at Amazon, now building a portfolio of ventures."
 ---
 <header class="resume-hero">
   <div>
     <h1 class="resume-title">Graham Mackie</h1>
-    <p class="resume-subtitle">Product-minded engineer with Amazon-scale operations, a venture portfolio, and hardware-to-cloud range.</p>
+    <p class="resume-subtitle">Engineer and founder. Ten years at Amazon, now building a portfolio of ventures across hardware, software, and everything in between.</p>
     <p class="resume-summary">
-      12+ years spanning Amazon fulfillment systems, cloud infrastructure, security, industrial automation, and embedded hardware. Spent a decade at Amazon progressing from intern to software manager and tech lead — the go-to person field operations reached out to when they needed issues resolved, features built, or workarounds to get unblocked. Since leaving in January 2026, launched a portfolio of ventures across infrastructure, AI, IoT, industrial controls, gaming, streaming, and education. AWS Solutions Architect and Security certified. OSCP expected June 2026.
+      12+ years of experience across fulfillment systems, cloud infrastructure, security, industrial automation, and embedded hardware. At Amazon I went from intern to software manager and tech lead. Operations teams pulled me in when they needed something fixed, built, or worked around. Since leaving in January 2026, I've launched {{ site.data.ventures | size }} ventures covering infrastructure, AI, IoT, industrial controls, gaming, streaming, and education. AWS Solutions Architect and Security certified. OSCP expected June 2026.
     </p>
   </div>
 
@@ -36,15 +36,15 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Jan 2026–Present</div>
         </div>
         <p class="resume-role-copy">
-          Building a portfolio of ventures across infrastructure, AI, IoT, industrial controls, gaming, media, and education — shipping production software across all of them.
+          Running {{ site.data.ventures | size }} ventures. Writing production code for all of them.
         </p>
         <ul class="resume-role-bullets">
-          <li><strong>ForgeGraph</strong> — Multi-node deployment platform on Cloudflare Workers, Hetzner bare-metal, and Tailscale mesh. Automated provisioning, health monitoring, edge proxy routing, and database management.</li>
-          <li><strong>GenTrellis</strong> — Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built NVIDIA hardware with hybrid Bedrock routing, protection levels, and immutable audit logs.</li>
-          <li><strong>Controls Foundry</strong> — AI-powered PLC analysis platform. Upload any legacy PLC program for instant analysis, annotated ladder logic, and migration planning.</li>
-          <li><strong>DriftPort</strong> — IoT monitoring for van/RV electrical systems. Custom PCB design, embedded firmware, and cloud dashboard with live telemetry and OTA updates.</li>
-          <li><strong>Stream Conductor</strong> — Cloud streaming control room for teams. Multi-platform output (Twitch/YouTube/Kick), role-based permissions, sub-second latency via SRT/RIST.</li>
-          <li><strong>BizPulse</strong> — AI business intelligence with multi-agent workflows, 10+ integration connectors, and automated remote job search pipeline.</li>
+          <li><strong>ForgeGraph</strong> — Deployment platform I use to run everything else. Cloudflare Workers, Hetzner bare-metal, Tailscale mesh. Handles provisioning, health checks, edge routing, and databases.</li>
+          <li><strong>GenTrellis</strong> — On-prem AI inference boxes for companies that can't send data to the cloud. Custom NVIDIA hardware, hybrid Bedrock routing, audit logs.</li>
+          <li><strong>Controls Foundry</strong> — Upload a legacy PLC program, get back annotated ladder logic and a migration plan. Built for the plants still running code from 2004.</li>
+          <li><strong>DriftPort</strong> — Monitors van/RV electrical systems. I designed the PCB, wrote the firmware, built the cloud dashboard. Live telemetry and OTA updates.</li>
+          <li><strong>Stream Conductor</strong> — Streaming control room for teams. Multi-platform output (Twitch/YouTube/Kick), role-based permissions, sub-second latency via SRT/RIST.</li>
+          <li><strong>BizPulse</strong> — Business intelligence tool with multi-agent AI workflows and 10+ integrations. Also has an automated remote job search pipeline because I needed one.</li>
         </ul>
       </article>
 
@@ -57,13 +57,13 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Nov 2021–Jan 2026</div>
         </div>
         <p class="resume-role-copy">
-          Tech lead for incident response and order management across SubSame Day and grocery delivery operations. Built systems that replaced manual operational processes with automated, weather-aware decision engines.
+          Tech lead for incident response and order management in SubSame Day and grocery delivery. Killed a lot of spreadsheets.
         </p>
         <ul class="resume-role-bullets">
-          <li>Built an automated disruption response system that replaced a manual Excel process — integrated weather forecasting to automatically adjust delivery operations ahead of weather events, ensuring on-time delivery and preventing over-scheduling during reduced capacity.</li>
-          <li>Evolved the system from manual spreadsheet to web tool to fully automated, running multiple times per day with customer-configured actions for different disruption types (weather, mechanical failures, city events).</li>
-          <li>Designed a complex execution engine to process multiple operational levers across different disruption categories. Coordinated across many stakeholder teams.</li>
-          <li>Built an internal location unification service that standardized fulfillment center and operational entity names across business domains, replacing hard-coded lists.</li>
+          <li>Built a disruption response system that replaced a manual Excel process. Integrated weather forecasting so delivery ops adjusted automatically before storms hit instead of scrambling after.</li>
+          <li>Evolved the system from spreadsheet to web tool to fully automated, running multiple times per day. Customers configured their own actions for different disruption types (weather, mechanical failures, city events).</li>
+          <li>Designed the execution engine that processed operational levers across disruption categories. Lots of cross-team coordination.</li>
+          <li>Built an internal service that standardized fulfillment center names across business domains, replacing hard-coded lists that everyone maintained slightly differently.</li>
         </ul>
       </article>
 
@@ -76,11 +76,11 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Oct 2019–Nov 2021</div>
         </div>
         <p class="resume-role-copy">
-          Replaced the legacy scheduling software for Global Specialty Fulfillment, Small Grocery, and SubSame Day with a new system designed for scale.
+          Replaced the legacy scheduling software for Global Specialty Fulfillment, Small Grocery, and SubSame Day.
         </p>
         <ul class="resume-role-bullets">
-          <li>Delivered the new system across the entire GSF network (60,000 associates) in 8 months — working directly with customers and product managers to shape design and hit the launch deadline.</li>
-          <li>Wrote migration scripts to import scheduling opportunities from the legacy planning system and worked hands-on with business owners through the cutover.</li>
+          <li>Shipped the new system across the entire GSF network (60,000 associates) in 8 months. Worked directly with customers and PMs on design and hit the launch deadline.</li>
+          <li>Wrote migration scripts from the legacy planning system and worked hands-on with business owners through the cutover.</li>
           <li>Designed for up to 10,000 transactions per second on the shift databases.</li>
         </ul>
       </article>
@@ -94,7 +94,7 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Mar 2019–Oct 2019</div>
         </div>
         <p class="resume-role-copy">
-          Built the ShiftSwap application enabling warehouse associates to swap scheduled shifts with each other, improving schedule flexibility across fulfillment operations.
+          Built ShiftSwap, which let warehouse associates swap scheduled shifts with each other.
         </p>
       </article>
 
@@ -107,11 +107,11 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Aug 2018–Mar 2019</div>
         </div>
         <p class="resume-role-copy">
-          Worked alongside third-party vendors to deploy hardware solutions in fulfillment centers, bridging the gap between physical systems and cloud infrastructure.
+          Deployed hardware in fulfillment centers with third-party vendors. Got PLCs talking to the cloud.
         </p>
         <ul class="resume-role-bullets">
-          <li>Connected vendor PLCs to the Amazon network and integrated them with cloud-based monitoring and control software.</li>
-          <li>Built an auto-commissioning web application (self-initiated, outside core role scope) that allowed vendors to commission hardware without Amazon engineers on-site. Reduced new site bring-up time by over 3 weeks and saved hundreds of thousands of dollars per year in travel costs.</li>
+          <li>Connected vendor PLCs to the Amazon network and wired them into cloud monitoring and control software.</li>
+          <li>Built an auto-commissioning web app on my own initiative (not part of my job) that let vendors commission hardware without an Amazon engineer on-site. Cut new site bring-up time by 3+ weeks and saved hundreds of thousands per year in travel costs.</li>
         </ul>
       </article>
 
@@ -124,12 +124,12 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">2016–Aug 2018</div>
         </div>
         <p class="resume-role-copy">
-          Managed a team of seven engineers to redesign and rebuild the labor planning system used across Amazon fulfillment centers.
+          Managed seven engineers. Rebuilt the labor planning system used across Amazon fulfillment centers.
         </p>
         <ul class="resume-role-bullets">
-          <li>Championed adoption of React and TypeScript, migrating from legacy Backbone.js and Angular frontends.</li>
-          <li>Productionized a research scientist's paper by completely rewriting the labor planning engine — automated attendance forecasting, attrition modeling, new-hire planning, and voluntary overtime postings.</li>
-          <li>Built productivity workflows, modeling pipelines, and linear regression systems for workforce optimization.</li>
+          <li>Moved the frontend from Backbone.js and Angular to React and TypeScript.</li>
+          <li>Took a research scientist's paper and turned it into a production labor planning engine: attendance forecasting, attrition modeling, new-hire planning, and voluntary overtime postings.</li>
+          <li>Built productivity workflows and linear regression pipelines for workforce planning.</li>
         </ul>
       </article>
 
@@ -142,7 +142,7 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">2014–2016</div>
         </div>
         <p class="resume-role-copy">
-          Wrote software automating the labor planning process: new-hire pipelines, voluntary overtime postings, and labor management. Built automated attendance and attrition models used for workforce forecasting.
+          Wrote software to automate labor planning: new-hire pipelines, voluntary overtime postings, labor management. Built the attendance and attrition models used for workforce forecasting.
         </p>
       </article>
 
@@ -155,7 +155,7 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Summer 2013</div>
         </div>
         <p class="resume-role-copy">
-          Developed user interfaces for handheld scanners used by associates in Amazon fulfillment centers.
+          Built UI for the handheld scanners used by associates in fulfillment centers.
         </p>
       </article>
 
@@ -168,7 +168,7 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
           <div class="resume-role-date">Summer 2012</div>
         </div>
         <p class="resume-role-copy">
-          Worked on the affiliate points program, shipping production web software inside a consumer-facing business.
+          Worked on the affiliate points program. Shipped production web software.
         </p>
       </article>
     </section>
@@ -178,11 +178,11 @@ excerpt: "Resume for Graham Mackie — product-minded engineer with Amazon-scale
     <section class="resume-section resume-side-block">
       <h2>What I Bring</h2>
       <ul class="resume-side-list">
-        <li>Product instinct — I care about what gets shipped and why, not just the code</li>
-        <li>Hardware-to-cloud range — PCB design through production cloud infrastructure</li>
-        <li>The go-to person operations teams call to get unblocked</li>
-        <li>10+ ventures launched in 4 months across infra, AI, IoT, media, and more</li>
-        <li>Amazon-scale distributed systems and incident response</li>
+        <li>I care about what ships and why, not just the code</li>
+        <li>Comfortable from PCB layout to production cloud infra</li>
+        <li>The person ops teams kept pulling into rooms</li>
+        <li>{{ site.data.ventures | size }} ventures launched since January 2026</li>
+        <li>Distributed systems and incident response at Amazon scale</li>
       </ul>
     </section>
 
