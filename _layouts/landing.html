@@ -62,7 +62,7 @@ layout: default
       <p class="landing-kicker">Ventures</p>
       <h2>Current portfolio</h2>
       <p>
-        11 companies and product bets. All running on the same shared infra I built. Click any card to see the project.
+        {{ site.data.ventures | size }} companies and product bets. All running on the same shared infra I built. Click any card to see the project.
       </p>
     </div>
 
@@ -149,7 +149,7 @@ layout: default
       </div>
       <div class="overview-card">
         <h3>Since Leaving</h3>
-        <p>{{ site.data.ventures | size }} ventures in four months. I design PCBs in KiCad, write embedded firmware, deploy cloud infra, and sometimes all three in the same week. I like switching contexts. Sue me.</p>
+        <p>{{ site.data.ventures | size }} ventures since January. I design PCBs in KiCad, write embedded firmware, deploy cloud infra, and sometimes all three in the same week. I like switching contexts. Sue me.</p>
       </div>
       <div class="overview-card">
         <h3>What I'm Into</h3>
