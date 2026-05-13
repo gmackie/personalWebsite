@@ -69,10 +69,10 @@ layout: default
       </p>
     </div>
 
-    {% assign infra = site.data.ventures | where_exp: "v", "v.category == 'infrastructure' or v.category == 'ai-infra'" %}
-    {% assign games = site.data.ventures | where_exp: "v", "v.category == 'edtech' or v.category == 'gamedev' or v.category == 'consumer'" %}
-    {% assign ops = site.data.ventures | where_exp: "v", "v.category == 'industrial' or v.category == 'workflow' or v.category == 'iot'" %}
-    {% assign standalone = site.data.ventures | where_exp: "v", "v.category == 'media' or v.category == 'proptech'" %}
+    {% assign infra = site.data.ventures | where_exp: "v", "v.category == 'infrastructure' or v.category == 'ai-infra'" | where_exp: "v", "v.experiment != true" %}
+    {% assign games = site.data.ventures | where_exp: "v", "v.category == 'edtech' or v.category == 'gamedev' or v.category == 'consumer'" | where_exp: "v", "v.experiment != true" %}
+    {% assign ops = site.data.ventures | where_exp: "v", "v.category == 'industrial' or v.category == 'workflow' or v.category == 'iot'" | where_exp: "v", "v.experiment != true" %}
+    {% assign standalone = site.data.ventures | where_exp: "v", "v.category == 'media' or v.category == 'proptech'" | where_exp: "v", "v.experiment != true" %}
     {% assign experiments = site.data.ventures | where: "experiment", true %}
 
     <div class="venture-group">
