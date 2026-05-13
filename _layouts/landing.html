@@ -20,7 +20,7 @@ layout: default
 
     <div class="landing-actions">
       <a class="landing-button primary" href="{{ site.owner.calendly }}">Let's Talk</a>
-      <a class="landing-button" href="{{ site.url }}/resume/">Resume</a>
+      <a class="landing-button" href="{{ site.baseurl }}/resume/">Resume</a>
       <a class="landing-button" href="https://linkedin.com/in/{{ site.owner.linkedin }}">LinkedIn</a>
       <a class="landing-button" href="https://github.com/{{ site.owner.github }}">GitHub</a>
     </div>
@@ -54,7 +54,7 @@ layout: default
       </div>
       {% endfor %}
     </div>
-    <p class="landing-section-link"><a href="{{ site.url }}/changelog/">Full changelog &rarr;</a></p>
+    <p class="landing-section-link"><a href="{{ site.baseurl }}/changelog/">Full changelog &rarr;</a></p>
   </section>
   {% endif %}
 
@@ -131,7 +131,7 @@ layout: default
     <p class="empty-state">No ventures yet.</p>
     {% endunless %}
 
-    <p class="landing-section-link"><a href="{{ site.url }}/ventures/">All ventures &rarr;</a></p>
+    <p class="landing-section-link"><a href="{{ site.baseurl }}/ventures/">All ventures &rarr;</a></p>
   </section>
 
   <hr class="section-rule scroll-rule-draw">
@@ -168,7 +168,7 @@ layout: default
           <li><strong>{{ career.job }}</strong> — {{ career.name }}</li>
           {% endfor %}
         </ul>
-        <p style="margin-top: 8px;"><a href="{{ site.url }}/resume/">Full resume &rarr;</a></p>
+        <p style="margin-top: 8px;"><a href="{{ site.baseurl }}/resume/">Full resume &rarr;</a></p>
       </div>
       <div class="overview-card">
         <h3>Stack</h3>
@@ -179,7 +179,7 @@ layout: default
           <li>React, Next.js, Postgres, tRPC</li>
           <li>Claude Code, AI agents, streaming</li>
         </ul>
-        <p style="margin-top: 8px;"><a href="{{ site.url }}/uses/">Full setup &rarr;</a></p>
+        <p style="margin-top: 8px;"><a href="{{ site.baseurl }}/uses/">Full setup &rarr;</a></p>
       </div>
       <div class="overview-card">
         <h3>Say Hi</h3>
@@ -187,7 +187,7 @@ layout: default
           <li><a href="{{ site.owner.calendly }}">Grab time on my calendar</a></li>
           <li><a href="https://linkedin.com/in/{{ site.owner.linkedin }}">LinkedIn</a></li>
           <li><a href="https://github.com/{{ site.owner.github }}">GitHub</a></li>
-          <li><a href="{{ site.url }}/now/">What I'm doing now</a></li>
+          <li><a href="{{ site.baseurl }}/now/">What I'm doing now</a></li>
         </ul>
       </div>
     </div>
@@ -213,7 +213,7 @@ layout: default
       {% for post in site_posts limit:3 %}
       <article class="blog-tease-card">
         <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
-        <h3><a href="{{ site.url }}{{ post.url }}.html">{{ post.title }}</a></h3>
+        <h3><a href="{{ site.baseurl }}{{ post.url }}.html">{{ post.title }}</a></h3>
         {% if post.excerpt %}
         <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
         {% endif %}
@@ -222,7 +222,7 @@ layout: default
     </div>
 
     <p class="landing-section-link">
-      <a href="{{ site.url }}/blog/">Browse all posts &rarr;</a>
+      <a href="{{ site.baseurl }}/blog/">Browse all posts &rarr;</a>
     </p>
   </section>
 </div>

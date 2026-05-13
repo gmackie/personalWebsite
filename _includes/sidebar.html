@@ -13,42 +13,42 @@
 
 <div class="cover-card table-cell table-middle">
   {% if site.site_id == 'personal' and site.personal_avatar_image %}
-  <img src="{{ site.url }}{{ site.personal_avatar_image }}" alt="{{ sidebar_name }}" class="avatar">
+  <img src="{{ site.baseurl }}{{ site.personal_avatar_image }}" alt="{{ sidebar_name }}" class="avatar">
   {% elsif sidebar_avatar %}
-  <img src="{{ site.url }}/img/{{ sidebar_avatar }}" alt="" class="avatar">
+  <img src="{{ site.baseurl }}/img/{{ sidebar_avatar }}" alt="" class="avatar">
   {% endif %}
-  <a href="{{ site.url }}/" class="author_name">{{ sidebar_name }}</a>
+  <a href="{{ site.baseurl }}/" class="author_name">{{ sidebar_name }}</a>
   <span class="author_job">{{ sidebar_job }}</span>
   <span class="author_bio mbm">{{ sidebar_bio }}</span>
   <nav class="nav">
     <ul class="nav-list">
       {% if site.site_id == 'gmacko' or site.site_id == nil %}
       <li class="nav-item">
-        <a href="{{ site.url }}/">home</a>
+        <a href="{{ site.baseurl }}/">home</a>
         <span>/</span>
       </li>
       <li class="nav-item">
-        <a href="{{ site.url }}/ventures/">ventures</a>
+        <a href="{{ site.baseurl }}/ventures/">ventures</a>
         <span>/</span>
       </li>
       <li class="nav-item">
-        <a href="{{ site.url }}/blog/">blog</a>
+        <a href="{{ site.baseurl }}/blog/">blog</a>
         <span>/</span>
       </li>
       <li class="nav-item">
-        <a href="{{ site.url }}/resume/">resume</a>
+        <a href="{{ site.baseurl }}/resume/">resume</a>
       </li>
       {% elsif site.site_id == 'personal' %}
       <li class="nav-item">
-        <a href="{{ site.url }}/">home</a>
+        <a href="{{ site.baseurl }}/">home</a>
         <span>/</span>
       </li>
       <li class="nav-item">
-        <a href="{{ site.url }}/blog/">blog</a>
+        <a href="{{ site.baseurl }}/blog/">blog</a>
       </li>
       {% elsif site.site_id == 'gmac' %}
       <li class="nav-item">
-        <a href="{{ site.url }}/">dashboard</a>
+        <a href="{{ site.baseurl }}/">dashboard</a>
       </li>
       {% endif %}
     </ul>
