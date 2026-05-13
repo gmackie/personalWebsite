@@ -19,7 +19,7 @@ Dark mode only. Neon accents for status signaling.
 | --surface-2 | #242424 | Elevated surfaces |
 | --text | #E0E0E0 | Body text |
 | --text-strong | #FFFFFF | Headlines |
-| --muted | #707070 | Secondary text |
+| --muted | #808080 | Secondary text |
 | --accent | #BF5AF2 | Neon purple — primary accent, headers, labels |
 | --accent-hover | #A344D4 | Hover state |
 | --rule | #2A2A2A | Card borders, grid lines |
@@ -32,7 +32,7 @@ Dark mode only. Neon accents for status signaling.
 | Live | #00FF88 | `box-shadow: 0 0 8px #00FF88` |
 | Degraded | #FFB800 | `box-shadow: 0 0 8px #FFB800`, slow pulse |
 | Down | #FF3366 | `box-shadow: 0 0 8px #FF3366` |
-| Coming soon | #707070 | No glow |
+| Coming soon | #808080 | No glow |
 | Local only | #00BFFF | `box-shadow: 0 0 6px #00BFFF` |
 
 ## Visual Treatment
