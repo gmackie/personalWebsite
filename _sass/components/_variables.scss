@@ -108,6 +108,14 @@
 }
 :root[data-theme="dark"] .theme-toggle .theme-toggle-icon::before { content: '☾'; }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
 // ============================================================
 // Sass Variables (backwards compat, referencing custom properties)
 // ============================================================
