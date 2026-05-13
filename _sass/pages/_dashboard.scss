@@ -259,7 +259,7 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: $small-screen) {
   .proto-header { flex-wrap: wrap; }
   .log-entry { flex-direction: column; gap: 2px; }
   .dashboard-status-legend { flex-wrap: wrap; gap: 12px; }

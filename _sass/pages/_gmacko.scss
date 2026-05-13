@@ -177,7 +177,7 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: $small-screen) {
   .gmacko-nav-inner {
     flex-wrap: wrap;
     gap: 8px;

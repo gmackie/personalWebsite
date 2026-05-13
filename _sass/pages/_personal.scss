@@ -195,7 +195,7 @@
 }
 
 /* Responsive — sidebar collapses to top */
-@media (max-width: 768px) {
+@media (max-width: $tablet-screen) {
   .personal-layout {
     grid-template-columns: 1fr;
   }
