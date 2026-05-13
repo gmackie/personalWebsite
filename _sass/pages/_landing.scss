@@ -40,7 +40,7 @@
 }
 
 .landing-hero {
-  border-bottom: 2px solid var(--rule-heavy);
+  border-bottom: 4px solid var(--rule-heavy);
   padding: 0 0 48px;
 }
 
@@ -73,13 +73,14 @@
 }
 
 .landing-hero h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 900;
-  line-height: 1.02;
-  margin: 0 0 16px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px;
 
   @include media-query($small-screen) {
-    font-size: 4rem;
+    font-size: 5.5rem;
   }
 }
 
@@ -88,6 +89,14 @@
   line-height: 1.6;
   margin: 0;
   max-width: 46rem;
+}
+
+.landing-intro-sub {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  margin-top: 12px;
 }
 
 .landing-hero-aside {
@@ -138,20 +147,30 @@
 }
 
 .landing-button {
-  border: 1px solid var(--rule);
+  border: 3px solid var(--text);
   border-radius: 4px;
   color: var(--text);
   display: inline-block;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 10px 14px;
   text-decoration: none;
+  text-transform: uppercase;
+  transform: rotate(var(--r, 0deg));
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+
+  &:nth-child(1) { --r: -1.5deg; }
+  &:nth-child(2) { --r: 1deg; }
+  &:nth-child(3) { --r: -0.5deg; }
+  &:nth-child(4) { --r: 2deg; }
 
   &:hover,
   &:focus {
+    --r: 0deg;
     border-color: var(--accent);
-    color: var(--accent-hover);
+    color: var(--accent);
   }
 
   &.primary {
@@ -164,12 +183,13 @@
       background: var(--accent-hover);
       border-color: var(--accent-hover);
       color: var(--bg);
+      --r: 0deg;
     }
   }
 }
 
 .landing-section {
-  border-top: 2px solid var(--rule-heavy);
+  border-top: 4px solid var(--rule-heavy);
   padding-top: 48px;
 }
 
@@ -183,9 +203,17 @@
 }
 
 .landing-section-header h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin: 0 0 8px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  display: inline-block;
+  border-bottom: 4px solid var(--accent);
+  padding-bottom: 4px;
+
+  @include media-query($small-screen) {
+    font-size: 3.5rem;
+  }
 }
 
 .landing-section-header p:last-child {
@@ -226,23 +254,28 @@
   grid-template-columns: repeat(1, minmax(0, 1fr));
 
   @include media-query(600px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+    .startup-card:nth-child(3n+1) {
+      grid-column: span 2;
+    }
   }
 }
 
 .startup-card {
   background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
+  border: 3px solid var(--rule);
+  border-radius: 2px;
   color: inherit;
   display: block;
   overflow: hidden;
   text-decoration: none;
+  transition: border-color 150ms ease, transform 150ms ease;
 
   &:hover,
   &:focus {
     border-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
   }
 }
 
@@ -412,9 +445,9 @@
 .credential-value {
   color: var(--text-strong);
   display: block;
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  font-weight: 900;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
   margin-bottom: 4px;
@@ -456,9 +489,19 @@
 
 .section-rule {
   border: none;
-  border-top: 2px solid var(--rule-heavy);
+  height: 4px;
+  background: var(--rule-heavy);
   margin: 48px auto;
   max-width: 960px;
+
+  &.scroll-rule-draw {
+    width: 0;
+    transition: width 400ms ease;
+
+    &.visible {
+      width: 100%;
+    }
+  }
 }
 
 // ---- Summary strip ----
@@ -533,6 +576,7 @@
 // ---- Status badges ----
 
 .status-badge {
+  border: 2px solid currentColor;
   border-radius: 4px;
   display: inline-block;
   font-family: var(--font-mono);
@@ -541,10 +585,14 @@
   letter-spacing: 0.08em;
   padding: 3px 8px;
   text-transform: uppercase;
+  transform: rotate(var(--r, 0deg));
+
+  &:nth-child(odd) { --r: 1deg; }
+  &:nth-child(even) { --r: -1deg; }
 }
 
 .status-active {
-  background: rgba(181, 69, 27, 0.12);
+  background: rgba(217, 58, 0, 0.12);
   color: var(--accent);
 }
 
@@ -583,9 +631,32 @@
   color: var(--muted);
 }
 
+// Dark mode status badge overrides
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    .status-shipping, .status-live { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+    .status-experiment { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
+    .status-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
+    .status-wip { color: #FBBF24; background: rgba(251, 191, 36, 0.12); }
+    .update-type-shipped { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+    .update-type-milestone { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
+    .update-type-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
+  }
+}
+:root[data-theme="dark"] {
+  .status-shipping, .status-live { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+  .status-experiment { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
+  .status-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
+  .status-wip { color: #FBBF24; background: rgba(251, 191, 36, 0.12); }
+  .update-type-shipped { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+  .update-type-milestone { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
+  .update-type-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
+}
+
 // ---- Update type badges ----
 
 .update-type-badge {
+  border: 2px solid currentColor;
   border-radius: 4px;
   display: inline-block;
   font-family: var(--font-mono);
@@ -594,6 +665,7 @@
   letter-spacing: 0.06em;
   padding: 2px 6px;
   text-transform: uppercase;
+  transform: rotate(var(--r, 1deg));
 }
 
 .update-type-shipped   { background: rgba(45, 95, 26, 0.12); color: #2D5F1A; }
@@ -613,14 +685,19 @@
 }
 
 .venture-tag {
-  background: rgba(107, 97, 89, 0.1);
+  background: transparent;
+  border: 1px solid var(--rule);
   border-radius: 3px;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.04em;
   padding: 2px 6px;
+  transform: rotate(var(--r, 0deg));
+
+  &:nth-child(odd) { --r: 0.5deg; }
+  &:nth-child(even) { --r: -0.5deg; }
 }
 
 // ---- Venture thesis (on cards) ----

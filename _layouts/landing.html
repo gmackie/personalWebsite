@@ -10,9 +10,12 @@ layout: default
 <div class="landing-page">
   <section class="landing-hero">
     <p class="landing-kicker">Making stuff, usually too many things at once</p>
-    <h1>Graham Mackie</h1>
+    <h1>Graham<br>Mackie</h1>
     <p class="landing-intro">
-      Spent ten years at Amazon. Started as an intern, ended up as the person ops called when things were on fire. Left in January 2026 because I had too many ideas and not enough evenings. Now I design PCBs, write firmware, build cloud platforms, and stream it all on Twitch. {{ site.data.ventures | size }} ventures so far. Yes, really.
+      Left Amazon after a decade of shipping other people's roadmaps. Now I build my own. Infrastructure, games, hardware, whatever catches fire next — I ship it, break it, ship it again.
+    </p>
+    <p class="landing-intro landing-intro-sub">
+      Seattle. Remote-first. Probably building something right now.
     </p>
 
     <div class="landing-actions">
@@ -25,11 +28,11 @@ layout: default
     <div class="landing-credentials">
       <div class="credential-item">
         <span class="credential-value">12+</span>
-        <span class="credential-label">Years Shipping</span>
+        <span class="credential-label">Yrs Shipping</span>
       </div>
       <div class="credential-item">
         <span class="credential-value">{{ site.data.ventures | size }}</span>
-        <span class="credential-label">Ventures</span>
+        <span class="credential-label">Ventures Active</span>
       </div>
       <div class="credential-item">
         <span class="credential-value">10K</span>
@@ -55,14 +58,14 @@ layout: default
   </section>
   {% endif %}
 
-  <hr class="section-rule">
+  <hr class="section-rule scroll-rule-draw">
 
   <section class="landing-section">
     <div class="landing-section-header">
       <p class="landing-kicker">Ventures</p>
-      <h2>Current portfolio</h2>
+      <h2>What I'm building</h2>
       <p>
-        {{ site.data.ventures | size }} companies and product bets. All running on the same shared infra I built. Click any card to see the project.
+        {{ site.data.ventures | size }} bets. Same shared infra under all of them. Some will work, some won't. That's the point.
       </p>
     </div>
 
@@ -74,7 +77,7 @@ layout: default
 
     <div class="venture-group">
       <p class="venture-group-label">Infrastructure &amp; AI</p>
-      <p class="venture-group-desc">The platform layer. ForgeGraf deploys everything. GenTrellis puts AI on-prem.</p>
+      <p class="venture-group-desc">The platform layer. I deploy everything on ForgeGraf. GenTrellis puts AI where it can't phone home.</p>
       <div class="startup-grid">
         {% for venture in infra %}
         {% include venture-card.html venture=venture %}
@@ -84,7 +87,7 @@ layout: default
 
     <div class="venture-group">
       <p class="venture-group-label">Games &amp; Learning</p>
-      <p class="venture-group-desc">Educational games, AI-assisted game dev, and gamifying real life.</p>
+      <p class="venture-group-desc">Making kids smarter and adults more disciplined. Or trying to.</p>
       <div class="startup-grid">
         {% for venture in games %}
         {% include venture-card.html venture=venture %}
@@ -94,7 +97,7 @@ layout: default
 
     <div class="venture-group">
       <p class="venture-group-label">Operations &amp; Controls</p>
-      <p class="venture-group-desc">Control rooms for physical systems. Industrial PLCs, escape rooms, and van electrical.</p>
+      <p class="venture-group-desc">Software that talks to physical things. PLCs, escape rooms, van wiring.</p>
       <div class="startup-grid">
         {% for venture in ops %}
         {% include venture-card.html venture=venture %}
@@ -104,7 +107,7 @@ layout: default
 
     <div class="venture-group">
       <p class="venture-group-label">Standalone</p>
-      <p class="venture-group-desc">Products that stand on their own.</p>
+      <p class="venture-group-desc">Things that didn't fit a category. I built them anyway.</p>
       <div class="startup-grid">
         {% for venture in standalone %}
         {% include venture-card.html venture=venture %}
@@ -115,7 +118,7 @@ layout: default
     {% if experiments.size > 0 %}
     <div class="venture-group">
       <p class="venture-group-label">Experiments</p>
-      <p class="venture-group-desc">Wild bets. Not ventures yet. Might become one, might not.</p>
+      <p class="venture-group-desc">Wild bets. Half-baked on purpose. Might become something, might not.</p>
       <div class="startup-grid">
         {% for venture in experiments %}
         {% include venture-card.html venture=venture %}
@@ -131,29 +134,29 @@ layout: default
     <p class="landing-section-link"><a href="{{ site.url }}/ventures/">All ventures &rarr;</a></p>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule scroll-rule-draw">
 
   <section class="landing-section landing-overview">
     <div class="landing-section-header">
       <p class="landing-kicker">Background</p>
       <h2>How I got here</h2>
       <p>
-        Ten years at Amazon, then I quit to do all of it myself.
+        10 years. 5 roles. A lot of oncall pages. Then I walked out the door.
       </p>
     </div>
 
     <div class="overview-grid">
       <div class="overview-card">
         <h3>The Amazon Years</h3>
-        <p>Rewrote a labor planning engine from a research paper. Shipped a scheduling platform for 60K people in 8 months. Built a weather response system that killed a beloved spreadsheet process. Connected PLCs to the cloud. Mostly I just kept fixing the thing nobody else wanted to touch.</p>
+        <p>Rewrote a labor planning engine from a research paper. Shipped scheduling for 60K people in 8 months. Built a weather response system that killed a beloved spreadsheet. Connected PLCs to the cloud. Mostly I kept fixing the thing nobody else wanted to touch.</p>
       </div>
       <div class="overview-card">
-        <h3>Since Leaving</h3>
+        <h3>Since walking out</h3>
         <p>{{ site.data.ventures | size }} ventures since January. I design PCBs in KiCad, write embedded firmware, deploy cloud infra, and sometimes all three in the same week. I like switching contexts. Sue me.</p>
       </div>
       <div class="overview-card">
-        <h3>What I'm Into</h3>
-        <p>AI tooling (Claude is my favorite coworker, but I read every line it writes). Custom electronics and embedded systems. Streaming and video production. Security (AWS certs, working on OSCP). Basically anything where software meets a physical thing.</p>
+        <h3>Things I won't shut up about</h3>
+        <p>AI tooling (Claude is my favorite coworker, but I read every line it writes). Custom electronics and embedded systems. Streaming and video production. Security (AWS certs, working on OSCP). Anything where software meets a physical thing.</p>
       </div>
     </div>
 
@@ -190,14 +193,14 @@ layout: default
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule scroll-rule-draw">
 
   <section class="landing-section landing-blog-tease">
     <div class="landing-section-header">
       <p class="landing-kicker">Writing</p>
-      <h2>Latest from the blog</h2>
+      <h2>Latest posts</h2>
       <p>
-        Longer stuff about what I'm building and what I've learned along the way.
+        Build logs, mistakes, and the occasional opinion nobody asked for.
       </p>
     </div>
 

@@ -13,18 +13,24 @@
 // ============================================================
 
 :root {
-  // Colors
+  // Colors — "Digital Zine" palette
   --bg: #F7F3ED;
   --surface: #EFEBE4;
   --surface-2: #E6E0D7;
-  --text: #1A1714;
-  --text-strong: #110F0D;
+  --text: #0A0A0A;
+  --text-strong: #0A0A0A;
   --muted: #6B6159;
-  --accent: #B5451B;
-  --accent-hover: #9A3A17;
+  --accent: #D93A00;
+  --accent-hover: #B83200;
+  --highlight: #FFD600;
   --rule: #D4CABC;
-  --rule-heavy: #B8AB9A;
+  --rule-heavy: #0A0A0A;
   --white: #FDFBF8;
+
+  // Sticker treatment
+  --sticker-border: 3px solid var(--text);
+  --sticker-rotate: rotate(var(--r, 0deg));
+  --grain-opacity: 0.03;
 
   // Typography
   --font-display: 'Satoshi', sans-serif;
@@ -40,33 +46,39 @@
 // Dark mode — triggered by system preference OR data-theme attribute
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #171411;
-    --surface: #1E1B17;
+    --bg: #0F0D0B;
+    --surface: #1A1714;
     --surface-2: #262220;
-    --text: #E5DFD6;
-    --text-strong: #F5F0E8;
+    --text: #F0EBE3;
+    --text-strong: #FFFFFF;
     --muted: #8A8078;
-    --accent: #D4612E;
+    --accent: #FF4D00;
     --accent-hover: #E87040;
+    --highlight: #FFD600;
     --rule: #2E2A25;
-    --rule-heavy: #3D3732;
-    --white: #1E1B17;
+    --rule-heavy: #F0EBE3;
+    --white: #1A1714;
+    --sticker-border: 3px solid var(--text);
+    --grain-opacity: 0.02;
   }
 }
 
 // Manual dark mode toggle
 :root[data-theme="dark"] {
-  --bg: #171411;
-  --surface: #1E1B17;
+  --bg: #0F0D0B;
+  --surface: #1A1714;
   --surface-2: #262220;
-  --text: #E5DFD6;
-  --text-strong: #F5F0E8;
+  --text: #F0EBE3;
+  --text-strong: #FFFFFF;
   --muted: #8A8078;
-  --accent: #D4612E;
+  --accent: #FF4D00;
   --accent-hover: #E87040;
+  --highlight: #FFD600;
   --rule: #2E2A25;
-  --rule-heavy: #3D3732;
-  --white: #1E1B17;
+  --rule-heavy: #F0EBE3;
+  --white: #1A1714;
+  --sticker-border: 3px solid var(--text);
+  --grain-opacity: 0.02;
 }
 
 // Theme toggle button
@@ -131,13 +143,14 @@ $hr-border-width:        $border-width;
 $bg:               #F7F3ED;
 $surface:          #EFEBE4;
 $surface-2:        #E6E0D7;
-$text-color:       #1A1714;
-$text-strong:      #110F0D;
+$text-color:       #0A0A0A;
+$text-strong:      #0A0A0A;
 $muted:            #6B6159;
-$accent:           #B5451B;
-$accent-hover:     #9A3A17;
+$accent:           #D93A00;
+$accent-hover:     #B83200;
+$highlight:        #FFD600;
 $rule:             #D4CABC;
-$rule-heavy:       #B8AB9A;
+$rule-heavy:       #0A0A0A;
 
 $background-color: $bg;
 $white:            #FDFBF8;
