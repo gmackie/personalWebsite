@@ -277,6 +277,11 @@
     border-color: var(--accent);
     transform: translateY(-3px);
   }
+
+  &:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 .startup-thumb {
