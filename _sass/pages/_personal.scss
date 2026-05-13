@@ -75,7 +75,7 @@
   margin: 0 0 32px;
 }
 
-.sidebar-links li { padding: 4px 0; }
+.sidebar-links li { padding: 0; }
 
 .sidebar-links a {
   font-size: 14px;
@@ -85,6 +85,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 10px 0;
 }
 
 .sidebar-links a:hover { color: var(--accent); }
@@ -107,7 +108,7 @@
   margin: 0;
 }
 
-.sidebar-site-links li { padding: 4px 0; }
+.sidebar-site-links li { padding: 0; }
 
 .sidebar-site-links a {
   font-family: var(--font-mono);
@@ -116,6 +117,8 @@
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s;
+  padding: 10px 0;
+  display: inline-block;
 }
 
 .sidebar-site-links a:hover { color: var(--accent); }
