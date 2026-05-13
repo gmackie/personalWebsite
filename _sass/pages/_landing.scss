@@ -380,6 +380,14 @@
   margin-top: 6px;
 }
 
+.overview-list + p {
+  margin-top: 8px;
+}
+
+.overview-grid + .overview-grid {
+  margin-top: 16px;
+}
+
 .blog-tease-list {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 
