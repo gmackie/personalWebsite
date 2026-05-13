@@ -105,6 +105,8 @@
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s;
+  padding: 12px 0;
+  display: inline-block;
 }
 
 .gmacko-nav-links a:hover {
@@ -125,6 +127,8 @@
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s;
+  padding: 12px 0;
+  display: inline-block;
 }
 
 .gmacko-nav-crosslinks a:hover {
