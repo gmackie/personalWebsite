@@ -39,7 +39,7 @@
 }
 
 .dashboard-caveat {
-  color: #FFB800;
+  color: var(--status-degraded, #FFB800);
   text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
 }
 
@@ -70,29 +70,29 @@
 }
 
 .dot-active, .dot-live {
-  background: #00FF88;
-  box-shadow: 0 0 8px #00FF88;
+  background: var(--status-live, #00FF88);
+  box-shadow: 0 0 8px var(--status-live, #00FF88);
   animation: pulse 2s ease-in-out infinite;
 }
 
 .dot-degraded {
-  background: #FFB800;
-  box-shadow: 0 0 8px #FFB800;
+  background: var(--status-degraded, #FFB800);
+  box-shadow: 0 0 8px var(--status-degraded, #FFB800);
   animation: pulse 2s ease-in-out infinite;
 }
 
 .dot-down {
-  background: #FF3366;
-  box-shadow: 0 0 8px #FF3366;
+  background: var(--status-down, #FF3366);
+  box-shadow: 0 0 8px var(--status-down, #FF3366);
 }
 
 .dot-local {
-  background: #00BFFF;
-  box-shadow: 0 0 6px #00BFFF;
+  background: var(--status-local, #00BFFF);
+  box-shadow: 0 0 6px var(--status-local, #00BFFF);
 }
 
 .dot-coming, .dot-coming-soon {
-  background: var(--muted);
+  background: var(--status-coming, var(--muted));
 }
 
 .dot-loading {
