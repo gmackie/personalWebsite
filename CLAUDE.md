@@ -115,3 +115,21 @@ Hosted on Cloudflare Pages — three projects (`gmacko`, `personal`, `gmac`), ea
 - `gmac` → gmac.io — `--config _config.yml,_config.gmac.yml --destination _site_gmac`
 
 Deploys are manual via `./scripts/deploy-pages.sh <gmacko|personal|gmac|all>`, which builds with the matching `_config.*.yml` and runs `wrangler pages deploy` against the corresponding project. Requires `wrangler login` once.
+
+## Skill routing
+
+When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
+
+Key routing rules:
+- Product ideas/brainstorming → invoke /office-hours
+- Strategy/scope → invoke /plan-ceo-review
+- Architecture → invoke /plan-eng-review
+- Design system/plan review → invoke /design-consultation or /plan-design-review
+- Full review pipeline → invoke /autoplan
+- Bugs/errors → invoke /investigate
+- QA/testing site behavior → invoke /qa or /qa-only
+- Code review/diff check → invoke /review
+- Visual polish → invoke /design-review
+- Ship/deploy/PR → invoke /ship or /land-and-deploy
+- Save progress → invoke /context-save
+- Resume context → invoke /context-restore
