@@ -74,7 +74,7 @@
   health_endpoint: https://x402arena.gg
 
 - name: HabitPlay
-  feed_slug: habitplay
+  feed_slug: habit-app
   url: https://habitplay.io
   description: Gamified habit tracker with RPG progression, battles, and daily plans.
   status: active
@@ -82,6 +82,7 @@
   health_endpoint: https://habitplay.io
 
 - name: Festigram
+  feed_slug: festigram
   url: https://festigram.net
   description: Off-grid social media for festivals and large gatherings. Disposable-camera style posting with delayed reveals and sync that survives overloaded networks.
   status: coming-soon
@@ -93,6 +94,30 @@
   description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
   status: coming-soon
   stack: [experiment, concept, visual]
+
+- name: Test Dojo
+  feed_slug: test-dojo
+  url: https://dojo.gmac.io
+  description: Interview prep platform. Timed coding challenges, system design practice, behavioral question drills.
+  status: active
+  stack: [react, node, postgres]
+  health_endpoint: https://dojo.gmac.io
+
+- name: HypeMarker
+  feed_slug: hypemarker
+  url: https://hypemarker.com
+  description: Listens to Twitch chat in real time, detects peak hype moments, and timestamps them for easy clipping. Helps streamers find their viral clips.
+  status: active
+  stack: [node, twitch, websockets]
+  health_endpoint: https://eventsub.hypemarker.com
+
+- name: Turntable Bot
+  feed_slug: turntable-bot
+  url: https://turntable.bot
+  description: AI DJ that builds sets from your local music library. Reads the room, mixes tracks, takes requests.
+  status: active
+  stack: [node, ai, websockets]
+  health_endpoint: https://turntable.bot
 
 - name: blder.bot
   feed_slug: blder

@@ -1,6 +1,7 @@
 # Infrastructure services running on gmac.io nodes
 
 - name: ForgeGraf
+  feed_slug: forgegraph
   url: https://forgegraf.com
   description: Edge + bare metal delivery platform. Cloudflare Workers + Hetzner Nix closures.
   status: active
@@ -15,19 +16,13 @@
   stack: [go, nix, caddy]
   health_endpoint: https://git.gmac.io
 
-- name: Harbor
-  url: https://harbor.gmac.io
-  description: Container registry for staging and production images.
+- name: SigNoz
+  feed_slug: signoz
+  url: https://trace.forgegraf.com
+  description: Distributed tracing, metrics, and log aggregation. OpenTelemetry-native.
   status: active
-  stack: [docker, nix]
-  health_endpoint: https://harbor.gmac.io/api/v2.0/health
-
-- name: Kubernetes
-  url: https://k8s.gmac.io
-  description: Container orchestration for staging workloads on labnuc NUC.
-  status: active
-  stack: [k3s, nix]
-  internal: true
+  stack: [clickhouse, otel, nix]
+  health_endpoint: https://trace.forgegraf.com
 
 - name: Bob
   feed_slug: bob
