@@ -110,6 +110,12 @@
   50% { opacity: 0.7; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .dot-active, .dot-live, .dot-degraded, .dot-loading {
+    animation: none;
+  }
+}
+
 /* Section labels */
 .dashboard-section {
   margin-bottom: 48px;
