@@ -24,6 +24,13 @@
   stack: [clickhouse, otel, nix]
   health_endpoint: https://trace.forgegraf.com
 
+- name: Veritas
+  feed_slug: veritas
+  url: https://forgegraf.com
+  description: Evidence ingestion and verification platform for build artifacts and deployment attestations.
+  status: active
+  stack: [cloudflare-workers, forgegraph]
+
 - name: Bob
   feed_slug: bob
   url: https://bob.tail1e1a32.ts.net

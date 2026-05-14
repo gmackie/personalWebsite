@@ -161,10 +161,10 @@
   transform: rotate(var(--r, 0deg));
   transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
 
-  &:nth-child(1) { --r: -1.5deg; }
-  &:nth-child(2) { --r: 1deg; }
-  &:nth-child(3) { --r: -0.5deg; }
-  &:nth-child(4) { --r: 2deg; }
+  &:nth-child(1) { --r: -0.6deg; }
+  &:nth-child(2) { --r: 0.4deg; }
+  &:nth-child(3) { --r: -0.3deg; }
+  &:nth-child(4) { --r: 0.7deg; }
 
   &:hover,
   &:focus {
@@ -600,8 +600,8 @@
   text-transform: uppercase;
   transform: rotate(var(--r, 0deg));
 
-  &:nth-child(odd) { --r: 1deg; }
-  &:nth-child(even) { --r: -1deg; }
+  &:nth-child(odd) { --r: 0.4deg; }
+  &:nth-child(even) { --r: -0.4deg; }
 }
 
 .status-active {
@@ -678,7 +678,7 @@
   letter-spacing: 0.06em;
   padding: 2px 6px;
   text-transform: uppercase;
-  transform: rotate(var(--r, 1deg));
+  transform: rotate(var(--r, 0.4deg));
 }
 
 .update-type-shipped   { background: rgba(45, 95, 26, 0.12); color: #2D5F1A; }
@@ -709,8 +709,8 @@
   padding: 2px 6px;
   transform: rotate(var(--r, 0deg));
 
-  &:nth-child(odd) { --r: 0.5deg; }
-  &:nth-child(even) { --r: -0.5deg; }
+  &:nth-child(odd) { --r: 0.3deg; }
+  &:nth-child(even) { --r: -0.3deg; }
 }
 
 // ---- Venture thesis (on cards) ----

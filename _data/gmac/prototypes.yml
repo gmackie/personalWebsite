@@ -12,11 +12,11 @@
 
 - name: GenTrellis
   feed_slug: gentrellis
-  url: https://gentrellis.com
-  description: On-prem AI inference boxes for regulated SMBs. Hybrid Bedrock routing.
+  url: https://console.gentrellis.com
+  description: Observability platform with distributed tracing, metrics, and AI-powered log analysis.
   status: active
   stack: [python, vllm, nix, nvidia]
-  health_endpoint: https://gentrellis.com
+  health_endpoint: https://console.gentrellis.com
 
 - name: Controls Foundry
   feed_slug: controlsfoundry
@@ -28,11 +28,11 @@
 
 - name: LatchFlow
   feed_slug: latchflow
-  url: https://latchflow.io
-  description: Escape room operations. Live game control, puzzle orchestration, bookings.
+  url: https://latchflow.gmac.io
+  description: Escape room puzzle management and runtime system. Design flows visually, control IoT devices, run live games.
   status: active
   stack: [react, node, postgres]
-  health_endpoint: https://latchflow.io
+  health_endpoint: https://latchflow.gmac.io
 
 - name: AppealKey
   feed_slug: appealkey
@@ -44,27 +44,27 @@
 
 - name: DriftPort
   feed_slug: driftport
-  url: https://driftport.io
-  description: Van/RV IoT monitoring. Battery, solar, water, climate from your phone.
+  url: https://driftport.gmac.io
+  description: Data drift detection and schema evolution tracker for production pipelines.
   status: active
   stack: [react, go, iot]
-  health_endpoint: https://driftport.io
+  health_endpoint: https://driftport.gmac.io
 
 - name: LevelForge
   feed_slug: levelforge
-  url: https://levelforge.io
-  description: AI game dev IDE. Describe your game, agent builds it in Unity via MCP.
+  url: https://levelforge.gmac.io
+  description: Game asset catalog and AI gap-fill platform. Browse 45K+ CC0 assets, analyze coverage, generate missing pieces.
   status: active
   stack: [electron, unity, mcp, ai]
-  health_endpoint: https://levelforge.io
+  health_endpoint: https://levelforge.gmac.io
 
 - name: Stream Conductor
   feed_slug: streamconductor
-  url: https://streamconductor.com
-  description: Cloud streaming control room. Multi-platform, role-based, auto-failover.
+  url: https://streamconductor.gmac.io
+  description: Live stream orchestration, scene management, and automated production.
   status: active
   stack: [react, obs, srt]
-  health_endpoint: https://streamconductor.com
+  health_endpoint: https://streamconductor.gmac.io
 
 - name: x402 Arena
   url: https://x402arena.gg
@@ -75,23 +75,23 @@
 
 - name: HabitPlay
   feed_slug: habit-app
-  url: https://habitplay.io
-  description: Gamified habit tracker with RPG progression, battles, and daily plans.
+  url: https://habitplay.gmac.io
+  description: Gamified habit tracker that turns daily routines into streaks and achievements.
   status: active
   stack: [react, node, gamification]
-  health_endpoint: https://habitplay.io
+  health_endpoint: https://habitplay.gmac.io
 
 - name: Festigram
   feed_slug: festigram
-  url: https://festigram.net
-  description: Off-grid social media for festivals and large gatherings. Disposable-camera style posting with delayed reveals and sync that survives overloaded networks.
+  url: https://festigram.gmac.io
+  description: Festival and event discovery platform with lineup tracking and social coordination.
   status: coming-soon
   stack: [pwa, photos, offline-sync]
 
-- name: bizpulse.cc
+- name: BizPulse
   feed_slug: bizpulse
   url: https://bizpulse.cc
-  description: Experimental concept site added for screenshots, visual inventory, and future product exploration.
+  description: Business telemetry and status in one operator view.
   status: coming-soon
   stack: [experiment, concept, visual]
 
@@ -120,8 +120,58 @@
   health_endpoint: https://turntable.bot
 
 - name: blder.bot
-  feed_slug: blder
+  feed_slug: bob
   url: https://blder.bot
-  description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.
+  description: Agent-first build automation experiments.
   status: coming-soon
   stack: [experiment, bot, visual]
+
+- name: Poker Trainer
+  feed_slug: poker-trainer
+  url: https://poker.gmac.io
+  description: Professional poker training with AI opponents, hand analysis, and strategy coaching.
+  status: coming-soon
+  stack: [ai, gaming]
+
+- name: Power Grid
+  feed_slug: power-grid
+  url: https://power-grid.gmac.io
+  description: Digital adaptation of the classic Power Grid board game with Go backend and LOVE2D frontend.
+  status: coming-soon
+  stack: [go, love2d, multiplayer]
+
+- name: Crucible
+  feed_slug: crucible
+  url: https://crucible.gmac.io
+  description: Fasting-first diet and exercise tracker built around circadian rhythms.
+  status: coming-soon
+  stack: [health, fitness]
+
+- name: Trip Planner
+  feed_slug: trip
+  url: https://trip.gmac.io
+  description: Palantir-style family trip planner. Itineraries, logistics, and real-time coordination.
+  status: coming-soon
+  stack: [travel, planning]
+
+- name: Dronesplat
+  feed_slug: dronesplat
+  url: https://dronesplat.gmac.io
+  description: Drone flight planning, 3D gaussian splatting, and aerial photogrammetry toolkit.
+  status: coming-soon
+  stack: [drones, 3d, photogrammetry]
+
+- name: Filmroom
+  feed_slug: filmroom
+  url: https://filmroom.gmac.io
+  description: Film analysis and game tape review platform for sports coaching.
+  status: coming-soon
+  stack: [video, sports, coaching]
+
+- name: TwitchComms
+  feed_slug: twitchcomms
+  url: https://twitchcomms.gmac.io
+  description: Twitch chat analytics, moderation tools, and community engagement dashboard.
+  status: active
+  stack: [twitch, chat, moderation]
+  health_endpoint: https://twitchcomms.gmac.io

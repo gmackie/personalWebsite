@@ -132,6 +132,35 @@
   next_milestone: Public beta
   image: /img/ventures/stream-conductor.png
 
+- name: Turntable Bot
+  slug: turntable-bot
+  feed_slug: turntable-bot
+  domain: turntable.bot
+  url: https://turntable.bot
+  description: AI DJ that builds mixed sets from your local music library. You make the creative decisions, the bot handles beatmatching, transitions, and phrasing. Built for people with great taste who never learned to use CDJs.
+  thesis: DJing should be about taste, not technical skill with decks.
+  status: active
+  category: media
+  tags: [ai, music, dj, consumer]
+  shared_infra: [forgegraph]
+  last_updated: 2026-05-01
+  next_milestone: Public beta
+
+- name: HypeMarker
+  slug: hypemarker
+  feed_slug: hypemarker
+  domain: hypemarker.com
+  url: https://hypemarker.com
+  description: Listens to Twitch chat in real time, detects peak hype moments, and timestamps them for easy clipping. Helps streamers find their viral clips without scrubbing through hours of VOD.
+  thesis: The best stream moments are in chat, not the video timeline.
+  status: active
+  category: media
+  tags: [twitch, streaming, analytics, ai]
+  shared_infra: [forgegraph]
+  last_updated: 2026-05-10
+  next_milestone: Multi-stream support
+  image: /img/ventures/hypemarker.png
+
 - name: AppealKey
   slug: appealkey
   domain: appealkey.com
@@ -194,7 +223,7 @@
 
 - name: blder.bot
   slug: blder-bot
-  feed_slug: blder
+  feed_slug: bob
   domain: blder.bot
   url: https://blder.bot
   description: Experimental bot concept added for screenshots, visual inventory, and future product exploration.
