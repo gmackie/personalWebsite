@@ -145,6 +145,7 @@
   shared_infra: [forgegraph]
   last_updated: 2026-05-01
   next_milestone: Public beta
+  image: /img/ventures/turntable-bot.png
 
 - name: HypeMarker
   slug: hypemarker
