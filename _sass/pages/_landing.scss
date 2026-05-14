@@ -598,10 +598,6 @@
   letter-spacing: 0.08em;
   padding: 3px 8px;
   text-transform: uppercase;
-  transform: rotate(var(--r, 0deg));
-
-  &:nth-child(odd) { --r: 0.4deg; }
-  &:nth-child(even) { --r: -0.4deg; }
 }
 
 .status-active {

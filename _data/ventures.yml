@@ -220,6 +220,7 @@
   last_updated: 2026-04-03
   next_milestone: Visual pass + concept validation
   experiment: true
+  image: /img/ventures/bizpulse.png
 
 - name: blder.bot
   slug: blder-bot
@@ -235,3 +236,4 @@
   last_updated: 2026-04-03
   next_milestone: Visual pass + concept validation
   experiment: true
+  image: /img/ventures/blder-bot.png
