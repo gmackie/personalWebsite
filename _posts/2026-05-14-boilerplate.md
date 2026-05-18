@@ -51,6 +51,22 @@ The fakes also make development faster. I don't need a PLC plugged into my desk 
 
 None of this is new. People have been writing test doubles since the '90s. The difference is that the cost of creating and maintaining them dropped to near zero. The pattern that was always right became practical.
 
+## The Spring problem
+
+There's a version of dependency injection that tried to solve the boilerplate problem before AI did. Java's Spring framework, and similar annotation-driven systems, let you slap `@Inject` or `@Autowired` on a field and the framework wires everything up at runtime. No explicit constructors, no composition root, no visible wiring. Magic.
+
+It worked for experienced developers who'd internalized the framework's conventions. If you knew Spring, you could look at a class and know where its dependencies came from. But if you were new to the codebase, it was impenetrable. Dependencies materialized from nowhere. Control flow disappeared into framework internals. You couldn't trace how anything got constructed without understanding the annotation processor, the bean lifecycle, the component scanning rules. The code was shorter but harder to reason about.
+
+This matters more now because LLMs have the same problem newcomers do.
+
+A recent paper from Harvard ("The Modular Imperative" by Kravchuk-Kirilyuk, Graciolli, and Amin) calls this the "facade problem." Models generate correct names and interface structures that suggest proper abstraction, but the implementations behind those interfaces frequently don't deliver correct behavior. Code that looks modular while the actual logic violates the contracts the names promise.
+
+Annotation-driven DI makes this worse. An LLM can reference a bean that doesn't exist anywhere in the codebase. It can say "inject this service" and generate code that compiles against the interface but points at nothing real. With Spring's runtime wiring, you won't find out until the application boots and the dependency resolution fails. Or worse, it resolves to something unexpected because of classpath scanning.
+
+Explicit constructor injection solves this at compile time. If a class takes its dependencies as constructor parameters, the LLM has to provide them. If it references something that doesn't exist, the TypeScript compiler or the Java compiler catches it immediately. No runtime surprises, no phantom beans, no "it looks right but blows up in production."
+
+The style of DI that's better for AI-generated code is also the style that was always better for humans who weren't framework experts. Explicit, visible, traceable. The old way of doing DI, before frameworks tried to hide the wiring, turns out to be the right way for a world where LLMs are writing the code. The boilerplate that made it impractical is gone. The explicitness that made it verbose is now a feature.
+
 ## The broader point
 
 There's a category of software engineering practices that everyone agrees are correct but that impose enough overhead to be impractical in most contexts. Dependency injection. Comprehensive test doubles. Detailed interface contracts. Thorough documentation of internal APIs. They all make code better. They all cost time that could be spent on features.
