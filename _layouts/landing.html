@@ -134,6 +134,14 @@ layout: default
     <p class="landing-section-link"><a href="{{ site.baseurl }}/ventures/">All ventures &rarr;</a></p>
   </section>
 
+  <div class="landing-mid-cta">
+    <p>Interested in what I'm building?</p>
+    <div class="landing-actions">
+      <a class="landing-button primary" href="{{ site.owner.calendly }}">Let's Talk</a>
+      <a class="landing-button" href="{{ site.baseurl }}/resume/">Resume</a>
+    </div>
+  </div>
+
   <hr class="section-rule scroll-rule-draw">
 
   <section class="landing-section landing-overview">
@@ -215,7 +223,14 @@ layout: default
         <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
         <h3><a href="{{ site.baseurl }}{{ post.url }}.html">{{ post.title }}</a></h3>
         {% if post.excerpt %}
-        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+        <p class="blog-tease-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+        {% endif %}
+        {% if post.tags and post.tags.size > 0 %}
+        <div class="blog-tease-tags">
+          {% for tag in post.tags %}
+          <span class="venture-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
         {% endif %}
       </article>
       {% endfor %}

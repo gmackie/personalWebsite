@@ -18,6 +18,9 @@
     <p class="venture-thesis">{{ include.venture.thesis }}</p>
     {% endif %}
     <p>{{ include.venture.description }}</p>
+    {% if include.venture.traction %}
+    <p class="venture-traction">{{ include.venture.traction }}</p>
+    {% endif %}
     {% if include.venture.tags and include.venture.tags.size > 0 %}
     <div class="venture-tags">
       {% for tag in include.venture.tags %}

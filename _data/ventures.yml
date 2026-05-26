@@ -10,6 +10,7 @@
   url: https://forgegraf.com
   description: Edge + bare metal delivery platform. Deploy Workers to Cloudflare and Nix closures to Hetzner from one pipeline. Built on Jujutsu's changeset identity model with full delivery evidence, promotion gates, and health monitoring across edge and metal.
   thesis: Deploying everywhere shouldn't mean managing everything.
+  traction: Runs all 12 ventures
   status: active
   category: infrastructure
   tags: [infrastructure, graph, deployment, nix, jujutsu]
@@ -24,6 +25,7 @@
   url: https://gentrellis.com
   description: Turnkey on-prem AI inference boxes for regulated SMBs. Purpose-built hardware (NVIDIA H200, RTX PRO 6000) with hybrid Bedrock routing, protection levels for sensitive data, immutable audit logs, and vibe-coder workshops. Starting at $39k.
   thesis: AI that stays on your network is the only AI enterprises will trust.
+  traction: First deliveries Q2 2026
   status: shipping
   category: ai-infra
   tags: [ai, infrastructure, privacy, enterprise, hardware]
@@ -95,6 +97,7 @@
   url: https://latchflow.io
   description: One system for escape room operations. Live game control, puzzle orchestration, device health, bookings, and post-run analytics. The interface feels like a control room, not generic SaaS.
   thesis: Escape rooms deserve ops tooling as good as the experiences they create.
+  traction: Shipping to first venues
   status: shipping
   category: workflow
   tags: [operations, entertainment, real-time, controls]
