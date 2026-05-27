@@ -341,11 +341,34 @@ a.proto-card-link:hover {
   color: var(--accent);
 }
 
+.proto-ping {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--status-live, #00FF88);
+  letter-spacing: 0.04em;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 /* Footer */
 .dashboard-footer {
   margin-top: 48px;
   padding-top: 24px;
   border-top: 1px solid var(--rule-heavy);
+}
+
+.dashboard-footer-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.dashboard-health-summary {
+  color: var(--status-live, #00FF88);
 }
 
 .dashboard-site-nav {

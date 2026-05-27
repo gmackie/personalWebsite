@@ -5,8 +5,6 @@
  */
 
 .theme-personal {
-  --text: #1A1714;
-  --text-strong: #110F0D;
   --accent: #4A7FB5;
   --accent-hover: #3D6A96;
 }
@@ -16,4 +14,9 @@
     --accent: #6A9FD5;
     --accent-hover: #82B3E0;
   }
+}
+
+:root[data-theme="dark"] .theme-personal {
+  --accent: #6A9FD5;
+  --accent-hover: #82B3E0;
 }

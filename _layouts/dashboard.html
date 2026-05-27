@@ -150,6 +150,10 @@
   {% endif %}
 
   <footer class="dashboard-footer">
+    <div class="dashboard-footer-meta">
+      <span class="dashboard-build-time">built {{ site.time | date: "%Y-%m-%d %H:%M UTC" }}</span>
+      <span class="dashboard-health-summary" id="health-summary"></span>
+    </div>
     <div class="dashboard-site-nav">
       <a href="https://gmacko.com">gmacko.com &rarr; ventures</a>
       <a href="https://grahammackie.com">grahammackie.com &rarr; personal</a>
@@ -160,7 +164,10 @@
 <script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.proto-card[data-health]').forEach(function(card) {
+  var cards = document.querySelectorAll('.proto-card[data-health]');
+  var total = 0, up = 0, down = 0, checked = 0;
+
+  cards.forEach(function(card) {
     var healthUrl = card.getAttribute('data-health');
     var isInternal = card.getAttribute('data-internal') === 'true';
     var dot = card.querySelector('.status-dot');
@@ -170,19 +177,39 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
+    total++;
     dot.className = 'status-dot dot-loading';
 
+    var start = performance.now();
     var controller = new AbortController();
-    var timeoutId = setTimeout(function() { controller.abort(); }, 3000);
+    var timeoutId = setTimeout(function() { controller.abort(); }, 4000);
 
     fetch(healthUrl, { mode: 'no-cors', signal: controller.signal })
       .then(function() {
         clearTimeout(timeoutId);
+        var ms = Math.round(performance.now() - start);
         dot.className = 'status-dot dot-live';
+        var ping = card.querySelector('.proto-ping');
+        if (!ping) {
+          ping = document.createElement('span');
+          ping.className = 'proto-ping';
+          var header = card.querySelector('.proto-header');
+          if (header) header.appendChild(ping);
+        }
+        ping.textContent = ms + 'ms';
+        up++;
       })
       .catch(function() {
         clearTimeout(timeoutId);
         dot.className = 'status-dot dot-unknown';
+        down++;
+      })
+      .finally(function() {
+        checked++;
+        if (checked === total) {
+          var el = document.getElementById('health-summary');
+          if (el) el.textContent = up + '/' + total + ' reachable';
+        }
       });
   });
 });
