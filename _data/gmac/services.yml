@@ -5,6 +5,7 @@
   url: https://forgegraf.com
   description: Edge + bare metal delivery platform. Cloudflare Workers + Hetzner Nix closures.
   status: active
+  node: hetzner-master
   stack: [nix, caddy, jujutsu, cloudflare]
   health_endpoint: https://forge.gmac.io/health
 
@@ -13,6 +14,7 @@
   url: https://git.gmac.io
   description: Self-hosted Git with CI/CD. Source of truth for all venture code.
   status: active
+  node: hetzner-master
   stack: [go, nix, caddy]
   health_endpoint: https://git.gmac.io
 
@@ -21,8 +23,18 @@
   url: https://trace.forgegraf.com
   description: Distributed tracing, metrics, and log aggregation. OpenTelemetry-native.
   status: active
+  node: hetzner-fg
   stack: [clickhouse, otel, nix]
   health_endpoint: https://trace.forgegraf.com
+
+- name: npm Registry
+  feed_slug: npm-registry
+  url: https://npm.forgegraf.com
+  description: Private npm registry with quarantine and security analysis. Verdaccio-based.
+  status: active
+  node: hetzner-fg
+  stack: [verdaccio, nix]
+  health_endpoint: https://npm.forgegraf.com
 
 - name: Veritas
   feed_slug: veritas
@@ -36,5 +48,6 @@
   url: https://bob.tail1e1a32.ts.net
   description: Task management and work tracking across ventures. Internal tool over Tailscale.
   status: active
+  node: hetzner-master
   stack: [go, tailscale]
   internal: true

@@ -1,0 +1,27 @@
+# Fleet nodes managed by ForgeGraph
+# Status updated manually; client-side JS will ping for liveness
+
+- name: hetzner-master
+  role: Primary
+  os: ubuntu
+  location: Falkenstein, DE
+
+- name: hetzner-worker
+  role: Worker
+  os: debian
+  location: Falkenstein, DE
+
+- name: hetzner-fg
+  role: ForgeGraph
+  os: ubuntu
+  location: Falkenstein, DE
+
+- name: hetzner-bob
+  role: Agent
+  os: debian
+  location: Falkenstein, DE
+
+- name: labnuc
+  role: Homelab
+  os: nixos
+  location: Seattle, WA

@@ -43,6 +43,70 @@
   text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
 }
 
+/* Infra stats strip */
+.dashboard-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.stat-value {
+  color: var(--text-strong);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-right: 4px;
+}
+
+/* Fleet status strip */
+.dashboard-fleet {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fleet-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.fleet-node {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.node-name {
+  color: var(--text-strong);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.node-role {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.node-location {
+  color: var(--muted);
+  font-size: 10px;
+  width: 100%;
+  padding-left: 18px;
+}
+
 /* Status legend */
 .dashboard-status-legend {
   display: flex;
@@ -180,11 +244,31 @@
   padding-left: 22px;
 }
 
+.proto-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 22px;
+}
+
 .proto-stack {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  padding-left: 22px;
+}
+
+.node-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid rgba(191, 90, 242, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .stack-pill {

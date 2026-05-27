@@ -14,11 +14,38 @@
 }
 </script>
 
+{% assign all_apps = site.data.gmac.services | concat: site.data.gmac.prototypes %}
+{% assign active_protos = site.data.gmac.prototypes | where: "status", "active" %}
+{% assign coming_protos = site.data.gmac.prototypes | where: "status", "coming-soon" %}
+
 <div class="dashboard-container" data-public-feed-root="gmac">
   <header class="dashboard-header">
     <h1 class="dashboard-title">gmac.io</h1>
     <p class="dashboard-subtitle">prototypes &amp; services <span class="dashboard-caveat">— nothing here is production</span></p>
+
+    <div class="dashboard-stats">
+      <span class="stat-item"><span class="stat-value">{{ site.data.gmac.nodes | size }}</span> nodes</span>
+      <span class="stat-item"><span class="stat-value">{{ site.data.gmac.services | size }}</span> services</span>
+      <span class="stat-item"><span class="stat-value">{{ active_protos | size }}</span> live</span>
+      <span class="stat-item"><span class="stat-value">{{ coming_protos | size }}</span> queued</span>
+    </div>
   </header>
+
+  {% if site.data.gmac.nodes.size > 0 %}
+  <section class="dashboard-fleet">
+    <h2 class="dashboard-section-label">Fleet</h2>
+    <div class="fleet-grid">
+      {% for node in site.data.gmac.nodes %}
+      <div class="fleet-node">
+        <span class="status-dot dot-live"></span>
+        <span class="node-name">{{ node.name }}</span>
+        <span class="node-role">{{ node.role }}</span>
+        <span class="node-location">{{ node.location }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 
   <div class="dashboard-status-legend">
     <span class="legend-item"><span class="status-dot dot-live"></span> live</span>
@@ -44,13 +71,18 @@
           {% endif %}
         </div>
         <p class="proto-desc">{{ svc.description }}</p>
-        {% if svc.stack %}
-        <div class="proto-stack">
-          {% for tech in svc.stack %}
-          <span class="stack-pill">{{ tech }}</span>
-          {% endfor %}
+        <div class="proto-meta">
+          {% if svc.stack %}
+          <div class="proto-stack">
+            {% for tech in svc.stack %}
+            <span class="stack-pill">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if svc.node %}
+          <span class="node-badge">{{ svc.node }}</span>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
       {% endfor %}
     </div>
@@ -62,7 +94,7 @@
     <h2 class="dashboard-section-label">Prototypes</h2>
     <div class="proto-grid" data-feed-target="prototypes">
       {% for proto in site.data.gmac.prototypes %}
-      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}>
+      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}{% if proto.health_endpoint %} data-health="{{ proto.health_endpoint }}"{% endif %}>
         <div class="proto-header">
           <span class="status-dot dot-{{ proto.status }}"></span>
           <span class="proto-name">{{ proto.name }}</span>
@@ -73,13 +105,18 @@
           {% endif %}
         </div>
         <p class="proto-desc">{{ proto.description }}</p>
-        {% if proto.stack %}
-        <div class="proto-stack">
-          {% for tech in proto.stack %}
-          <span class="stack-pill">{{ tech }}</span>
-          {% endfor %}
+        <div class="proto-meta">
+          {% if proto.stack %}
+          <div class="proto-stack">
+            {% for tech in proto.stack %}
+            <span class="stack-pill">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if proto.node %}
+          <span class="node-badge">{{ proto.node }}</span>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
       {% endfor %}
     </div>
@@ -111,7 +148,6 @@
 
 <script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
 <script>
-// Health check: ping each service URL and update status dots
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.proto-card[data-health]').forEach(function(card) {
     var healthUrl = card.getAttribute('data-health');

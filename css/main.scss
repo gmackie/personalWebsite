@@ -20,6 +20,10 @@
 @import "components/buttons";
 @import "components/syntax-highlighting";
 
+// Theme overrides
+@import "theme-personal";
+@import "theme-dashboard";
+
 // Pages styling
 @import "pages/layout";
 @import "pages/tags";
