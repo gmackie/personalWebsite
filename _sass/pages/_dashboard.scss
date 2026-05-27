@@ -107,6 +107,13 @@
   padding-left: 18px;
 }
 
+.node-apps {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
 /* Status legend */
 .dashboard-status-legend {
   display: flex;
@@ -210,8 +217,20 @@
   transition: border-color 0.15s;
 }
 
+a.proto-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
 .proto-card:hover {
   border-color: var(--rule-heavy);
+}
+
+a.proto-card-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(191, 90, 242, 0.1);
 }
 
 .proto-header {

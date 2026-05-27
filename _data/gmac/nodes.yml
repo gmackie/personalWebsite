@@ -1,27 +1,32 @@
 # Fleet nodes managed by ForgeGraph
-# Status updated manually; client-side JS will ping for liveness
+# Status: all nodes connected to hub as of last deploy
 
 - name: hetzner-master
   role: Primary
   os: ubuntu
   location: Falkenstein, DE
+  apps: 9
 
 - name: hetzner-worker
   role: Worker
   os: debian
   location: Falkenstein, DE
+  apps: 3
 
 - name: hetzner-fg
   role: ForgeGraph
   os: ubuntu
   location: Falkenstein, DE
+  apps: 2
 
 - name: hetzner-bob
   role: Agent
   os: debian
   location: Falkenstein, DE
+  apps: 0
 
 - name: labnuc
   role: Homelab
   os: nixos
   location: Seattle, WA
+  apps: 0

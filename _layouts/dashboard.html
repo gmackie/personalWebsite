@@ -41,6 +41,9 @@
         <span class="node-name">{{ node.name }}</span>
         <span class="node-role">{{ node.role }}</span>
         <span class="node-location">{{ node.location }}</span>
+        {% if node.apps > 0 %}
+        <span class="node-apps">{{ node.apps }} apps</span>
+        {% endif %}
       </div>
       {% endfor %}
     </div>
@@ -60,7 +63,7 @@
     <h2 class="dashboard-section-label">Services</h2>
     <div class="proto-grid" data-feed-target="services">
       {% for svc in site.data.gmac.services %}
-      <div class="proto-card" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}"{% if svc.feed_slug %} data-feed-slug="{{ svc.feed_slug }}"{% endif %}>
+      <a class="proto-card proto-card-link" href="{{ svc.url }}" target="_blank" rel="noopener" data-url="{{ svc.url }}" data-health="{{ svc.health_endpoint }}" data-internal="{{ svc.internal }}"{% if svc.feed_slug %} data-feed-slug="{{ svc.feed_slug }}"{% endif %}>
         <div class="proto-header">
           <span class="status-dot dot-{{ svc.status }}"></span>
           <span class="proto-name">{{ svc.name }}</span>
@@ -83,7 +86,7 @@
           <span class="node-badge">{{ svc.node }}</span>
           {% endif %}
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </section>
@@ -94,7 +97,11 @@
     <h2 class="dashboard-section-label">Prototypes</h2>
     <div class="proto-grid" data-feed-target="prototypes">
       {% for proto in site.data.gmac.prototypes %}
-      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}{% if proto.health_endpoint %} data-health="{{ proto.health_endpoint }}"{% endif %}>
+      {% if proto.status == 'coming-soon' %}
+      <div class="proto-card" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}>
+      {% else %}
+      <a class="proto-card proto-card-link" href="{{ proto.url }}" target="_blank" rel="noopener" data-url="{{ proto.url }}" data-status="{{ proto.status }}"{% if proto.feed_slug %} data-feed-slug="{{ proto.feed_slug }}"{% endif %}{% if proto.health_endpoint %} data-health="{{ proto.health_endpoint }}"{% endif %}>
+      {% endif %}
         <div class="proto-header">
           <span class="status-dot dot-{{ proto.status }}"></span>
           <span class="proto-name">{{ proto.name }}</span>
@@ -117,7 +124,11 @@
           <span class="node-badge">{{ proto.node }}</span>
           {% endif %}
         </div>
+      {% if proto.status == 'coming-soon' %}
       </div>
+      {% else %}
+      </a>
+      {% endif %}
       {% endfor %}
     </div>
   </section>
