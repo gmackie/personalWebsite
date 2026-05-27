@@ -4,7 +4,7 @@
  * See /DESIGN.personal.md
  */
 
-:root {
+.theme-personal {
   --text: #1A1714;
   --text-strong: #110F0D;
   --accent: #4A7FB5;
@@ -12,7 +12,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  .theme-personal {
     --accent: #6A9FD5;
     --accent-hover: #82B3E0;
   }
