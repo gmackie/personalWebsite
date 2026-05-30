@@ -187,6 +187,43 @@
   }
 }
 
+/* Filter bar */
+.dash-filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dash-filter-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 5px 10px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.dash-filter-pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.dash-filter-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.dash-filter-pill .tag-count {
+  opacity: 0.6;
+  margin-left: 2px;
+}
+
 /* Section labels */
 .dashboard-section {
   margin-bottom: 48px;
@@ -339,6 +376,15 @@ a.proto-card-link:hover {
 
 .log-message a:hover {
   color: var(--accent);
+}
+
+.proto-sparkline {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.proto-sparkline svg {
+  display: block;
 }
 
 .proto-ping {

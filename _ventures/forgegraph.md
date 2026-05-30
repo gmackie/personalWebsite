@@ -1,5 +1,5 @@
 ---
 layout: venture
-venture: "ForgeGraph"
-title: "ForgeGraph"
+venture: "ForgeGraf"
+title: "ForgeGraf"
 ---

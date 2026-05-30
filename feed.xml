@@ -11,7 +11,12 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    {% if site.site_id %}
+      {% assign feed_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+    {% else %}
+      {% assign feed_posts = site.posts %}
+    {% endif %}
+    {% for post in feed_posts limit:20 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
         <description>{{ post.content | xml_escape }}</description>

@@ -6,11 +6,22 @@ layout: default
 
 <div class="venture-detail">
   {% if v %}
+
+  {% if v.image %}
+  <div class="venture-hero">
+    <img src="{{ v.image }}" alt="{{ v.name }} screenshot" class="venture-hero-img">
+  </div>
+  {% endif %}
+
   <p class="landing-kicker">Venture</p>
   <div class="venture-detail-header">
     <h1>{{ v.name }}</h1>
     <span class="status-badge status-{{ v.status }}">{{ v.status }}</span>
   </div>
+
+  {% if v.thesis %}
+  <blockquote class="venture-thesis-block">{{ v.thesis }}</blockquote>
+  {% endif %}
 
   <div class="venture-meta-strip">
     <span class="venture-meta-item"><strong>{{ v.domain }}</strong></span>
@@ -18,26 +29,39 @@ layout: default
     {% if v.last_updated %}
     <span class="venture-meta-item">Updated {{ v.last_updated | date: "%-d %b %Y" }}</span>
     {% endif %}
-    <a href="{{ v.url }}" class="venture-meta-item" target="_blank" rel="noopener noreferrer">Visit site &rarr;</a>
+    <a href="{{ v.url }}" class="venture-meta-item venture-visit-link" target="_blank" rel="noopener noreferrer">Visit site &rarr;</a>
   </div>
 
-  {% if v.thesis %}
-  <blockquote class="venture-thesis-block">{{ v.thesis }}</blockquote>
-  {% endif %}
+  <div class="venture-body">
+    <p class="venture-desc">{{ v.description }}</p>
 
-  <p>{{ v.description }}</p>
+    <div class="venture-info-grid">
+      {% if v.traction %}
+      <div class="venture-info-card">
+        <p class="venture-info-label">Traction</p>
+        <p class="venture-info-value">{{ v.traction }}</p>
+      </div>
+      {% endif %}
 
-  {% if v.next_milestone %}
-  <p class="venture-milestone"><strong>Next milestone:</strong> {{ v.next_milestone }}</p>
-  {% endif %}
+      {% if v.next_milestone %}
+      <div class="venture-info-card">
+        <p class="venture-info-label">Next Milestone</p>
+        <p class="venture-info-value">{{ v.next_milestone }}</p>
+      </div>
+      {% endif %}
 
-  {% if v.shared_infra and v.shared_infra.size > 0 %}
-  <p class="venture-infra"><strong>Shared infra:</strong>
-    {% for infra in v.shared_infra %}
-    <span class="venture-tag">{{ infra }}</span>
-    {% endfor %}
-  </p>
-  {% endif %}
+      {% if v.shared_infra and v.shared_infra.size > 0 %}
+      <div class="venture-info-card">
+        <p class="venture-info-label">Shared Infra</p>
+        <div class="venture-info-tags">
+          {% for infra in v.shared_infra %}
+          <span class="venture-tag">{{ infra }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
 
   {% if v.tags and v.tags.size > 0 %}
   <div class="venture-tags">
@@ -71,7 +95,7 @@ layout: default
   <div class="blog-tease-list">
     {% for post in related_posts limit:5 %}
     <article class="blog-tease-card">
-      <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }}</p>
+      <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }} &middot; {% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by: 180 }} min read{% endif %}</p>
       <h3><a href="{{ site.url }}{{ post.url }}.html">{{ post.title }}</a></h3>
     </article>
     {% endfor %}
@@ -94,27 +118,6 @@ layout: default
       <span class="update-type-badge update-type-{{ update.type }}">{{ update.type }}</span>
       <span class="update-summary">{{ update.summary }}</span>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  {% assign related_experiments = "" | split: "" %}
-  {% if site.data.experiments %}
-    {% for exp in site.data.experiments %}
-      {% if exp.venture == v.name %}
-        {% assign related_experiments = related_experiments | push: exp %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
-  {% if related_experiments.size > 0 %}
-  <h2>Experiments</h2>
-  <div class="experiment-grid">
-    {% for exp in related_experiments %}
-    <a class="experiment-card" href="{{ exp.url }}" target="_blank" rel="noopener noreferrer">
-      <h3>{{ exp.name }}</h3>
-      <p>{{ exp.description }}</p>
-    </a>
     {% endfor %}
   </div>
   {% endif %}

@@ -95,6 +95,11 @@
   {% if site.data.gmac.prototypes.size > 0 %}
   <section class="dashboard-section" data-feed-section="prototypes">
     <h2 class="dashboard-section-label">Prototypes</h2>
+    <div class="dash-filter-bar">
+      <button class="dash-filter-pill active" data-filter="all">All <span class="tag-count">{{ site.data.gmac.prototypes | size }}</span></button>
+      <button class="dash-filter-pill" data-filter="active">Live <span class="tag-count">{{ active_protos | size }}</span></button>
+      <button class="dash-filter-pill" data-filter="coming-soon">Queued <span class="tag-count">{{ coming_protos | size }}</span></button>
+    </div>
     <div class="proto-grid" data-feed-target="prototypes">
       {% for proto in site.data.gmac.prototypes %}
       {% if proto.status == 'coming-soon' %}
@@ -164,6 +169,66 @@
 <script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Prototype filter
+  var filterPills = document.querySelectorAll('.dash-filter-pill');
+  var protoCards = document.querySelectorAll('[data-feed-target="prototypes"] .proto-card');
+  filterPills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      filterPills.forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      var filter = pill.getAttribute('data-filter');
+      protoCards.forEach(function(card) {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          var status = card.getAttribute('data-status');
+          card.style.display = status === filter ? '' : 'none';
+        }
+      });
+    });
+  });
+
+  // Sparkline helper
+  function drawSparkline(container, data, color) {
+    if (data.length < 2) return;
+    var w = 60, h = 16;
+    var max = Math.max.apply(null, data);
+    var min = Math.min.apply(null, data);
+    var range = max - min || 1;
+    var step = w / (data.length - 1);
+    var points = data.map(function(v, i) {
+      return (i * step).toFixed(1) + ',' + (h - ((v - min) / range) * (h - 2) - 1).toFixed(1);
+    }).join(' ');
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    line.setAttribute('points', points);
+    line.setAttribute('fill', 'none');
+    line.setAttribute('stroke', color);
+    line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('stroke-linecap', 'round');
+    line.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(line);
+    container.appendChild(svg);
+  }
+
+  function getHistory(key) {
+    try { return JSON.parse(sessionStorage.getItem(key)) || []; }
+    catch(e) { return []; }
+  }
+
+  function pushHistory(key, val) {
+    var hist = getHistory(key);
+    hist.push(val);
+    if (hist.length > 20) hist = hist.slice(-20);
+    try { sessionStorage.setItem(key, JSON.stringify(hist)); }
+    catch(e) {}
+    return hist;
+  }
+
+  // Health checks
   var cards = document.querySelectorAll('.proto-card[data-health]');
   var total = 0, up = 0, down = 0, checked = 0;
 
@@ -171,6 +236,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var healthUrl = card.getAttribute('data-health');
     var isInternal = card.getAttribute('data-internal') === 'true';
     var dot = card.querySelector('.status-dot');
+    var histKey = 'ping:' + healthUrl;
+
+    // Render existing sparkline from history
+    var existing = getHistory(histKey);
+    if (existing.length >= 2) {
+      var spark = document.createElement('span');
+      spark.className = 'proto-sparkline';
+      var header = card.querySelector('.proto-header');
+      if (header) header.appendChild(spark);
+      drawSparkline(spark, existing, 'rgba(0,255,136,0.5)');
+    }
 
     if (isInternal || !healthUrl) {
       if (isInternal) dot.className = 'status-dot dot-local';
@@ -198,6 +274,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         ping.textContent = ms + 'ms';
         up++;
+
+        var hist = pushHistory(histKey, ms);
+        var spark = card.querySelector('.proto-sparkline');
+        if (spark && hist.length >= 2) {
+          spark.innerHTML = '';
+          drawSparkline(spark, hist, '#00FF88');
+        }
       })
       .catch(function() {
         clearTimeout(timeoutId);

@@ -967,6 +967,19 @@
 
 // ---- Venture detail ----
 
+.venture-hero {
+  margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+
+.venture-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .venture-detail-header {
   display: flex;
   align-items: center;
@@ -999,6 +1012,57 @@
   font-style: italic;
   margin: 24px 0;
   padding: 0 0 0 16px;
+}
+
+.venture-visit-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+
+  &:hover { color: var(--accent-hover); }
+}
+
+.venture-desc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 42rem;
+}
+
+.venture-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.venture-info-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.venture-info-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+
+.venture-info-value {
+  font-size: 14px;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.venture-info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .venture-milestone {
