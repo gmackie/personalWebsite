@@ -13,8 +13,8 @@ fail() {
 GMAC_DEST="_site_gmac_test"
 GMACKO_DEST="_site_gmacko_test"
 
-~/.rbenv/shims/bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination "$GMAC_DEST" >/dev/null
-~/.rbenv/shims/bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination "$GMACKO_DEST" >/dev/null
+bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination "$GMAC_DEST" >/dev/null
+bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination "$GMACKO_DEST" >/dev/null
 
 [ -f "$GMAC_DEST/index.html" ] || fail "missing gmac.io dashboard build"
 [ -f "$GMAC_DEST/lab/index.html" ] || fail "missing gmac.io lab build"
