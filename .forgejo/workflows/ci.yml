@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build gmacko.com
+        run: bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination _site_gmacko
+
+      - name: Build grahammackie.com
+        run: bundle exec jekyll build --config _config.yml,_config.personal.yml --destination _site_personal
+
+      - name: Build gmac.io
+        run: bundle exec jekyll build --config _config.yml,_config.gmac.yml --destination _site_gmac
+
+      - name: Test (site structure)
+        run: bash scripts/assert_site_structure.sh .
+
+      - name: Test (experiment visibility + feed hydration)
+        run: bash scripts/assert_experiment_visibility.sh .
+
+      - name: Report CI result to ForgeGraph
+        if: always()
+        env:
+          FG_CI_TOKEN: ${{ secrets.FG_CI_TOKEN }}
+        run: |
+          if [ -z "${FG_CI_TOKEN:-}" ]; then
+            echo "::warning::FG_CI_TOKEN not set, skipping report to ForgeGraph"
+            exit 0
+          fi
+
+          if [ "${{ job.status }}" = "success" ]; then
+            STATUS="success"
+          elif [ "${{ job.status }}" = "cancelled" ]; then
+            STATUS="cancelled"
+          else
+            STATUS="failure"
+          fi
+
+          REPO_FULL="${{ github.repository }}"
+          OWNER="${REPO_FULL%%/*}"
+          REPO="${REPO_FULL##*/}"
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+
+          curl -sf -X POST "https://forgegraf.com/api/fg/ci/report" \
+            -H "Authorization: Bearer ${FG_CI_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"owner\": \"${OWNER}\",
+              \"repo\": \"${REPO}\",
+              \"sha\": \"${{ github.sha }}\",
+              \"branch\": \"${BRANCH}\",
+              \"status\": \"${STATUS}\",
+              \"runId\": \"${{ github.run_id }}\",
+              \"runUrl\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\",
+              \"workflowName\": \"CI\"
+            }" || echo "::warning::Failed to report CI result to ForgeGraph"
