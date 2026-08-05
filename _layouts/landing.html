@@ -6,6 +6,20 @@ layout: default
 {% assign shipping_ventures = site.data.ventures | where: "status", "shipping" %}
 {% assign experiment_ventures = site.data.ventures | where: "status", "experiment" %}
 {% assign recent_updates = site.data.updates | slice: 0, 3 %}
+{% if site.site_id %}
+  {% assign landing_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
+{% else %}
+  {% assign landing_posts = site.posts %}
+{% endif %}
+{% assign build_updates = "" | split: "" %}
+{% assign editorial_posts = "" | split: "" %}
+{% for post in landing_posts %}
+  {% if post.post_type == "build-update" or post.tags contains "build-update" %}
+    {% assign build_updates = build_updates | push: post %}
+  {% else %}
+    {% assign editorial_posts = editorial_posts | push: post %}
+  {% endif %}
+{% endfor %}
 
 <div class="landing-page">
   <section class="landing-hero">
@@ -58,9 +72,26 @@ layout: default
   </section>
   {% endif %}
 
+  {% if build_updates.size > 0 %}
+  <section class="landing-section landing-build-updates" aria-labelledby="build-updates-heading">
+    <div class="landing-section-header build-updates-header">
+      <div>
+        <p class="landing-kicker">From the workbench</p>
+        <h2 id="build-updates-heading">What just shipped</h2>
+      </div>
+      <p>Short field notes attached to the actual work. The evidence is automated. The judgment and writing are not.</p>
+    </div>
+    <div class="build-update-rail">
+      {% for update in build_updates limit:3 %}
+        {% include build-update-card.html update=update surface="home" %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   <hr class="section-rule scroll-rule-draw">
 
-  <section class="landing-section">
+  <section class="landing-section landing-ventures">
     <div class="landing-section-header">
       <p class="landing-kicker">Ventures</p>
       <h2>What I'm building</h2>
@@ -213,13 +244,8 @@ layout: default
     </div>
 
     <div class="blog-tease-list">
-      {% if site.site_id %}
-        {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
-      {% else %}
-        {% assign site_posts = site.posts %}
-      {% endif %}
-      {% for post in site_posts limit:3 %}
-      <article class="blog-tease-card">
+      {% for post in editorial_posts limit:3 %}
+      <article class="blog-tease-card" data-editorial-title="{{ post.title | escape }}">
         <p class="blog-tease-meta">{{ post.date | date: "%-d %b %Y" | upcase }} &middot; {% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by: 180 }} min read{% endif %}</p>
         <h3><a href="{{ site.baseurl }}{{ post.url }}.html">{{ post.title }}</a></h3>
         {% if post.excerpt %}

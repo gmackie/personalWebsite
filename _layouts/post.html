@@ -2,10 +2,28 @@
 layout: default
 ---
 
-<a class="btn" href= "{{ site.baseurl }}/" >
-  Home
+{% assign is_build_update = false %}
+{% if page.post_type == "build-update" or page.tags contains "build-update" %}
+  {% assign is_build_update = true %}
+{% endif %}
+{% assign venture = site.data.ventures | where: "slug", page.venture_slug | first %}
+{% unless venture %}
+  {% for candidate in site.data.ventures %}
+    {% if page.tags contains candidate.slug or page.tags contains candidate.feed_slug %}
+      {% assign venture = candidate %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endunless %}
+
+<a class="btn" href="{% if is_build_update and venture %}{{ site.baseurl }}/ventures/{{ venture.slug }}/{% else %}{{ site.baseurl }}/{% endif %}">
+  {% if is_build_update and venture %}&larr; {{ venture.name }}{% else %}Home{% endif %}
 </a>
-{% if page.image.feature %}
+{% if page.hero_artifact_url %}
+<div class="post-image-feature build-update-hero">
+  <img class="feature-image" src="{{ page.hero_artifact_url }}" alt="{{ page.hero_artifact_alt | default: page.title | escape }}">
+</div>
+{% elsif page.image.feature %}
 <div class="post-image-feature">
   <img class="feature-image" src=
   {% if page.image.feature contains 'https' or page.image.feature contains 'http' %}
@@ -22,8 +40,14 @@ layout: default
 {% endif %}
 
 
-<div id="post">
-  <header class="post-header">
+<div id="post"{% if is_build_update %} class="build-update-post"{% endif %}>
+  <header class="post-header{% if is_build_update %} build-update-post-header{% endif %}">
+    {% if is_build_update %}
+    <div class="build-update-identity">
+      <span class="build-update-stamp">Build update</span>
+      {% if venture %}<a href="{{ site.baseurl }}/ventures/{{ venture.slug }}/">{{ venture.name }}</a>{% endif %}
+    </div>
+    {% endif %}
     <h1 title="{{ page.title }}">{{ page.title }}</h1>
     <span class="post-meta">
       <span class="post-date">
@@ -33,11 +57,37 @@ layout: default
       {% include read_time.html %}
     </span>
 
+    {% if is_build_update %}
+    <p class="build-update-authorship">Human-written field notes, backed by machine-captured evidence.</p>
+    {% if page.source_event_ids or page.forgegraph_event_id %}
+    <div class="build-update-provenance" aria-label="Build provenance">
+      <strong>ForgeGraph event</strong>
+      {% if page.source_event_ids %}
+        {% for event_id in page.source_event_ids %}<code>{{ event_id }}</code>{% endfor %}
+      {% else %}
+        <code>{{ page.forgegraph_event_id }}</code>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endif %}
+
   </header>
 
   <article class="post-content">
     {{ content }}
   </article>
+
+  {% if is_build_update and page.evidence and page.evidence.size > 0 %}
+  <aside class="build-update-evidence" aria-labelledby="build-evidence-heading">
+    <p class="landing-kicker">Receipts</p>
+    <h2 id="build-evidence-heading">Evidence from the build</h2>
+    <ul>
+      {% for item in page.evidence %}
+      <li><a href="{{ item.url }}">{{ item.label | default: "Build artifact" }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+  {% endif %}
 </div>
 
 <div class="share-buttons">

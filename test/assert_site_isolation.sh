@@ -26,10 +26,10 @@ assert_present() {
   fi
 }
 
-assert_present "_site_gmacko/archive/index.html" "Building Five MVPs with AI \\(Without Lying to Myself\\)"
-assert_present "_site_gmacko/archive/index.html" "You Don't Need a Team"
-assert_present "_site_personal/archive/index.html" "Habits, Systems, and the Gap Between Knowing and Doing"
-assert_present "_site_personal/archive/index.html" "Van Internet: Starlink \\+ LTE Failover for Life on the Road"
+assert_present "_site_gmacko/archive/index.html" "Source Control for Agents"
+assert_present "_site_gmacko/archive/index.html" "Not Enough Humans"
+assert_present "_site_personal/archive/index.html" "Four Months Out"
+assert_present "_site_personal/archive/index.html" "Sandcastles"
 
 PERSONAL_SURFACES=(
   "_site_personal/index.html"
@@ -48,24 +48,20 @@ GMACKO_SURFACES=(
 )
 
 for surface in "${PERSONAL_SURFACES[@]}"; do
-  assert_absent "$surface" "Building Five MVPs with AI \\(Without Lying to Myself\\)"
-  assert_absent "$surface" "ClassCheck: My First Real Vibe-Coded Edtech App"
-  assert_absent "$surface" "PlayPath: The Edtech Idea I Actually Wanted to Build"
-  assert_absent "$surface" "Stream Conductor: From Twitch Tools to High School Sports"
-  assert_absent "$surface" "You Don't Need a Team"
+  assert_absent "$surface" "Source Control for Agents"
+  assert_absent "$surface" "Not Enough Humans"
 done
 
 for surface in "${GMACKO_SURFACES[@]}"; do
-  assert_absent "$surface" "Habits, Systems, and the Gap Between Knowing and Doing"
-  assert_absent "$surface" "Van Build v0\\.5: Current Setup and the IIoT Future"
-  assert_absent "$surface" "Van Internet: Starlink \\+ LTE Failover for Life on the Road"
+  assert_absent "$surface" "Four Months Out"
+  assert_absent "$surface" "Sandcastles"
 done
 
-if find _site_personal/articles -type f | rg -q 'building-five|classcheck|playpath|stream-conductor|you-dont-need-a-team'; then
+if find _site_personal/articles -type f | rg -q 'source-control-for-agents|not-enough-humans'; then
   fail "personal site should not generate gmacko article pages"
 fi
 
-if find _site_gmacko/articles -type f | rg -q 'habits-systems-and-good-intentions|van-build-v0-5-current-setup-and-the-iiot-future|van-internet-starlink-lte-failover'; then
+if find _site_gmacko/articles -type f | rg -q 'four-months-out|sandcastles'; then
   fail "gmacko site should not generate personal article pages"
 fi
 

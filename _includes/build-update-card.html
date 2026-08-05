@@ -1,0 +1,27 @@
+{% assign update = include.update %}
+{% assign venture = site.data.ventures | where: "slug", update.venture_slug | first %}
+{% unless venture %}
+  {% for candidate in site.data.ventures %}
+    {% if update.tags contains candidate.slug or update.tags contains candidate.feed_slug %}
+      {% assign venture = candidate %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endunless %}
+
+<article class="build-update-card" {% if include.surface == "venture" %}data-venture-proof-title{% else %}data-build-update-title{% endif %}="{{ update.title | escape }}">
+  <div class="build-update-card-meta">
+    <span class="build-update-stamp">Build update</span>
+    {% if venture %}<span>{{ venture.name }}</span>{% endif %}
+    <time datetime="{{ update.date | date_to_xmlschema }}">{{ update.date | date: "%-d %b %Y" }}</time>
+  </div>
+  <h3><a href="{{ site.baseurl }}{{ update.url }}.html">{{ update.title }}</a></h3>
+  {% if update.excerpt %}
+  <p>{{ update.excerpt | strip_html | strip_newlines }}</p>
+  {% endif %}
+  <div class="build-update-card-footer">
+    {% if update.evidence and update.evidence.size > 0 %}<span>{{ update.evidence.size }} evidence item{% if update.evidence.size != 1 %}s{% endif %}</span>{% endif %}
+    {% if update.forgegraph_event_id or update.source_event_ids %}<span>ForgeGraph linked</span>{% endif %}
+    <a href="{{ site.baseurl }}{{ update.url }}.html">Read field notes &rarr;</a>
+  </div>
+</article>

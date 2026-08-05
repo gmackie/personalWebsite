@@ -32,8 +32,14 @@ jobs:
       - name: Test (site structure)
         run: bash scripts/assert_site_structure.sh .
 
+      - name: Test (site isolation)
+        run: bash test/assert_site_isolation.sh
+
       - name: Test (experiment visibility + feed hydration)
         run: bash scripts/assert_experiment_visibility.sh .
+
+      - name: Test (build update portfolio surface)
+        run: bash test/build_update_surface.sh
 
       - name: Report CI result to ForgeGraph
         if: always()

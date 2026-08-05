@@ -409,6 +409,132 @@
   margin-top: 16px;
 }
 
+// ---- Build update proof rail ----
+
+.landing-build-updates {
+  margin-top: 48px;
+}
+
+.landing-ventures {
+  border-top: 0;
+}
+
+.build-updates-header {
+  display: grid;
+  gap: 16px;
+  max-width: none;
+
+  @include media-query(700px) {
+    align-items: end;
+    grid-template-columns: minmax(0, 1.45fr) minmax(16rem, 0.75fr);
+  }
+}
+
+.build-update-rail {
+  display: grid;
+  gap: 12px;
+
+  @include media-query(700px) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    .build-update-card {
+      grid-column: span 4;
+    }
+
+    .build-update-card:first-child {
+      grid-column: span 6;
+      transform: rotate(-0.35deg);
+    }
+  }
+}
+
+.build-update-card {
+  background: var(--surface);
+  border: 3px solid var(--rule-heavy);
+  box-shadow: 6px 6px 0 var(--highlight);
+  padding: 18px;
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.08;
+    margin: 18px 0 10px;
+  }
+
+  h3 a {
+    color: var(--text-strong);
+    text-decoration: none;
+  }
+
+  h3 a:hover,
+  h3 a:focus {
+    color: var(--accent);
+  }
+
+  > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.build-update-card-meta,
+.build-update-card-footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  gap: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.build-update-card-meta {
+  color: var(--muted);
+}
+
+.build-update-card-footer {
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  margin-top: 18px;
+  padding-top: 10px;
+
+  a {
+    margin-left: auto;
+  }
+}
+
+.build-update-stamp {
+  background: var(--highlight);
+  border: 2px solid var(--text);
+  color: #0a0a0a;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  text-transform: uppercase;
+  transform: rotate(-1deg);
+}
+
+.venture-proof > h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  margin: 0 0 20px;
+}
+
+.build-update-rail-venture {
+  @include media-query(700px) {
+    .build-update-card,
+    .build-update-card:first-child {
+      grid-column: span 6;
+    }
+  }
+}
+
 // ---- Mid-page CTA ----
 
 .landing-mid-cta {

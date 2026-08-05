@@ -73,20 +73,49 @@ layout: default
 
   <hr class="section-rule">
 
-  {% assign related_posts = "" | split: "" %}
+  {% assign venture_build_updates = "" | split: "" %}
   {% if site.site_id %}
     {% assign site_posts = site.posts | where_exp: "p", "p.site contains site.site_id" %}
   {% else %}
     {% assign site_posts = site.posts %}
   {% endif %}
+  {% for post in site_posts %}
+    {% assign is_build_update = false %}
+    {% if post.post_type == "build-update" or post.tags contains "build-update" %}
+      {% assign is_build_update = true %}
+    {% endif %}
+    {% if is_build_update %}
+      {% if post.venture_slug == v.slug or post.tags contains v.slug or post.tags contains v.feed_slug %}
+        {% assign venture_build_updates = venture_build_updates | push: post %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if venture_build_updates.size > 0 %}
+  <section class="venture-proof" aria-labelledby="venture-proof-heading">
+    <p class="landing-kicker">Current proof</p>
+    <h2 id="venture-proof-heading">Built, not pitched</h2>
+    <div class="build-update-rail build-update-rail-venture">
+      {% for update in venture_build_updates limit:4 %}
+        {% include build-update-card.html update=update surface="venture" %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <hr class="section-rule">
+  {% endif %}
+
+  {% assign related_posts = "" | split: "" %}
   {% if v.tags %}
     {% for post in site_posts %}
-      {% for tag in v.tags %}
-        {% if post.tags contains tag %}
-          {% assign related_posts = related_posts | push: post %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
+      {% unless post.post_type == "build-update" or post.tags contains "build-update" %}
+        {% for tag in v.tags %}
+          {% if post.tags contains tag %}
+            {% assign related_posts = related_posts | push: post %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
     {% endfor %}
   {% endif %}
 
