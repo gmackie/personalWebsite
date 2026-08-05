@@ -276,6 +276,7 @@
     <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
     <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds. Conflicts preserve human files, unavailable destinations do not block one another, and no path publishes final prose or Substack editorial.</span></div>
     <div class="decision"><b><code>gmacko.com</code> proof surface live.</b><span>Build updates are separated from essays on the homepage, attached to venture proof rails, and can render source-linked screenshots and playable clips inline.</span></div>
+    <div class="decision"><b>Clean production delivery is automated.</b><span>A five-minute LaunchAgent reconciles GitHub <code>main</code> to all three Cloudflare Pages projects from a dedicated clean worktree, verifies exact health SHAs, and refuses any dirty checkout.</span></div>
   </div>
   <div class="callout">
     <strong>Current P0:</strong> add the OODA outline-bundle contract so one or more approved events, optional vault context, open questions, and evidence assets can become a useful editorial handoff without generating final prose. Destination materialization acknowledgement follows.
@@ -678,6 +679,12 @@ created: 2026-08-04
         <td><span class="badge partial">Partial</span></td>
       </tr>
       <tr>
+        <td>Make website deployment commit-exact and unattended without exposing local drafts or copying broad Cloudflare OAuth credentials into CI.</td>
+        <td><code>scripts/deploy-pages.sh</code><br><code>scripts/run-cloudflare-deploy-sync.sh</code><br><code>ops/launchd/</code></td>
+        <td>dirty primary checkout is rejected; scheduled clean worktree deploy advances all three public health endpoints to the exact main SHA</td>
+        <td><span class="badge done">Done</span></td>
+      </tr>
+      <tr>
         <td>Document the editorial guardrail: no automatic Substack publication, and no final prose without human rewrite.</td>
         <td><code>README</code> / operator docs / admin help text</td>
         <td>workflow docs make the boundary explicit</td>
@@ -755,6 +762,7 @@ created: 2026-08-04
     <li><strong>Portfolio media contract — verified:</strong> ForgeGraph PR #255 merged as <code>1987f53c53fa</code>; future scaffolds include a build-update identity, venture slug, source event ids, hero URL, and structured screenshot/clip evidence. Focused catalog and promotion tests, root typecheck, lint, formatting, and secret scan passed locally.</li>
     <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout, completed with exit code 0 against the live bearer-authenticated endpoint, and correctly found zero pending approved drafts.</li>
     <li><strong><code>gmacko.com</code> — verified:</strong> commits <code>d74798c</code> and <code>0c3b2fc</code> add build-update identity, homepage and venture proof rails, provenance, responsive screenshot cards, and inline clips. Three Jekyll builds, nine JavaScript tests, fixture, isolation, structure, hydration, live-wall, ShellCheck, diff checks, and desktop/mobile browser proof passed.</li>
+    <li><strong>Website CI and deployment — verified:</strong> Forgejo runs 14 and 15 passed on the exact pushed commits after portability fixes removed runner-only <code>rg</code> and cache-proxy assumptions. <code>com.gmacko.pages-deploy-sync</code> then deployed commit <code>20f5023900ab</code> from its clean global worktree, exited 0, and advanced <code>gmacko.com</code>, <code>grahammackie.com</code>, and <code>gmac.io</code> to that immutable health SHA. Homepage, archive, and feed checks confirmed uncommitted essays are absent.</li>
     <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization is automatic and preserves human files; ForgeGraph state acknowledgement and OODA outline synthesis remain.</li>
     <li><strong>Editorial guardrail — verified:</strong> no automation path publishes to Substack or marks generated scaffold copy as final.</li>
   </ul>

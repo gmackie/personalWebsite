@@ -75,12 +75,18 @@ git -C "${WORKTREE_ROOT}" checkout --quiet --detach "${TARGET_SHA}"
   ./scripts/deploy-pages.sh all
 )
 
-for _attempt in {1..10}; do
+consecutive_matches=0
+for _attempt in {1..15}; do
   if live_matches "${TARGET_SHA}"; then
-    printf '%s\n' "${TARGET_SHA}" > "${STATE_FILE}.tmp"
-    mv "${STATE_FILE}.tmp" "${STATE_FILE}"
-    echo "Deployed and verified ${TARGET_SHA} on all three domains."
-    exit 0
+    consecutive_matches=$((consecutive_matches + 1))
+    if [[ "${consecutive_matches}" -ge 2 ]]; then
+      printf '%s\n' "${TARGET_SHA}" > "${STATE_FILE}.tmp"
+      mv "${STATE_FILE}.tmp" "${STATE_FILE}"
+      echo "Deployed and verified ${TARGET_SHA} on all three domains."
+      exit 0
+    fi
+  else
+    consecutive_matches=0
   fi
   sleep 6
 done
