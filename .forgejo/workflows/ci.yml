@@ -18,7 +18,11 @@ jobs:
       - uses: ruby/setup-ruby@v1.291.0
         with:
           ruby-version: "3.2"
-          bundler-cache: true
+
+      # act_runner's cache proxy is not reachable from every Docker runner.
+      # Keep dependency installation explicit so any ubuntu-latest runner works.
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
 
       - name: Build gmacko.com
         run: bundle exec jekyll build --config _config.yml,_config.gmacko.yml --destination _site_gmacko
