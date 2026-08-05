@@ -82,6 +82,7 @@
   .badge.risk { background: var(--warn-soft); color: var(--warn); }
   .badge.blocked { background: var(--bad-soft); color: var(--bad); }
   .badge.done { background: var(--accent-soft); color: var(--accent); }
+  .badge.partial { background: var(--info-soft); color: var(--info); }
   .badge.todo { background: var(--surface-2); color: var(--muted); }
   .stats {
     display: grid;
@@ -238,10 +239,10 @@
 <body>
 <header class="hero">
   <div class="hero-inner">
-    <div class="kicker">Implementation Plan</div>
-    <h1>ForgeGraph Public Content System <span class="badge draft">Draft</span></h1>
+    <div class="kicker">Implementation Plan + Delivery Record</div>
+    <h1>ForgeGraph Public Content System <span class="badge partial">In progress</span></h1>
     <p class="meta">
-      <span>2026-08-04</span>
+      <span>updated 2026-08-05</span>
       <span>repo: <code>personalWebsite</code> @ <code>main</code></span>
       <span>surfaces: <code>ForgeGraph</code>, <code>gmac.io</code>, <code>gmacko.com</code>, <code>Obsidian</code>, <code>OODA</code></span>
       <span>author: Codex</span>
@@ -252,19 +253,32 @@
 
   <div class="stats">
     <div class="stat"><b>6</b><span>Phases</span></div>
-    <div class="stat"><b>24</b><span>Core tasks</span></div>
+    <div class="stat"><b>26</b><span>Live events</span></div>
     <div class="stat"><b>5</b><span>Systems touched</span></div>
     <div class="stat"><b>3</b><span>Public lanes</span></div>
-    <div class="stat"><b>~3-5w</b><span>Est. effort</span></div>
+    <div class="stat"><b>3</b><span>Primary gaps</span></div>
   </div>
 
   <div class="progress" aria-label="Phase progress">
-    <i class="active"></i><i></i><i></i><i></i><i></i><i></i>
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="active"></i><i class="active"></i><i class="active"></i>
   </div>
 
   <h2>Overview</h2>
-  <p>This plan turns the existing partial feed/hydration work into a full public content system with clear boundaries. ForgeGraph becomes the machine-truth producer for public status, events, screenshots, and clips; <code>gmac.io</code> becomes the live operations wall; <code>gmacko.com</code> becomes the curated portfolio/build-update surface; Obsidian remains the idea farm; and Substack stays a human-authored editorial outlet outside the operational pipeline.</p>
+  <p>This plan and delivery record turns the original feed/hydration work into a full public content system with clear boundaries. ForgeGraph is now the machine-truth producer for public status, events, screenshots, and clips; <code>gmac.io</code> is the live operations wall; <code>gmacko.com</code> remains the curated portfolio/build-update surface; Obsidian remains the idea farm; and Substack stays a human-authored editorial outlet outside the operational pipeline.</p>
   <p>The implementation bias is narrow ownership. ForgeGraph does not become a CMS, Obsidian does not become a dashboard, and Substack never receives automatic publication. The system should produce proof artifacts and scaffolding, then require human judgment for anything that looks like narrative.</p>
+
+  <h2>Current Shipped State</h2>
+  <div class="decision-grid">
+    <div class="decision"><b>Producer live.</b><span>ForgeGraph serves workspace-scoped apps, events, summary, timeline, and artifact feeds with CORS, generation IDs, and last-good snapshots.</span></div>
+    <div class="decision"><b>Evidence live.</b><span>The current feed contains screenshots, two short UI clips with poster frames, and capture events linked to public apps.</span></div>
+    <div class="decision"><b>Automatic deploy facts live.</b><span>Public-enabled <code>gmac</code> apps emit sanitized deployment facts. The first production event recorded commit <code>d4419ed65b3f</code>.</span></div>
+    <div class="decision"><b>Human PR context live.</b><span>An explicit <code>forgegraph:public-update</code> block accepts a human headline, summary, and why. Raw private PR titles remain internal.</span></div>
+    <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
+    <div class="decision"><b>Promotion remains reviewed.</b><span>ForgeGraph has durable <code>gmacko</code> and Obsidian promotion decisions and scaffold materializers, but no path publishes final prose or Substack editorial.</span></div>
+  </div>
+  <div class="callout">
+    <strong>Remaining automation:</strong> schedule capture runs without an operator, schedule approved-draft materialization with destination roots configured, and finish the curated <code>gmacko.com</code> venture/build-update presentation plus OODA outline handoff.
+  </div>
 
   <h2>Architecture</h2>
   <figure class="diagram">
@@ -385,15 +399,15 @@
 
   <h2>Milestones</h2>
   <ul class="timeline">
-    <li class="active"><b>Phase 1 — Producer foundation</b><br>Define public events, artifacts, and human promotion state inside ForgeGraph.</li>
-    <li><b>Phase 2 — Capture and redaction pipeline</b><br>Generate screenshots and short UI clips that are safe to publish and attach them to events.</li>
-    <li><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Render events, artifacts, freshness, and “needs attention” lanes from the live feed.</li>
-    <li><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Promote approved events into venture pages and short build-update drafts.</li>
-    <li><b>Phase 5 — Obsidian and OODA export</b><br>Generate idea seeds and outline scaffolds without overwriting human notes.</li>
-    <li><b>Phase 6 — Governance and verification</b><br>Lock in review points, redaction policy, and end-to-end evidence checks.</li>
+    <li class="done"><b>Phase 1 — Producer foundation</b><br>Public events, artifacts, destination targets, and durable promotion state are live.</li>
+    <li class="done"><b>Phase 2 — Capture and redaction pipeline</b><br>Screenshots and short UI clips are captured, uploaded, filtered, and attached to events; unattended scheduling remains.</li>
+    <li class="done"><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Fleet health, events, artifacts, and fallback states render from the live feed.</li>
+    <li class="active"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Draft scaffolds materialize; curated venture proof sections and publishing remain.</li>
+    <li class="active"><b>Phase 5 — Obsidian and OODA export</b><br>Obsidian seed scaffolds materialize; OODA outline synthesis remains.</li>
+    <li class="active"><b>Phase 6 — Governance and verification</b><br>Privacy and editorial boundaries are enforced; unattended end-to-end smoke coverage remains.</li>
   </ul>
 
-  <h2>Phase 1 — Producer Foundation <span class="badge todo">Todo</span></h2>
+  <h2>Phase 1 — Producer Foundation <span class="badge done">Done</span></h2>
   <p>This phase gives ForgeGraph first-class public-content objects so the rest of the system stops inferring narrative from half-structured feeds.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -402,31 +416,31 @@
         <td>Create <code>public_events</code> schema with event type, visibility, summary, links, artifact references, and promotion flags.</td>
         <td><code>packages/db/src/schema/public-event.ts</code><br><code>packages/db/drizzle/&lt;next&gt;_public_events.sql</code></td>
         <td><code>pnpm --filter @forgegraph/db typecheck</code><br>route tests cover empty/non-empty feeds</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Create <code>public_artifacts</code> schema for screenshots, clips, thumbnails, alt text, visibility, and freshness metadata.</td>
         <td><code>packages/db/src/schema/public-artifact.ts</code><br><code>packages/db/drizzle/&lt;next&gt;_public_artifacts.sql</code></td>
         <td>schema tests or route tests prove attach/read path</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Create <code>promotion_decisions</code> schema so human curation has durable state for <code>gmacko</code> and Obsidian targets.</td>
         <td><code>packages/db/src/schema/promotion-decision.ts</code></td>
         <td>CRUD tests prove idempotent promotion lifecycle</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add a feed builder for <code>events</code> and <code>artifacts</code>, parallel to the existing apps/summary/timeline builder.</td>
         <td><code>apps/web/src/lib/public-feed/build-public-events.ts</code><br><code>apps/web/src/lib/public-feed/types.ts</code></td>
         <td><code>pnpm --dir apps/web exec vitest run src/app/api/public/feed</code></td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add public routes for <code>/api/public/feed/events</code> and optional <code>/artifacts</code>, with CORS and last-good snapshot fallback.</td>
         <td><code>apps/web/src/app/api/public/feed/events/route.ts</code><br><code>apps/web/src/app/api/public/feed/artifacts/route.ts</code></td>
         <td><code>curl</code> returns compact JSON with pinned <code>generation_id</code></td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
@@ -445,7 +459,7 @@ PublicArtifact {
 }</code></pre>
   </details>
 
-  <h2>Phase 2 — Capture and Redaction Pipeline <span class="badge todo">Todo</span></h2>
+  <h2>Phase 2 — Capture and Redaction Pipeline <span class="badge partial">Shipped / scheduling open</span></h2>
   <p>This phase makes the feed visually useful. The output is not just “app is healthy,” but “here is what the user would actually see, and here is the short clip proving the UI changed.”</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -454,24 +468,30 @@ PublicArtifact {
         <td>Generalize the existing screenshot publisher into a reusable capture job with per-app routes and asset policies.</td>
         <td><code>scripts/publish-public-feed.sh</code><br><code>scripts/lib/public-feed-screenshots.mjs</code><br><code>scripts/lib/playwright-public-feed-capture.mjs</code></td>
         <td>capture job emits asset manifest with non-null screenshot URLs</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add short clip capture for selected routes: 6-20 second UI recordings with thumbnail extraction.</td>
         <td><code>scripts/lib/public-feed-clips.mjs</code><br><code>scripts/lib/playwright-public-feed-capture.mjs</code></td>
         <td>clip files, poster frame, and metadata recorded for at least one app</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add redaction policy: internal routes, tokens, emails, test accounts, and unstable experimental views must be blocklisted or scrubbed.</td>
         <td><code>apps/web/src/lib/public-feed/redaction-policy.ts</code><br><code>scripts/lib/capture-redaction.mjs</code></td>
         <td>fixture capture proves sensitive UI is skipped or masked</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Attach screenshots/clips to a new <code>feature_shipped</code>, <code>screenshot_captured</code>, or <code>clip_captured</code> event automatically when capture succeeds.</td>
         <td><code>apps/web/src/lib/public-feed/record-public-event.ts</code></td>
         <td>single run produces both artifact rows and linked event rows</td>
+        <td><span class="badge done">Done</span></td>
+      </tr>
+      <tr>
+        <td>Run capture and upload on a durable schedule with per-app cadence, retry policy, and operator-visible failure state.</td>
+        <td><code>scripts/publish-public-feed.sh</code><br>ForgeGraph scheduler or runner timer</td>
+        <td>two unattended runs publish new generations and preserve the last good artifacts on failure</td>
         <td><span class="badge todo">Todo</span></td>
       </tr>
     </tbody>
@@ -486,7 +506,7 @@ PublicArtifact {
     </ul>
   </details>
 
-  <h2>Phase 3 — <code>gmac.io</code> Live Wall <span class="badge todo">Todo</span></h2>
+  <h2>Phase 3 — <code>gmac.io</code> Live Wall <span class="badge done">Done</span></h2>
   <p>This phase changes <code>gmac.io</code> from a static catalog with health badges into a living operations surface with evidence.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -495,25 +515,25 @@ PublicArtifact {
         <td>Add event and artifact sections to the dashboard: <em>Now shipping</em>, <em>Recent events</em>, and <em>Proof rail</em>.</td>
         <td><code>_layouts/dashboard.html</code><br><code>_sass/pages/_dashboard.scss</code></td>
         <td>local build renders all three sections with static fallback</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Extend <code>public-feed.js</code> to fetch events/artifacts and decorate cards with last event, screenshot, and freshness markers.</td>
         <td><code>js/public-feed.js</code></td>
         <td>browser with live feed shows screenshot-backed cards and recent event summaries</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add stale-state UX: explicit “capture stale,” “status stale,” and “feed unavailable” treatments instead of silent fallback.</td>
         <td><code>js/public-feed.js</code><br><code>_sass/pages/_dashboard.scss</code></td>
         <td>simulated feed failure keeps shell intact and surfaces stale state visibly</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add rendered-site assertions for event/bootstrap sections so future redesigns cannot accidentally strip the live wall primitives.</td>
         <td><code>scripts/assert_rendered_site.sh</code><br><code>scripts/assert_experiment_visibility.sh</code></td>
         <td>regression scripts fail if event feed hooks disappear</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
@@ -529,7 +549,7 @@ PublicArtifact {
     </ol>
   </details>
 
-  <h2>Phase 4 — <code>gmacko.com</code> Portfolio Updates <span class="badge todo">Todo</span></h2>
+  <h2>Phase 4 — <code>gmacko.com</code> Portfolio Updates <span class="badge partial">In progress</span></h2>
   <p>This phase turns promoted events into human-readable, portfolio-grade updates without letting the site devolve into a copy of the live wall.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -548,9 +568,9 @@ PublicArtifact {
       </tr>
       <tr>
         <td>Generate Jekyll draft files from approved promotion decisions with scaffold only: <em>What changed</em>, <em>Why it matters</em>, <em>What was tricky</em>, <em>What’s next</em>.</td>
-        <td><code>packages/vault/src/publish.ts</code><br><code>packages/api/src/router/publish.ts</code><br><code>personalWebsite/_drafts/</code></td>
-        <td>promotion action writes a draft without auto-publishing</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><code>scripts/sync-public-promotion-drafts.mjs</code><br><code>scripts/lib/public-promotion-drafts.mjs</code><br><code>personalWebsite/_drafts/</code></td>
+        <td>approved promotion materializes a source-linked scaffold without auto-publishing</td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add a homepage lane for <em>Current build updates</em> and a small outbound editorial lane linking to Substack.</td>
@@ -575,22 +595,22 @@ status: draft
 ---</code></pre>
   </details>
 
-  <h2>Phase 5 — Obsidian and OODA Export <span class="badge todo">Todo</span></h2>
+  <h2>Phase 5 — Obsidian and OODA Export <span class="badge partial">In progress</span></h2>
   <p>This phase treats public updates as idea triggers rather than finished essays. The vault gets seeds, not auto-authored content.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
     <tbody>
       <tr>
         <td>Add an idea-seed exporter that writes a new note for approved Obsidian promotions and never overwrites existing notes.</td>
-        <td><code>packages/vault/src/export-idea-seed.ts</code><br><code>packages/vault/src/writer.ts</code></td>
+        <td><code>scripts/sync-public-promotion-drafts.mjs</code><br><code>scripts/lib/public-promotion-drafts.mjs</code></td>
         <td>sample export creates one vault note with linked source event ids and artifacts</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Define a seed template with hook, what happened, why it matters, raw thoughts, possible angles, and related assets.</td>
-        <td><code>obsidian/Templates/</code> or exporter-owned inline template</td>
+        <td>exporter-owned Obsidian scaffold template</td>
         <td>generated seed is useful without feeling like a fake finished draft</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add an OODA outline generator that consumes one or more source events plus optional vault context and emits an outline bundle rather than final prose.</td>
@@ -602,7 +622,7 @@ status: draft
         <td>Mark exported items as <code>seeded</code> or <code>outlined</code> in ForgeGraph so the same event does not keep spamming the vault.</td>
         <td><code>promotion_decisions</code> integration</td>
         <td>re-running export is idempotent</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge partial">File-safe; state sync open</span></td>
       </tr>
     </tbody>
   </table>
@@ -626,7 +646,7 @@ created: 2026-08-04
 # Related assets</code></pre>
   </details>
 
-  <h2>Phase 6 — Governance and Verification <span class="badge todo">Todo</span></h2>
+  <h2>Phase 6 — Governance and Verification <span class="badge partial">In progress</span></h2>
   <p>This phase stops the system from collapsing into noisy feeds, accidental leaks, or AI-written slop.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -635,62 +655,62 @@ created: 2026-08-04
         <td>Codify promotion heuristics: <em>did public reality change?</em>, <em>would I want this on the portfolio?</em>, <em>does this unlock a bigger idea?</em></td>
         <td><code>docs/</code> or admin UI help text in ForgeGraph</td>
         <td>manual review shows low-value churn is filtered out</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add admin review UI or CLI flow for approving/rejecting promotions to <code>gmacko</code> and Obsidian.</td>
-        <td><code>apps/web/src/app/...</code><br><code>apps/cli/src/commands/</code></td>
+        <td><code>apps/web/src/app/settings/public-feed/</code><br><code>packages/api/src/routers/public-catalog.ts</code></td>
         <td>single approval round-trip updates durable state</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add end-to-end regression checks covering: event emitted, artifact captured, feed visible, draft export works, idea seed export works.</td>
         <td><code>apps/web/src/app/api/public/feed/__tests__/</code><br><code>packages/vault/src/__tests__/</code><br><code>scripts/</code></td>
         <td>focused smoke pass proves the entire chain</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge partial">Partial</span></td>
       </tr>
       <tr>
         <td>Document the editorial guardrail: no automatic Substack publication, and no final prose without human rewrite.</td>
         <td><code>README</code> / operator docs / admin help text</td>
         <td>workflow docs make the boundary explicit</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
 
-  <h2>Initial Execution Order</h2>
+  <h2>Remaining Execution Order</h2>
   <table>
-    <thead><tr><th>Batch</th><th>Why first</th><th>Included work</th><th>Exit signal</th></tr></thead>
+    <thead><tr><th>Priority</th><th>Why next</th><th>Included work</th><th>Exit signal</th></tr></thead>
     <tbody>
       <tr>
-        <td>Batch A</td>
-        <td>Producer first; everything else depends on durable objects.</td>
-        <td>Phase 1 schemas, feed builders, public events route</td>
-        <td><code>curl /api/public/feed/events</code> returns real data</td>
+        <td>P0</td>
+        <td>Evidence ages unless capture runs without an agent or operator.</td>
+        <td>Schedule <code>publish-public-feed.sh</code>, expose run health, and preserve last-good media on failure.</td>
+        <td>Two unattended generations complete; one induced failure remains visible without deleting prior artifacts.</td>
       </tr>
       <tr>
-        <td>Batch B</td>
-        <td>Need visual proof before frontends matter.</td>
-        <td>Phase 2 screenshot/clip capture and redaction</td>
-        <td>at least one app has fresh screenshot and clip artifacts</td>
+        <td>P0</td>
+        <td>Approved promotions currently require an operator to run destination sync.</td>
+        <td>Schedule draft materialization with configured personalWebsite and Obsidian roots; report conflicts instead of overwriting.</td>
+        <td>One approved <code>gmacko</code> draft and one Obsidian seed materialize unattended and remain idempotent.</td>
       </tr>
       <tr>
-        <td>Batch C</td>
-        <td>Make the public surface actually useful.</td>
-        <td>Phase 3 <code>gmac.io</code> event/proof wall</td>
-        <td><code>gmac.io</code> visibly shows recent events and artifacts</td>
+        <td>P1</td>
+        <td>The portfolio still needs a distinct human-facing presentation.</td>
+        <td>Build the <code>gmacko.com</code> build-update type, venture proof rail, and homepage separation from editorial links.</td>
+        <td>One reviewed scaffold becomes a human-edited portfolio post linked to its event and evidence.</td>
       </tr>
       <tr>
-        <td>Batch D</td>
-        <td>Portfolio promotion next, not before.</td>
-        <td>Phase 4 <code>gmacko.com</code> build updates and venture proof sections</td>
-        <td>one approved event becomes one published portfolio update</td>
+        <td>P1</td>
+        <td>Obsidian has seeds, but cross-event synthesis is not yet a durable handoff.</td>
+        <td>Add the OODA outline bundle contract: source events, vault context, talking points, questions, and asset list.</td>
+        <td>One selected seed produces an outline bundle without producing or publishing final prose.</td>
       </tr>
       <tr>
-        <td>Batch E</td>
-        <td>Idea farming only after the producer and public surfaces are real.</td>
-        <td>Phase 5 seed export and OODA outline flow</td>
-        <td>one event becomes one useful Obsidian seed</td>
+        <td>P2</td>
+        <td>The chain has live proof but still relies on manual release verification.</td>
+        <td>Automate a smoke path for deploy event, public feed, gmac rendering, promotion materialization, and stale/failure behavior.</td>
+        <td>A scheduled smoke run links an immutable commit to feed evidence and consumer proof.</td>
       </tr>
     </tbody>
   </table>
@@ -702,7 +722,7 @@ created: 2026-08-04
       <tr>
         <td>Feed stays technically live but editorially thin because capture artifacts are null or stale.</td>
         <td><span class="badge risk">High</span></td>
-        <td>Phase 2 is mandatory before calling the system successful; add stale-state UI and artifact freshness counters.</td>
+        <td>Keep freshness visible, run capture on a durable schedule, and retain last-good artifacts when a route cannot be captured.</td>
       </tr>
       <tr>
         <td>Raw event noise overwhelms <code>gmac.io</code> and promotion queues.</td>
@@ -729,18 +749,22 @@ created: 2026-08-04
 
   <h2>Verification</h2>
   <ul>
-    <li><strong>Producer:</strong> schema/typecheck, feed route tests, and direct <code>curl</code> of <code>manifest</code>, <code>apps</code>, <code>events</code>, and <code>artifacts</code>.</li>
-    <li><strong>Capture:</strong> at least one fresh screenshot and one short clip attached to a public event, with a visible stale-path when capture fails.</li>
-    <li><strong><code>gmac.io</code>:</strong> browser verification that recent events, proof rail, and freshness states render from live data and degrade gracefully.</li>
-    <li><strong><code>gmacko.com</code>:</strong> one approved event produces one build-update draft and one venture page proof section.</li>
-    <li><strong>Obsidian/OODA:</strong> one approved event creates one seed note and one outline scaffold without overwriting existing vault notes.</li>
-    <li><strong>Editorial guardrail:</strong> no automation path can publish directly to Substack or mark AI-generated draft copy as final.</li>
+    <li><strong>Producer — verified:</strong> 78 focused tests, root typecheck, lint, CORS, alias/workspace routes, and live health passed for ForgeGraph PR #242.</li>
+    <li><strong>Deployment — verified:</strong> merge commit <code>6d7a3dce</code> is the first parent of deployed production commit <code>d4419ed6</code>; deploy workflow 1246 passed.</li>
+    <li><strong>Automatic event — verified:</strong> both public events routes returned 26 items with a sanitized <code>deploy_succeeded</code> event first and <code>site_targets: ["gmac"]</code>.</li>
+    <li><strong><code>gmac.io</code> — verified:</strong> shared-browser proof showed the live ForgeGraph deployment card with commit <code>d4419ed65b3f</code>, screenshots, and clips.</li>
+    <li><strong><code>gmacko.com</code> — partial:</strong> approved-event draft materialization exists; distinct build-update rendering, venture proof sections, and human publication remain.</li>
+    <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization exists and preserves human files; scheduled sync, ForgeGraph state acknowledgement, and OODA outline synthesis remain.</li>
+    <li><strong>Editorial guardrail — verified:</strong> no automation path publishes to Substack or marks generated scaffold copy as final.</li>
   </ul>
 
   <h2>Open Questions</h2>
-  <div class="callout">
-    <strong>Needs a decision:</strong> should promotion review live inside a ForgeGraph admin UI first, or should v1 ship as a CLI/operator flow that writes <code>promotion_decisions</code> rows and exports drafts/seeds from there? Recommended default: CLI/operator flow first, then UI after the object model is stable.
-  </div>
+  <ul>
+    <li>Which durable runner should own capture cadence and approved-draft sync, and what interval balances freshness against browser/storage cost?</li>
+    <li>Should a successful materialization advance ForgeGraph promotion state automatically, or should “materialized” remain distinct from human “published” state?</li>
+    <li>Should OODA consume one promotion at a time or support a selected bundle of related events as the default editorial outline unit?</li>
+  </ul>
+  <div class="callout"><strong>Resolved:</strong> promotion review lives in ForgeGraph settings with durable decisions. Destination sync remains an operator-safe materializer until scheduling and acknowledgement are added.</div>
 
 </main>
 </body>
