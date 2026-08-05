@@ -81,9 +81,24 @@ layout: default
   <aside class="build-update-evidence" aria-labelledby="build-evidence-heading">
     <p class="landing-kicker">Receipts</p>
     <h2 id="build-evidence-heading">Evidence from the build</h2>
-    <ul>
+    <ul class="build-update-evidence-grid">
       {% for item in page.evidence %}
-      <li><a href="{{ item.url }}">{{ item.label | default: "Build artifact" }}</a></li>
+      <li class="build-update-evidence-item build-update-evidence-{{ item.kind | default: 'link' }}">
+        {% if item.kind == "clip" %}
+        <video controls preload="metadata"{% if item.preview_url %} poster="{{ item.preview_url }}"{% endif %}>
+          <source src="{{ item.url }}">
+          <a href="{{ item.url }}">Watch {{ item.label | default: "build clip" }}</a>
+        </video>
+        {% elsif item.kind == "screenshot" or item.kind == "thumbnail" %}
+        <a href="{{ item.url }}" class="build-update-evidence-media">
+          <img src="{{ item.url }}" alt="{{ item.label | default: "Build screenshot" | escape }}" loading="lazy">
+        </a>
+        {% endif %}
+        <div class="build-update-evidence-caption">
+          <a href="{{ item.url }}">{{ item.label | default: "Build artifact" }}</a>
+          {% if item.kind or item.freshness %}<span>{{ item.kind }}{% if item.kind and item.freshness %} / {% endif %}{{ item.freshness }}</span>{% endif %}
+        </div>
+      </li>
       {% endfor %}
     </ul>
   </aside>

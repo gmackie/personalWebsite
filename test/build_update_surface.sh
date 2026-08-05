@@ -31,6 +31,13 @@ source_event_ids: [evt_surface_fixture]
 evidence:
   - label: "UI proof"
     url: "https://example.com/ui-proof.png"
+    kind: "screenshot"
+    freshness: "fresh"
+  - label: "UI walkthrough"
+    url: "https://example.com/ui-walkthrough.webm"
+    preview_url: "https://example.com/ui-walkthrough-poster.jpg"
+    kind: "clip"
+    freshness: "fresh"
 ---
 
 This fixture exists only while the rendered-site test runs.
@@ -59,6 +66,9 @@ grep -q 'Build update' "$POST_PAGE" || fail "post missing build update identity"
 grep -q 'ForgeGraph event' "$POST_PAGE" || fail "post missing source event label"
 grep -q 'evt_surface_fixture' "$POST_PAGE" || fail "post missing source event id"
 grep -q 'UI proof' "$POST_PAGE" || fail "post missing evidence link"
+grep -q '<img src="https://example.com/ui-proof.png"' "$POST_PAGE" || fail "post missing inline screenshot evidence"
+grep -q '<video controls' "$POST_PAGE" || fail "post missing playable clip evidence"
+grep -q 'poster="https://example.com/ui-walkthrough-poster.jpg"' "$POST_PAGE" || fail "clip missing poster frame"
 grep -q 'Human-written field notes' "$POST_PAGE" || fail "post missing authorship boundary"
 
 echo "PASS: build updates render as portfolio proof, not editorial"
