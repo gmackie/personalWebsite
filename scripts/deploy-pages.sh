@@ -9,14 +9,22 @@
 set -euo pipefail
 
 SITES=(gmacko personal gmac)
+COMMIT_SHA="$(git rev-parse HEAD)"
+
+assert_clean_checkout() {
+  if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+    echo "Refusing to deploy uncommitted content. Use a clean worktree at the intended commit." >&2
+    exit 1
+  fi
+}
 
 write_build_data() {
   # Capture commit SHA + build timestamp for /.well-known/forge-health.
   # Regenerated on every build; _data/build.yml is gitignored.
   mkdir -p _data
   cat > _data/build.yml <<EOF
-commit_sha: "$(git rev-parse HEAD 2>/dev/null || echo unknown)"
-commit_short: "$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
+commit_sha: "${COMMIT_SHA}"
+commit_short: "${COMMIT_SHA:0:7}"
 built_at: "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 EOF
 }
@@ -36,8 +44,10 @@ deploy_site() {
   wrangler pages deploy "${dest}" \
     --project-name "${site}" \
     --branch main \
-    --commit-dirty=true
+    --commit-hash "${COMMIT_SHA}"
 }
+
+assert_clean_checkout
 
 case "${1:-}" in
   gmacko|personal|gmac)

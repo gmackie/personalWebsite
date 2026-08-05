@@ -30,7 +30,7 @@ bundle exec jekyll serve --config _config.yml,_config.gmacko.yml --destination _
 
 ## Deploy
 
-Hosted on Cloudflare Pages — three projects (`gmacko`, `personal`, `gmac`) mapped to gmacko.com, grahammackie.com, and gmac.io respectively. Deploys are manual via wrangler for now.
+Hosted on Cloudflare Pages — three projects (`gmacko`, `personal`, `gmac`) mapped to gmacko.com, grahammackie.com, and gmac.io respectively. A workstation LaunchAgent checks GitHub `main` every five minutes, deploys changed commits from a dedicated clean worktree, and verifies that all three health endpoints report the exact SHA.
 
 ```bash
 # One-time: authenticate
@@ -45,7 +45,16 @@ wrangler login
 ./scripts/deploy-pages.sh all
 ```
 
-The script builds with the matching `_config.*.yml` and pushes the output directory to the corresponding Pages project.
+The deploy script refuses dirty checkouts so uncommitted drafts cannot leak into production. Use a separate clean worktree for every production or preview deployment.
+
+Install or refresh the unattended deployment job after authenticating Wrangler:
+
+```bash
+npx wrangler login
+./scripts/install-cloudflare-deploy-sync.sh
+```
+
+The scheduler uses the local Wrangler OAuth session instead of copying a broad Cloudflare token into Forgejo. Force an immediate reconciliation with `FORCE_DEPLOY=1 ./scripts/run-cloudflare-deploy-sync.sh`.
 
 ## Structure
 
