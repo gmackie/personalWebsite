@@ -260,7 +260,7 @@
   </div>
 
   <div class="progress" aria-label="Phase progress">
-    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="active"></i><i class="active"></i>
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="active"></i>
   </div>
 
   <h2>Overview</h2>
@@ -276,10 +276,11 @@
     <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
     <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds. Conflicts preserve human files, unavailable destinations do not block one another, and no path publishes final prose or Substack editorial.</span></div>
     <div class="decision"><b><code>gmacko.com</code> proof surface live.</b><span>Build updates are separated from essays on the homepage, attached to venture proof rails, and can render source-linked screenshots and playable clips inline.</span></div>
+    <div class="decision"><b>OODA synthesis is automated.</b><span>A separate 15-minute LaunchAgent turns one or more provenance-linked Obsidian captures plus optional project context into source-bounded outline bundles. It records provenance, preserves existing human notes, and explicitly refuses final prose.</span></div>
     <div class="decision"><b>Clean production delivery is automated.</b><span>A five-minute LaunchAgent reconciles GitHub <code>main</code> to all three Cloudflare Pages projects from a dedicated clean worktree, verifies exact health SHAs, and refuses any dirty checkout.</span></div>
   </div>
   <div class="callout">
-    <strong>Current P0:</strong> add the OODA outline-bundle contract so one or more approved events, optional vault context, open questions, and evidence assets can become a useful editorial handoff without generating final prose. Destination materialization acknowledgement follows.
+    <strong>Current P0:</strong> acknowledge successful scaffold materialization per destination in ForgeGraph without conflating machine-created drafts with human publication. Unattended cross-system smoke coverage follows.
   </div>
 
   <h2>Architecture</h2>
@@ -405,7 +406,7 @@
     <li class="done"><b>Phase 2 — Capture and redaction pipeline</b><br>Screenshots and short UI clips are captured, uploaded, filtered, attached to events, and proven across consecutive six-hour scheduled generations.</li>
     <li class="done"><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Fleet health, events, artifacts, and fallback states render from the live feed.</li>
     <li class="done"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Approved scaffolds materialize automatically and render as curated build updates with homepage, venture, screenshot, and clip proof surfaces.</li>
-    <li class="active"><b>Phase 5 — Obsidian and OODA export</b><br>Approved Obsidian seed scaffolds materialize automatically; OODA outline synthesis remains.</li>
+    <li class="done"><b>Phase 5 — Obsidian and OODA export</b><br>Approved Obsidian seeds materialize automatically, and provenance-linked captures become human-owned OODA outline bundles on a separate schedule.</li>
     <li class="active"><b>Phase 6 — Governance and verification</b><br>Privacy and editorial boundaries are enforced; unattended end-to-end smoke coverage remains.</li>
   </ul>
 
@@ -604,7 +605,7 @@ status: draft
 ---</code></pre>
   </details>
 
-  <h2>Phase 5 — Obsidian and OODA Export <span class="badge partial">In progress</span></h2>
+  <h2>Phase 5 — Obsidian and OODA Export <span class="badge done">Done</span></h2>
   <p>This phase treats public updates as idea triggers rather than finished essays. The vault gets seeds, not auto-authored content.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -623,15 +624,15 @@ status: draft
       </tr>
       <tr>
         <td>Add an OODA outline generator that consumes one or more source events plus optional vault context and emits an outline bundle rather than final prose.</td>
-        <td><code>packages/api/src/router/publish.ts</code><br><code>apps/cli/src/commands/</code> or OODA-specific route</td>
-        <td>outline generation returns headings, talking points, and suggested asset list</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><code>/Volumes/dev/bob/ooda/packages/thread-workspace/src/create-outline-bundle.ts</code><br><code>/Volumes/dev/bob/ooda/apps/cli/src/commands/outline.ts</code></td>
+        <td>one or many captures produce facts, source boundaries, questions, format cuts, video notes, evidence, and separate provenance while <code>final_prose_generated</code> remains false</td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
-        <td>Mark exported items as <code>seeded</code> or <code>outlined</code> in ForgeGraph so the same event does not keep spamming the vault.</td>
-        <td><code>promotion_decisions</code> integration</td>
-        <td>re-running export is idempotent</td>
-        <td><span class="badge partial">File-safe; state sync open</span></td>
+        <td>Run OODA synthesis independently and never overwrite an existing outline that may contain human notes.</td>
+        <td><code>/Volumes/dev/bob/ooda/scripts/sync-forgegraph-outlines.sh</code><br><code>/Volumes/dev/bob/ooda/ops/launchd/</code></td>
+        <td>15-minute LaunchAgent exits 0; rerun reports <code>existing</code> while the outline hash and OODA vault commit remain unchanged</td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
@@ -673,6 +674,12 @@ created: 2026-08-04
         <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
+        <td>Record successful scaffold materialization per destination without marking generated files as human-published.</td>
+        <td><code>promotion_decisions</code> integration<br>workstation promotion acknowledgement</td>
+        <td>ForgeGraph distinguishes <code>approved</code>, <code>materialized</code>, and human-controlled <code>published</code> state per destination</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
         <td>Add end-to-end regression checks covering: event emitted, artifact captured, feed visible, draft export works, idea seed export works.</td>
         <td><code>apps/web/src/app/api/public/feed/__tests__/</code><br><code>packages/vault/src/__tests__/</code><br><code>scripts/</code></td>
         <td>focused smoke pass proves the entire chain</td>
@@ -699,18 +706,12 @@ created: 2026-08-04
     <tbody>
       <tr>
         <td>P0</td>
-        <td>Obsidian has seeds, but cross-event synthesis is not yet a durable handoff.</td>
-        <td>Add the OODA outline bundle contract: source events, vault context, talking points, questions, and asset list.</td>
-        <td>One selected seed produces an outline bundle without producing or publishing final prose.</td>
-      </tr>
-      <tr>
-        <td>P2</td>
         <td>Materialization is file-safe but ForgeGraph does not yet distinguish generated scaffolds from human publication.</td>
         <td>Add a workstation acknowledgement after successful create or refresh, while preserving a separate human-controlled <code>published</code> state.</td>
         <td>ForgeGraph records <code>materialized</code> per destination without treating any scaffold as published.</td>
       </tr>
       <tr>
-        <td>P2</td>
+        <td>P1</td>
         <td>The individual lanes are proven, but unattended cross-system regression detection remains incomplete.</td>
         <td>Automate smoke coverage for deploy event, public feed, <code>gmac.io</code> rendering, promotion materialization, and stale/failure behavior.</td>
         <td>A scheduled smoke links immutable commits to feed evidence and consumer proof; an induced failure leaves last-good media intact.</td>
@@ -762,16 +763,16 @@ created: 2026-08-04
     <li><strong>Portfolio media contract — verified:</strong> ForgeGraph PR #255 merged as <code>1987f53c53fa</code>; future scaffolds include a build-update identity, venture slug, source event ids, hero URL, and structured screenshot/clip evidence. Focused catalog and promotion tests, root typecheck, lint, formatting, and secret scan passed locally.</li>
     <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout, completed with exit code 0 against the live bearer-authenticated endpoint, and correctly found zero pending approved drafts.</li>
     <li><strong><code>gmacko.com</code> — verified:</strong> commits <code>d74798c</code> and <code>0c3b2fc</code> add build-update identity, homepage and venture proof rails, provenance, responsive screenshot cards, and inline clips. Three Jekyll builds, nine JavaScript tests, fixture, isolation, structure, hydration, live-wall, ShellCheck, diff checks, and desktop/mobile browser proof passed.</li>
-    <li><strong>Website CI and deployment — verified:</strong> Forgejo runs 14 and 15 passed on the exact pushed commits after portability fixes removed runner-only <code>rg</code> and cache-proxy assumptions. <code>com.gmacko.pages-deploy-sync</code> then deployed commit <code>20f5023900ab</code> from its clean global worktree, exited 0, and advanced <code>gmacko.com</code>, <code>grahammackie.com</code>, and <code>gmac.io</code> to that immutable health SHA. Homepage, archive, and feed checks confirmed uncommitted essays are absent.</li>
-    <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization is automatic and preserves human files; ForgeGraph state acknowledgement and OODA outline synthesis remain.</li>
+    <li><strong>Website CI and deployment — verified:</strong> Forgejo run 16 passed commit <code>2e6168219deb</code> after portability fixes removed runner-only <code>rg</code> and cache-proxy assumptions. <code>com.gmacko.pages-deploy-sync</code> deployed that exact commit from its clean global worktree, converged twice, exited 0, and advanced <code>gmacko.com</code>, <code>grahammackie.com</code>, and <code>gmac.io</code> to the same immutable health SHA. Mobile browser proof confirmed the live build update and absence of uncommitted essays.</li>
+    <li><strong>Obsidian/OODA — verified:</strong> OODA commits <code>91021d9</code> and <code>cb21395</code> add the one-or-many capture CLI, source-linked outline and provenance contracts, no-overwrite semantics, and a 15-minute LaunchAgent. The live agent's third run exited 0 with <code>existing</code>; the outline SHA-256 remained <code>cb8c755cf2d8</code> and the OODA vault remained at <code>7a70c9b72b35</code>.</li>
     <li><strong>Editorial guardrail — verified:</strong> no automation path publishes to Substack or marks generated scaffold copy as final.</li>
   </ul>
 
   <h2>Open Questions</h2>
   <ul>
-    <li>Should OODA consume one promotion at a time or support a selected bundle of related events as the default editorial outline unit?</li>
+    <li>What authenticated acknowledgement shape should workstation materializers send so ForgeGraph can represent per-destination success and failure without granting publication authority?</li>
   </ul>
-  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, and a separate 15-minute workstation LaunchAgent owns approved scaffold materialization. Promotion review remains durable in ForgeGraph; destination failures are isolated, human files are preserved, successful materialization will be acknowledged separately, and publication remains a human act.</div>
+  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, a 15-minute ForgeGraph workstation LaunchAgent owns approved scaffold materialization, and a separate 15-minute OODA LaunchAgent owns source-linked outline synthesis. OODA accepts one capture or an intentionally selected related bundle, optional human vault context, and evidence links; it never overwrites an existing outline or emits final prose. Promotion review remains durable in ForgeGraph, and publication remains a human act.</div>
 
 </main>
 </body>
