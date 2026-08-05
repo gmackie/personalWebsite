@@ -256,11 +256,11 @@
     <div class="stat"><b>26</b><span>Live events</span></div>
     <div class="stat"><b>5</b><span>Systems touched</span></div>
     <div class="stat"><b>3</b><span>Public lanes</span></div>
-    <div class="stat"><b>3</b><span>Primary gaps</span></div>
+    <div class="stat"><b>2</b><span>Primary gaps</span></div>
   </div>
 
   <div class="progress" aria-label="Phase progress">
-    <i class="done"></i><i class="done"></i><i class="done"></i><i class="active"></i><i class="active"></i><i class="active"></i>
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="active"></i><i class="active"></i>
   </div>
 
   <h2>Overview</h2>
@@ -275,9 +275,10 @@
     <div class="decision"><b>Human PR context live.</b><span>An explicit <code>forgegraph:public-update</code> block accepts a human headline, summary, and why. Raw private PR titles remain internal.</span></div>
     <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
     <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds. Conflicts preserve human files, unavailable destinations do not block one another, and no path publishes final prose or Substack editorial.</span></div>
+    <div class="decision"><b><code>gmacko.com</code> proof surface live.</b><span>Build updates are separated from essays on the homepage, attached to venture proof rails, and can render source-linked screenshots and playable clips inline.</span></div>
   </div>
   <div class="callout">
-    <strong>Current P0:</strong> turn approved <code>gmacko.com</code> scaffolds into a distinct build-update presentation with venture proof rails and a homepage lane. OODA outline synthesis and materialization acknowledgement follow; final prose remains human-authored.
+    <strong>Current P0:</strong> add the OODA outline-bundle contract so one or more approved events, optional vault context, open questions, and evidence assets can become a useful editorial handoff without generating final prose. Destination materialization acknowledgement follows.
   </div>
 
   <h2>Architecture</h2>
@@ -402,7 +403,7 @@
     <li class="done"><b>Phase 1 — Producer foundation</b><br>Public events, artifacts, destination targets, and durable promotion state are live.</li>
     <li class="done"><b>Phase 2 — Capture and redaction pipeline</b><br>Screenshots and short UI clips are captured, uploaded, filtered, attached to events, and proven across consecutive six-hour scheduled generations.</li>
     <li class="done"><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Fleet health, events, artifacts, and fallback states render from the live feed.</li>
-    <li class="active"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Approved draft scaffolds materialize automatically; curated build-update and venture proof presentation remains.</li>
+    <li class="done"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Approved scaffolds materialize automatically and render as curated build updates with homepage, venture, screenshot, and clip proof surfaces.</li>
     <li class="active"><b>Phase 5 — Obsidian and OODA export</b><br>Approved Obsidian seed scaffolds materialize automatically; OODA outline synthesis remains.</li>
     <li class="active"><b>Phase 6 — Governance and verification</b><br>Privacy and editorial boundaries are enforced; unattended end-to-end smoke coverage remains.</li>
   </ul>
@@ -549,22 +550,22 @@ PublicArtifact {
     </ol>
   </details>
 
-  <h2>Phase 4 — <code>gmacko.com</code> Portfolio Updates <span class="badge partial">In progress</span></h2>
+  <h2>Phase 4 — <code>gmacko.com</code> Portfolio Updates <span class="badge done">Done</span></h2>
   <p>This phase turns promoted events into human-readable, portfolio-grade updates without letting the site devolve into a copy of the live wall.</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
     <tbody>
       <tr>
         <td>Add a <code>build-update</code> content type with hero artifact, source event ids, venture slug, and compact structure.</td>
-        <td><code>_layouts/post.html</code><br><code>_sass/pages/_post.scss</code><br><code>_includes/venture-card.html</code></td>
-        <td>one sample update renders distinctly from long-form blog posts</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><code>_layouts/post.html</code><br><code>_sass/pages/_post.scss</code><br><code>_includes/build-update-card.html</code></td>
+        <td>fixture update renders source identity, screenshots, playable clips, poster frames, and a human-authorship boundary distinctly from essays</td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Create venture-page sections for current proof, recent build updates, and latest promoted artifacts.</td>
         <td><code>_layouts/venture.html</code><br><code>_ventures/*.md</code></td>
         <td>venture page shows proof and update rails without reading raw feed JSON client-side</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Generate Jekyll draft files from approved promotion decisions with scaffold only: <em>What changed</em>, <em>Why it matters</em>, <em>What was tricky</em>, <em>What’s next</em>.</td>
@@ -574,9 +575,9 @@ PublicArtifact {
       </tr>
       <tr>
         <td>Add a homepage lane for <em>Current build updates</em> and a small outbound editorial lane linking to Substack.</td>
-        <td><code>_layouts/landing.html</code><br><code>_sass/pages/_gmacko.scss</code></td>
+        <td><code>_layouts/landing.html</code><br><code>_sass/pages/_landing.scss</code></td>
         <td>homepage clearly separates portfolio updates from essays</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
@@ -589,8 +590,15 @@ post_type: build-update
 title: "ForgeGraph now shows deploy evidence"
 venture_slug: forgegraph
 source_event_ids: [evt_123]
-hero_artifact_id: art_987
-tags: [forgegraph, deployment, build-log]
+hero_artifact_url: "https://evidence.example/screenshot.png"
+hero_artifact_alt: "ForgeGraph deployment evidence"
+evidence:
+  - label: "Deployment walkthrough"
+    url: "https://evidence.example/walkthrough.webm"
+    preview_url: "https://evidence.example/walkthrough-poster.jpg"
+    kind: clip
+    freshness: fresh
+tags: [build-update, forgegraph, deployment]
 status: draft
 ---</code></pre>
   </details>
@@ -684,12 +692,6 @@ created: 2026-08-04
     <tbody>
       <tr>
         <td>P0</td>
-        <td>The portfolio still needs a distinct human-facing presentation.</td>
-        <td>Build the <code>gmacko.com</code> build-update type, venture proof rail, and homepage separation from editorial links.</td>
-        <td>One reviewed scaffold becomes a human-edited portfolio post linked to its event and evidence.</td>
-      </tr>
-      <tr>
-        <td>P1</td>
         <td>Obsidian has seeds, but cross-event synthesis is not yet a durable handoff.</td>
         <td>Add the OODA outline bundle contract: source events, vault context, talking points, questions, and asset list.</td>
         <td>One selected seed produces an outline bundle without producing or publishing final prose.</td>
@@ -750,18 +752,18 @@ created: 2026-08-04
     <li><strong>Automatic event — verified:</strong> both public events routes returned 26 items with a sanitized <code>deploy_succeeded</code> event first and <code>site_targets: ["gmac"]</code>.</li>
     <li><strong><code>gmac.io</code> — verified:</strong> shared-browser proof showed the live ForgeGraph deployment card with commit <code>d4419ed65b3f</code>, screenshots, and clips.</li>
     <li><strong>Promotion handoff — verified:</strong> ForgeGraph PR #254 merged as <code>6fd2b476fc8a</code>; 25 focused tests plus exact CI-equivalent typecheck, lint, package tests, API/web suites, health tests, Go tests, tracked-tree secret scan, and script checks passed.</li>
+    <li><strong>Portfolio media contract — verified:</strong> ForgeGraph PR #255 merged as <code>1987f53c53fa</code>; future scaffolds include a build-update identity, venture slug, source event ids, hero URL, and structured screenshot/clip evidence. Focused catalog and promotion tests, root typecheck, lint, formatting, and secret scan passed locally.</li>
     <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout, completed with exit code 0 against the live bearer-authenticated endpoint, and correctly found zero pending approved drafts.</li>
-    <li><strong><code>gmacko.com</code> — partial:</strong> approved-event draft materialization is automatic and destination-independent; distinct build-update rendering, venture proof sections, and human publication remain.</li>
+    <li><strong><code>gmacko.com</code> — verified:</strong> commits <code>d74798c</code> and <code>0c3b2fc</code> add build-update identity, homepage and venture proof rails, provenance, responsive screenshot cards, and inline clips. Three Jekyll builds, nine JavaScript tests, fixture, isolation, structure, hydration, live-wall, ShellCheck, diff checks, and desktop/mobile browser proof passed.</li>
     <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization is automatic and preserves human files; ForgeGraph state acknowledgement and OODA outline synthesis remain.</li>
     <li><strong>Editorial guardrail — verified:</strong> no automation path publishes to Substack or marks generated scaffold copy as final.</li>
   </ul>
 
   <h2>Open Questions</h2>
   <ul>
-    <li>Should a successful materialization advance ForgeGraph promotion state automatically, or should “materialized” remain distinct from human “published” state?</li>
     <li>Should OODA consume one promotion at a time or support a selected bundle of related events as the default editorial outline unit?</li>
   </ul>
-  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, and a separate 15-minute workstation LaunchAgent owns approved scaffold materialization. Promotion review remains durable in ForgeGraph; destination failures are isolated, human files are preserved, and publication remains a separate human act.</div>
+  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, and a separate 15-minute workstation LaunchAgent owns approved scaffold materialization. Promotion review remains durable in ForgeGraph; destination failures are isolated, human files are preserved, successful materialization will be acknowledged separately, and publication remains a human act.</div>
 
 </main>
 </body>
