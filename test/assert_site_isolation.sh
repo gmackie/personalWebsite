@@ -13,7 +13,7 @@ fail() {
 assert_absent() {
   local path="$1"
   local pattern="$2"
-  if rg -q "$pattern" "$path"; then
+  if grep -q -- "$pattern" "$path"; then
     fail "unexpected match for '$pattern' in $path"
   fi
 }
@@ -21,7 +21,7 @@ assert_absent() {
 assert_present() {
   local path="$1"
   local pattern="$2"
-  if ! rg -q "$pattern" "$path"; then
+  if ! grep -q -- "$pattern" "$path"; then
     fail "missing '$pattern' in $path"
   fi
 }
@@ -57,11 +57,11 @@ for surface in "${GMACKO_SURFACES[@]}"; do
   assert_absent "$surface" "Sandcastles"
 done
 
-if find _site_personal/articles -type f | rg -q 'source-control-for-agents|not-enough-humans'; then
+if find _site_personal/articles -type f | grep -Eq 'source-control-for-agents|not-enough-humans'; then
   fail "personal site should not generate gmacko article pages"
 fi
 
-if find _site_gmacko/articles -type f | rg -q 'four-months-out|sandcastles'; then
+if find _site_gmacko/articles -type f | grep -Eq 'four-months-out|sandcastles'; then
   fail "gmacko site should not generate personal article pages"
 fi
 
