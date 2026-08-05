@@ -270,14 +270,14 @@
   <h2>Current Shipped State</h2>
   <div class="decision-grid">
     <div class="decision"><b>Producer live.</b><span>ForgeGraph serves workspace-scoped apps, events, summary, timeline, and artifact feeds with CORS, generation IDs, and last-good snapshots.</span></div>
-    <div class="decision"><b>Evidence live.</b><span>The current feed contains screenshots, two short UI clips with poster frames, and capture events linked to public apps.</span></div>
+    <div class="decision"><b>Evidence live and scheduled.</b><span>A managed six-hour capture job preserves last-good generations. The current verified bundle contains 21 screenshots, three UI clips, manifests, and timeline data.</span></div>
     <div class="decision"><b>Automatic deploy facts live.</b><span>Public-enabled <code>gmac</code> apps emit sanitized deployment facts. The first production event recorded commit <code>d4419ed65b3f</code>.</span></div>
     <div class="decision"><b>Human PR context live.</b><span>An explicit <code>forgegraph:public-update</code> block accepts a human headline, summary, and why. Raw private PR titles remain internal.</span></div>
     <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
-    <div class="decision"><b>Promotion remains reviewed.</b><span>ForgeGraph has durable <code>gmacko</code> and Obsidian promotion decisions and scaffold materializers, but no path publishes final prose or Substack editorial.</span></div>
+    <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds. Conflicts preserve human files, unavailable destinations do not block one another, and no path publishes final prose or Substack editorial.</span></div>
   </div>
   <div class="callout">
-    <strong>Remaining automation:</strong> schedule capture runs without an operator, schedule approved-draft materialization with destination roots configured, and finish the curated <code>gmacko.com</code> venture/build-update presentation plus OODA outline handoff.
+    <strong>Current P0:</strong> turn approved <code>gmacko.com</code> scaffolds into a distinct build-update presentation with venture proof rails and a homepage lane. OODA outline synthesis and materialization acknowledgement follow; final prose remains human-authored.
   </div>
 
   <h2>Architecture</h2>
@@ -400,10 +400,10 @@
   <h2>Milestones</h2>
   <ul class="timeline">
     <li class="done"><b>Phase 1 — Producer foundation</b><br>Public events, artifacts, destination targets, and durable promotion state are live.</li>
-    <li class="done"><b>Phase 2 — Capture and redaction pipeline</b><br>Screenshots and short UI clips are captured, uploaded, filtered, and attached to events; unattended scheduling remains.</li>
+    <li class="done"><b>Phase 2 — Capture and redaction pipeline</b><br>Screenshots and short UI clips are captured, uploaded, filtered, attached to events, and proven across consecutive six-hour scheduled generations.</li>
     <li class="done"><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Fleet health, events, artifacts, and fallback states render from the live feed.</li>
-    <li class="active"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Draft scaffolds materialize; curated venture proof sections and publishing remain.</li>
-    <li class="active"><b>Phase 5 — Obsidian and OODA export</b><br>Obsidian seed scaffolds materialize; OODA outline synthesis remains.</li>
+    <li class="active"><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Approved draft scaffolds materialize automatically; curated build-update and venture proof presentation remains.</li>
+    <li class="active"><b>Phase 5 — Obsidian and OODA export</b><br>Approved Obsidian seed scaffolds materialize automatically; OODA outline synthesis remains.</li>
     <li class="active"><b>Phase 6 — Governance and verification</b><br>Privacy and editorial boundaries are enforced; unattended end-to-end smoke coverage remains.</li>
   </ul>
 
@@ -459,7 +459,7 @@ PublicArtifact {
 }</code></pre>
   </details>
 
-  <h2>Phase 2 — Capture and Redaction Pipeline <span class="badge partial">Shipped / scheduling open</span></h2>
+  <h2>Phase 2 — Capture and Redaction Pipeline <span class="badge done">Done</span></h2>
   <p>This phase makes the feed visually useful. The output is not just “app is healthy,” but “here is what the user would actually see, and here is the short clip proving the UI changed.”</p>
   <table>
     <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
@@ -490,9 +490,9 @@ PublicArtifact {
       </tr>
       <tr>
         <td>Run capture and upload on a durable schedule with per-app cadence, retry policy, and operator-visible failure state.</td>
-        <td><code>scripts/publish-public-feed.sh</code><br>ForgeGraph scheduler or runner timer</td>
-        <td>two unattended runs publish new generations and preserve the last good artifacts on failure</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><code>scripts/run-public-feed-capture.sh</code><br>ForgeGraph managed scheduler</td>
+        <td>consecutive scheduled generations completed at 12:17Z and 18:17Z; current last-good contains 35 files, including 21 screenshots and three clips</td>
+        <td><span class="badge done">Done</span></td>
       </tr>
     </tbody>
   </table>
@@ -569,7 +569,7 @@ PublicArtifact {
       <tr>
         <td>Generate Jekyll draft files from approved promotion decisions with scaffold only: <em>What changed</em>, <em>Why it matters</em>, <em>What was tricky</em>, <em>What’s next</em>.</td>
         <td><code>scripts/sync-public-promotion-drafts.mjs</code><br><code>scripts/lib/public-promotion-drafts.mjs</code><br><code>personalWebsite/_drafts/</code></td>
-        <td>approved promotion materializes a source-linked scaffold without auto-publishing</td>
+        <td>approved promotion materializes a source-linked scaffold without auto-publishing; 15-minute sync isolates unavailable roots, conflicts, and filesystem failures per destination</td>
         <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
@@ -603,7 +603,7 @@ status: draft
       <tr>
         <td>Add an idea-seed exporter that writes a new note for approved Obsidian promotions and never overwrites existing notes.</td>
         <td><code>scripts/sync-public-promotion-drafts.mjs</code><br><code>scripts/lib/public-promotion-drafts.mjs</code></td>
-        <td>sample export creates one vault note with linked source event ids and artifacts</td>
+        <td>sample export creates one vault note with linked source event ids and artifacts; 15-minute sync runs independently from capture and preserves existing notes</td>
         <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
@@ -684,18 +684,6 @@ created: 2026-08-04
     <tbody>
       <tr>
         <td>P0</td>
-        <td>Evidence ages unless capture runs without an agent or operator.</td>
-        <td>Schedule <code>publish-public-feed.sh</code>, expose run health, and preserve last-good media on failure.</td>
-        <td>Two unattended generations complete; one induced failure remains visible without deleting prior artifacts.</td>
-      </tr>
-      <tr>
-        <td>P0</td>
-        <td>Approved promotions currently require an operator to run destination sync.</td>
-        <td>Schedule draft materialization with configured personalWebsite and Obsidian roots; report conflicts instead of overwriting.</td>
-        <td>One approved <code>gmacko</code> draft and one Obsidian seed materialize unattended and remain idempotent.</td>
-      </tr>
-      <tr>
-        <td>P1</td>
         <td>The portfolio still needs a distinct human-facing presentation.</td>
         <td>Build the <code>gmacko.com</code> build-update type, venture proof rail, and homepage separation from editorial links.</td>
         <td>One reviewed scaffold becomes a human-edited portfolio post linked to its event and evidence.</td>
@@ -708,9 +696,15 @@ created: 2026-08-04
       </tr>
       <tr>
         <td>P2</td>
-        <td>The chain has live proof but still relies on manual release verification.</td>
-        <td>Automate a smoke path for deploy event, public feed, gmac rendering, promotion materialization, and stale/failure behavior.</td>
-        <td>A scheduled smoke run links an immutable commit to feed evidence and consumer proof.</td>
+        <td>Materialization is file-safe but ForgeGraph does not yet distinguish generated scaffolds from human publication.</td>
+        <td>Add a workstation acknowledgement after successful create or refresh, while preserving a separate human-controlled <code>published</code> state.</td>
+        <td>ForgeGraph records <code>materialized</code> per destination without treating any scaffold as published.</td>
+      </tr>
+      <tr>
+        <td>P2</td>
+        <td>The individual lanes are proven, but unattended cross-system regression detection remains incomplete.</td>
+        <td>Automate smoke coverage for deploy event, public feed, <code>gmac.io</code> rendering, promotion materialization, and stale/failure behavior.</td>
+        <td>A scheduled smoke links immutable commits to feed evidence and consumer proof; an induced failure leaves last-good media intact.</td>
       </tr>
     </tbody>
   </table>
@@ -751,20 +745,23 @@ created: 2026-08-04
   <ul>
     <li><strong>Producer — verified:</strong> 78 focused tests, root typecheck, lint, CORS, alias/workspace routes, and live health passed for ForgeGraph PR #242.</li>
     <li><strong>Deployment — verified:</strong> merge commit <code>6d7a3dce</code> is the first parent of deployed production commit <code>d4419ed6</code>; deploy workflow 1246 passed.</li>
+    <li><strong>Capture scheduler — verified:</strong> consecutive natural-cadence generations completed at 12:17Z and 18:17Z; the latter advanced last-good to a 35-file generation containing 21 screenshots, three WebM clips, JSON feed data, a manifest, and a timeline.</li>
+    <li><strong>Command security — verified:</strong> production commit <code>2b6b51217d16</code> removed legacy command credentials; raw legacy tokens return <code>401</code> while scoped mint and dispatch complete.</li>
     <li><strong>Automatic event — verified:</strong> both public events routes returned 26 items with a sanitized <code>deploy_succeeded</code> event first and <code>site_targets: ["gmac"]</code>.</li>
     <li><strong><code>gmac.io</code> — verified:</strong> shared-browser proof showed the live ForgeGraph deployment card with commit <code>d4419ed65b3f</code>, screenshots, and clips.</li>
-    <li><strong><code>gmacko.com</code> — partial:</strong> approved-event draft materialization exists; distinct build-update rendering, venture proof sections, and human publication remain.</li>
-    <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization exists and preserves human files; scheduled sync, ForgeGraph state acknowledgement, and OODA outline synthesis remain.</li>
+    <li><strong>Promotion handoff — verified:</strong> ForgeGraph PR #254 merged as <code>6fd2b476fc8a</code>; 25 focused tests plus exact CI-equivalent typecheck, lint, package tests, API/web suites, health tests, Go tests, tracked-tree secret scan, and script checks passed.</li>
+    <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout, completed with exit code 0 against the live bearer-authenticated endpoint, and correctly found zero pending approved drafts.</li>
+    <li><strong><code>gmacko.com</code> — partial:</strong> approved-event draft materialization is automatic and destination-independent; distinct build-update rendering, venture proof sections, and human publication remain.</li>
+    <li><strong>Obsidian/OODA — partial:</strong> approved seed materialization is automatic and preserves human files; ForgeGraph state acknowledgement and OODA outline synthesis remain.</li>
     <li><strong>Editorial guardrail — verified:</strong> no automation path publishes to Substack or marks generated scaffold copy as final.</li>
   </ul>
 
   <h2>Open Questions</h2>
   <ul>
-    <li>Which durable runner should own capture cadence and approved-draft sync, and what interval balances freshness against browser/storage cost?</li>
     <li>Should a successful materialization advance ForgeGraph promotion state automatically, or should “materialized” remain distinct from human “published” state?</li>
     <li>Should OODA consume one promotion at a time or support a selected bundle of related events as the default editorial outline unit?</li>
   </ul>
-  <div class="callout"><strong>Resolved:</strong> promotion review lives in ForgeGraph settings with durable decisions. Destination sync remains an operator-safe materializer until scheduling and acknowledgement are added.</div>
+  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, and a separate 15-minute workstation LaunchAgent owns approved scaffold materialization. Promotion review remains durable in ForgeGraph; destination failures are isolated, human files are preserved, and publication remains a separate human act.</div>
 
 </main>
 </body>
