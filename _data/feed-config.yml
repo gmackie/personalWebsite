@@ -10,3 +10,4 @@
 enabled: true
 manifest_url: https://forgegraf.com/api/public/feed/manifest
 fetch_timeout_ms: 3500
+refresh_interval_ms: 60000

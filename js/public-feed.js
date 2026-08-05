@@ -1,12 +1,13 @@
 // ForgeGraph public-feed consumer.
 //
 // Reads a bootstrap <script type="application/json" id="public-feed-config">
-// blob containing { enabled, manifest_url, fetch_timeout_ms, site_target }.
-// When enabled, fetches manifest → apps, exposes the result on
+// blob containing { enabled, manifest_url, fetch_timeout_ms,
+// refresh_interval_ms, site_target }. When enabled, fetches the manifest and
+// its apps, events, and summary resources, exposes the result on
 // window.__publicFeed, and dispatches `public-feed:loaded` on document.
 //
-// Everything no-ops when disabled or when any request fails — the static
-// server-rendered shell is the ground truth, hydration is additive.
+// Everything no-ops when disabled or when a required request fails — the
+// static server-rendered shell is the ground truth, hydration is additive.
 
 (function () {
   function readConfig() {
@@ -49,6 +50,14 @@
       });
   }
 
+  function fetchOptionalJson(url, timeoutMs) {
+    if (!url) return Promise.resolve(null);
+    return fetchJson(url, timeoutMs).catch(function (err) {
+      log('optional resource unavailable', url, err && err.message);
+      return null;
+    });
+  }
+
   function load(cfg) {
     var timeout = cfg.fetch_timeout_ms || 3500;
     log('loading manifest', cfg.manifest_url);
@@ -57,8 +66,17 @@
         throw new Error('manifest missing apps_url');
       }
       log('manifest ok, loading apps', manifest.apps_url);
-      return fetchJson(manifest.apps_url, timeout).then(function (apps) {
-        return { manifest: manifest, apps: apps };
+      return Promise.all([
+        fetchJson(manifest.apps_url, timeout),
+        fetchOptionalJson(manifest.events_url, timeout),
+        fetchOptionalJson(manifest.summary_url, timeout),
+      ]).then(function (resources) {
+        return {
+          manifest: manifest,
+          apps: resources[0],
+          events: resources[1],
+          summary: resources[2],
+        };
       });
     });
   }
@@ -78,15 +96,30 @@
       return;
     }
 
-    load(cfg).then(function (result) {
-      window.__publicFeed = result;
-      log('loaded', result);
-      applyFeedToCards(result.apps, cfg);
-      document.dispatchEvent(new CustomEvent('public-feed:loaded', { detail: result }));
-    }).catch(function (err) {
-      log('load failed, static shell remains', err && err.message);
-      document.dispatchEvent(new CustomEvent('public-feed:failed', { detail: { error: String(err) } }));
-    });
+    var loading = false;
+    var refresh = function () {
+      if (loading) return;
+      loading = true;
+
+      load(cfg).then(function (result) {
+        window.__publicFeed = result;
+        log('loaded', result);
+        applyFeedToCards(result.apps, cfg);
+        document.dispatchEvent(new CustomEvent('public-feed:loaded', { detail: result }));
+      }).catch(function (err) {
+        log('load failed, static shell remains', err && err.message);
+        document.dispatchEvent(new CustomEvent('public-feed:failed', { detail: { error: String(err) } }));
+      }).then(function () {
+        loading = false;
+      });
+    };
+
+    refresh();
+
+    var refreshInterval = Number(cfg.refresh_interval_ms || 0);
+    if (refreshInterval > 0 && typeof window.setInterval === 'function') {
+      window.setInterval(refresh, Math.max(refreshInterval, 15000));
+    }
   }
 
   // --- Card enhancement -----------------------------------------------------
