@@ -10,6 +10,7 @@
   "enabled": {{ site.data.feed-config.enabled | default: false | jsonify }},
   "manifest_url": {{ site.data.feed-config.manifest_url | jsonify }},
   "fetch_timeout_ms": {{ site.data.feed-config.fetch_timeout_ms | default: 3500 | jsonify }},
+  "refresh_interval_ms": {{ site.data.feed-config.refresh_interval_ms | default: 60000 | jsonify }},
   "site_target": "gmac"
 }
 </script>
@@ -30,6 +31,23 @@
       <span class="stat-item"><span class="stat-value">{{ coming_protos | size }}</span> queued</span>
     </div>
   </header>
+
+  <section class="dashboard-live-pulse" data-feed-summary-panel data-feed-state="waiting" aria-live="polite">
+    <div class="live-pulse-heading">
+      <div>
+        <p class="dashboard-section-label">ForgeGraph pulse</p>
+        <p class="live-pulse-copy">Machine-reported health across the public build fleet.</p>
+      </div>
+      <span class="live-sync-label"><span class="status-dot dot-loading"></span><span data-feed-sync-label>connecting</span></span>
+    </div>
+    <div class="live-metric-grid">
+      <div class="live-metric"><strong data-feed-metric="total">&mdash;</strong><span>tracked</span></div>
+      <div class="live-metric live-metric-healthy"><strong data-feed-metric="healthy">&mdash;</strong><span>healthy</span></div>
+      <div class="live-metric live-metric-degraded"><strong data-feed-metric="degraded">&mdash;</strong><span>degraded</span></div>
+      <div class="live-metric live-metric-down"><strong data-feed-metric="down">&mdash;</strong><span>down</span></div>
+      <div class="live-metric"><strong data-feed-metric="deploys">&mdash;</strong><span>deploys / 24h</span></div>
+    </div>
+  </section>
 
   {% if site.data.gmac.nodes.size > 0 %}
   <section class="dashboard-fleet">
@@ -57,6 +75,33 @@
     <span class="legend-item"><span class="status-dot dot-local"></span> local only</span>
     <span class="legend-item"><span class="status-dot dot-coming"></span> coming soon</span>
   </div>
+
+  <section class="dashboard-section dashboard-activity" data-feed-activity-section>
+    <div class="activity-heading">
+      <div>
+        <h2 class="dashboard-section-label">Build activity</h2>
+        <p>Deploys, captures, and product evidence as ForgeGraph records them. The interpretation belongs on gmacko.com.</p>
+      </div>
+      <a href="https://gmacko.com/blog/">read the human version &rarr;</a>
+    </div>
+    <div class="activity-grid" data-feed-activity-root data-feed-state="waiting"></div>
+
+    <div data-feed-static-build-log>
+      {% assign gmac_posts = site.posts | where_exp: "p", "p.site contains 'gmac'" %}
+      {% if gmac_posts.size > 0 %}
+      <div class="build-log build-log-fallback">
+        {% for post in gmac_posts limit:6 %}
+        <div class="log-entry">
+          <span class="log-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <span class="log-message"><a href="{{ post.url }}">{{ post.title }}</a></span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="activity-empty">Waiting for the first public build event.</p>
+      {% endif %}
+    </div>
+  </section>
 
   {% if site.data.gmac.services.size > 0 %}
   <section class="dashboard-section" data-feed-section="services">
@@ -139,21 +184,6 @@
   </section>
   {% endif %}
 
-  {% assign gmac_posts = site.posts | where_exp: "p", "p.site contains 'gmac'" %}
-  {% if gmac_posts.size > 0 %}
-  <section class="dashboard-section">
-    <h2 class="dashboard-section-label">Build Log</h2>
-    <div class="build-log">
-      {% for post in gmac_posts limit:10 %}
-      <div class="log-entry">
-        <span class="log-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        <span class="log-message"><a href="{{ post.url }}">{{ post.title }}</a></span>
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-
   <footer class="dashboard-footer">
     <div class="dashboard-footer-meta">
       <span class="dashboard-build-time">built {{ site.time | date: "%Y-%m-%d %H:%M UTC" }}</span>
@@ -167,6 +197,7 @@
 </div>
 
 <script src="{{ '/js/public-feed.js' | prepend: site.baseurl }}" defer></script>
+<script src="{{ '/js/gmac-dashboard.js' | prepend: site.baseurl }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Prototype filter

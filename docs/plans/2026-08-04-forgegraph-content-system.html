@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ForgeGraph Content System — Implementation Plan</title>
+<style>
+  :root {
+    --bg: #f4efe4;
+    --surface: #fffaf0;
+    --surface-2: #ede4d1;
+    --ink: #1b1812;
+    --muted: #655d50;
+    --line: #cdbfa5;
+    --accent: #0f766e;
+    --accent-soft: #d9f0ea;
+    --warn: #9a3412;
+    --warn-soft: #f7e0d5;
+    --bad: #b42318;
+    --bad-soft: #f9ddda;
+    --info: #1d4ed8;
+    --info-soft: #dce7fb;
+    --hero: radial-gradient(circle at top left, #d9f0ea 0%, #f4efe4 44%, #e7dcc6 100%);
+    --display: "Avenir Next", "Gill Sans", "Segoe UI", sans-serif;
+    --body: "Iowan Old Style", Georgia, serif;
+    --mono: Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      linear-gradient(var(--surface-2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--surface-2) 1px, transparent 1px),
+      var(--bg);
+    background-size: 32px 32px, 32px 32px, auto;
+    font: 17px/1.68 var(--body);
+  }
+  main { max-width: 980px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+  header.hero {
+    background: var(--hero);
+    border-bottom: 2px solid var(--line);
+    padding: 4rem 1.5rem 2.75rem;
+    margin-bottom: 2rem;
+  }
+  .hero-inner { max-width: 980px; margin: 0 auto; }
+  .kicker {
+    color: var(--accent);
+    font: 700 .78rem var(--display);
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    margin-bottom: .8rem;
+  }
+  h1 {
+    margin: 0 0 .55rem;
+    font: 800 3rem/1.06 var(--display);
+    letter-spacing: -.03em;
+    max-width: 14ch;
+  }
+  .meta { color: var(--muted); font: .95rem var(--display); }
+  .meta span + span::before { content: "•"; margin: 0 .5rem; }
+  h2 {
+    font: 750 1.45rem var(--display);
+    margin: 2.85rem 0 .8rem;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: .35rem;
+  }
+  h3 { font: 700 1.08rem var(--display); margin: 1.5rem 0 .45rem; }
+  p { margin: .55rem 0 1rem; max-width: 75ch; }
+  ul { padding-left: 1.3rem; max-width: 75ch; }
+  li { margin-bottom: .35rem; }
+  .badge {
+    display: inline-block;
+    padding: .12rem .62rem;
+    border-radius: 999px;
+    font: 700 .72rem var(--display);
+    letter-spacing: .03em;
+    vertical-align: middle;
+  }
+  .badge.draft { background: var(--info-soft); color: var(--info); }
+  .badge.approved { background: var(--accent-soft); color: var(--accent); }
+  .badge.risk { background: var(--warn-soft); color: var(--warn); }
+  .badge.blocked { background: var(--bad-soft); color: var(--bad); }
+  .badge.done { background: var(--accent-soft); color: var(--accent); }
+  .badge.todo { background: var(--surface-2); color: var(--muted); }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: .8rem;
+    margin: 1.5rem 0;
+  }
+  .stat {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 6px 18px rgba(27, 24, 18, 0.05);
+  }
+  .stat b {
+    display: block;
+    color: var(--accent);
+    font: 800 2rem/1.08 var(--display);
+  }
+  .stat span {
+    color: var(--muted);
+    font: .8rem var(--display);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .progress { display: flex; gap: 4px; height: 11px; margin: .75rem 0 2rem; }
+  .progress i { flex: 1; border-radius: 8px; background: #d7cbb5; }
+  .progress i.done { background: var(--accent); }
+  .progress i.active { background: var(--info); }
+  .card {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .goals { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .goals h3 { margin-top: 0; }
+  .timeline {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0 0 0 1.45rem;
+    border-left: 3px solid var(--line);
+  }
+  .timeline li { position: relative; padding: 0 0 1.05rem; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -1.85rem;
+    top: .35rem;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    border: 3px solid var(--muted);
+    background: var(--bg);
+  }
+  .timeline li.done::before { border-color: var(--accent); background: var(--accent); }
+  .timeline li.active::before { border-color: var(--info); background: var(--info-soft); }
+  .timeline b { font-family: var(--display); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: .75rem 0 1.3rem;
+    font-size: .93rem;
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  th {
+    text-align: left;
+    color: var(--muted);
+    font: 700 .75rem var(--display);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: #f0e7d6;
+  }
+  th, td {
+    padding: .58rem .68rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  code {
+    background: #f0e7d6;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: .1rem .35rem;
+    font: .85em var(--mono);
+  }
+  pre {
+    background: #f0e7d6;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-x: auto;
+    font: .85rem/1.48 var(--mono);
+  }
+  pre code { border: none; background: none; padding: 0; }
+  details {
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: .65rem .95rem;
+    margin: .65rem 0;
+    background: var(--surface);
+  }
+  summary { cursor: pointer; font: 700 1em var(--display); }
+  .callout {
+    border-left: 5px solid var(--warn);
+    background: var(--warn-soft);
+    border-radius: 0 12px 12px 0;
+    padding: .85rem 1rem;
+    margin: 1rem 0;
+    max-width: 75ch;
+  }
+  figure.diagram {
+    margin: 1.25rem 0 .25rem;
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 1.2rem;
+    overflow-x: auto;
+    text-align: center;
+  }
+  figure.diagram svg { max-width: 100%; height: auto; }
+  figure.diagram figcaption {
+    color: var(--muted);
+    font: .88rem var(--display);
+    margin-top: .75rem;
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .8rem;
+    margin: 1rem 0 1.25rem;
+  }
+  .decision {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: .95rem 1rem;
+  }
+  .decision b {
+    display: block;
+    margin-bottom: .35rem;
+    font-family: var(--display);
+  }
+  @media (max-width: 720px) {
+    .goals { grid-template-columns: 1fr; }
+    h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Implementation Plan</div>
+    <h1>ForgeGraph Public Content System <span class="badge draft">Draft</span></h1>
+    <p class="meta">
+      <span>2026-08-04</span>
+      <span>repo: <code>personalWebsite</code> @ <code>main</code></span>
+      <span>surfaces: <code>ForgeGraph</code>, <code>gmac.io</code>, <code>gmacko.com</code>, <code>Obsidian</code>, <code>OODA</code></span>
+      <span>author: Codex</span>
+    </p>
+  </div>
+</header>
+<main>
+
+  <div class="stats">
+    <div class="stat"><b>6</b><span>Phases</span></div>
+    <div class="stat"><b>24</b><span>Core tasks</span></div>
+    <div class="stat"><b>5</b><span>Systems touched</span></div>
+    <div class="stat"><b>3</b><span>Public lanes</span></div>
+    <div class="stat"><b>~3-5w</b><span>Est. effort</span></div>
+  </div>
+
+  <div class="progress" aria-label="Phase progress">
+    <i class="active"></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <h2>Overview</h2>
+  <p>This plan turns the existing partial feed/hydration work into a full public content system with clear boundaries. ForgeGraph becomes the machine-truth producer for public status, events, screenshots, and clips; <code>gmac.io</code> becomes the live operations wall; <code>gmacko.com</code> becomes the curated portfolio/build-update surface; Obsidian remains the idea farm; and Substack stays a human-authored editorial outlet outside the operational pipeline.</p>
+  <p>The implementation bias is narrow ownership. ForgeGraph does not become a CMS, Obsidian does not become a dashboard, and Substack never receives automatic publication. The system should produce proof artifacts and scaffolding, then require human judgment for anything that looks like narrative.</p>
+
+  <h2>Architecture</h2>
+  <figure class="diagram">
+    <!-- DIAGRAM_PUBLIC_SYSTEM -->
+    <svg id="diagram-public-system-placeholder" viewBox="0 0 920 220" width="920" role="img" aria-label="Public content system overview">
+      <rect x="20" y="35" width="180" height="54" rx="10" fill="#fffaf0" stroke="#0f766e" stroke-width="2"></rect>
+      <text x="110" y="58" text-anchor="middle" fill="#0f766e" font-size="18" font-family="sans-serif">ForgeGraph</text>
+      <text x="110" y="78" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">events • artifacts • promotions</text>
+      <rect x="255" y="25" width="170" height="48" rx="10" fill="#fffaf0" stroke="#1d4ed8" stroke-width="2"></rect>
+      <text x="340" y="54" text-anchor="middle" fill="#1d4ed8" font-size="17" font-family="sans-serif">gmac.io</text>
+      <text x="340" y="88" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">live proof wall</text>
+      <rect x="255" y="120" width="170" height="48" rx="10" fill="#fffaf0" stroke="#9a3412" stroke-width="2"></rect>
+      <text x="340" y="149" text-anchor="middle" fill="#9a3412" font-size="17" font-family="sans-serif">gmacko.com</text>
+      <text x="340" y="183" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">curated build updates</text>
+      <rect x="495" y="25" width="170" height="48" rx="10" fill="#fffaf0" stroke="#0f766e" stroke-width="2"></rect>
+      <text x="580" y="54" text-anchor="middle" fill="#0f766e" font-size="17" font-family="sans-serif">Obsidian</text>
+      <text x="580" y="88" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">idea seeds and raw notes</text>
+      <rect x="495" y="120" width="170" height="48" rx="10" fill="#fffaf0" stroke="#1d4ed8" stroke-width="2"></rect>
+      <text x="580" y="149" text-anchor="middle" fill="#1d4ed8" font-size="17" font-family="sans-serif">OODA</text>
+      <text x="580" y="183" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">outline and draft scaffolding</text>
+      <rect x="735" y="72" width="165" height="54" rx="10" fill="#fffaf0" stroke="#9a3412" stroke-width="2"></rect>
+      <text x="817" y="95" text-anchor="middle" fill="#9a3412" font-size="18" font-family="sans-serif">Substack</text>
+      <text x="817" y="115" text-anchor="middle" fill="#655d50" font-size="12" font-family="sans-serif">human-authored editorial</text>
+      <line x1="200" y1="62" x2="255" y2="49" stroke="#655d50" stroke-width="2"></line>
+      <line x1="200" y1="62" x2="255" y2="144" stroke="#655d50" stroke-width="2"></line>
+      <line x1="425" y1="144" x2="495" y2="49" stroke="#655d50" stroke-width="2"></line>
+      <line x1="425" y1="144" x2="495" y2="144" stroke="#655d50" stroke-width="2"></line>
+      <line x1="665" y1="144" x2="735" y2="99" stroke="#655d50" stroke-width="2"></line>
+      <text x="449" y="110" fill="#655d50" font-size="11" font-family="sans-serif">promoted only</text>
+      <text x="680" y="155" fill="#655d50" font-size="11" font-family="sans-serif">never auto-publish</text>
+    </svg>
+    <figcaption>Source of truth and promotion boundaries across the five-system content stack.</figcaption>
+  </figure>
+  <details class="mermaid-source">
+    <summary>Diagram source (mermaid)</summary>
+    <pre><code>flowchart LR
+  FG[ForgeGraph<br/>events • artifacts • promotions]
+  GMAC[gmac.io<br/>live proof wall]
+  GMACKO[gmacko.com<br/>curated build updates]
+  OBS[Obsidian<br/>idea seeds and raw notes]
+  OODA[OODA<br/>outline and draft scaffolding]
+  SUB[Substack<br/>human-authored editorial]
+
+  FG --> GMAC
+  FG --> GMACKO
+  GMACKO --> OBS
+  GMACKO --> OODA
+  OODA --> SUB</code></pre>
+  </details>
+
+  <figure class="diagram">
+    <!-- DIAGRAM_PROMOTION_STATES -->
+    <svg id="diagram-promotion-states-placeholder" viewBox="0 0 920 140" width="920" role="img" aria-label="Promotion state ladder">
+      <rect x="24" y="42" width="118" height="40" rx="10" fill="#fffaf0" stroke="#0f766e" stroke-width="2"></rect>
+      <text x="83" y="67" text-anchor="middle" fill="#0f766e" font-size="15" font-family="sans-serif">recorded</text>
+      <rect x="174" y="42" width="118" height="40" rx="10" fill="#fffaf0" stroke="#1d4ed8" stroke-width="2"></rect>
+      <text x="233" y="67" text-anchor="middle" fill="#1d4ed8" font-size="15" font-family="sans-serif">public</text>
+      <rect x="324" y="42" width="118" height="40" rx="10" fill="#fffaf0" stroke="#9a3412" stroke-width="2"></rect>
+      <text x="383" y="67" text-anchor="middle" fill="#9a3412" font-size="15" font-family="sans-serif">promotable</text>
+      <rect x="474" y="42" width="118" height="40" rx="10" fill="#fffaf0" stroke="#0f766e" stroke-width="2"></rect>
+      <text x="533" y="67" text-anchor="middle" fill="#0f766e" font-size="15" font-family="sans-serif">seeded</text>
+      <rect x="624" y="42" width="118" height="40" rx="10" fill="#fffaf0" stroke="#1d4ed8" stroke-width="2"></rect>
+      <text x="683" y="67" text-anchor="middle" fill="#1d4ed8" font-size="15" font-family="sans-serif">outlined</text>
+      <rect x="774" y="42" width="122" height="40" rx="10" fill="#fffaf0" stroke="#9a3412" stroke-width="2"></rect>
+      <text x="835" y="67" text-anchor="middle" fill="#9a3412" font-size="15" font-family="sans-serif">published</text>
+      <line x1="142" y1="62" x2="174" y2="62" stroke="#655d50" stroke-width="2"></line>
+      <line x1="292" y1="62" x2="324" y2="62" stroke="#655d50" stroke-width="2"></line>
+      <line x1="442" y1="62" x2="474" y2="62" stroke="#655d50" stroke-width="2"></line>
+      <line x1="592" y1="62" x2="624" y2="62" stroke="#655d50" stroke-width="2"></line>
+      <line x1="742" y1="62" x2="774" y2="62" stroke="#655d50" stroke-width="2"></line>
+      <text x="235" y="28" text-anchor="middle" fill="#655d50" font-size="11" font-family="sans-serif">automatic</text>
+      <text x="535" y="28" text-anchor="middle" fill="#655d50" font-size="11" font-family="sans-serif">human judgment begins</text>
+      <text x="833" y="28" text-anchor="middle" fill="#655d50" font-size="11" font-family="sans-serif">portfolio or editorial</text>
+    </svg>
+    <figcaption>The event ladder: increasing curation as an object moves toward human-facing narrative.</figcaption>
+  </figure>
+  <details class="mermaid-source">
+    <summary>Diagram source (mermaid)</summary>
+    <pre><code>flowchart LR
+  A[recorded] --> B[public]
+  B --> C[promotable]
+  C --> D[seeded]
+  D --> E[outlined]
+  E --> F[published]</code></pre>
+  </details>
+
+  <h2>Goals &amp; Non-goals</h2>
+  <div class="goals">
+    <div class="card">
+      <h3>Goals</h3>
+      <ul>
+        <li>Make ForgeGraph the canonical producer for public status, media artifacts, and public event history.</li>
+        <li>Turn <code>gmac.io</code> into a live proof surface instead of a mostly static dashboard with thin hydration.</li>
+        <li>Turn <code>gmacko.com</code> into a curated portfolio of current ventures and short build updates tied to real shipped work.</li>
+        <li>Export idea seeds into Obsidian without flattening them into AI-written essays.</li>
+        <li>Keep Substack entirely human-controlled and editorial.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Non-goals</h3>
+      <ul>
+        <li>Do not make ForgeGraph a general-purpose blog CMS.</li>
+        <li>Do not auto-publish long-form writing to Substack.</li>
+        <li>Do not remove the local YAML/Jekyll fallbacks until the dynamic feeds are proven stable.</li>
+        <li>Do not make Obsidian the source of truth for deploys, health, or public app inventory.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Core Decisions</h2>
+  <div class="decision-grid">
+    <div class="decision"><b>ForgeGraph owns facts.</b><span>Status, screenshots, clips, deploy freshness, and public event records all originate here.</span></div>
+    <div class="decision"><b><code>gmac.io</code> stays factual.</b><span>No essays, no long prose, just live proof, event flow, and operator-level context.</span></div>
+    <div class="decision"><b><code>gmacko.com</code> is curated.</b><span>Only promoted items become portfolio updates, venture proofs, or build posts.</span></div>
+    <div class="decision"><b>Obsidian farms ideas.</b><span>Idea seeds, hooks, and reflections go into the vault, not raw status noise.</span></div>
+    <div class="decision"><b>Substack is manual.</b><span>AI may scaffold outlines or asset bundles, but not publish editorial by itself.</span></div>
+  </div>
+
+  <h2>Milestones</h2>
+  <ul class="timeline">
+    <li class="active"><b>Phase 1 — Producer foundation</b><br>Define public events, artifacts, and human promotion state inside ForgeGraph.</li>
+    <li><b>Phase 2 — Capture and redaction pipeline</b><br>Generate screenshots and short UI clips that are safe to publish and attach them to events.</li>
+    <li><b>Phase 3 — <code>gmac.io</code> live wall</b><br>Render events, artifacts, freshness, and “needs attention” lanes from the live feed.</li>
+    <li><b>Phase 4 — <code>gmacko.com</code> portfolio updates</b><br>Promote approved events into venture pages and short build-update drafts.</li>
+    <li><b>Phase 5 — Obsidian and OODA export</b><br>Generate idea seeds and outline scaffolds without overwriting human notes.</li>
+    <li><b>Phase 6 — Governance and verification</b><br>Lock in review points, redaction policy, and end-to-end evidence checks.</li>
+  </ul>
+
+  <h2>Phase 1 — Producer Foundation <span class="badge todo">Todo</span></h2>
+  <p>This phase gives ForgeGraph first-class public-content objects so the rest of the system stops inferring narrative from half-structured feeds.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Create <code>public_events</code> schema with event type, visibility, summary, links, artifact references, and promotion flags.</td>
+        <td><code>packages/db/src/schema/public-event.ts</code><br><code>packages/db/drizzle/&lt;next&gt;_public_events.sql</code></td>
+        <td><code>pnpm --filter @forgegraph/db typecheck</code><br>route tests cover empty/non-empty feeds</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Create <code>public_artifacts</code> schema for screenshots, clips, thumbnails, alt text, visibility, and freshness metadata.</td>
+        <td><code>packages/db/src/schema/public-artifact.ts</code><br><code>packages/db/drizzle/&lt;next&gt;_public_artifacts.sql</code></td>
+        <td>schema tests or route tests prove attach/read path</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Create <code>promotion_decisions</code> schema so human curation has durable state for <code>gmacko</code> and Obsidian targets.</td>
+        <td><code>packages/db/src/schema/promotion-decision.ts</code></td>
+        <td>CRUD tests prove idempotent promotion lifecycle</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add a feed builder for <code>events</code> and <code>artifacts</code>, parallel to the existing apps/summary/timeline builder.</td>
+        <td><code>apps/web/src/lib/public-feed/build-public-events.ts</code><br><code>apps/web/src/lib/public-feed/types.ts</code></td>
+        <td><code>pnpm --dir apps/web exec vitest run src/app/api/public/feed</code></td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add public routes for <code>/api/public/feed/events</code> and optional <code>/artifacts</code>, with CORS and last-good snapshot fallback.</td>
+        <td><code>apps/web/src/app/api/public/feed/events/route.ts</code><br><code>apps/web/src/app/api/public/feed/artifacts/route.ts</code></td>
+        <td><code>curl</code> returns compact JSON with pinned <code>generation_id</code></td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <details>
+    <summary>Producer object contract</summary>
+    <pre><code>PublicEvent {
+  id, workspaceSlug, appSlug, eventType, visibility, occurredAt,
+  headline, summary, publicWhy, statusImpact, sourceKind, sourceId,
+  dedupeKey, siteTargets, tags, artifactIds,
+  promotable, seededToObsidian, promotedToPortfolio
+}
+
+PublicArtifact {
+  id, appSlug, kind, url, previewUrl, capturedAt, sourceEventId,
+  sourceRoute, width, height, durationMs, alt, freshness, visibility
+}</code></pre>
+  </details>
+
+  <h2>Phase 2 — Capture and Redaction Pipeline <span class="badge todo">Todo</span></h2>
+  <p>This phase makes the feed visually useful. The output is not just “app is healthy,” but “here is what the user would actually see, and here is the short clip proving the UI changed.”</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Generalize the existing screenshot publisher into a reusable capture job with per-app routes and asset policies.</td>
+        <td><code>scripts/publish-public-feed.sh</code><br><code>scripts/lib/public-feed-screenshots.mjs</code><br><code>scripts/lib/playwright-public-feed-capture.mjs</code></td>
+        <td>capture job emits asset manifest with non-null screenshot URLs</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add short clip capture for selected routes: 6-20 second UI recordings with thumbnail extraction.</td>
+        <td><code>scripts/lib/public-feed-clips.mjs</code><br><code>scripts/lib/playwright-public-feed-capture.mjs</code></td>
+        <td>clip files, poster frame, and metadata recorded for at least one app</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add redaction policy: internal routes, tokens, emails, test accounts, and unstable experimental views must be blocklisted or scrubbed.</td>
+        <td><code>apps/web/src/lib/public-feed/redaction-policy.ts</code><br><code>scripts/lib/capture-redaction.mjs</code></td>
+        <td>fixture capture proves sensitive UI is skipped or masked</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Attach screenshots/clips to a new <code>feature_shipped</code>, <code>screenshot_captured</code>, or <code>clip_captured</code> event automatically when capture succeeds.</td>
+        <td><code>apps/web/src/lib/public-feed/record-public-event.ts</code></td>
+        <td>single run produces both artifact rows and linked event rows</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <details>
+    <summary>Capture heuristics</summary>
+    <ul>
+      <li>Prefer one canonical route per app first; do not try to capture every screen in v1.</li>
+      <li>Store the route used for the capture so stale or broken captures can be diagnosed later.</li>
+      <li>Short clips should be opt-in per app and capped to avoid storage churn.</li>
+      <li>Failure should never wipe the last known good artifact.</li>
+    </ul>
+  </details>
+
+  <h2>Phase 3 — <code>gmac.io</code> Live Wall <span class="badge todo">Todo</span></h2>
+  <p>This phase changes <code>gmac.io</code> from a static catalog with health badges into a living operations surface with evidence.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Add event and artifact sections to the dashboard: <em>Now shipping</em>, <em>Recent events</em>, and <em>Proof rail</em>.</td>
+        <td><code>_layouts/dashboard.html</code><br><code>_sass/pages/_dashboard.scss</code></td>
+        <td>local build renders all three sections with static fallback</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Extend <code>public-feed.js</code> to fetch events/artifacts and decorate cards with last event, screenshot, and freshness markers.</td>
+        <td><code>js/public-feed.js</code></td>
+        <td>browser with live feed shows screenshot-backed cards and recent event summaries</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add stale-state UX: explicit “capture stale,” “status stale,” and “feed unavailable” treatments instead of silent fallback.</td>
+        <td><code>js/public-feed.js</code><br><code>_sass/pages/_dashboard.scss</code></td>
+        <td>simulated feed failure keeps shell intact and surfaces stale state visibly</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add rendered-site assertions for event/bootstrap sections so future redesigns cannot accidentally strip the live wall primitives.</td>
+        <td><code>scripts/assert_rendered_site.sh</code><br><code>scripts/assert_experiment_visibility.sh</code></td>
+        <td>regression scripts fail if event feed hooks disappear</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <details>
+    <summary><code>gmac.io</code> module order</summary>
+    <ol>
+      <li>Fleet summary</li>
+      <li>Now shipping</li>
+      <li>App grid</li>
+      <li>Recent events</li>
+      <li>Proof rail</li>
+      <li>Needs attention</li>
+    </ol>
+  </details>
+
+  <h2>Phase 4 — <code>gmacko.com</code> Portfolio Updates <span class="badge todo">Todo</span></h2>
+  <p>This phase turns promoted events into human-readable, portfolio-grade updates without letting the site devolve into a copy of the live wall.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Add a <code>build-update</code> content type with hero artifact, source event ids, venture slug, and compact structure.</td>
+        <td><code>_layouts/post.html</code><br><code>_sass/pages/_post.scss</code><br><code>_includes/venture-card.html</code></td>
+        <td>one sample update renders distinctly from long-form blog posts</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Create venture-page sections for current proof, recent build updates, and latest promoted artifacts.</td>
+        <td><code>_layouts/venture.html</code><br><code>_ventures/*.md</code></td>
+        <td>venture page shows proof and update rails without reading raw feed JSON client-side</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Generate Jekyll draft files from approved promotion decisions with scaffold only: <em>What changed</em>, <em>Why it matters</em>, <em>What was tricky</em>, <em>What’s next</em>.</td>
+        <td><code>packages/vault/src/publish.ts</code><br><code>packages/api/src/router/publish.ts</code><br><code>personalWebsite/_drafts/</code></td>
+        <td>promotion action writes a draft without auto-publishing</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add a homepage lane for <em>Current build updates</em> and a small outbound editorial lane linking to Substack.</td>
+        <td><code>_layouts/landing.html</code><br><code>_sass/pages/_gmacko.scss</code></td>
+        <td>homepage clearly separates portfolio updates from essays</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <details>
+    <summary>Build update frontmatter sketch</summary>
+    <pre><code>---
+layout: post
+site: gmacko
+post_type: build-update
+title: "ForgeGraph now shows deploy evidence"
+venture_slug: forgegraph
+source_event_ids: [evt_123]
+hero_artifact_id: art_987
+tags: [forgegraph, deployment, build-log]
+status: draft
+---</code></pre>
+  </details>
+
+  <h2>Phase 5 — Obsidian and OODA Export <span class="badge todo">Todo</span></h2>
+  <p>This phase treats public updates as idea triggers rather than finished essays. The vault gets seeds, not auto-authored content.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Add an idea-seed exporter that writes a new note for approved Obsidian promotions and never overwrites existing notes.</td>
+        <td><code>packages/vault/src/export-idea-seed.ts</code><br><code>packages/vault/src/writer.ts</code></td>
+        <td>sample export creates one vault note with linked source event ids and artifacts</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Define a seed template with hook, what happened, why it matters, raw thoughts, possible angles, and related assets.</td>
+        <td><code>obsidian/Templates/</code> or exporter-owned inline template</td>
+        <td>generated seed is useful without feeling like a fake finished draft</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add an OODA outline generator that consumes one or more source events plus optional vault context and emits an outline bundle rather than final prose.</td>
+        <td><code>packages/api/src/router/publish.ts</code><br><code>apps/cli/src/commands/</code> or OODA-specific route</td>
+        <td>outline generation returns headings, talking points, and suggested asset list</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Mark exported items as <code>seeded</code> or <code>outlined</code> in ForgeGraph so the same event does not keep spamming the vault.</td>
+        <td><code>promotion_decisions</code> integration</td>
+        <td>re-running export is idempotent</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <details>
+    <summary>Idea seed template sketch</summary>
+    <pre><code>---
+type: idea-seed
+project: ForgeGraph
+source_event_ids: [evt_123]
+formats: [substack, thread, youtube]
+status: seed
+created: 2026-08-04
+---
+
+# Hook
+# What happened
+# Why this might matter beyond the update
+# Raw thoughts
+# Possible angles
+# Lines worth keeping
+# Related assets</code></pre>
+  </details>
+
+  <h2>Phase 6 — Governance and Verification <span class="badge todo">Todo</span></h2>
+  <p>This phase stops the system from collapsing into noisy feeds, accidental leaks, or AI-written slop.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Files</th><th>Verification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Codify promotion heuristics: <em>did public reality change?</em>, <em>would I want this on the portfolio?</em>, <em>does this unlock a bigger idea?</em></td>
+        <td><code>docs/</code> or admin UI help text in ForgeGraph</td>
+        <td>manual review shows low-value churn is filtered out</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add admin review UI or CLI flow for approving/rejecting promotions to <code>gmacko</code> and Obsidian.</td>
+        <td><code>apps/web/src/app/...</code><br><code>apps/cli/src/commands/</code></td>
+        <td>single approval round-trip updates durable state</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Add end-to-end regression checks covering: event emitted, artifact captured, feed visible, draft export works, idea seed export works.</td>
+        <td><code>apps/web/src/app/api/public/feed/__tests__/</code><br><code>packages/vault/src/__tests__/</code><br><code>scripts/</code></td>
+        <td>focused smoke pass proves the entire chain</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+      <tr>
+        <td>Document the editorial guardrail: no automatic Substack publication, and no final prose without human rewrite.</td>
+        <td><code>README</code> / operator docs / admin help text</td>
+        <td>workflow docs make the boundary explicit</td>
+        <td><span class="badge todo">Todo</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Initial Execution Order</h2>
+  <table>
+    <thead><tr><th>Batch</th><th>Why first</th><th>Included work</th><th>Exit signal</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Batch A</td>
+        <td>Producer first; everything else depends on durable objects.</td>
+        <td>Phase 1 schemas, feed builders, public events route</td>
+        <td><code>curl /api/public/feed/events</code> returns real data</td>
+      </tr>
+      <tr>
+        <td>Batch B</td>
+        <td>Need visual proof before frontends matter.</td>
+        <td>Phase 2 screenshot/clip capture and redaction</td>
+        <td>at least one app has fresh screenshot and clip artifacts</td>
+      </tr>
+      <tr>
+        <td>Batch C</td>
+        <td>Make the public surface actually useful.</td>
+        <td>Phase 3 <code>gmac.io</code> event/proof wall</td>
+        <td><code>gmac.io</code> visibly shows recent events and artifacts</td>
+      </tr>
+      <tr>
+        <td>Batch D</td>
+        <td>Portfolio promotion next, not before.</td>
+        <td>Phase 4 <code>gmacko.com</code> build updates and venture proof sections</td>
+        <td>one approved event becomes one published portfolio update</td>
+      </tr>
+      <tr>
+        <td>Batch E</td>
+        <td>Idea farming only after the producer and public surfaces are real.</td>
+        <td>Phase 5 seed export and OODA outline flow</td>
+        <td>one event becomes one useful Obsidian seed</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Risks &amp; Mitigations</h2>
+  <table>
+    <thead><tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Feed stays technically live but editorially thin because capture artifacts are null or stale.</td>
+        <td><span class="badge risk">High</span></td>
+        <td>Phase 2 is mandatory before calling the system successful; add stale-state UI and artifact freshness counters.</td>
+      </tr>
+      <tr>
+        <td>Raw event noise overwhelms <code>gmac.io</code> and promotion queues.</td>
+        <td><span class="badge risk">High</span></td>
+        <td>Filter to public-reality changes only; dedupe with <code>dedupeKey</code>; manual approval for promotions.</td>
+      </tr>
+      <tr>
+        <td>Sensitive UI or internal routes leak via screenshots or clips.</td>
+        <td><span class="badge blocked">Critical</span></td>
+        <td>Default deny for internal/demo routes, explicit capture allowlist, masking policy, and manual review for new apps.</td>
+      </tr>
+      <tr>
+        <td><code>gmacko.com</code> becomes a second live dashboard instead of a portfolio.</td>
+        <td><span class="badge risk">Medium</span></td>
+        <td>Only render approved build updates and venture proof slices; no raw event stream on the homepage.</td>
+      </tr>
+      <tr>
+        <td>Obsidian fills with low-signal seeds that nobody revisits.</td>
+        <td><span class="badge risk">Medium</span></td>
+        <td>Only export events that trigger a real idea; add <code>status: seed</code> and dedupe exported notes.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><strong>Producer:</strong> schema/typecheck, feed route tests, and direct <code>curl</code> of <code>manifest</code>, <code>apps</code>, <code>events</code>, and <code>artifacts</code>.</li>
+    <li><strong>Capture:</strong> at least one fresh screenshot and one short clip attached to a public event, with a visible stale-path when capture fails.</li>
+    <li><strong><code>gmac.io</code>:</strong> browser verification that recent events, proof rail, and freshness states render from live data and degrade gracefully.</li>
+    <li><strong><code>gmacko.com</code>:</strong> one approved event produces one build-update draft and one venture page proof section.</li>
+    <li><strong>Obsidian/OODA:</strong> one approved event creates one seed note and one outline scaffold without overwriting existing vault notes.</li>
+    <li><strong>Editorial guardrail:</strong> no automation path can publish directly to Substack or mark AI-generated draft copy as final.</li>
+  </ul>
+
+  <h2>Open Questions</h2>
+  <div class="callout">
+    <strong>Needs a decision:</strong> should promotion review live inside a ForgeGraph admin UI first, or should v1 ship as a CLI/operator flow that writes <code>promotion_decisions</code> rows and exports drafts/seeds from there? Recommended default: CLI/operator flow first, then UI after the object model is stable.
+  </div>
+
+</main>
+</body>
+</html>
