@@ -151,6 +151,32 @@
     }
   }
 
+  function lifecycleLabel(lifecycle) {
+    return String(lifecycle || 'in_development').replace(/_/g, ' ');
+  }
+
+  function applyLifecycleLabel(card, lifecycle) {
+    if (!lifecycle) return;
+
+    card.setAttribute('data-feed-lifecycle', lifecycle);
+    var label = card.querySelector('[data-feed-lifecycle-label]');
+    if (!label) return;
+
+    var classes = String(label.className || '').split(/\s+/).filter(function (name) {
+      if (!name) return false;
+      if (name === 'status-badge' || name === 'project-lifecycle-badge') return true;
+      return !/^status-/.test(name) && !/^lifecycle-/.test(name);
+    });
+    classes.push(
+      classes.indexOf('status-badge') !== -1
+        ? 'status-' + lifecycle
+        : 'lifecycle-' + lifecycle
+    );
+    label.className = classes.join(' ');
+    label.textContent = lifecycleLabel(lifecycle);
+    label.hidden = false;
+  }
+
   function applyToCard(card, app, siteTarget) {
     if (!app) return;
     // Respect site_targets: skip enhancement if this site isn't listed. A
@@ -163,6 +189,7 @@
 
     // Expose metadata on the element for inspectability + future CSS hooks.
     card.setAttribute('data-feed-status', app.public_status || 'unknown');
+    applyLifecycleLabel(card, app.lifecycle);
     if (app.freshness) card.setAttribute('data-feed-freshness', app.freshness);
     if (app.last_deploy_at) card.setAttribute('data-feed-last-deploy-at', app.last_deploy_at);
     if (app.last_checked_at) card.setAttribute('data-feed-last-checked-at', app.last_checked_at);

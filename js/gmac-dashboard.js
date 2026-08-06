@@ -212,6 +212,7 @@
         card.appendChild(line);
       }
 
+      if (app.lifecycle) card.setAttribute('data-feed-lifecycle', app.lifecycle);
       var parts = [app.public_status || 'unknown'];
       if (Number.isFinite(app.endpoints_total)) {
         parts.push((app.endpoints_healthy || 0) + '/' + app.endpoints_total + ' checks');

@@ -5,7 +5,7 @@ const vm = require('node:vm');
 
 const sourcePath = require.resolve('../js/public-feed.js');
 
-async function runConsumer(payloads) {
+async function runConsumer(payloads, options = {}) {
   const source = await readFile(sourcePath, 'utf8');
   const requests = [];
 
@@ -23,12 +23,12 @@ async function runConsumer(payloads) {
           enabled: true,
           manifest_url: 'https://forgegraf.test/manifest',
           fetch_timeout_ms: 100,
-          site_target: 'gmac',
+          site_target: options.siteTarget || 'gmac',
         }),
       };
     },
-    querySelectorAll() {
-      return [];
+    querySelectorAll(selector) {
+      return selector === '[data-feed-slug]' ? (options.cards || []) : [];
     },
     dispatchEvent(dispatched) {
       resolveEvent(dispatched);
@@ -64,6 +64,49 @@ async function runConsumer(payloads) {
   vm.runInNewContext(source, context, { filename: sourcePath });
   return { dispatched: await event, requests };
 }
+
+test('replaces static project labels with ForgeGraph lifecycle without changing health', async () => {
+  const attributes = { 'data-feed-slug': 'forgegraph' };
+  const lifecycleLabel = {
+    className: 'status-badge status-active',
+    hidden: false,
+    textContent: 'active',
+  };
+  const healthDot = {
+    className: 'status-dot dot-local',
+    classList: { add() {} },
+  };
+  const card = {
+    getAttribute(name) { return attributes[name] || null; },
+    setAttribute(name, value) { attributes[name] = value; },
+    querySelector(selector) {
+      if (selector === '[data-feed-lifecycle-label]') return lifecycleLabel;
+      if (selector === '.status-dot') return healthDot;
+      return null;
+    },
+  };
+  const manifest = {
+    generation_id: 'generation-lifecycle',
+    apps_url: 'https://forgegraf.test/apps',
+  };
+
+  await runConsumer({
+    'https://forgegraf.test/manifest': manifest,
+    'https://forgegraf.test/apps': {
+      apps: [{
+        slug: 'forgegraph',
+        lifecycle: 'launched',
+        public_status: 'healthy',
+        site_targets: ['gmacko'],
+      }],
+    },
+  }, { cards: [card], siteTarget: 'gmacko' });
+
+  assert.equal(attributes['data-feed-lifecycle'], 'launched');
+  assert.equal(lifecycleLabel.textContent, 'launched');
+  assert.match(lifecycleLabel.className, /status-launched/);
+  assert.equal(attributes['data-feed-status'], 'healthy');
+});
 
 test('loads apps, events, and summary resources from one manifest generation', async () => {
   const manifest = {

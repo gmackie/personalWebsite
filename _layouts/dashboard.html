@@ -112,6 +112,7 @@
         <div class="proto-header">
           <span class="status-dot dot-{{ svc.status }}"></span>
           <span class="proto-name">{{ svc.name }}</span>
+          <span class="project-lifecycle-badge" data-feed-lifecycle-label hidden></span>
           {% if svc.internal %}
           <span class="proto-url">tailscale only</span>
           {% else %}
@@ -155,6 +156,7 @@
         <div class="proto-header">
           <span class="status-dot dot-{{ proto.status }}"></span>
           <span class="proto-name">{{ proto.name }}</span>
+          <span class="project-lifecycle-badge" data-feed-lifecycle-label hidden></span>
           {% if proto.status == 'coming-soon' %}
           <span class="proto-url">coming soon</span>
           {% else %}
