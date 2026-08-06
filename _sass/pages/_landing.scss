@@ -776,6 +776,17 @@
   color: #1A4A6B;
 }
 
+.status-in_development {
+  background: rgba(107, 97, 89, 0.12);
+  color: var(--muted);
+}
+
+.status-launched,
+.status-maintained {
+  background: rgba(45, 95, 26, 0.12);
+  color: #2D5F1A;
+}
+
 .status-paused {
   background: rgba(107, 97, 89, 0.12);
   color: var(--muted);
@@ -804,7 +815,7 @@
 // Dark mode status badge overrides
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    .status-shipping, .status-live { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+    .status-shipping, .status-live, .status-launched, .status-maintained { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
     .status-experiment { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
     .status-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
     .status-wip { color: #FBBF24; background: rgba(251, 191, 36, 0.12); }
@@ -814,7 +825,7 @@
   }
 }
 :root[data-theme="dark"] {
-  .status-shipping, .status-live { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
+  .status-shipping, .status-live, .status-launched, .status-maintained { color: #4ADE80; background: rgba(74, 222, 128, 0.12); }
   .status-experiment { color: #60A5FA; background: rgba(96, 165, 250, 0.12); }
   .status-killed { color: #F87171; background: rgba(248, 113, 113, 0.12); }
   .status-wip { color: #FBBF24; background: rgba(251, 191, 36, 0.12); }

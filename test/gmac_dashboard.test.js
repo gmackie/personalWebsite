@@ -171,3 +171,46 @@ test('removes health details from apps not targeted to gmac', async () => {
 
   assert.equal(removed, true);
 });
+
+test('keeps lifecycle metadata separate from the health detail', async () => {
+  const attributes = { 'data-feed-slug': 'forgegraph' };
+  let healthLine = null;
+  const card = {
+    getAttribute(name) { return attributes[name] || null; },
+    setAttribute(name, value) { attributes[name] = value; },
+    appendChild(line) { healthLine = line; },
+    querySelector(selector) {
+      return selector === '[data-feed-health-line]' ? healthLine : null;
+    },
+  };
+  const document = {
+    addEventListener() {},
+    createElement() {
+      return {
+        className: '',
+        textContent: '',
+        setAttribute() {},
+      };
+    },
+    querySelectorAll(selector) {
+      return selector === '[data-feed-slug]' ? [card] : [];
+    },
+  };
+  const dashboard = await loadDashboardApi(document);
+
+  dashboard.applyCardHealth({
+    apps: {
+      apps: [{
+        slug: 'forgegraph',
+        lifecycle: 'launched',
+        public_status: 'degraded',
+        site_targets: ['gmac'],
+        endpoints_total: 2,
+        endpoints_healthy: 1,
+      }],
+    },
+  }, 'gmac');
+
+  assert.equal(attributes['data-feed-lifecycle'], 'launched');
+  assert.equal(healthLine.textContent, 'degraded / 1/2 checks');
+});

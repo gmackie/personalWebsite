@@ -12,7 +12,7 @@
   <div class="startup-copy">
     <div class="startup-title-row">
       <h3>{{ include.venture.name }}</h3>
-      <span class="status-badge status-{{ include.venture.status }}">{{ include.venture.status }}</span>
+      <span class="status-badge status-{{ include.venture.status }}" data-feed-lifecycle-label>{{ include.venture.status }}</span>
     </div>
     {% if include.venture.thesis %}
     <p class="venture-thesis">{{ include.venture.thesis }}</p>

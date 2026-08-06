@@ -3,8 +3,9 @@ layout: default
 ---
 
 {% assign v = site.data.ventures | where: "name", page.venture | first %}
+{% assign venture_feed_slug = v.feed_slug | default: v.slug %}
 
-<div class="venture-detail">
+<div class="venture-detail"{% if venture_feed_slug %} data-feed-slug="{{ venture_feed_slug }}"{% endif %}>
   {% if v %}
 
   {% if v.image %}
@@ -16,7 +17,7 @@ layout: default
   <p class="landing-kicker">Venture</p>
   <div class="venture-detail-header">
     <h1>{{ v.name }}</h1>
-    <span class="status-badge status-{{ v.status }}">{{ v.status }}</span>
+    <span class="status-badge status-{{ v.status }}" data-feed-lifecycle-label>{{ v.status }}</span>
   </div>
 
   {% if v.thesis %}

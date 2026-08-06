@@ -391,6 +391,25 @@ a.proto-card-link:hover {
   flex: 1;
 }
 
+.project-lifecycle-badge {
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+.lifecycle-experiment { color: #60A5FA; }
+.lifecycle-in_development { color: #FBBF24; }
+.lifecycle-launched { color: #4ADE80; }
+.lifecycle-maintained { color: #2DD4BF; }
+.lifecycle-paused { color: var(--muted); }
+.lifecycle-archived { color: #94A3B8; }
+
 .proto-url {
   font-family: var(--font-mono);
   font-size: 12px;
