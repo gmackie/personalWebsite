@@ -256,7 +256,7 @@
     <div class="stat"><b>26</b><span>Live events</span></div>
     <div class="stat"><b>5</b><span>Systems touched</span></div>
     <div class="stat"><b>3</b><span>Public lanes</span></div>
-    <div class="stat"><b>2</b><span>Primary gaps</span></div>
+    <div class="stat"><b>1</b><span>Primary gap</span></div>
   </div>
 
   <div class="progress" aria-label="Phase progress">
@@ -274,13 +274,13 @@
     <div class="decision"><b>Automatic deploy facts live.</b><span>Public-enabled <code>gmac</code> apps emit sanitized deployment facts. The first production event recorded commit <code>d4419ed65b3f</code>.</span></div>
     <div class="decision"><b>Human PR context live.</b><span>An explicit <code>forgegraph:public-update</code> block accepts a human headline, summary, and why. Raw private PR titles remain internal.</span></div>
     <div class="decision"><b><code>gmac.io</code> consumer live.</b><span>The browser renders fleet health, build activity, screenshots, clips, and the automatic deploy card from ForgeGraph on a 60-second refresh.</span></div>
-    <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds. Conflicts preserve human files, unavailable destinations do not block one another, and no path publishes final prose or Substack editorial.</span></div>
+    <div class="decision"><b>Reviewed promotion is automated.</b><span>A 15-minute workstation job independently materializes approved <code>gmacko</code> and Obsidian scaffolds, then records a per-destination <code>materialized</code> receipt in ForgeGraph. Conflicts preserve human files, unavailable destinations do not block one another, and only a human can move work to <code>published</code> or Substack.</span></div>
     <div class="decision"><b><code>gmacko.com</code> proof surface live.</b><span>Build updates are separated from essays on the homepage, attached to venture proof rails, and can render source-linked screenshots and playable clips inline.</span></div>
     <div class="decision"><b>OODA synthesis is automated.</b><span>A separate 15-minute LaunchAgent turns one or more provenance-linked Obsidian captures plus optional project context into source-bounded outline bundles. It records provenance, preserves existing human notes, and explicitly refuses final prose.</span></div>
     <div class="decision"><b>Clean production delivery is automated.</b><span>A five-minute LaunchAgent reconciles GitHub <code>main</code> to all three Cloudflare Pages projects from a dedicated clean worktree, verifies exact health SHAs, and refuses any dirty checkout.</span></div>
   </div>
   <div class="callout">
-    <strong>Current P0:</strong> acknowledge successful scaffold materialization per destination in ForgeGraph without conflating machine-created drafts with human publication. Unattended cross-system smoke coverage follows.
+    <strong>Current P1:</strong> complete unattended cross-system smoke coverage and alerting across deploy evidence, public feeds, consumer rendering, promotion materialization, and last-good failure behavior.
   </div>
 
   <h2>Architecture</h2>
@@ -677,7 +677,7 @@ created: 2026-08-04
         <td>Record successful scaffold materialization per destination without marking generated files as human-published.</td>
         <td><code>promotion_decisions</code> integration<br>workstation promotion acknowledgement</td>
         <td>ForgeGraph distinguishes <code>approved</code>, <code>materialized</code>, and human-controlled <code>published</code> state per destination</td>
-        <td><span class="badge todo">Todo</span></td>
+        <td><span class="badge done">Done</span></td>
       </tr>
       <tr>
         <td>Add end-to-end regression checks covering: event emitted, artifact captured, feed visible, draft export works, idea seed export works.</td>
@@ -704,12 +704,6 @@ created: 2026-08-04
   <table>
     <thead><tr><th>Priority</th><th>Why next</th><th>Included work</th><th>Exit signal</th></tr></thead>
     <tbody>
-      <tr>
-        <td>P0</td>
-        <td>Materialization is file-safe but ForgeGraph does not yet distinguish generated scaffolds from human publication.</td>
-        <td>Add a workstation acknowledgement after successful create or refresh, while preserving a separate human-controlled <code>published</code> state.</td>
-        <td>ForgeGraph records <code>materialized</code> per destination without treating any scaffold as published.</td>
-      </tr>
       <tr>
         <td>P1</td>
         <td>The individual lanes are proven, but unattended cross-system regression detection remains incomplete.</td>
@@ -761,7 +755,9 @@ created: 2026-08-04
     <li><strong><code>gmac.io</code> — verified:</strong> shared-browser proof showed the live ForgeGraph deployment card with commit <code>d4419ed65b3f</code>, screenshots, and clips.</li>
     <li><strong>Promotion handoff — verified:</strong> ForgeGraph PR #254 merged as <code>6fd2b476fc8a</code>; 25 focused tests plus exact CI-equivalent typecheck, lint, package tests, API/web suites, health tests, Go tests, tracked-tree secret scan, and script checks passed.</li>
     <li><strong>Portfolio media contract — verified:</strong> ForgeGraph PR #255 merged as <code>1987f53c53fa</code>; future scaffolds include a build-update identity, venture slug, source event ids, hero URL, and structured screenshot/clip evidence. Focused catalog and promotion tests, root typecheck, lint, formatting, and secret scan passed locally.</li>
-    <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout, completed with exit code 0 against the live bearer-authenticated endpoint, and correctly found zero pending approved drafts.</li>
+    <li><strong>Materialization contract — verified:</strong> ForgeGraph PR #256 merged as <code>3e978ff6c791</code> and added per-destination <code>materialized</code> state, timestamps, references, an authenticated acknowledgement route, and UI distinction from human-controlled <code>published</code>. Migration 0083 was applied to the managed production binding with SQL hash <code>77b4cd9d3c51</code>; the live enum and columns are present. Focused DB, API, and web suites, monorepo typecheck, lint, formatting, ShellCheck, secret scan, hosted manifest CI, Forgejo CI, and a GNU <code>stat</code> portability regression passed.</li>
+    <li><strong>Deployment control plane — verified:</strong> ForgeGraph PR #257 merged as <code>ff38244ac95a</code>, replacing an unauthorized random command-hub token with the existing scoped token-mint path. Forgejo run 1309 passed test, schema-drift, command-hub upgrade, Cloudflare deploy, health, capture configuration, and deploy-report steps for that exact commit. The active production record identifies immutable Worker version <code>b2635525-224f-4a85-b29a-215a254df3a8</code>.</li>
+    <li><strong>Workstation scheduler — verified:</strong> <code>com.forgegraph.public-promotion-sync</code> runs every 15 minutes from the canonical checkout. Run 12 completed with exit code 0 against the live bearer-authenticated GET and POST contract, zero failures, and a correctly empty acknowledgement batch because no approved drafts were pending.</li>
     <li><strong><code>gmacko.com</code> — verified:</strong> commits <code>d74798c</code> and <code>0c3b2fc</code> add build-update identity, homepage and venture proof rails, provenance, responsive screenshot cards, and inline clips. Three Jekyll builds, nine JavaScript tests, fixture, isolation, structure, hydration, live-wall, ShellCheck, diff checks, and desktop/mobile browser proof passed.</li>
     <li><strong>Website CI and deployment — verified:</strong> Forgejo run 16 passed commit <code>2e6168219deb</code> after portability fixes removed runner-only <code>rg</code> and cache-proxy assumptions. <code>com.gmacko.pages-deploy-sync</code> deployed that exact commit from its clean global worktree, converged twice, exited 0, and advanced <code>gmacko.com</code>, <code>grahammackie.com</code>, and <code>gmac.io</code> to the same immutable health SHA. Mobile browser proof confirmed the live build update and absence of uncommitted essays.</li>
     <li><strong>Obsidian/OODA — verified:</strong> OODA commits <code>91021d9</code> and <code>cb21395</code> add the one-or-many capture CLI, source-linked outline and provenance contracts, no-overwrite semantics, and a 15-minute LaunchAgent. The live agent's third run exited 0 with <code>existing</code>; the outline SHA-256 remained <code>cb8c755cf2d8</code> and the OODA vault remained at <code>7a70c9b72b35</code>.</li>
@@ -770,9 +766,9 @@ created: 2026-08-04
 
   <h2>Open Questions</h2>
   <ul>
-    <li>What authenticated acknowledgement shape should workstation materializers send so ForgeGraph can represent per-destination success and failure without granting publication authority?</li>
+    <li>Which alert destination should receive unattended cross-system smoke failures, and how long may stale last-good evidence remain visible before the public surfaces should explicitly degrade?</li>
   </ul>
-  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, a 15-minute ForgeGraph workstation LaunchAgent owns approved scaffold materialization, and a separate 15-minute OODA LaunchAgent owns source-linked outline synthesis. OODA accepts one capture or an intentionally selected related bundle, optional human vault context, and evidence links; it never overwrites an existing outline or emits final prose. Promotion review remains durable in ForgeGraph, and publication remains a human act.</div>
+  <div class="callout"><strong>Resolved:</strong> ForgeGraph's managed scheduler owns six-hour evidence capture, a 15-minute ForgeGraph workstation LaunchAgent owns approved scaffold materialization and reports machine <code>materialized</code> receipts, and a separate 15-minute OODA LaunchAgent owns source-linked outline synthesis. OODA accepts one capture or an intentionally selected related bundle, optional human vault context, and evidence links; it never overwrites an existing outline or emits final prose. Promotion review remains durable in ForgeGraph, and <code>published</code> remains a human act.</div>
 
 </main>
 </body>
