@@ -45,6 +45,9 @@ jobs:
       - name: Test (build update portfolio surface)
         run: bash test/build_update_surface.sh
 
+      - name: Test (JavaScript contracts)
+        run: node --test test/*.test.js
+
       - name: Report CI result to ForgeGraph
         if: always()
         env:

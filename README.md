@@ -56,6 +56,19 @@ npx wrangler login
 
 The scheduler uses the local Wrangler OAuth session instead of copying a broad Cloudflare token into Forgejo. Force an immediate reconciliation with `FORCE_DEPLOY=1 ./scripts/run-cloudflare-deploy-sync.sh`.
 
+Install the independent public-content canary after the sites and ForgeGraph feed are live:
+
+```bash
+./scripts/install-public-content-canary.sh
+```
+
+Every five minutes it verifies feed freshness, generation consistency, CORS,
+summary totals, the `gmac.io` hydration bootstrap, and convergence of all three
+site health commits. Successful JSON summaries are written to
+`~/Library/Logs/personalWebsite/public-content-canary.log`; failures are written
+to the matching `.error.log` and exit nonzero. The canary observes production
+but never publishes content or blocks the deployment agent.
+
 ## Structure
 
 - `_config.yml` — Shared base config
