@@ -17,8 +17,7 @@ plutil -lint "${DESTINATION}.tmp" >/dev/null
 mv "${DESTINATION}.tmp" "${DESTINATION}"
 
 launchctl bootout "${DOMAIN}/${LABEL}" >/dev/null 2>&1 || true
-launchctl bootstrap "${DOMAIN}" "${DESTINATION}"
 launchctl enable "${DOMAIN}/${LABEL}"
-launchctl kickstart -k "${DOMAIN}/${LABEL}"
+launchctl bootstrap "${DOMAIN}" "${DESTINATION}"
 
 echo "Installed ${LABEL}; production main is checked every five minutes."
