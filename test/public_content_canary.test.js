@@ -279,11 +279,14 @@ test('schedules the production canary every five minutes with dedicated logs', a
   ]);
 
   assert.match(plist, /<string>com\.gmacko\.public-content-canary<\/string>/);
+  assert.match(plist, /<string>\/usr\/bin\/env<\/string>/);
+  assert.match(plist, /<string>-i<\/string>/);
+  assert.doesNotMatch(plist, /<string>Background<\/string>/);
   assert.match(plist, /scripts\/public-content-canary\.js/);
   assert.match(plist, /<integer>300<\/integer>/);
   assert.match(plist, /public-content-canary\.log/);
   assert.match(plist, /public-content-canary\.error\.log/);
   assert.match(installer, /com\.gmacko\.public-content-canary/);
   assert.match(installer, /launchctl bootstrap/);
-  assert.match(installer, /launchctl kickstart -k/);
+  assert.doesNotMatch(installer, /launchctl kickstart/);
 });
