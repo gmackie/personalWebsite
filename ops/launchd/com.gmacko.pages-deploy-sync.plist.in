@@ -6,6 +6,10 @@
   <string>com.gmacko.pages-deploy-sync</string>
   <key>ProgramArguments</key>
   <array>
+    <string>/usr/bin/env</string>
+    <string>-i</string>
+    <string>HOME=__HOME__</string>
+    <string>PATH=/usr/bin:/bin</string>
     <string>/bin/bash</string>
     <string>__REPO_ROOT__/scripts/run-cloudflare-deploy-sync.sh</string>
   </array>
@@ -13,8 +17,6 @@
   <true/>
   <key>StartInterval</key>
   <integer>300</integer>
-  <key>ProcessType</key>
-  <string>Background</string>
   <key>StandardOutPath</key>
   <string>__HOME__/Library/Logs/personalWebsite/deploy-sync.log</string>
   <key>StandardErrorPath</key>

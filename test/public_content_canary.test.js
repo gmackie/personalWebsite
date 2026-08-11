@@ -289,4 +289,18 @@ test('schedules the production canary every five minutes with dedicated logs', a
   assert.match(installer, /com\.gmacko\.public-content-canary/);
   assert.match(installer, /launchctl bootstrap/);
   assert.doesNotMatch(installer, /launchctl kickstart/);
+  assert.ok(installer.indexOf('launchctl enable') < installer.indexOf('launchctl bootstrap'));
+});
+
+test('runs the production deploy scheduler without throttling or inherited credentials', async () => {
+  const [plist, installer] = await Promise.all([
+    readFile('ops/launchd/com.gmacko.pages-deploy-sync.plist.in', 'utf8'),
+    readFile('scripts/install-cloudflare-deploy-sync.sh', 'utf8'),
+  ]);
+
+  assert.match(plist, /<string>\/usr\/bin\/env<\/string>/);
+  assert.match(plist, /<string>-i<\/string>/);
+  assert.doesNotMatch(plist, /<string>Background<\/string>/);
+  assert.doesNotMatch(installer, /launchctl kickstart/);
+  assert.ok(installer.indexOf('launchctl enable') < installer.indexOf('launchctl bootstrap'));
 });
